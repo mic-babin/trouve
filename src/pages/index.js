@@ -1,5 +1,17 @@
-import * as React from "react";
+import React from "react";
+import Layout from "../components/layout";
+import styled from "styled-components";
 
-export default function Home() {
-  return <div>Hello world!</div>;
-}
+const Home = () => {
+  return (
+    <Layout>
+      <Div className="px-5">Hello World</Div>
+    </Layout>
+  );
+};
+
+const Div = styled.div`
+  color: red;
+`;
+
+export default Home;
