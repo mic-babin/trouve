@@ -12,6 +12,9 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 });
 
+const { languages, defaultLanguage } = require("./languages");
+const siteUrl = "http://localhost:8000/";
+
 module.exports = {
   siteMetadata: {
     title: `TROUVÉ - Mode. Beauté. Design`,
@@ -25,6 +28,13 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        path: `${__dirname}/locales`,
+        name: "locale",
+      },
+    },
+    {
       resolve: `gatsby-plugin-styled-components`,
       options: {
         // Add any options here
@@ -33,8 +43,25 @@ module.exports = {
     {
       resolve: `gatsby-source-contentful`,
       options: {
-        spaceId: `iy5sbbdepii3`,
+        spaceId: `idt129n7kjbs`,
         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+      },
+    },
+    {
+      resolve: "gatsby-plugin-react-i18next",
+      options: {
+        languages,
+        defaultLanguage,
+        siteUrl,
+        i18nextOptions: {
+          // debug: true,
+          fallbackLng: defaultLanguage,
+          supportedLngs: languages,
+          defaultNS: "common",
+          interpolation: {
+            escapeValue: false, // not needed for react as it escapes by default
+          },
+        },
       },
     },
   ],
