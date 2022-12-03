@@ -7,127 +7,107 @@ import InputMask from "react-input-mask";
 import axios from "axios";
 import { motion } from "framer-motion";
 
-function ContactForm() {
-  const data = useStaticQuery(graphql`
-    query {
-      contentfulContactForm {
-        id
-        title
-        inputFields {
-          id
-          text
-          placeholder
-          type
-          fieldName
-          required
-        }
-        cta {
-          id
-          text
-        }
-      }
-    }
-  `);
-  const { title, inputFields, cta } = data.contentfulContactForm;
-
-  const defaultFormFields = {
+function ContactForm({ data }) {
+  const { title, formFields, button } = data;
+  const inputs = formFields.filter(
+    (field) => field.type !== "textArea" && field.type !== "file"
+  );
+  const textArea = formFields.filter((field) => field.type === "textArea")[0];
+  const fileUpload = formFields.filter((field) => field.type === "file")[0];
+  console.log(fileUpload);
+  const defaultFields = {
     firstName: "",
     lastName: "",
     email: "",
-    phone: "",
+    linkedIn: "",
+    resume: "",
+    message: "",
   };
-
-  const [formFields, setFormFields] = useState(defaultFormFields);
+  const [fields, setFields] = useState(defaultFields);
   const [show, setShow] = useState(false);
-
-  const resetFormFields = () => {
-    setFormFields(defaultFormFields);
+  const resetFields = () => {
+    setFields(defaultFields);
   };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const { firstName, lastName, email, phone } = formFields;
-
+    const { firstName, lastName, email, linkedIn, resume, message } = fields;
     try {
       await axios.post("/.netlify/functions/email", {
         firstName,
         lastName,
         email,
-        phone,
+        linkedIn,
+        resume,
+        message,
       });
-      resetFormFields();
+      resetFields();
       handleShow();
     } catch (error) {
       alert("Une erreur est survenue");
       console.log(error.response.data);
     }
   };
-
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormFields({ ...formFields, [name]: value });
+    setFields({ ...fields, [name]: value });
   };
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
   return (
     <>
-      <ScrollTo id="contact"></ScrollTo>
-      <motion.div
-        whileInView={{ opacity: 1 }}
-        initial={{ opacity: 0 }}
-        transition={{
-          duration: 0.4,
-          delay: 0.2,
-          type: "spring",
-        }}
-        viewport={{ once: true }}
-      >
-        <Section className="container mt-0 mt-lg-5 px-3 px-sm-5 form-bg">
-          <Shape className="d-none d-xxl-block" src={SVG} alt="shape" />
-          <div className="my-3 my-sm-0 py-5 py-sm-0 d-flex flex-column align-items-center">
-            {title && <H2 className="px-3 text-center">{title}</H2>}
-            <Form
-              onSubmit={handleSubmit}
-              className="d-flex flex-column px-sm-5"
-            >
-              <div className="row py-5">
-                {inputFields &&
-                  inputFields.map((content) => (
-                    <div className="col-lg-6" key={content.id}>
-                      <Label>{content.text}</Label>
-                      <Input
-                        key={content.id}
-                        type={content.type}
-                        placeholder={content.placeholder}
-                        mask={
-                          content.fieldName === "phone"
-                            ? "(+1) 999 999-9999"
-                            : null
-                        }
-                        required={content.required}
-                        onChange={handleChange}
-                        name={content.fieldName}
-                        value={formFields[content.fieldName]}
-                      />
-                    </div>
-                  ))}
-              </div>
-              {cta && (
-                <FormButton
-                  type="submit"
-                  className="align-self-center"
-                  key={cta.id}
+      <section className="d-flex flex-column justify-content-center h-100">
+        <div className="">
+          {title && <H2 className="text-center">{title}</H2>}
+          <Form onSubmit={handleSubmit} className="d-flex flex-column">
+            {inputs &&
+              inputs.map((content, index) => (
+                <InputGroup
+                  key={content.id}
+                  className="d-flex flex-align-start align-items-center"
                 >
-                  {cta.text}
-                </FormButton>
-              )}
-            </Form>
-          </div>
-        </Section>
-      </motion.div>
-
+                  <div>0{index + 1}</div>
+                  <Input
+                    type={content.type}
+                    placeholder={content.label}
+                    mask={
+                      content.fieldName === "phone" ? "(+1) 999 999-9999" : null
+                    }
+                    required={content.required}
+                    onChange={handleChange}
+                    name={content.fieldName}
+                    value={fields[content.fieldName]}
+                  />
+                </InputGroup>
+              ))}
+            <InputGroup className="d-flex flex-align-start align-items-center">
+              <div>05</div>
+              <FileInput
+                type={fileUpload.type}
+                placeholder={fileUpload.label}
+                required={fileUpload.required}
+                onChange={handleChange}
+                name={fileUpload.fieldName}
+                value={fields[fileUpload.fieldName]}
+              />
+            </InputGroup>
+            <div className="d-flex flex-align-start align-items-center">
+              <div>06</div>
+              <Label>{textArea.label}</Label>
+            </div>
+            <TextArea
+              required={textArea.required}
+              onChange={handleChange}
+              name={textArea.fieldName}
+              value={fields[textArea.fieldName]}
+            />
+            {button && (
+              <FormButton type="submit" className="align-self-end">
+                {button}
+              </FormButton>
+            )}
+          </Form>
+        </div>
+      </section>
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Body>
           <h3 className="p-3">Merci de communiquer avec moi</h3>
@@ -145,58 +125,58 @@ function ContactForm() {
 }
 
 const Form = styled.form`
-  max-width: 700px;
   display: block;
 `;
 
-const Label = styled.label`
-  display: block;
-  font-size: 14px;
-  font-weight: 600;
-  color: #51565d;
-  margin-bottom: 8px;
-  margin-left: calc(1.5rem + 1px);
-`;
-
-const FormButton = styled.button`
+const FormButton = styled.a`
   font-size: 18px;
   font-weight: 600;
-  color: #ffffff;
-  background-color: #395266;
-  padding: 0.75rem 1.5rem;
-  border: 1.5px solid #395266;
-  border-radius: 27px;
-  transition: 0.2s ease-in;
-  cursor: pointer;
-  width: 280px !important;
-  text-align: center;
+  color: black;
+  padding: 0.75rem 0;
+  text-decoration: none;
   &:hover {
-    color: #395266;
-    background-color: #ffffff;
-  }
-  @media only screen and (max-width: 576px) {
-    width: 260px !important;
+    color: red;
   }
 `;
 
-const Section = styled.section`
-  border-top-left-radius: 150px;
-  border-bottom-right-radius: 150px;
-  @media only screen and (max-width: 576px) {
-    border-top-left-radius: 100px;
-    border-bottom-right-radius: 100px;
-  }
+const Label = styled.div`
+  padding: 1rem 1.5rem;
+`;
+
+const InputGroup = styled.div`
+  border-bottom: 1px solid black;
 `;
 
 const Input = styled(InputMask)`
-  margin-bottom: 15px;
   width: 100%;
-  border: 1px solid #c9ced3;
-  border-radius: 27px;
+  border: none;
   padding: 1rem 1.5rem;
 
   &:focus {
-    border: 1px solid #395266;
+    border: none;
+    outline: none !important;
+  }
+
+  ::placeholder {
+    color: black;
+    opacity: 1;
+  }
+
+  :-ms-input-placeholder {
+    color: black;
+  }
+
+  ::-ms-input-placeholder {
+    color: black;
+  }
+`;
+
+const TextArea = styled.textarea`
+  border: 1px solid black;
+  height: 85px;
+  resize: none;
+
+  &:focus {
     outline: none !important;
   }
 `;
@@ -207,21 +187,27 @@ const H2 = styled.h2`
   }
 `;
 
-const Shape = styled.img`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  transform: rotate(180deg);
-`;
-
-const ScrollTo = styled.div`
-  transform: translateY(-130px);
-`;
 const ModalButton = styled.p`
   cursor: pointer;
   text-align: right;
   font-weight: bold;
   color: #395266;
+`;
+
+const FileInput = styled(Input)`
+  visibility: hidden;
+
+  /* TODO add variable */
+  &::before {
+    content: "SELECT SOME FILES";
+    visibility: visible;
+    color: transparent;
+    display: inline-block;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+  }
 `;
 
 export default ContactForm;

@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 const ContactInfo = ({ data }) => {
-  console.log(data);
   const { title, textFields, components } = data;
   return (
     <div className="d-flex flex-column justify-content-center h-100">
@@ -25,7 +24,7 @@ const ContactInfo = ({ data }) => {
           <React.Fragment key={element.id}>
             {element &&
               element.contactInformations.map((el) => (
-                <Address>{el.address}</Address>
+                <Address key={el.id}>{el.address}</Address>
               ))}
           </React.Fragment>
         ))}
@@ -37,6 +36,7 @@ const H1 = styled.h1`
   font-size: 50px;
   height: 125px;
   font-weight: 500;
+  margin-top: 0;
 
   div:nth-of-type(2) {
     transform: translate(-30px, 60px);

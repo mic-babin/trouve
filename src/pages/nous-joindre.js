@@ -77,6 +77,7 @@ export const query = graphql`
                 ... on ContentfulContacts {
                   id
                   contactInformations {
+                    id
                     address
                     type
                   }
@@ -101,12 +102,14 @@ export const query = graphql`
               id
               title
               formFields {
+                id
                 fieldName
                 label
                 type
                 required
                 node_locale
               }
+              button
             }
           }
         }
