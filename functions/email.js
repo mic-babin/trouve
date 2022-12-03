@@ -1,6 +1,5 @@
 const nodemailer = require("nodemailer");
 require("dotenv").config();
-
 const { EMAIL_HOST, EMAIL_PORT, EMAIL_USER, EMAIL_PASSWORD } = process.env;
 
 var mailList = ["michael.babin@outlook.fr", "noreply.trouvemtl@gmail.com"];
@@ -17,10 +16,12 @@ const authData = nodemailer.createTransport({
 
 exports.handler = async (event, context) => {
   const method = event.httpMethod;
-  const { firstName, lastName, email, phone } = JSON.parse(event.body);
+  const { firstName, lastName, email, linkedIn, file, message } = JSON.parse(
+    event.body
+  );
   // const from = "Formulaire de contact <noreply.lecoute@gmail.com>";
   const from = "michael.babin@griffincreative.ca";
-  const emailSubject = "Formulaire de contact - Lecoute.ca";
+  const emailSubject = "Formulaire de contact - TROUVEMTL";
   const data = {
     from: from,
     to: mailList,
@@ -66,7 +67,8 @@ exports.handler = async (event, context) => {
                                                                                 <li>Prénom: ${firstName} </li>
                                                                                 <li>Nom: ${lastName}</li>
                                                                                 <li>Courriel: ${email}</li>
-                                                                                <li>Téléphone: ${phone}</li>
+                                                                                <li>LinkedIn: ${linkedIn}</li>
+                                                                                <li>message: ${message}</li>
                                                                             </ul>
                                                                         </p>
                                                                     </td>
@@ -115,7 +117,11 @@ exports.handler = async (event, context) => {
                                     </table>
                                 </table>
                             </body>
-                        </html>`,
+                        </html>
+    `,
+    // attachments: [{
+    //     path: change with file path
+    // }]
   };
   if (method !== "POST") {
     return {

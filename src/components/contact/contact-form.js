@@ -14,7 +14,6 @@ function ContactForm({ data }) {
   );
   const textArea = formFields.filter((field) => field.type === "textArea")[0];
   const fileUpload = formFields.filter((field) => field.type === "file")[0];
-  console.log(fileUpload);
   const defaultFields = {
     firstName: "",
     lastName: "",
@@ -28,25 +27,26 @@ function ContactForm({ data }) {
   const resetFields = () => {
     setFields(defaultFields);
   };
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const { firstName, lastName, email, linkedIn, resume, message } = fields;
-    try {
-      await axios.post("/.netlify/functions/email", {
-        firstName,
-        lastName,
-        email,
-        linkedIn,
-        resume,
-        message,
-      });
-      resetFields();
-      handleShow();
-    } catch (error) {
-      alert("Une erreur est survenue");
-      console.log(error.response.data);
-    }
-  };
+  //   const handleSubmit = async (event) => {
+  //     event.preventDefault();
+  //     const { firstName, lastName, email, linkedIn, resume, message } = fields;
+  //     try {
+  //       await axios.post("/.netlify/functions/email", {
+  //         firstName,
+  //         lastName,
+  //         email,
+  //         linkedIn,
+  //         resume,
+  //         message,
+  //       });
+  //       //   resetFields();
+  //       console.log(fields);
+  //       handleShow();
+  //     } catch (error) {
+  //       alert("Une erreur est survenue");
+  //       console.log(error.response.data);
+  //     }
+  //   };
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFields({ ...fields, [name]: value });
@@ -58,7 +58,16 @@ function ContactForm({ data }) {
       <section className="d-flex flex-column justify-content-center h-100">
         <div className="">
           {title && <H2 className="text-center">{title}</H2>}
-          <Form onSubmit={handleSubmit} className="d-flex flex-column">
+          <Form
+            name="contact-form"
+            method="post"
+            netlify-honeypot="bot-field"
+            data-netlify="true"
+            action="/success"
+            className="d-flex flex-column"
+          >
+            <input type="hidden" name="bot-field" />
+            <input type="hidden" name="form-name" value="contact-form" />
             {inputs &&
               inputs.map((content, index) => (
                 <InputGroup
@@ -69,9 +78,6 @@ function ContactForm({ data }) {
                   <Input
                     type={content.type}
                     placeholder={content.label}
-                    mask={
-                      content.fieldName === "phone" ? "(+1) 999 999-9999" : null
-                    }
                     required={content.required}
                     onChange={handleChange}
                     name={content.fieldName}
@@ -79,7 +85,7 @@ function ContactForm({ data }) {
                   />
                 </InputGroup>
               ))}
-            <InputGroup className="d-flex flex-align-start align-items-center">
+            {/* <InputGroup className="d-flex flex-align-start align-items-center">
               <div>05</div>
               <FileInput
                 type={fileUpload.type}
@@ -89,7 +95,7 @@ function ContactForm({ data }) {
                 name={fileUpload.fieldName}
                 value={fields[fileUpload.fieldName]}
               />
-            </InputGroup>
+            </InputGroup> */}
             <div className="d-flex flex-align-start align-items-center">
               <div>06</div>
               <Label>{textArea.label}</Label>
@@ -128,7 +134,7 @@ const Form = styled.form`
   display: block;
 `;
 
-const FormButton = styled.a`
+const FormButton = styled.button`
   font-size: 18px;
   font-weight: 600;
   color: black;
@@ -147,7 +153,7 @@ const InputGroup = styled.div`
   border-bottom: 1px solid black;
 `;
 
-const Input = styled(InputMask)`
+const Input = styled.input`
   width: 100%;
   border: none;
   padding: 1rem 1.5rem;
@@ -205,7 +211,6 @@ const FileInput = styled(Input)`
     display: inline-block;
     outline: none;
     white-space: nowrap;
-    -webkit-user-select: none;
     cursor: pointer;
   }
 `;
