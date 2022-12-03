@@ -64,6 +64,7 @@ function ContactForm({ data }) {
             netlify-honeypot="bot-field"
             data-netlify="true"
             action="/success"
+            enctype="multipart/form-data"
             className="d-flex flex-column"
           >
             <input type="hidden" name="bot-field" />
@@ -85,7 +86,7 @@ function ContactForm({ data }) {
                   />
                 </InputGroup>
               ))}
-            {/* <InputGroup className="d-flex flex-align-start align-items-center">
+            <InputGroup className="d-flex flex-align-start align-items-center">
               <div>05</div>
               <FileInput
                 type={fileUpload.type}
@@ -95,7 +96,7 @@ function ContactForm({ data }) {
                 name={fileUpload.fieldName}
                 value={fields[fileUpload.fieldName]}
               />
-            </InputGroup> */}
+            </InputGroup>
             <div className="d-flex flex-align-start align-items-center">
               <div>06</div>
               <Label>{textArea.label}</Label>
