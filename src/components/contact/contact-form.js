@@ -1,11 +1,11 @@
 import React from "react";
-import { graphql, useStaticQuery } from "gatsby";
+// import { graphql, useStaticQuery } from "gatsby";
 import styled from "styled-components";
-import Modal from "react-bootstrap/Modal";
+// import Modal from "react-bootstrap/Modal";
 import { useState } from "react";
-import InputMask from "react-input-mask";
-import axios from "axios";
-import { motion } from "framer-motion";
+// import InputMask from "react-input-mask";
+// import axios from "axios";
+// import { motion } from "framer-motion";
 
 function ContactForm({ data }) {
   const { title, formFields, button } = data;
@@ -23,14 +23,15 @@ function ContactForm({ data }) {
     message: "",
   };
   const [fields, setFields] = useState(defaultFields);
-  const [show, setShow] = useState(false);
-  const resetFields = () => {
-    setFields(defaultFields);
-  };
+  // const [show, setShow] = useState(false);
+  // const resetFields = () => {
+  //   setFields(defaultFields);
+  // };
   //   const handleSubmit = async (event) => {
   //     event.preventDefault();
   //     const { firstName, lastName, email, linkedIn, resume, message } = fields;
   //     try {
+
   //       await axios.post("/.netlify/functions/email", {
   //         firstName,
   //         lastName,
@@ -51,8 +52,8 @@ function ContactForm({ data }) {
     const { name, value } = event.target;
     setFields({ ...fields, [name]: value });
   };
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  // const handleClose = () => setShow(false);
+  // const handleShow = () => setShow(true);
   return (
     <>
       <section className="d-flex flex-column justify-content-center h-100">
@@ -115,7 +116,7 @@ function ContactForm({ data }) {
           </Form>
         </div>
       </section>
-      <Modal show={show} onHide={handleClose} centered>
+      {/* <Modal show={show} onHide={handleClose} centered>
         <Modal.Body>
           <h3 className="p-3">Merci de communiquer avec moi</h3>
           <p className="px-3">
@@ -126,7 +127,7 @@ function ContactForm({ data }) {
             Fermer
           </ModalButton>
         </Modal.Body>
-      </Modal>
+      </Modal> */}
     </>
   );
 }
@@ -194,12 +195,12 @@ const H2 = styled.h2`
   }
 `;
 
-const ModalButton = styled.p`
-  cursor: pointer;
-  text-align: right;
-  font-weight: bold;
-  color: #395266;
-`;
+// const ModalButton = styled.p`
+//   cursor: pointer;
+//   text-align: right;
+//   font-weight: bold;
+//   color: #395266;
+// `;
 
 const FileInput = styled(Input)`
   visibility: hidden;

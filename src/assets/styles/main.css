@@ -1,3 +1,27 @@
 .h-100 {
   height: 100%;
 }
+
+@font-face {
+  font-family: "Neue";
+  src: local("Neue"), url(../fonts/PPNeueMontreal-Book.otf) format("truetype");
+}
+
+@font-face {
+  font-family: "Neue-Italic";
+  src: local("Neue-Italic"),
+    url(../fonts/PPNeueMontreal-Italic.otf) format("truetype");
+}
+@font-face {
+  font-family: "Neue-Medium";
+  src: local("Neue-Medium"),
+    url(../fonts/PPNeueMontreal-Medium.otf) format("truetype");
+}
+
+body {
+  font-family: "Neue-Medium";
+}
+
+.border-bottom-white {
+  border-bottom: 1px solid white;
+}

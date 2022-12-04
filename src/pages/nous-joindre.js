@@ -1,10 +1,11 @@
 import React from "react";
-import Layout from "../components/layout";
 import { graphql } from "gatsby";
 import ContactInfo from "../components/contact/contact-info";
 import ContactForm from "../components/contact/contact-form";
 import LogoSrc from "../assets/img/trouve.svg";
 import styled from "styled-components";
+import { MenuButton } from "../components/styled-components/menu-button";
+import { Logo } from "../components/styled-components/logo";
 
 const Contact = ({ data }) => {
   const sections = data.allContentfulPage.edges[0].node.sections;
@@ -16,7 +17,7 @@ const Contact = ({ data }) => {
     <Container>
       <div className="d-flex justify-content-between align-items-center">
         <Logo src={LogoSrc} alt="Logo" />
-        <CloseButton>{close}</CloseButton>
+        <MenuButton>{close}</MenuButton>
       </div>
       <div className="container">
         <FullHeight className="row">
@@ -31,16 +32,6 @@ const Contact = ({ data }) => {
     </Container>
   );
 };
-
-const Logo = styled.img`
-  height: 90px;
-`;
-
-const CloseButton = styled.div`
-  font-size: 30px;
-  font-weight: 600;
-  margin-right: 20px;
-`;
 
 const Container = styled.div`
   width: 99.2vw;

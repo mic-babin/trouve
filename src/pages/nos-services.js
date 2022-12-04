@@ -1,12 +1,12 @@
 import React from "react";
 import Layout from "../components/layout";
 
-const Expertise = () => {
+const NosServices = () => {
   return (
     <Layout>
-      <div>Expertise</div>
+      <div>Nos Services</div>
     </Layout>
   );
 };
 
-export default Expertise;
+export default NosServices;

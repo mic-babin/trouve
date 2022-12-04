@@ -1,29 +1,26 @@
 import React from "react";
-import { Link, useI18next } from "gatsby-plugin-react-i18next";
+import Menu from "./menu";
+import { MenuButton } from "../components/styled-components/menu-button";
+import { Logo } from "../components/styled-components/logo";
+import LogoSrc from "../assets/img/trouve.svg";
+import { useState } from "react";
+import styled from "styled-components";
 
-const Header = () => {
-  const { languages, originalPath, t, i18n } = useI18next();
+const Header = ({ menu }) => {
+  const [showMenu, setShowMenu] = useState(false);
+  const handleShowMenu = () => setShowMenu(true);
+
   return (
-    <header className="main-header">
-      {/* ... */}
-      <ul className="languages">
-        {languages.map((lng) => (
-          <li key={lng}>
-            <Link
-              to={originalPath}
-              language={lng}
-              style={{
-                textDecoration:
-                  i18n.resolvedLanguage === lng ? "underline" : "none",
-              }}
-            >
-              {lng}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </header>
+    <HeaderWrapper className="d-flex justify-content-between align-items-center position-relative">
+      <Logo src={LogoSrc} alt="Logo" />
+      <MenuButton onClick={handleShowMenu}>MENU</MenuButton>
+      <Menu showMenu={showMenu} setShowMenu={setShowMenu} menu={menu} />
+    </HeaderWrapper>
   );
 };
+
+const HeaderWrapper = styled.header`
+  border-bottom: 1.5px solid black;
+`;
 
 export default Header;

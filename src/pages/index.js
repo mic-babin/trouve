@@ -7,9 +7,9 @@ import { Trans, useTranslation } from "gatsby-plugin-react-i18next";
 // import { SEO } from "../components/seo";
 
 export default function Homepage(props) {
-  // const homepage = props.data.contentfulHomepage;
+  const menu = props.data.allContentfulHeader.edges[0].node;
   return (
-    <Layout>
+    <Layout menu={menu}>
       {/* {homepage.blocks.map((block) => {
         const {
           id,
@@ -45,6 +45,36 @@ export const query = graphql`
           ns
           data
           language
+        }
+      }
+    }
+    allContentfulHeader(filter: { node_locale: { eq: $language } }) {
+      edges {
+        node {
+          closeTitle
+          navLinks {
+            links {
+              ... on ContentfulLink {
+                id
+                text
+                url
+              }
+              ... on ContentfulShortText {
+                id
+                text
+              }
+            }
+          }
+          langs: language {
+            id
+            value
+          }
+          featured: image {
+            gatsbyImageData(placeholder: BLURRED)
+          }
+          logo {
+            url
+          }
         }
       }
     }
