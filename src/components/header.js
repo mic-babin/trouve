@@ -6,7 +6,7 @@ import LogoSrc from "../assets/img/trouve.svg";
 import { useState } from "react";
 import styled from "styled-components";
 
-const Header = ({ menu }) => {
+const Header = ({ menu, contact }) => {
   const [showMenu, setShowMenu] = useState(false);
   const handleShowMenu = () => setShowMenu(true);
 
@@ -14,7 +14,12 @@ const Header = ({ menu }) => {
     <HeaderWrapper className="d-flex justify-content-between align-items-center position-relative">
       <Logo src={LogoSrc} alt="Logo" />
       <MenuButton onClick={handleShowMenu}>MENU</MenuButton>
-      <Menu showMenu={showMenu} setShowMenu={setShowMenu} menu={menu} />
+      <Menu
+        showMenu={showMenu}
+        setShowMenu={setShowMenu}
+        menu={menu}
+        contact={contact}
+      />
     </HeaderWrapper>
   );
 };
