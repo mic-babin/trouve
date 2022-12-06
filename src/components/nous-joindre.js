@@ -1,5 +1,4 @@
 import React from "react";
-import { graphql } from "gatsby";
 import ContactInfo from "./contact/contact-info";
 import ContactForm from "./contact/contact-form";
 import LogoSrc from "../assets/img/trouve.svg";
@@ -10,7 +9,6 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const Contact = ({ contact, showContact, setShowContact }) => {
   const sections = contact;
-  console.log(sections);
   // TODO change title for id
   const contactInfo = sections[0];
   const contactForm = sections[1];

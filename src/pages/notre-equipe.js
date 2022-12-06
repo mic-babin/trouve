@@ -61,6 +61,9 @@ export const query = graphql`
           logo {
             url
           }
+          copyrights {
+            raw
+          }
         }
       }
     }

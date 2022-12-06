@@ -9,7 +9,6 @@ import { useState } from "react";
 import Contact from "./nous-joindre";
 
 const Menu = ({ showMenu, setShowMenu, menu, contact }) => {
-  console.log(contact);
   const { languages, originalPath, t, i18n } = useI18next();
   const { closeTitle, navLinks, langs, featured, logo } = menu;
 
@@ -17,7 +16,6 @@ const Menu = ({ showMenu, setShowMenu, menu, contact }) => {
   const [showContact, setShowContact] = useState(false);
   const handleShowContact = () => {
     setShowContact(true);
-    console.log(showContact);
   };
 
   const getLang = (lng) => {
@@ -65,7 +63,7 @@ const Menu = ({ showMenu, setShowMenu, menu, contact }) => {
                     <LinkWrapper key={link.id} className="col-lg-6">
                       {isRealLink(link, index) && (
                         <NavLink
-                          to={link.url}
+                          to={link.url === "/" ? link.url : "/" + link.url}
                           className="d-flex border-bottom-white"
                         >
                           <div className="me-4">0{index + 1}</div>
@@ -86,7 +84,7 @@ const Menu = ({ showMenu, setShowMenu, menu, contact }) => {
                       {link.text === "SOCIALS" && (
                         <NavLink
                           as="div"
-                          className="d-flex border-bottom-white"
+                          className="d-flex border-bottom-white pointer"
                         >
                           <div className="me-4">0{index + 1}</div>
                           <div>{link.text}</div>
@@ -96,7 +94,7 @@ const Menu = ({ showMenu, setShowMenu, menu, contact }) => {
                         <NavLink
                           onClick={handleShowContact}
                           as="div"
-                          className="d-flex border-bottom-white"
+                          className="d-flex border-bottom-white pointer"
                         >
                           <div className="me-4">0{index + 1}</div>
                           <div>{link.text}</div>

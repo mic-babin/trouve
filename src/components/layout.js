@@ -10,7 +10,7 @@ const Layout = ({ menu, children, contact }) => {
     <>
       <Header menu={menu} contact={contact} />
       {children}
-      <Footer />
+      <Footer menu={menu} contact={contact} />
     </>
   );
 };
