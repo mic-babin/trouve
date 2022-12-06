@@ -36,11 +36,6 @@ export default function Homepage(props) {
 
 // export const Head = () => <SEO />;
 
-// export const query = graphql`
-//   query {
-
-// `;
-
 export const query = graphql`
   query ($language: String!) {
     locales: allLocale(
