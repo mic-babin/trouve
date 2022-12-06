@@ -11,6 +11,7 @@ import { renderRichText } from "gatsby-source-contentful/rich-text";
 const Footer = ({ menu, contact }) => {
   const { languages, originalPath, t, i18n } = useI18next();
   const { navLinks, langs, copyrights } = menu;
+  console.log(navLinks);
   const [showContact, setShowContact] = useState(false);
   const handleShowContact = () => {
     setShowContact(true);
@@ -56,14 +57,28 @@ const Footer = ({ menu, contact }) => {
                           <div>{link.text}</div>
                         </NavLink>
                       )}
-                      {link.text === "SOCIALS" && (
-                        <NavLink
+                      {link.title === "SOCIALS" && (
+                        <Socials
                           as="div"
                           className="d-flex border-bottom-white pointer"
                         >
                           <div className="me-4">0{index + 1}</div>
-                          <div>{link.text}</div>
-                        </NavLink>
+                          <div className="me-5">{link.title}</div>
+                          <div>
+                            {link.socialLinks &&
+                              link.socialLinks.map((socialLink) => (
+                                <NavLink
+                                  key={socialLink.id}
+                                  as="a"
+                                  href={socialLink.url}
+                                  target="_blank"
+                                  className="me-4 social"
+                                >
+                                  {socialLink.text}
+                                </NavLink>
+                              ))}
+                          </div>
+                        </Socials>
                       )}
                       {link.text === "CONTACT" && (
                         <NavLink
@@ -166,6 +181,26 @@ const Copyright = styled.div`
 
 const LogoFooter = styled(Logo)`
   margin: 0 100px;
+`;
+
+const Socials = styled(NavLink)`
+  .social {
+    display: none;
+    opacity: 0;
+  }
+
+  &:hover {
+    .social {
+      display: inline;
+      opacity: 1;
+      color: white;
+      font-family: "Neue-Italic";
+
+      &:hover {
+        font-family: "Neue";
+      }
+    }
+  }
 `;
 
 export default Footer;

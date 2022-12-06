@@ -81,14 +81,27 @@ const Menu = ({ showMenu, setShowMenu, menu, contact }) => {
                           <div>{link.text}</div>
                         </NavLink>
                       )}
-                      {link.text === "SOCIALS" && (
-                        <NavLink
+                      {link.title === "SOCIALS" && (
+                        <Socials
                           as="div"
                           className="d-flex border-bottom-white pointer"
                         >
                           <div className="me-4">0{index + 1}</div>
-                          <div>{link.text}</div>
-                        </NavLink>
+                          <div className="me-5">{link.title}</div>
+                          <div>
+                            {link.socialLinks &&
+                              link.socialLinks.map((socialLink) => (
+                                <NavLink
+                                  as="a"
+                                  href={socialLink.url}
+                                  target="_blank"
+                                  className="me-4 social"
+                                >
+                                  {socialLink.text}
+                                </NavLink>
+                              ))}
+                          </div>
+                        </Socials>
                       )}
                       {link.text === "CONTACT" && (
                         <NavLink
@@ -177,6 +190,26 @@ const NavLinks = styled.nav``;
 
 const FullHeight = styled.div`
   min-height: calc(100vh - 90px);
+`;
+
+const Socials = styled(NavLink)`
+  .social {
+    display: none;
+    opacity: 0;
+  }
+
+  &:hover {
+    .social {
+      display: inline;
+      opacity: 1;
+      color: white;
+      font-family: "Neue-Italic";
+
+      &:hover {
+        font-family: "Neue";
+      }
+    }
+  }
 `;
 
 export default Menu;

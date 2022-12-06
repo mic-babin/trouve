@@ -48,6 +48,14 @@ export const query = graphql`
                 id
                 text
               }
+              ... on ContentfulSocials {
+                id
+                title
+                socialLinks {
+                  text
+                  url
+                }
+              }
             }
           }
           langs: language {
