@@ -11,9 +11,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const Contact = ({ contact, showContact, setShowContact }) => {
   const section = contact;
   // TODO change title for id
-  const contactInfo = section.filter(
-    (section) => section.id === "b8dc3482-8f6b-52e3-9c2a-cdf3971f3a76"
-  )[0];
+  const contactInfo = section[0];
   const contactForm = section[1];
   const close = contactInfo.link.text;
 
