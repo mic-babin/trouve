@@ -39,6 +39,7 @@ export const query = graphql`
         node {
           closeTitle
           navLinks {
+            id
             links {
               ... on ContentfulLink {
                 id
@@ -53,6 +54,7 @@ export const query = graphql`
                 id
                 title
                 socialLinks {
+                  id
                   text
                   url
                 }

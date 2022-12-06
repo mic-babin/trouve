@@ -1,5 +1,5 @@
 import React from "react";
-import Menu from "./menu";
+import Menu from "./navigation/menu";
 import { MenuButton } from "../components/styled-components/menu-button";
 import { Logo } from "../components/styled-components/logo";
 import LogoSrc from "../assets/img/trouve.svg";
