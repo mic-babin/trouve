@@ -9,10 +9,11 @@ import { Logo } from "./styled-components/logo";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Contact = ({ contact, showContact, setShowContact }) => {
-  const section = contact;
+  const sections = contact;
+  console.log(sections);
   // TODO change title for id
-  const contactInfo = section[0];
-  const contactForm = section[1];
+  const contactInfo = sections[0];
+  const contactForm = sections[1];
   const close = contactInfo.link.text;
 
   const handleCloseContact = () => setShowContact(false);

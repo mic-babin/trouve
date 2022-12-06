@@ -7,7 +7,9 @@ const Equipe = (props) => {
   const contact = props.data.allContentfulPage.edges[0].node.sections.filter(
     (section) =>
       section.id === "b8dc3482-8f6b-52e3-9c2a-cdf3971f3a76" ||
-      section.id === "7245ed4c-7485-59f3-bcf3-2825bfce37a1"
+      section.id === "7245ed4c-7485-59f3-bcf3-2825bfce37a1" ||
+      section.id === "33167fe8-1da1-59ca-8cae-8aed5506436b" ||
+      section.id === "6609d98c-4bf8-5936-9f03-9e293bbd3542"
   );
 
   return (
