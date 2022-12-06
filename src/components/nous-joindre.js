@@ -24,7 +24,9 @@ const Contact = ({ contact, showContact, setShowContact }) => {
         <Container variants={backdrop} animate="visible" initial="hidden">
           <div className="d-flex justify-content-between align-items-center">
             <Logo src={LogoSrc} alt="Logo" />
-            <MenuButton onClick={handleCloseContact}>{close}</MenuButton>
+            {close && (
+              <MenuButton onClick={handleCloseContact}>{close}</MenuButton>
+            )}
           </div>
           <div className="container">
             <FullHeight className="row">
