@@ -2,15 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { Logo } from "../styled-components/logo";
 import LogoSrc from "../../assets/img/trouve_blanc.svg";
-import { useState } from "react";
-import Contact from "../nous-joindre";
 import { renderRichText } from "gatsby-source-contentful/rich-text";
 import NavLinks from "./nav-links";
 import Languages from "./languages";
 
-const Footer = ({ menu, contact }) => {
+const Footer = ({ menu, setShowContact, setShowMenu }) => {
   const { navLinks, langs, copyrights } = menu;
-  const [showContact, setShowContact] = useState(false);
 
   return (
     <>
@@ -19,7 +16,11 @@ const Footer = ({ menu, contact }) => {
           <LogoFooter src={LogoSrc} alt="Logo" />
           <div className="flex-grow-1">
             <div className="d-flex flex-column justify-content-end">
-              <NavLinks navLinks={navLinks} setShowContact={setShowContact} />
+              <NavLinks
+                navLinks={navLinks}
+                setShowContact={setShowContact}
+                setShowMenu={setShowMenu}
+              />
             </div>
             <div className="d-flex justify-content-between">
               <Languages langs={langs} />
@@ -28,11 +29,6 @@ const Footer = ({ menu, contact }) => {
           </div>
         </div>
       </FooterWrapper>
-      <Contact
-        showContact={showContact}
-        setShowContact={setShowContact}
-        contact={contact}
-      />
     </>
   );
 };

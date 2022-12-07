@@ -5,6 +5,7 @@ import * as sections from "../components/home/index-sections";
 import Fallback from "../components/fallback";
 import { Trans, useTranslation } from "gatsby-plugin-react-i18next";
 // import { SEO } from "../components/seo";
+import { useState } from "react";
 
 export default function Homepage(props) {
   const menu = props.data.allContentfulHeader.edges[0].node;
@@ -15,9 +16,14 @@ export default function Homepage(props) {
       section.id === "33167fe8-1da1-59ca-8cae-8aed5506436b" ||
       section.id === "6609d98c-4bf8-5936-9f03-9e293bbd3542"
   );
-
+  const [showContact, setShowContact] = useState(false);
   return (
-    <Layout menu={menu} contact={contact}>
+    <Layout
+      menu={menu}
+      contact={contact}
+      showContact={showContact}
+      setShowContact={setShowContact}
+    >
       {/* {homepage.blocks.map((block) => {
         const {
           id,

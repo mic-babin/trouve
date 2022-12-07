@@ -4,16 +4,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { MenuButton } from "../styled-components/menu-button";
 import { Logo } from "../styled-components/logo";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import { useState } from "react";
-import Contact from "../nous-joindre";
 import Languages from "./languages";
 import NavLinks from "./nav-links";
 
-const Menu = ({ showMenu, setShowMenu, menu, contact }) => {
+const Menu = ({ showMenu, setShowMenu, menu, setShowContact }) => {
   const { closeTitle, navLinks, langs, featured, logo } = menu;
 
   const handleCloseMenu = () => setShowMenu(false);
-  const [showContact, setShowContact] = useState(false);
 
   return (
     <>
@@ -28,7 +25,11 @@ const Menu = ({ showMenu, setShowMenu, menu, contact }) => {
               )}
             </div>
             <FullHeight className="d-flex flex-column justify-content-end">
-              <NavLinks navLinks={navLinks} setShowContact={setShowContact} />
+              <NavLinks
+                navLinks={navLinks}
+                setShowContact={setShowContact}
+                setShowMenu={setShowMenu}
+              />
               {featured && (
                 <Image
                   alt="featured"
@@ -39,11 +40,6 @@ const Menu = ({ showMenu, setShowMenu, menu, contact }) => {
           </NavBg>
         )}
       </AnimatePresence>
-      <Contact
-        showContact={showContact}
-        setShowContact={setShowContact}
-        contact={contact}
-      />
     </>
   );
 };

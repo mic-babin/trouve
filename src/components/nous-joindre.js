@@ -22,7 +22,7 @@ const Contact = ({ contact, showContact, setShowContact }) => {
           <div className="d-flex justify-content-between align-items-center">
             <Logo src={LogoSrc} alt="Logo" />
             {close && (
-              <MenuButton onClick={handleCloseContact}>{close}</MenuButton>
+              <CloseButton onClick={handleCloseContact}>{close}</CloseButton>
             )}
           </div>
           <div className="container">
@@ -42,13 +42,13 @@ const Contact = ({ contact, showContact, setShowContact }) => {
 };
 
 const Container = styled(motion.div)`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  min-height: 100%;
   width: 100vw;
   min-height: 100vh;
   background-color: white;
+  z-index: 10;
 `;
 
 const FullHeight = styled.div`
@@ -59,4 +59,8 @@ const backdrop = {
   visible: { opacity: 1 },
   hidden: { opacity: 0 },
 };
+
+const CloseButton = styled(MenuButton)`
+  color: black;
+`;
 export default Contact;

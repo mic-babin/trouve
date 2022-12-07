@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "../components/layout";
 import { graphql } from "gatsby";
+import { useState } from "react";
 
 const Equipe = (props) => {
   const menu = props.data.allContentfulHeader.edges[0].node;
@@ -12,8 +13,16 @@ const Equipe = (props) => {
       section.id === "6609d98c-4bf8-5936-9f03-9e293bbd3542"
   );
 
+  const sections = props.data.allContentfulPage.edges[0].node.sections;
+
+  const [showContact, setShowContact] = useState(false);
   return (
-    <Layout menu={menu} contact={contact}>
+    <Layout
+      menu={menu}
+      contact={contact}
+      showContact={showContact}
+      setShowContact={setShowContact}
+    >
       <div>Equipe</div>;
     </Layout>
   );

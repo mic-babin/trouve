@@ -1,6 +1,9 @@
 import React from "react";
 import Layout from "../components/layout";
 import { graphql } from "gatsby";
+import Expertise from "../components/services/expertise";
+import Mandate from "../components/services/mandate";
+import { useState } from "react";
 
 const NosServices = (props) => {
   const menu = props.data.allContentfulHeader.edges[0].node;
@@ -11,10 +14,34 @@ const NosServices = (props) => {
       section.id === "33167fe8-1da1-59ca-8cae-8aed5506436b" ||
       section.id === "6609d98c-4bf8-5936-9f03-9e293bbd3542"
   );
+  const sections = props.data.allContentfulPage.edges[1].node.sections;
 
+  const expertise = props.data.allContentfulPage.edges[1].node.sections.filter(
+    (section) =>
+      section.id === "75150f30-8ceb-5821-bf1e-428049b55a0a" ||
+      section.id === "16c38960-c0a9-5a92-9779-bbe69b49b8f3"
+  )[0];
+  const mandate = props.data.allContentfulPage.edges[1].node.sections.filter(
+    (section) =>
+      section.id === "b4a2f391-7296-551e-82d5-be228227643d" ||
+      section.id === "33f95366-e224-521c-8a86-525042586da0"
+  )[0];
+
+  const [showContact, setShowContact] = useState(false);
+  console.log("nous-joindre", showContact);
   return (
-    <Layout menu={menu} contact={contact}>
-      <div>Nos Services</div>
+    <Layout
+      menu={menu}
+      contact={contact}
+      showContact={showContact}
+      setShowContact={setShowContact}
+    >
+      <Expertise expertise={expertise} />
+      <Mandate
+        mandate={mandate}
+        contact={contact}
+        setShowContact={setShowContact}
+      />
     </Layout>
   );
 };
@@ -78,7 +105,10 @@ export const query = graphql`
       }
     }
     allContentfulPage(
-      filter: { title: { eq: "Contact" }, node_locale: { eq: $language } }
+      filter: {
+        title: { in: ["Contact", "Services"] }
+        node_locale: { eq: $language }
+      }
     ) {
       edges {
         node {
@@ -96,7 +126,16 @@ export const query = graphql`
                   }
                 }
               }
+              images {
+                id
+                gatsbyImageData(placeholder: BLURRED)
+              }
               link {
+                ... on ContentfulLink {
+                  id
+                  text
+                  url
+                }
                 ... on ContentfulShortText {
                   id
                   text
@@ -107,6 +146,16 @@ export const query = graphql`
                   id
                   childContentfulParagraphTextTextNode {
                     text
+                  }
+                  text {
+                    text
+                    id
+                  }
+                }
+                ... on ContentfulRichText {
+                  id
+                  text {
+                    raw
                   }
                 }
               }

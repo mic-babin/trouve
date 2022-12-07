@@ -2,8 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "gatsby-plugin-react-i18next";
 
-const NavLinks = ({ navLinks, setShowContact }) => {
+const NavLinks = ({ navLinks, setShowContact, setShowMenu }) => {
   const handleShowContact = () => {
+    setShowMenu(false);
     setShowContact(true);
   };
 
