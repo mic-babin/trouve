@@ -18,7 +18,10 @@ const NavLinks = ({ navLinks, setShowContact, setShowMenu }) => {
         navLinks.links.map((link, index) => (
           <LinkWrapper key={link.id} className="col-lg-6">
             {isRealLink(link, index) && (
-              <NavLink to={link.url} className="d-flex border-bottom-white">
+              <NavLink
+                to={link.url !== "/" ? "/" + link.url : link.url}
+                className="d-flex border-bottom-white"
+              >
                 <div className="me-4">0{index + 1}</div>
                 <div>{link.text}</div>
               </NavLink>
