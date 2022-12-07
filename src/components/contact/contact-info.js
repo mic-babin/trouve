@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { H1 } from "../styled-components/h1";
 
 const ContactInfo = ({ data }) => {
   const { title, textFields, components } = data;
@@ -31,18 +32,6 @@ const ContactInfo = ({ data }) => {
     </div>
   );
 };
-
-const H1 = styled.h1`
-  font-size: 50px;
-  height: 125px;
-  font-weight: 500;
-  margin-top: 0;
-
-  div:nth-of-type(2) {
-    transform: translate(-30px, 60px);
-    font-style: italic;
-  }
-`;
 
 const Text = styled.p`
   font-size: 16px;

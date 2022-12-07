@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "gatsby-plugin-react-i18next";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { renderRichText } from "gatsby-source-contentful/rich-text";
+import { NavLink } from "../styled-components/nav-link";
+import { Kicker } from "../styled-components/kicker";
+import { H1 } from "../styled-components/h1";
 
 const Expertise = ({ expertise }) => {
   const { title, textFields, images, link } = expertise;
@@ -76,39 +78,10 @@ const Expertise = ({ expertise }) => {
 
 export default Expertise;
 
-const H1 = styled.h1`
-  font-size: 50px;
-  height: 125px;
-  font-weight: 500;
-  margin-top: 0;
-
-  div:nth-of-type(2) {
-    transform: translate(-60px, 60px);
-    font-style: italic;
-  }
-`;
-
 const Section = styled.section`
   background-color: black;
   color: white;
   padding-top: 200px;
-`;
-
-const Kicker = styled.p`
-  font-size: 20px;
-  line-height: 35px;
-  letter-spacing: 2px;
-  text-align: justify;
-`;
-
-const NavLink = styled(Link)`
-  font-size: 16px;
-  text-decoration: none;
-  color: white;
-  padding: 1rem 0;
-  &:hover {
-    color: white;
-  }
 `;
 
 const BuildingImage = styled(GatsbyImage)`

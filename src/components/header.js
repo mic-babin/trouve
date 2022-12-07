@@ -3,7 +3,6 @@ import Menu from "./navigation/menu";
 import { MenuButton } from "../components/styled-components/menu-button";
 import { Logo } from "../components/styled-components/logo";
 import LogoSrc from "../assets/img/trouve_blanc.svg";
-import { useState } from "react";
 import styled from "styled-components";
 import { Link } from "gatsby-plugin-react-i18next";
 

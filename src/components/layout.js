@@ -1,17 +1,26 @@
 import React from "react";
 import Footer from "./navigation/footer";
 import Header from "./header";
-import Contact from "./nous-joindre";
+import Contact from "./navigation/nous-joindre";
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../assets/styles/normalize.css";
 import "../assets/styles/main.css";
+import { useEffect } from "react";
 
 const Layout = ({ menu, children, contact, showContact, setShowContact }) => {
   const [showMenu, setShowMenu] = useState(false);
-  const modalOpened = () => {
-    return showMenu || showContact;
-  };
+  const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    if (showModal) {
+      setShowModal(showMenu || showContact);
+    } else {
+      setTimeout(() => {
+        setShowModal(showMenu || showContact);
+      }, 1500);
+    }
+  }, [showMenu, showContact]);
 
   return (
     <>
@@ -22,7 +31,7 @@ const Layout = ({ menu, children, contact, showContact, setShowContact }) => {
         showMenu={showMenu}
         setShowMenu={setShowMenu}
       />
-      {!modalOpened() && <div>{children}</div>}
+      {!showModal && <div>{children}</div>}
       <Footer
         menu={menu}
         setShowContact={setShowContact}

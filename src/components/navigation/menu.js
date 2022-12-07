@@ -6,6 +6,7 @@ import { Logo } from "../styled-components/logo";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import Languages from "./languages";
 import NavLinks from "./nav-links";
+import { ModalAnimation } from "../animation/modal-animation";
 
 const Menu = ({ showMenu, setShowMenu, menu, setShowContact }) => {
   const { closeTitle, navLinks, langs, featured, logo } = menu;
@@ -14,9 +15,14 @@ const Menu = ({ showMenu, setShowMenu, menu, setShowContact }) => {
 
   return (
     <>
-      <AnimatePresence exitBeforeEnter>
+      <AnimatePresence initial={false} custom={ModalAnimation}>
         {showMenu && (
-          <NavBg variants={backdrop} animate="visible" initial="hidden">
+          <NavBg
+            variants={ModalAnimation}
+            animate="visible"
+            initial="hidden"
+            exit="hidden"
+          >
             <div className="d-flex justify-content-between align-items-center">
               {logo && <Logo src={logo.url} alt="Logo" />}
               <Languages langs={langs} />
@@ -24,7 +30,13 @@ const Menu = ({ showMenu, setShowMenu, menu, setShowContact }) => {
                 <MenuButton onClick={handleCloseMenu}>{closeTitle}</MenuButton>
               )}
             </div>
-            <FullHeight className="d-flex flex-column justify-content-end">
+            <motion.div
+              className="d-flex flex-column justify-content-end"
+              variants={HeightAnimation}
+              animate="visible"
+              initial="hidden"
+              exit="hidden"
+            >
               <NavLinks
                 navLinks={navLinks}
                 setShowContact={setShowContact}
@@ -36,7 +48,7 @@ const Menu = ({ showMenu, setShowMenu, menu, setShowContact }) => {
                   image={getImage(featured.gatsbyImageData)}
                 />
               )}
-            </FullHeight>
+            </motion.div>
           </NavBg>
         )}
       </AnimatePresence>
@@ -49,23 +61,26 @@ const NavBg = styled(motion.div)`
   color: white;
   position: absolute;
   top: 0;
-  left: 0;
+  right: 0;
   min-height: 100%;
-  width: 100vw;
+  overflow: hidden;
+  border-radius: 50%;
 `;
-
-const backdrop = {
-  visible: { opacity: 1 },
-  hidden: { opacity: 0 },
-};
 
 const Image = styled(GatsbyImage)`
   height: 40vh;
   margin: 20px;
 `;
 
-const FullHeight = styled.div`
-  min-height: calc(100vh - 90px);
-`;
+const HeightAnimation = {
+  visible: {
+    height: "calc(100vh - 90px)",
+    transition: { duration: 1.5, type: "linear" },
+  },
+  hidden: {
+    height: "0vh",
+    transition: { duration: 1.5, type: "linear" },
+  },
+};
 
 export default Menu;

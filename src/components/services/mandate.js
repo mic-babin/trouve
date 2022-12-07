@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { renderRichText } from "gatsby-source-contentful/rich-text";
-import { Link } from "gatsby-plugin-react-i18next";
+import { NavLink } from "../styled-components/nav-link";
+import { Kicker } from "../styled-components/kicker";
 
 const Mandate = ({ mandate, setShowContact }) => {
   const { title, textFields, link } = mandate;
@@ -22,9 +23,9 @@ const Mandate = ({ mandate, setShowContact }) => {
                 </Kicker>
               ))}
             {link && (
-              <NavLink as="div" onClick={handleShowContact}>
+              <DarkNavLink as="div" onClick={handleShowContact}>
                 – {link.text}
-              </NavLink>
+              </DarkNavLink>
             )}
           </div>
         </div>
@@ -49,19 +50,9 @@ const H2 = styled.h2`
   font-size: 65px;
 `;
 
-const Kicker = styled.div`
-  font-size: 20px;
-  line-height: 35px;
-  letter-spacing: 2px;
-  text-align: justify;
-`;
-
-const NavLink = styled(Link)`
-  cursor: pointer;
-  font-size: 16px;
-  text-decoration: none;
+const DarkNavLink = styled(NavLink)`
   color: black;
-  padding: 1rem 0;
+  cursor: pointer;
   &:hover {
     color: black;
   }

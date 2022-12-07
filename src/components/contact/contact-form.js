@@ -195,13 +195,6 @@ const H2 = styled.h2`
   }
 `;
 
-// const ModalButton = styled.p`
-//   cursor: pointer;
-//   text-align: right;
-//   font-weight: bold;
-//   color: #395266;
-// `;
-
 const FileInput = styled(Input)`
   visibility: hidden;
 

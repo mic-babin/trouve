@@ -1,6 +1,7 @@
 import React from "react";
-import { Link, useI18next } from "gatsby-plugin-react-i18next";
+import { useI18next } from "gatsby-plugin-react-i18next";
 import styled from "styled-components";
+import { NavLink } from "../styled-components/nav-link";
 
 const Languages = ({ langs }) => {
   const { languages, originalPath, t, i18n } = useI18next();
@@ -31,16 +32,6 @@ const Languages = ({ langs }) => {
 
 const LanguagesWrapper = styled.div`
   width: calc(50% - 145px);
-`;
-
-const NavLink = styled(Link)`
-  font-size: 16px;
-  text-decoration: none;
-  color: white;
-  padding: 1rem 0;
-  &:hover {
-    color: white;
-  }
 `;
 
 const Lang = styled(NavLink)`
