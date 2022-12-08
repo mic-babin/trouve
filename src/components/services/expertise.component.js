@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { renderRichText } from "gatsby-source-contentful/rich-text";
-import { NavLink } from "../styled-components/nav-link";
-import { Kicker } from "../styled-components/kicker";
-import { H1 } from "../styled-components/h1";
+import { NavLink } from "../styled-components/nav-link.style";
+import { Kicker } from "../styled-components/kicker.style";
+import { H1 } from "../styled-components/h1.style";
 
 const Expertise = ({ expertise }) => {
   const { title, textFields, images, link } = expertise;

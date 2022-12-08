@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
-import { MenuButton } from "../styled-components/menu-button";
-import { Logo } from "../styled-components/logo";
+import { MenuButton } from "../styled-components/menu-button.style";
+import { Logo } from "../styled-components/logo.style";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import Languages from "./languages";
-import NavLinks from "./nav-links";
-import { ModalAnimation } from "../animation/modal-animation";
+import Languages from "./languages.component";
+import NavLinks from "./nav-links.component";
+import { ModalAnimation } from "../animation/modal.animation";
 
 const Menu = ({ showMenu, setShowMenu, menu, setShowContact }) => {
   const { closeTitle, navLinks, langs, featured, logo } = menu;

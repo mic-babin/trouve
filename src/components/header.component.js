@@ -1,7 +1,7 @@
 import React from "react";
-import Menu from "./navigation/menu";
-import { MenuButton } from "../components/styled-components/menu-button";
-import { Logo } from "../components/styled-components/logo";
+import Menu from "./navigation/menu.component";
+import { MenuButton } from "./styled-components/menu-button.style";
+import { Logo } from "./styled-components/logo.style";
 import LogoSrc from "../assets/img/trouve_blanc.svg";
 import styled from "styled-components";
 import { Link } from "gatsby-plugin-react-i18next";

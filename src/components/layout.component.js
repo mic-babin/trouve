@@ -1,7 +1,7 @@
 import React from "react";
-import Footer from "./navigation/footer";
-import Header from "./header";
-import Contact from "./navigation/nous-joindre";
+import Footer from "./navigation/footer.component";
+import Header from "./header.component";
+import Contact from "./navigation/nous-joindre.component";
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../assets/styles/normalize.css";

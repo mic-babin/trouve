@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { Logo } from "../styled-components/logo";
+import { Logo } from "../styled-components/logo.style";
 import LogoSrc from "../../assets/img/trouve_blanc.svg";
 import { renderRichText } from "gatsby-source-contentful/rich-text";
-import NavLinks from "./nav-links";
-import Languages from "./languages";
+import NavLinks from "./nav-links.component";
+import Languages from "./languages.component";
 
 const Footer = ({ menu, setShowContact, setShowMenu }) => {
   const { navLinks, langs, copyrights } = menu;

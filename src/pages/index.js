@@ -1,8 +1,8 @@
 import * as React from "react";
 import { graphql } from "gatsby";
-import Layout from "../components/layout";
-import * as sections from "../components/home/index-sections";
-import Fallback from "../components/fallback";
+import Layout from "../components/layout.component";
+import * as sections from "../components/home/index-sections.component";
+import Fallback from "../components/fallback.component";
 import { Trans, useTranslation } from "gatsby-plugin-react-i18next";
 // import { SEO } from "../components/seo";
 import { useState } from "react";

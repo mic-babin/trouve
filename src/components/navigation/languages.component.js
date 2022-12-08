@@ -1,7 +1,7 @@
 import React from "react";
 import { useI18next } from "gatsby-plugin-react-i18next";
 import styled from "styled-components";
-import { NavLink } from "../styled-components/nav-link";
+import { NavLink } from "../styled-components/nav-link.style";
 
 const Languages = ({ langs }) => {
   const { languages, originalPath, t, i18n } = useI18next();

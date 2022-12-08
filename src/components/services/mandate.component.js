@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { renderRichText } from "gatsby-source-contentful/rich-text";
-import { NavLink } from "../styled-components/nav-link";
-import { Kicker } from "../styled-components/kicker";
+import { NavLink } from "../styled-components/nav-link.style";
+import { Kicker } from "../styled-components/kicker.style";
 
 const Mandate = ({ mandate, setShowContact }) => {
   const { title, textFields, link } = mandate;

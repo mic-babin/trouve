@@ -1,20 +1,20 @@
 import React from "react";
-import ContactInfo from "../contact/contact-info";
-import ContactForm from "../contact/contact-form";
+import ContactInfo from "../contact/contact-info.component";
+import ContactForm from "../contact/contact-form.component";
 import LogoSrc from "../../assets/img/trouve.svg";
 import styled from "styled-components";
-import { MenuButton } from "../styled-components/menu-button";
-import { Logo } from "../styled-components/logo";
+import { MenuButton } from "../styled-components/menu-button.style";
+import { Logo } from "../styled-components/logo.style";
 import { motion, AnimatePresence } from "framer-motion";
-import { ModalAnimation } from "../animation/modal-animation";
+import { ModalAnimation } from "../animation/modal.animation";
 
 const Contact = ({ contact, showContact, setShowContact }) => {
   const sections = contact;
   // TODO change title for id
+  console.log(contact);
   const contactInfo = sections[0];
   const contactForm = sections[1];
   const close = contactInfo.link.text;
-
   const handleCloseContact = () => setShowContact(false);
   return (
     <AnimatePresence initial={false} custom={ModalAnimation}>

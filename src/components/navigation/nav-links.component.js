@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { WidthAnimation } from "../animation/width-animation";
-import { NavLink } from "../styled-components/nav-link";
+import { WidthAnimation } from "../animation/width.animation";
+import { NavLink } from "../styled-components/nav-link.style";
 import { motion } from "framer-motion";
 
 const NavLinks = ({ navLinks, setShowContact, setShowMenu }) => {

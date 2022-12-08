@@ -1,5 +1,5 @@
 import React from "react";
-import Layout from "../components/layout";
+import Layout from "../components/layout.component";
 import { graphql } from "gatsby";
 import { useState } from "react";
 
