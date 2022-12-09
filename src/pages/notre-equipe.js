@@ -19,8 +19,6 @@ const Equipe = (props) => {
       el.id !== "8a5acd35-6c67-5045-bde6-39ecf7bb1cc2" &&
       el.id !== "25d32986-3977-5e32-b3fb-27185ec42a7c"
   );
-  // const sections = props.data.allContentfulPage;
-  console.log(teamMembers);
   const [showContact, setShowContact] = useState(false);
   return (
     <Layout

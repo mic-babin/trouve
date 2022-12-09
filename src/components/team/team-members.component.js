@@ -5,14 +5,12 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { CardWrapper } from "../styled-components/card-wrapper.style";
 
 const TeamMembers = ({ teamMembers }) => {
-  console.log(teamMembers);
   return (
     <>
       {teamMembers &&
         teamMembers.map((employee) => {
           const { name, title, description, phone, email, image, id } =
             employee;
-          console.log(employee);
           return (
             <CardWrapper>
               <div key={id}>
@@ -37,8 +35,8 @@ const TeamMembers = ({ teamMembers }) => {
                   <div className="col-lg-4">
                     {image && (
                       <Image
-                        imgStyle={{ objectPosition: "top" }}
                         image={getImage(image.gatsbyImageData)}
+                        alt="TODO"
                       ></Image>
                     )}
                   </div>

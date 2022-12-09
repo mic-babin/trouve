@@ -46,7 +46,7 @@ const TeamHero = ({ hero, setShowContact }) => {
         </Container>
         {images &&
           images.map((img) => (
-            <Image image={getImage(img.gatsbyImageData)}></Image>
+            <Image image={getImage(img.gatsbyImageData)} alt="TODO"></Image>
           ))}
       </div>
     </Section>

@@ -21,8 +21,12 @@ const Card = ({ data }) => {
         </div>
         <div className="col-lg-4">
           {images &&
-            images.map((img) => (
-              <Image image={getImage(img.gatsbyImageData)}></Image>
+            images.map((img, index) => (
+              <Image
+                key={index}
+                image={getImage(img.gatsbyImageData)}
+                alt="TODO"
+              ></Image>
             ))}
         </div>
       </div>

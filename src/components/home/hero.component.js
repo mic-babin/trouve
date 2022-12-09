@@ -40,7 +40,7 @@ const Hero = ({ data }) => {
           <Image
             key={index}
             image={getImage(img.gatsbyImageData)}
-            alt="background"
+            alt="TODO"
           ></Image>
         ))}
     </Section>

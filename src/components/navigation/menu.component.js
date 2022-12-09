@@ -43,10 +43,7 @@ const Menu = ({ showMenu, setShowMenu, menu, setShowContact }) => {
                 setShowMenu={setShowMenu}
               />
               {featured && (
-                <Image
-                  alt="featured"
-                  image={getImage(featured.gatsbyImageData)}
-                />
+                <Image alt="TODO" image={getImage(featured.gatsbyImageData)} />
               )}
             </motion.div>
           </NavBg>

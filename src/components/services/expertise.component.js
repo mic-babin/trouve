@@ -53,14 +53,14 @@ const Expertise = ({ expertise }) => {
               <div className="position-relative">
                 {woodImg && (
                   <WoodImage
-                    alt="featured"
+                    alt="TODO"
                     image={getImage(woodImg.gatsbyImageData)}
                   />
                 )}
               </div>
               {buildingImg && (
                 <BuildingImage
-                  alt="featured"
+                  alt="TODO"
                   image={getImage(buildingImg.gatsbyImageData)}
                 />
               )}

@@ -26,18 +26,17 @@ const Experience = ({ data }) => {
             ))}
         </div>
       </div>
-      <div className="row">
+      <div className="row mx-0">
         {components &&
           components.map((el) => {
-            console.log(el);
             const { image, title, description, link } = el;
             return (
               <div key={el.id} className="col-lg-4">
                 <ImageWrapper>
-                  <div class="round"></div>
+                  <div className="round"></div>
                   <Image
                     image={getImage(image.gatsbyImageData)}
-                    alt="background"
+                    alt="TODO"
                   ></Image>
                 </ImageWrapper>
                 {title && <Kicker className="mt-4">{title}</Kicker>}
