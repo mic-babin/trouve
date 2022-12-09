@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import { useIsMedium, useIsSmall } from "../../utils/media-query.hook";
 
 const Hero = ({ data }) => {
   const { images, textFields } = data;
@@ -8,7 +9,17 @@ const Hero = ({ data }) => {
   const stopSearching = textFields[1].paragraph;
   const youFound = textFields[2].paragraph;
   const opportunities = textFields[3].paragraph;
-  const list = textFields[4].value.concat(textFields[4].value);
+
+  const isMedium = useIsMedium();
+  const isSmall = useIsSmall();
+
+  let list = isMedium
+    ? textFields[4].value
+    : textFields[4].value.concat(textFields[4].value);
+  // console.log(isSmall);
+  // if (!isSmall) {
+  //   list = list.splice(list - 2, 2);
+  // }
   return (
     <Section className="position-relative">
       <div className="w-100 pt-5 mt-5">
@@ -130,5 +141,5 @@ const List = styled.div`
   justify-content: space-between;
   width: 190vw;
   transform: translateX(-50vw);
-  overflow: hidden;
+  overflow-x: hidden !important;
 `;

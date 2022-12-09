@@ -2,13 +2,14 @@ import React from "react";
 import { useI18next } from "gatsby-plugin-react-i18next";
 import styled from "styled-components";
 import { NavLink } from "../styled-components/nav-link.style";
-import { useIsMedium } from "../../utils/media-query.hook";
+import { useIsXLarge } from "../../utils/media-query.hook";
 
-const Languages = ({ langs }) => {
+const LanguagesFooter = ({ langs }) => {
   const { languages, originalPath, t, i18n } = useI18next();
-  const isMedium = useIsMedium();
+  const isXLarge = useIsXLarge();
+  console.log(isXLarge);
   const getLang = (lng) => {
-    if (isMedium) {
+    if (isXLarge) {
       return lng.toUpperCase();
     }
     return langs.value
@@ -16,13 +17,14 @@ const Languages = ({ langs }) => {
       .toUpperCase();
   };
   return (
-    <LanguagesWrapper className="d-flex justify-content-end justify-content-md-center">
+    <LanguagesWrapper className="d-flex justify-content-start ps-sm-3">
       {languages &&
         languages.map((lng) => (
           <Lang
             key={lng}
             to={originalPath}
             language={lng}
+            className="flex-grow-1"
             style={{
               fontFamily:
                 i18n.resolvedLanguage === lng ? "Neue-Italic" : "Neue",
@@ -37,6 +39,9 @@ const Languages = ({ langs }) => {
 
 const LanguagesWrapper = styled.div`
   width: calc(50% - 145px);
+  @media (max-width: 574px) {
+    width: 100%;
+  }
 `;
 
 const Lang = styled(NavLink)`
@@ -50,9 +55,12 @@ const Lang = styled(NavLink)`
     margin-right: 2rem;
   }
   @media (max-width: 767px) {
-    margin-right: 0;
-    margin-left: 1rem;
+    margin-right: 1rem;
+    /* margin-left: 1rem; */
+  }
+  @media (max-width: 574px) {
+    margin: 0 1rem;
   }
 `;
 
-export default Languages;
+export default LanguagesFooter;

@@ -1,7 +1,6 @@
 import React from "react";
 import Menu from "./navigation/menu.component";
 import { MenuButton } from "./styled-components/menu-button.style";
-import { Logo } from "./styled-components/logo.style";
 import LogoSrc from "../assets/img/trouve_blanc.svg";
 import styled from "styled-components";
 import { Link } from "gatsby-plugin-react-i18next";
@@ -11,7 +10,7 @@ const Header = ({ menu, contact, setShowContact, showMenu, setShowMenu }) => {
 
   return (
     <HeaderWrapper>
-      <div className="d-flex justify-content-between align-items-center position-relative">
+      <div className="d-flex justify-content-between align-items-center">
         <Link to="/">
           <Logo src={LogoSrc} alt="Logo" />
         </Link>
@@ -34,10 +33,14 @@ const HeaderWrapper = styled.header`
   border-bottom: 1.5px solid white;
   position: fixed !important;
   top: 0;
-  width: calc(100vw);
+  width: 100vw;
   color: white;
   z-index: 10;
   /* background-color: black; */
+`;
+
+const Logo = styled.img`
+  height: 90px;
 `;
 
 export default Header;

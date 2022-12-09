@@ -10,12 +10,14 @@ import { ModalAnimation } from "../animation/modal.animation";
 import { ModalWrapperAnimation } from "../animation/modal-wrapper.animation";
 import { ModalMediumAnimation } from "../animation/modal-medium.animation";
 import { useIsMedium } from "../../utils/media-query.hook";
+import { useIsSmall } from "../../utils/media-query.hook";
 
 const Menu = ({ showMenu, setShowMenu, menu, setShowContact }) => {
   const { closeTitle, navLinks, langs, featured, logo } = menu;
 
   const handleCloseMenu = () => setShowMenu(false);
   const isMedium = useIsMedium();
+  const isSmall = useIsSmall();
   const ModalVariant = isMedium ? ModalMediumAnimation : ModalAnimation;
   return (
     <>
@@ -36,13 +38,18 @@ const Menu = ({ showMenu, setShowMenu, menu, setShowContact }) => {
             >
               <div className="d-flex justify-content-between align-items-center">
                 {logo && <Logo src={logo.url} alt="Logo" />}
-                <Languages langs={langs} />
+                {isSmall && <Languages langs={langs} />}
                 {closeTitle && (
                   <MenuButton onClick={handleCloseMenu}>
                     {closeTitle}
                   </MenuButton>
                 )}
               </div>
+              {!isSmall && (
+                <SmallLanguagesWrapper className="d-flex justify-content-end">
+                  <Languages langs={langs} />
+                </SmallLanguagesWrapper>
+              )}
               <motion.div className="d-flex flex-column justify-content-end">
                 <NavLinks
                   navLinks={navLinks}
@@ -89,17 +96,29 @@ const ModalWrapper = styled(motion.div)`
   overflow: hidden;
   @media (max-width: 991px) {
     left: 100vw;
+    width: calc(100vw - 10px) !important;
   }
 `;
 
 const ImageWrapper = styled.div`
   width: calc(100vw - 17px);
   padding: 12px;
+  overflow: hidden;
+  @media (max-width: 991px) {
+    width: calc(100vw -10px) !important;
+  }
 `;
 
 const Image = styled(GatsbyImage)`
   height: 40vh;
   max-width: calc(100vw - 14px);
+  @media (max-width: 991px) {
+    width: calc(100vw) !important;
+  }
+`;
+
+const SmallLanguagesWrapper = styled.div`
+  transform: translateY(-40px);
 `;
 
 export default Menu;
