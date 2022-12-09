@@ -34,10 +34,12 @@ const Experience = ({ data }) => {
               <div key={el.id} className="col-lg-4">
                 <ImageWrapper>
                   <div className="round"></div>
-                  <Image
-                    image={getImage(image.gatsbyImageData)}
-                    alt="TODO"
-                  ></Image>
+                  {image && (
+                    <Image
+                      image={getImage(image.gatsbyImageData)}
+                      alt="TODO"
+                    ></Image>
+                  )}
                 </ImageWrapper>
                 {title && <Kicker className="mt-4">{title}</Kicker>}
                 <Description>
