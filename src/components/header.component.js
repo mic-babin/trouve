@@ -35,6 +35,7 @@ const HeaderWrapper = styled.header`
   width: 100vw;
   color: white;
   z-index: 10;
+  /* background-color: black; */
 `;
 
 export default Header;

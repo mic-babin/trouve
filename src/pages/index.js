@@ -3,7 +3,6 @@ import { graphql } from "gatsby";
 import Layout from "../components/layout.component";
 import * as sections from "../components/home/index-sections.component";
 import Fallback from "../components/fallback.component";
-import { Trans, useTranslation } from "gatsby-plugin-react-i18next";
 // import { SEO } from "../components/seo";
 import { useState } from "react";
 
@@ -17,6 +16,7 @@ export default function Homepage(props) {
       section.id === "6609d98c-4bf8-5936-9f03-9e293bbd3542"
   );
   const [showContact, setShowContact] = useState(false);
+  const home = props.data.allContentfulPage.edges[1].node.sections;
   return (
     <Layout
       menu={menu}
@@ -24,20 +24,12 @@ export default function Homepage(props) {
       showContact={showContact}
       setShowContact={setShowContact}
     >
-      {/* {homepage.blocks.map((block) => {
-        const {
-          id,
-          internal: { type },
-          ...componentProps
-        } = block;
-        const blocktype = type.replace("Contentful", "");
-        const Component = sections[blocktype] || Fallback;
-        return <Component key={id} {...componentProps} />;
-      })} */}
-      <h1>
-        <Trans i18nKey="title">Hi people</Trans>
-      </h1>
-      {/* ... */}
+      {home.map((section) => {
+        const { id, type, ...componentProps } = section;
+        const Component = sections[type] || Fallback;
+        const data = home.filter((el) => el.type === type)[0];
+        return <Component key={id} {...componentProps} data={data} />;
+      })}
     </Layout>
   );
 }
@@ -101,14 +93,22 @@ export const query = graphql`
       }
     }
     allContentfulPage(
-      filter: { title: { eq: "Contact" }, node_locale: { eq: $language } }
+      filter: {
+        title: { in: ["Contact", "Home", "Accueil"] }
+        node_locale: { eq: $language }
+      }
     ) {
       edges {
         node {
+          id
           sections {
             ... on ContentfulSection {
               id
+              type
               title
+              images {
+                gatsbyImageData(placeholder: BLURRED)
+              }
               components {
                 ... on ContentfulContacts {
                   id
@@ -116,6 +116,22 @@ export const query = graphql`
                     id
                     address
                     type
+                  }
+                }
+                ... on ContentfulCard {
+                  id
+                  title
+                  image {
+                    gatsbyImageData(placeholder: BLURRED)
+                  }
+                  description {
+                    id
+                    description
+                  }
+                  link {
+                    id
+                    text
+                    url
                   }
                 }
               }
@@ -130,6 +146,23 @@ export const query = graphql`
                   id
                   childContentfulParagraphTextTextNode {
                     text
+                  }
+                  text {
+                    text
+                  }
+                }
+                ... on ContentfulShortText {
+                  id
+                  paragraph: text
+                }
+                ... on ContentfulList {
+                  id
+                  value
+                }
+                ... on ContentfulRichText {
+                  id
+                  richText: text {
+                    raw
                   }
                 }
               }

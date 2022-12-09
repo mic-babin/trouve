@@ -11,7 +11,6 @@ import { ModalAnimation } from "../animation/modal.animation";
 const Contact = ({ contact, showContact, setShowContact }) => {
   const sections = contact;
   // TODO change title for id
-  console.log(contact);
   const contactInfo = sections[0];
   const contactForm = sections[1];
   const close = contactInfo.link.text;

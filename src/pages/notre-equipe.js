@@ -3,6 +3,7 @@ import Layout from "../components/layout.component";
 import { graphql } from "gatsby";
 import { useState } from "react";
 import TeamHero from "../components/team/team-hero.component";
+import TeamMembers from "../components/team/team-members.component";
 
 const Equipe = (props) => {
   const menu = props.data.allContentfulHeader.edges[0].node;
@@ -10,12 +11,12 @@ const Equipe = (props) => {
   const team = props.data.allContentfulPage.edges[0].node.sections;
   const hero = team.filter(
     (el) =>
-      el.id === "25d32986-3977-5e32-b3fb-27185ec42a7c" ||
+      el.id === "8a5acd35-6c67-5045-bde6-39ecf7bb1cc2" ||
       el.id === "25d32986-3977-5e32-b3fb-27185ec42a7c"
-  );
+  )[0];
   const teamMembers = team.filter(
     (el) =>
-      el.id !== "25d32986-3977-5e32-b3fb-27185ec42a7c" ||
+      el.id !== "8a5acd35-6c67-5045-bde6-39ecf7bb1cc2" &&
       el.id !== "25d32986-3977-5e32-b3fb-27185ec42a7c"
   );
   // const sections = props.data.allContentfulPage;
@@ -28,7 +29,8 @@ const Equipe = (props) => {
       showContact={showContact}
       setShowContact={setShowContact}
     >
-      <TeamHero />
+      <TeamHero hero={hero} setShowContact={setShowContact} />
+      <TeamMembers teamMembers={teamMembers} />
     </Layout>
   );
 };
