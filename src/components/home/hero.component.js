@@ -54,7 +54,7 @@ const Section = styled.section`
   display: flex;
   color: white;
   & > * {
-    z-index: 10;
+    z-index: 2;
   }
   overflow-x: hidden;
 `;

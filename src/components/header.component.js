@@ -15,7 +15,9 @@ const Header = ({ menu, contact, setShowContact, showMenu, setShowMenu }) => {
         <Link to="/">
           <Logo src={LogoSrc} alt="Logo" />
         </Link>
-        <MenuButton onClick={handleShowMenu}>MENU</MenuButton>
+        <MenuButton className="pe-2" onClick={handleShowMenu}>
+          MENU
+        </MenuButton>
         <Menu
           showMenu={showMenu}
           setShowMenu={setShowMenu}
@@ -32,7 +34,7 @@ const HeaderWrapper = styled.header`
   border-bottom: 1.5px solid white;
   position: fixed !important;
   top: 0;
-  width: 100vw;
+  width: calc(100vw);
   color: white;
   z-index: 10;
   /* background-color: black; */

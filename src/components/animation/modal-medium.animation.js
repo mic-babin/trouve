@@ -1,8 +1,9 @@
-export const ModalAnimation = {
+export const ModalMediumAnimation = {
   visible: {
-    padding: "50vw 50vw",
-    width: "200vw",
-    height: "200vw",
+    padding: "50vw 150vw",
+    margin: "0 -200vw",
+    width: "400vw",
+    height: "400vw",
     transition: { duration: 1, type: "linear" },
   },
   hidden: {

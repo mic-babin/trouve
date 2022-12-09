@@ -16,10 +16,9 @@ const Layout = ({ menu, children, contact, showContact, setShowContact }) => {
     if (showModal) {
       setShowModal(showMenu || showContact);
     } else {
-      setTimeout(() => {
-        setShowModal(showMenu || showContact);
-      }, 1500);
+      setShowModal(showMenu || showContact);
     }
+    console.log(showMenu);
   }, [showMenu, showContact]);
 
   return (
@@ -31,12 +30,23 @@ const Layout = ({ menu, children, contact, showContact, setShowContact }) => {
         showMenu={showMenu}
         setShowMenu={setShowMenu}
       />
-      {!showModal && <div>{children}</div>}
-      <Footer
-        menu={menu}
-        setShowContact={setShowContact}
-        setShowMenu={setShowMenu}
-      />
+
+      <div
+        style={
+          {
+            // height: showMenu ? "calc(100vh)" : "auto",
+            // overflow: showMenu ? "hidden" : "auto",
+          }
+        }
+      >
+        {children}
+        <Footer
+          menu={menu}
+          setShowContact={setShowContact}
+          setShowMenu={setShowMenu}
+        />
+      </div>
+
       <Contact
         showContact={showContact}
         setShowContact={setShowContact}

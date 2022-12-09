@@ -4,6 +4,8 @@ import { H1 } from "../styled-components/h1.style";
 
 const ContactInfo = ({ data }) => {
   const { title, textFields, components } = data;
+  console.log(textFields);
+
   return (
     <div className="d-flex flex-column justify-content-center h-100">
       <H1>
@@ -15,11 +17,14 @@ const ContactInfo = ({ data }) => {
           ))}
       </H1>
       {textFields &&
-        textFields.map((text) => (
-          <Text key={text.id}>
-            {text.childContentfulParagraphTextTextNode.text}
-          </Text>
-        ))}
+        textFields.map((text, index) => {
+          return (
+            <div key={text.id}>
+              <Toggler>{text.reference}</Toggler>
+              <Text>{text.childContentfulParagraphTextTextNode.text}</Text>
+            </div>
+          );
+        })}
       {components &&
         components.map((element) => (
           <React.Fragment key={element.id}>
@@ -41,6 +46,22 @@ const Text = styled.p`
 const Address = styled.div`
   &:nth-of-type(3) {
     margin-top: 20px;
+  }
+`;
+
+const Toggler = styled.div`
+  position: relative;
+  &:before {
+    content: "";
+    display: block;
+    width: 30px;
+    height: 1px;
+    background: black !important;
+    top: 45%;
+    position: absolute;
+    opacity: 1;
+    z-index: 1;
+    transform: translateX(-50px);
   }
 `;
 

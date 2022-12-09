@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { WidthAnimation } from "../animation/width.animation";
 import { NavLink } from "../styled-components/nav-link.style";
 import { motion } from "framer-motion";
 
@@ -15,13 +14,7 @@ const NavLinks = ({ navLinks, setShowContact, setShowMenu }) => {
   };
 
   return (
-    <LinksWrapper
-      className="row mx-0"
-      variants={NavHeightAnimation}
-      animate="visible"
-      initial="hidden"
-      exit="hidden"
-    >
+    <LinksWrapper className="row mx-0">
       {navLinks &&
         navLinks.links.map((link, index) => (
           <LinkWrapper key={link.id} className="col-lg-6">
@@ -29,10 +22,6 @@ const NavLinks = ({ navLinks, setShowContact, setShowMenu }) => {
               <NavLink
                 to={link.url !== "/" ? "/" + link.url : link.url}
                 className="d-flex border-bottom-white"
-                variants={WidthAnimation}
-                animate="visible"
-                initial="hidden"
-                exit="hidden"
               >
                 <div className="me-4">0{index + 1}</div>
                 <div>{link.text}</div>
@@ -40,30 +29,20 @@ const NavLinks = ({ navLinks, setShowContact, setShowMenu }) => {
             )}
             {link.url === "http://jobs.trouvemtl.com/" && (
               <NavLink
-                as={motion.a}
+                as="a"
                 href={link.url}
                 target="_blank"
                 className="d-flex border-bottom-white"
-                variants={WidthAnimation}
-                animate="visible"
-                initial="hidden"
-                exit="hidden"
               >
                 <div className="me-4">0{index + 1}</div>
                 <div>{link.text}</div>
               </NavLink>
             )}
-            {link.title === "SOCIALS" && (
-              <Socials
-                as={motion.div}
-                className="d-flex border-bottom-white pointer"
-                variants={WidthAnimation}
-                animate="visible"
-                initial="hidden"
-                exit="hidden"
-              >
-                <div className="me-4">0{index + 1}</div>
-                <div className="me-5">{link.title}</div>
+            {(link.title === "SOCIAL MEDIA" ||
+              link.title === "RÉSEAUX SOCIAUX ") && (
+              <Socials as="div" className="d-flex border-bottom-white pointer">
+                <div className="me-3">0{index + 1}</div>
+                <div className="me-4">{link.title}</div>
                 <div>
                   {link.socialLinks &&
                     link.socialLinks.map((socialLink) => (
@@ -80,15 +59,11 @@ const NavLinks = ({ navLinks, setShowContact, setShowMenu }) => {
                 </div>
               </Socials>
             )}
-            {link.text === "CONTACT" && (
+            {(link.text === "CONTACT US" || link.text === "NOUS CONTACTER") && (
               <NavLink
-                as={motion.div}
+                as="div"
                 onClick={handleShowContact}
                 className="d-flex border-bottom-white pointer"
-                variants={WidthAnimation}
-                animate="visible"
-                initial="hidden"
-                exit="hidden"
               >
                 <div className="me-4">0{index + 1}</div>
                 <div>{link.text}</div>
@@ -107,6 +82,13 @@ const LinkWrapper = styled.div`
   &:nth-of-type(6) {
     .border-bottom-white {
       border-bottom: none;
+    }
+  }
+  @media (max-width: 991px) {
+    &:nth-of-type(5) {
+      .border-bottom-white {
+        border-bottom: 1px solid white;
+      }
     }
   }
 `;
@@ -134,14 +116,3 @@ const Socials = styled(NavLink)`
 const LinksWrapper = styled(motion.div)`
   overflow: hidden;
 `;
-
-const NavHeightAnimation = {
-  visible: {
-    height: "170px",
-    transition: { duration: 0, delay: 1, type: "linear" },
-  },
-  hidden: {
-    height: "0px",
-    transition: { duration: 0, delay: 0, type: "linear" },
-  },
-};

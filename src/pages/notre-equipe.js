@@ -127,6 +127,7 @@ export const query = graphql`
               textFields {
                 ... on ContentfulParagraph {
                   id
+                  reference
                   childContentfulParagraphTextTextNode {
                     text
                   }
