@@ -1,6 +1,6 @@
 export const ModalAnimation = {
   visible: {
-    padding: "50vw 50vw",
+    // padding: "50vw 50vw",
     width: "200vw",
     height: "200vw",
     transition: { duration: 1, type: "linear" },

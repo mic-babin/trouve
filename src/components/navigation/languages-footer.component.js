@@ -7,7 +7,7 @@ import { useIsXLarge } from "../../utils/media-query.hook";
 const LanguagesFooter = ({ langs }) => {
   const { languages, originalPath, t, i18n } = useI18next();
   const isXLarge = useIsXLarge();
-  console.log(isXLarge);
+
   const getLang = (lng) => {
     if (isXLarge) {
       return lng.toUpperCase();

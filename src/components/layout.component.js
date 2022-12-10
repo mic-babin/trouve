@@ -6,7 +6,9 @@ import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../assets/styles/normalize.css";
 import "../assets/styles/main.css";
+import "../assets/styles/accordion.css";
 import { useEffect } from "react";
+import styled from "styled-components";
 
 const Layout = ({ menu, children, contact, showContact, setShowContact }) => {
   const [showMenu, setShowMenu] = useState(false);
@@ -18,7 +20,6 @@ const Layout = ({ menu, children, contact, showContact, setShowContact }) => {
     } else {
       setShowModal(showMenu || showContact);
     }
-    console.log(showMenu);
   }, [showMenu, showContact]);
 
   return (
@@ -46,14 +47,20 @@ const Layout = ({ menu, children, contact, showContact, setShowContact }) => {
           setShowMenu={setShowMenu}
         />
       </div>
-
-      <Contact
-        showContact={showContact}
-        setShowContact={setShowContact}
-        contact={contact}
-      />
+      <ContactWrapper>
+        <Contact
+          showContact={showContact}
+          setShowContact={setShowContact}
+          contact={contact}
+        />
+      </ContactWrapper>
     </>
   );
 };
 
+const ContactWrapper = styled.div`
+  max-height: 100vh;
+  max-width: 100vw;
+  overflow: hidden;
+`;
 export default Layout;

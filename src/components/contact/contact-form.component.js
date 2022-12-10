@@ -6,14 +6,19 @@ import { useState } from "react";
 // import InputMask from "react-input-mask";
 // import axios from "axios";
 // import { motion } from "framer-motion";
+import { useI18next } from "gatsby-plugin-react-i18next";
 
 function ContactForm({ data }) {
-  const { title, formFields, button } = data;
+  const { formFields, button } = data;
   const inputs = formFields.filter(
     (field) => field.type !== "textArea" && field.type !== "file"
   );
   const textArea = formFields.filter((field) => field.type === "textArea")[0];
   const fileUpload = formFields.filter((field) => field.type === "file")[0];
+
+  const { i18n } = useI18next();
+  const lang = i18n.language;
+
   const defaultFields = {
     firstName: "",
     lastName: "",
@@ -23,42 +28,31 @@ function ContactForm({ data }) {
     message: "",
   };
   const [fields, setFields] = useState(defaultFields);
-  // const [show, setShow] = useState(false);
-  // const resetFields = () => {
-  //   setFields(defaultFields);
-  // };
-  //   const handleSubmit = async (event) => {
-  //     event.preventDefault();
-  //     const { firstName, lastName, email, linkedIn, resume, message } = fields;
-  //     try {
+  const [fileUploaded, setFileUploaded] = useState(false);
 
-  //       await axios.post("/.netlify/functions/email", {
-  //         firstName,
-  //         lastName,
-  //         email,
-  //         linkedIn,
-  //         resume,
-  //         message,
-  //       });
-  //       //   resetFields();
-  //       console.log(fields);
-  //       handleShow();
-  //     } catch (error) {
-  //       alert("Une erreur est survenue");
-  //       console.log(error.response.data);
-  //     }
-  //   };
   const handleChange = (event) => {
     const { name, value } = event.target;
+    if (name === "resume") {
+      setFileUploaded(true);
+    }
     setFields({ ...fields, [name]: value });
   };
-  // const handleClose = () => setShow(false);
-  // const handleShow = () => setShow(true);
+
+  const getFileName = () => {
+    return fields["resume"]
+      .split("\\")
+      [fields["resume"].split("\\").length - 1].toUpperCase();
+  };
+
+  const resetResumeField = () => {
+    setFields({ ...fields, ["resume"]: "" });
+    setFileUploaded(false);
+  };
+
   return (
     <>
       <section className="d-flex flex-column justify-content-center h-100">
         <div className="">
-          {title && <H2 className="text-center">{title}</H2>}
           <Form
             name="contact-form"
             method="post"
@@ -89,14 +83,32 @@ function ContactForm({ data }) {
               ))}
             <InputGroup className="d-flex flex-align-start align-items-center">
               <div>05</div>
-              <FileInput
-                type={fileUpload.type}
-                placeholder={fileUpload.label}
-                required={fileUpload.required}
-                onChange={handleChange}
-                name={fileUpload.fieldName}
-                value={fields[fileUpload.fieldName]}
-              />
+              {!fileUploaded && lang === "fr" && (
+                <FileInput
+                  type={fileUpload.type}
+                  placeholder={fileUpload.label}
+                  required={fileUpload.required}
+                  onChange={handleChange}
+                  name={fileUpload.fieldName}
+                  value={fields[fileUpload.fieldName]}
+                />
+              )}
+              {!fileUploaded && lang === "en" && (
+                <FileInputEn
+                  type={fileUpload.type}
+                  placeholder={fileUpload.label}
+                  required={fileUpload.required}
+                  onChange={handleChange}
+                  name={fileUpload.fieldName}
+                  value={fields[fileUpload.fieldName]}
+                />
+              )}
+              {fileUploaded && <Label>{getFileName()}</Label>}
+              {fileUploaded && (
+                <Label onClick={resetResumeField} className="pointer">
+                  &#x2715;
+                </Label>
+              )}
             </InputGroup>
             <div className="d-flex flex-align-start align-items-center">
               <div>06</div>
@@ -109,25 +121,13 @@ function ContactForm({ data }) {
               value={fields[textArea.fieldName]}
             />
             {button && (
-              <FormButton type="submit" className="align-self-end">
+              <FormButton type="submit" className="align-self-end mt-3">
                 {button}
               </FormButton>
             )}
           </Form>
         </div>
       </section>
-      {/* <Modal show={show} onHide={handleClose} centered>
-        <Modal.Body>
-          <h3 className="p-3">Merci de communiquer avec moi</h3>
-          <p className="px-3">
-            Votre message a bien été envoyé et sera traité dans les plus bref
-            délais. Merci!
-          </p>
-          <ModalButton className="pe-3" onClick={handleClose}>
-            Fermer
-          </ModalButton>
-        </Modal.Body>
-      </Modal> */}
     </>
   );
 }
@@ -142,8 +142,10 @@ const FormButton = styled.button`
   color: black;
   padding: 0.75rem 0;
   text-decoration: none;
+  background-color: transparent;
+  border: none;
   &:hover {
-    color: red;
+    /* color: red; */
   }
 `;
 
@@ -181,7 +183,7 @@ const Input = styled.input`
 
 const TextArea = styled.textarea`
   border: 1px solid black;
-  height: 85px;
+  height: 135px;
   resize: none;
 
   &:focus {
@@ -189,24 +191,25 @@ const TextArea = styled.textarea`
   }
 `;
 
-const H2 = styled.h2`
-  @media only screen and (max-width: 576px) {
-    font-size: 30px !important;
-  }
-`;
-
 const FileInput = styled(Input)`
-  visibility: hidden;
+  width: 188px;
 
   /* TODO add variable */
   &::before {
-    content: "SELECT SOME FILES";
+    content: "JOINDRE VOTRE CV ICI";
     visibility: visible;
-    color: transparent;
+    color: black;
     display: inline-block;
     outline: none;
     white-space: nowrap;
+    margin-right: 100px;
     cursor: pointer;
+  }
+`;
+
+const FileInputEn = styled(FileInput)`
+  &::before {
+    content: "ATTACH CV HERE";
   }
 `;
 
