@@ -1,6 +1,6 @@
 import React from "react";
 import ContactInfo from "../contact/contact-info.component";
-import ContactForm from "../contact/contact-form.component";
+import ContactForm from "../contact/contact-form.component-test";
 import LogoSrc from "../../assets/img/trouve.svg";
 import styled from "styled-components";
 import { MenuButton } from "../styled-components/menu-button.style";
@@ -131,7 +131,9 @@ const Round = styled.div`
   position: absolute;
   right: 0;
   width: 100vh;
-  padding-top: calc(100vh);
+  max-width: 60vw;
+  margin-top: max(0, calc(20vw));
+  padding-top: min(100vh, 60vw);
   border-radius: 50%;
   border: 1px solid black;
 `;
