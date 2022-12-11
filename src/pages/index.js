@@ -4,7 +4,7 @@ import Layout from "../components/layout.component";
 import * as sections from "../components/home/index-sections.component";
 import Fallback from "../components/fallback.component";
 // import { SEO } from "../components/seo";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Homepage(props) {
   const menu = props.data.allContentfulHeader.edges[0].node;
@@ -17,12 +17,33 @@ export default function Homepage(props) {
   );
   const [showContact, setShowContact] = useState(false);
   const home = props.data.allContentfulPage.edges[1].node.sections;
+  const [headerColor, setHeaderColor] = useState("transparent");
+
+  const handleHeaderColor = (color) => setHeaderColor(color);
+  useEffect(() => {
+    var observer = new IntersectionObserver(
+      function (entries) {
+        if (!entries[0].isIntersecting === true) {
+          console.log("Element is not visible in screen");
+          handleHeaderColor("black");
+        } else {
+          handleHeaderColor("transparent");
+        }
+      },
+      { threshold: [0] }
+    );
+
+    observer.observe(document.querySelector("#hero"));
+  }, []);
+
+  console.log(headerColor);
   return (
     <Layout
       menu={menu}
       contact={contact}
       showContact={showContact}
       setShowContact={setShowContact}
+      headerColor={headerColor}
     >
       {home.map((section) => {
         const { id, type, ...componentProps } = section;

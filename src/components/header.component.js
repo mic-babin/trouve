@@ -4,12 +4,28 @@ import { MenuButton } from "./styled-components/menu-button.style";
 import LogoSrc from "../assets/img/trouve_blanc.svg";
 import styled from "styled-components";
 import { Link } from "gatsby-plugin-react-i18next";
+import { motion } from "framer-motion";
 
-const Header = ({ menu, contact, setShowContact, showMenu, setShowMenu }) => {
-  const handleShowMenu = () => setShowMenu(true);
-
+const Header = ({
+  menu,
+  contact,
+  setShowContact,
+  showMenu,
+  setShowMenu,
+  headerColor,
+}) => {
+  const handleShowMenu = ({ headerColor }) => setShowMenu(true);
+  console.log(headerColor);
   return (
-    <HeaderWrapper>
+    <HeaderWrapper
+      initial={{
+        transform:
+          headerColor === "black" ? "translateY(00px)" : "translateY(-200px)",
+      }}
+      animate={{ transform: "translateY(0px)" }}
+      transition={{ duration: 0.5, delay: 1.8 }}
+      style={{ backgroundColor: headerColor }}
+    >
       <div className="d-flex justify-content-between align-items-center">
         <Link to="/">
           <Logo src={LogoSrc} alt="Logo" />
@@ -29,7 +45,7 @@ const Header = ({ menu, contact, setShowContact, showMenu, setShowMenu }) => {
   );
 };
 
-const HeaderWrapper = styled.header`
+const HeaderWrapper = styled(motion.header)`
   border-bottom: 1.5px solid white;
   position: fixed !important;
   top: 0;

@@ -1,6 +1,6 @@
 import React from "react";
 import ContactInfo from "../contact/contact-info.component";
-import ContactForm from "../contact/contact-form.component-test";
+import ContactForm from "../contact/contact-form.component";
 import LogoSrc from "../../assets/img/trouve.svg";
 import styled from "styled-components";
 import { MenuButton } from "../styled-components/menu-button.style";

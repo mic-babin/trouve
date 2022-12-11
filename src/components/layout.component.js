@@ -10,7 +10,14 @@ import "../assets/styles/accordion.css";
 import { useEffect } from "react";
 import styled from "styled-components";
 
-const Layout = ({ menu, children, contact, showContact, setShowContact }) => {
+const Layout = ({
+  menu,
+  children,
+  contact,
+  showContact,
+  setShowContact,
+  headerColor,
+}) => {
   const [showMenu, setShowMenu] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
@@ -30,6 +37,7 @@ const Layout = ({ menu, children, contact, showContact, setShowContact }) => {
         setShowContact={setShowContact}
         showMenu={showMenu}
         setShowMenu={setShowMenu}
+        headerColor={headerColor}
       />
 
       <div

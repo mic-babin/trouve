@@ -7,7 +7,7 @@ const Reason = ({ data }) => {
   const { title, textFields } = data;
   return (
     <Section>
-      <div className="container">
+      <div className="container" id="about">
         {title && (
           <H2>
             {title &&
