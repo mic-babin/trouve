@@ -28,7 +28,6 @@ const Hero = ({ data }) => {
   const handleScroll = () => {
     const position = window.pageYOffset;
     setScrollPosition(position);
-    console.log(position);
   };
 
   useEffect(() => {
@@ -109,7 +108,7 @@ const Hero = ({ data }) => {
           <div
             className="d-flex justify-content-between"
             id="list-wrapper"
-            style={{ transform: "translate(" + scrollPosition / 1.5 + "px)" }}
+            style={{ transform: "translate(" + scrollPosition / 3 + "px)" }}
           >
             {list && list.map((el, index) => <div key={index}>{el}</div>)}
           </div>

@@ -24,7 +24,6 @@ export default function Homepage(props) {
     var observer = new IntersectionObserver(
       function (entries) {
         if (!entries[0].isIntersecting === true) {
-          console.log("Element is not visible in screen");
           handleHeaderColor("black");
         } else {
           handleHeaderColor("transparent");
@@ -36,7 +35,6 @@ export default function Homepage(props) {
     observer.observe(document.querySelector("#hero"));
   }, []);
 
-  console.log(headerColor);
   return (
     <Layout
       menu={menu}

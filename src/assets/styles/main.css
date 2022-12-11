@@ -29,3 +29,7 @@ body {
 .pointer {
   cursor: pointer;
 }
+
+.h-0 {
+  height: 0px;
+}

@@ -15,7 +15,6 @@ const Header = ({
   headerColor,
 }) => {
   const handleShowMenu = ({ headerColor }) => setShowMenu(true);
-  console.log(headerColor);
   return (
     <HeaderWrapper
       initial={{
