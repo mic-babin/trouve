@@ -30,7 +30,7 @@ const Layout = ({
   }, [showMenu, showContact]);
 
   return (
-    <>
+    <div>
       <Header
         menu={menu}
         contact={contact}
@@ -39,22 +39,13 @@ const Layout = ({
         setShowMenu={setShowMenu}
         headerColor={headerColor}
       />
+      {children}
+      <Footer
+        menu={menu}
+        setShowContact={setShowContact}
+        setShowMenu={setShowMenu}
+      />
 
-      <div
-        style={
-          {
-            // height: showMenu ? "calc(100vh)" : "auto",
-            // overflow: showMenu ? "hidden" : "auto",
-          }
-        }
-      >
-        {children}
-        <Footer
-          menu={menu}
-          setShowContact={setShowContact}
-          setShowMenu={setShowMenu}
-        />
-      </div>
       <ContactWrapper>
         <Contact
           showContact={showContact}
@@ -62,7 +53,7 @@ const Layout = ({
           contact={contact}
         />
       </ContactWrapper>
-    </>
+    </div>
   );
 };
 

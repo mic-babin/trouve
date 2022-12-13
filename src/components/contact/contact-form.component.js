@@ -144,8 +144,9 @@ const FormButton = styled.button`
   text-decoration: none;
   background-color: transparent;
   border: none;
+  transition: all 0.2s ease-in;
   &:hover {
-    /* color: red; */
+    transform: scale(1.1);
   }
 `;
 
