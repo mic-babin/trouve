@@ -4,7 +4,7 @@ import Layout from "../components/layout.component";
 import * as sections from "../components/home/index-sections.component";
 import Fallback from "../components/fallback.component";
 // import { SEO } from "../components/seo";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function Homepage(props) {
   const menu = props.data.allContentfulHeader.edges[0].node;
@@ -15,12 +15,72 @@ export default function Homepage(props) {
       section.id === "33167fe8-1da1-59ca-8cae-8aed5506436b" ||
       section.id === "6609d98c-4bf8-5936-9f03-9e293bbd3542"
   );
-  const [showContact, setShowContact] = useState(false);
   const home = props.data.allContentfulPage.edges[1].node.sections;
+
+  const layout = useRef();
+
+  const [showContact, setShowContact] = useState(false);
   const [headerColor, setHeaderColor] = useState("transparent");
+  const [section, setSection] = useState("hero");
+  console.log("component = ", section);
 
   const handleHeaderColor = (color) => setHeaderColor(color);
+  const handleSection = () => {
+    console.log("handleSection = ", section);
+    const about = document.getElementById("about");
+    const process = document.getElementById("process");
+    const recruiters = document.getElementById("recruiters");
+    const talent = document.getElementById("talent");
+    const experience = document.getElementById("experience");
+
+    if (section === "hero") {
+      setSection("about");
+      about.scrollIntoView({ block: "start", inline: "nearest" });
+    }
+    if (section === "about") {
+      setSection("process");
+      process.scrollIntoView({ block: "start", inline: "nearest" });
+    }
+    if (section === "process") {
+      setSection("recruiters");
+      recruiters.scrollIntoView({ block: "start", inline: "nearest" });
+      setTimeout(() => {
+        recruiters.scrollIntoView({ block: "start", inline: "nearest" });
+        console.log("click");
+      }, 300);
+    }
+    if (section === "recruiters") {
+      setSection("experience");
+      talent.scrollIntoView({ block: "start", inline: "nearest" });
+      setTimeout(() => {
+        talent.scrollIntoView({ block: "start", inline: "nearest" });
+        console.log("click");
+      }, 300);
+    }
+    if (section === "experience") {
+      setSection("footer");
+      experience.scrollIntoView({ block: "start", inline: "nearest" });
+    }
+    if (section === "footer") {
+      setSection("footer");
+      window.scrollTo(0, document.body.scrollHeight);
+    }
+  };
+
+  const handleScroll = (e) => {
+    e.preventDefault();
+    console.log("handleScroll = ", section);
+    if (e.wheelDelta < 0) {
+      handleSection();
+    } else {
+      const hero = document.getElementById("hero");
+      hero.scrollIntoView({ block: "start", inline: "nearest" });
+      console.log("scroll to previous");
+    }
+  };
+
   useEffect(() => {
+    console.log("useEffect = ", section);
     var observer = new IntersectionObserver(
       function (entries) {
         if (!entries[0].isIntersecting === true) {
@@ -33,23 +93,34 @@ export default function Homepage(props) {
     );
 
     observer.observe(document.querySelector("#hero"));
-  }, []);
+    layout.current.addEventListener("scroll", handleScroll, false);
+    // layout.current.addEventListener("scroll", handleEvent, false);
+    layout.current.addEventListener("mousewheel", handleScroll, false);
+    // layout.current.addEventListener("touchmove", handleEvent, false);
+
+    return () => {
+      layout.current.removeEventListener("scroll", handleScroll);
+      layout.current.removeEventListener("mousewheel", handleScroll);
+    };
+  }, [section]);
 
   return (
-    <Layout
-      menu={menu}
-      contact={contact}
-      showContact={showContact}
-      setShowContact={setShowContact}
-      headerColor={headerColor}
-    >
-      {home.map((section) => {
-        const { id, type, ...componentProps } = section;
-        const Component = sections[type] || Fallback;
-        const data = home.filter((el) => el.type === type)[0];
-        return <Component key={id} {...componentProps} data={data} />;
-      })}
-    </Layout>
+    <div ref={layout}>
+      <Layout
+        menu={menu}
+        contact={contact}
+        showContact={showContact}
+        setShowContact={setShowContact}
+        headerColor={headerColor}
+      >
+        {home.map((section) => {
+          const { id, type, ...componentProps } = section;
+          const Component = sections[type] || Fallback;
+          const data = home.filter((el) => el.type === type)[0];
+          return <Component key={id} {...componentProps} data={data} />;
+        })}
+      </Layout>
+    </div>
   );
 }
 

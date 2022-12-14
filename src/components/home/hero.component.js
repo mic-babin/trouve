@@ -39,91 +39,94 @@ const Hero = ({ data }) => {
   }, []);
 
   return (
-    <Section className="position-relative" id="hero">
-      <motion.div
-        className="w-100 pt-5 mt-5"
-        initial={{ transform: "translateY(-50px)" }}
-        animate={{ transform: "translateY(0px)" }}
-        transition={{ duration: 0.5, delay: 1.8 }}
-      >
-        <Container className="container">
-          <H3>
-            <div className="word">
-              <motion.div
-                initial={{ transform: "translateX(-350px)" }}
-                animate={{ transform: "translateX(0px)" }}
-                transition={{ duration: 0.5, delay: 0.8 }}
-              >
-                {stopSearching}
-              </motion.div>
-            </div>
-            <div className="second-word">
-              <motion.div
-                initial={{ transform: "translateX(-350px)" }}
-                animate={{ transform: "translateX(0px)" }}
-                transition={{ duration: 0.5, delay: 0.8 }}
-              >
-                {youFound}
-              </motion.div>
-            </div>
-          </H3>
-          <JobsLinkWrapper>
-            <Circle />
-            <JobsLink
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3, delay: 1.3 }}
-            >
-              {opportunities}
-            </JobsLink>
-          </JobsLinkWrapper>
-        </Container>
-        <div className="d-flex justify-content-end w-100 px-4">
-          <H1
-            className="text-end"
-            initial={{ transform: "translateX(-200px)" }}
-            animate={{ transform: "translateX(0px)" }}
-            transition={{ duration: 0.5, delay: 0.8 }}
-          >
-            {title &&
-              title.split(" ").map((word, index) => (
-                <div key={index} className="word-wrapper">
-                  <motion.div
-                    className="word"
-                    initial={{ transform: "translateY(200px)" }}
-                    animate={{ transform: "translateY(0px)" }}
-                    transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
-                  >
-                    {word}{" "}
-                  </motion.div>
-                </div>
-              ))}
-          </H1>
-        </div>
-        <List
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3, delay: 2.3 }}
+    <>
+      <div className="scroll-to" id="hero"></div>
+      <Section className="position-relative" id="hero">
+        <motion.div
+          className="w-100 pt-5 mt-5"
+          initial={{ transform: "translateY(-50px)" }}
+          animate={{ transform: "translateY(0px)" }}
+          transition={{ duration: 0.5, delay: 1.8 }}
         >
-          <div
-            className="d-flex justify-content-between"
-            id="list-wrapper"
-            style={{ transform: "translate(" + scrollPosition / 3 + "px)" }}
-          >
-            {list && list.map((el, index) => <div key={index}>{el}</div>)}
+          <Container className="container">
+            <H3>
+              <div className="word">
+                <motion.div
+                  initial={{ transform: "translateX(-350px)" }}
+                  animate={{ transform: "translateX(0px)" }}
+                  transition={{ duration: 0.5, delay: 0.8 }}
+                >
+                  {stopSearching}
+                </motion.div>
+              </div>
+              <div className="second-word">
+                <motion.div
+                  initial={{ transform: "translateX(-350px)" }}
+                  animate={{ transform: "translateX(0px)" }}
+                  transition={{ duration: 0.5, delay: 0.8 }}
+                >
+                  {youFound}
+                </motion.div>
+              </div>
+            </H3>
+            <JobsLinkWrapper>
+              <Circle />
+              <JobsLink
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3, delay: 1.3 }}
+              >
+                {opportunities}
+              </JobsLink>
+            </JobsLinkWrapper>
+          </Container>
+          <div className="d-flex justify-content-end w-100 px-4">
+            <H1
+              className="text-end"
+              initial={{ transform: "translateX(-200px)" }}
+              animate={{ transform: "translateX(0px)" }}
+              transition={{ duration: 0.5, delay: 0.8 }}
+            >
+              {title &&
+                title.split(" ").map((word, index) => (
+                  <div key={index} className="word-wrapper">
+                    <motion.div
+                      className="word"
+                      initial={{ transform: "translateY(200px)" }}
+                      animate={{ transform: "translateY(0px)" }}
+                      transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
+                    >
+                      {word}{" "}
+                    </motion.div>
+                  </div>
+                ))}
+            </H1>
           </div>
-        </List>
-      </motion.div>
+          <List
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3, delay: 2.3 }}
+          >
+            <div
+              className="d-flex justify-content-between"
+              id="list-wrapper"
+              style={{ transform: "translate(" + scrollPosition / 3 + "px)" }}
+            >
+              {list && list.map((el, index) => <div key={index}>{el}</div>)}
+            </div>
+          </List>
+        </motion.div>
 
-      {images &&
-        images.map((img, index) => (
-          <Image
-            key={index}
-            image={getImage(img.gatsbyImageData)}
-            alt="TODO"
-          ></Image>
-        ))}
-    </Section>
+        {images &&
+          images.map((img, index) => (
+            <Image
+              key={index}
+              image={getImage(img.gatsbyImageData)}
+              alt="TODO"
+            ></Image>
+          ))}
+      </Section>
+    </>
   );
 };
 

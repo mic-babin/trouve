@@ -7,50 +7,53 @@ import { NavLink } from "../styled-components/nav-link.style";
 const Experience = ({ data }) => {
   const { title, textFields, components } = data;
   return (
-    <Section>
-      <div className="container">
-        {title && (
-          <H2>
-            {title &&
-              title.split("<br>").map((word, index) => (
-                <div className="d-inline-block" key={index}>
-                  {word}{" "}
-                </div>
+    <>
+      <div className="scroll-to" id="experience"></div>
+      <Section>
+        <div className="container">
+          {title && (
+            <H2>
+              {title &&
+                title.split("<br>").map((word, index) => (
+                  <div className="d-inline-block" key={index}>
+                    {word}{" "}
+                  </div>
+                ))}
+            </H2>
+          )}
+          <div className="d-flex justify-content-center">
+            {textFields &&
+              textFields.map((el) => (
+                <Paragraph key={el.id}>{el.text.text}</Paragraph>
               ))}
-          </H2>
-        )}
-        <div className="d-flex justify-content-center">
-          {textFields &&
-            textFields.map((el) => (
-              <Paragraph key={el.id}>{el.text.text}</Paragraph>
-            ))}
+          </div>
         </div>
-      </div>
-      <div className="row mx-0">
-        {components &&
-          components.map((el) => {
-            const { image, title, description, link } = el;
-            return (
-              <div key={el.id} className="col-lg-4">
-                <ImageWrapper>
-                  <div className="round"></div>
-                  {image && (
-                    <Image
-                      image={getImage(image.gatsbyImageData)}
-                      alt="TODO"
-                    ></Image>
-                  )}
-                </ImageWrapper>
-                {title && <Kicker className="mt-4">{title}</Kicker>}
-                <Description>
-                  {description && <div>{description.description}</div>}
-                  {link && <CardLink to={link.url}>{link.text}</CardLink>}
-                </Description>
-              </div>
-            );
-          })}
-      </div>
-    </Section>
+        <div className="row mx-0">
+          {components &&
+            components.map((el) => {
+              const { image, title, description, link } = el;
+              return (
+                <div key={el.id} className="col-lg-4">
+                  <ImageWrapper>
+                    <div className="round"></div>
+                    {image && (
+                      <Image
+                        image={getImage(image.gatsbyImageData)}
+                        alt="TODO"
+                      ></Image>
+                    )}
+                  </ImageWrapper>
+                  {title && <Kicker className="mt-4">{title}</Kicker>}
+                  <Description>
+                    {description && <div>{description.description}</div>}
+                    {link && <CardLink to={link.url}>{link.text}</CardLink>}
+                  </Description>
+                </div>
+              );
+            })}
+        </div>
+      </Section>
+    </>
   );
 };
 
