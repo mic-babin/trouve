@@ -4,8 +4,8 @@ import Card from "./card.component";
 const Recruiters = ({ data }) => {
   return (
     <>
-      <div className="scroll-to" id="recruiters"></div>
-      <Card data={data} />
+      {/* <div className="scroll-to" id="recruiters"></div> */}
+      <Card data={data} titleHeight="10px" />
     </>
   );
 };

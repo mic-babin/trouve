@@ -84,6 +84,7 @@ const Section = styled.section`
   color: white;
   padding-top: 250px;
   padding-bottom: 200px;
+  overflow: hidden;
 `;
 
 const Image = styled(GatsbyImage)``;
