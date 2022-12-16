@@ -20,7 +20,6 @@ const Layout = ({
 }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [showModal, setShowModal] = useState(false);
-
   useEffect(() => {
     if (showModal) {
       setShowModal(showMenu || showContact);

@@ -5,6 +5,7 @@ import { Kicker } from "../styled-components/kicker.style";
 import { renderRichText } from "gatsby-source-contentful/rich-text";
 import { NavLink } from "../styled-components/nav-link.style";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import { motion } from "framer-motion";
 
 const TeamHero = ({ hero, setShowContact }) => {
   const { title, link, images, textFields } = hero;
@@ -20,9 +21,14 @@ const TeamHero = ({ hero, setShowContact }) => {
               <H1>
                 {title &&
                   title.split(" ").map((word, index) => (
-                    <div className="d-inline-block" key={index}>
+                    <motion.div
+                      className="word"
+                      initial={{ transform: "translateY(200px)" }}
+                      animate={{ transform: "translateY(0px)" }}
+                      transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
+                    >
                       {word}{" "}
-                    </div>
+                    </motion.div>
                   ))}
               </H1>
               {textFields &&
@@ -58,8 +64,8 @@ export default TeamHero;
 const Section = styled.section`
   background-color: black;
   color: white;
-  padding-top: 200px;
-  padding-bottom: 100px;
+  padding-top: 250px;
+  padding-bottom: 200px;
 `;
 
 const Image = styled(GatsbyImage)`

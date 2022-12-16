@@ -26,6 +26,7 @@ const Equipe = (props) => {
       contact={contact}
       showContact={showContact}
       setShowContact={setShowContact}
+      headerColor="#000000"
     >
       <TeamHero hero={hero} setShowContact={setShowContact} />
       <TeamMembers teamMembers={teamMembers} />

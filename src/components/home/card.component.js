@@ -2,7 +2,7 @@ import React from "react";
 import { CardWrapper } from "../styled-components/card-wrapper.style";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import styled from "styled-components";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { motion, useAnimationControls } from "framer-motion";
 
 const Card = ({ data }) => {
@@ -11,16 +11,21 @@ const Card = ({ data }) => {
   const cardWrapperControls = useAnimationControls();
   const imageWrapperControls = useAnimationControls();
   const titleControls = useAnimationControls();
-  const executeScroll = () => box.current.scrollIntoView();
+  const executeScroll = () => {
+    box.current.scrollIntoView();
+    setTimeout(() => {
+      box.current.scrollIntoView({ block: "start", inline: "nearest" });
+    }, 300);
+  };
   useEffect(() => {
     const updatePosition = () => {
       if (
-        box.current.getBoundingClientRect().top < 100 &&
-        box.current.getBoundingClientRect().top > -100
+        box.current.getBoundingClientRect().top < 200 &&
+        box.current.getBoundingClientRect().top > 0
       ) {
         // OPEN
         cardWrapperControls.start({
-          height: "413px",
+          height: "463px",
           transition: { duration: 0.75 },
         });
         imageWrapperControls.start({

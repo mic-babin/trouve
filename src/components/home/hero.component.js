@@ -40,7 +40,6 @@ const Hero = ({ data }) => {
 
   return (
     <>
-      <div className="scroll-to" id="hero"></div>
       <Section className="position-relative" id="hero">
         <motion.div
           className="w-100 pt-5 mt-5"
@@ -75,6 +74,8 @@ const Hero = ({ data }) => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.3, delay: 1.3 }}
+                href="http://jobs.trouvemtl.com"
+                target="_blank"
               >
                 {opportunities}
               </JobsLink>
@@ -191,10 +192,12 @@ const JobsLinkWrapper = styled.div`
   top: 610px;
 `;
 
-const JobsLink = styled(motion.div)`
+const JobsLink = styled(motion.a)`
   cursor: pointer;
   position: relative;
   margin-left: 50px;
+  color: white;
+  text-decoration: none;
   &:before {
     content: "";
     display: block;
@@ -204,6 +207,18 @@ const JobsLink = styled(motion.div)`
     left: -70px;
     top: 45%;
     position: absolute;
+    transition: all 0.2s ease-in;
+  }
+  &:hover {
+    color: white;
+
+    &:before {
+      content: "";
+
+      width: 72px;
+
+      left: -82px;
+    }
   }
 `;
 

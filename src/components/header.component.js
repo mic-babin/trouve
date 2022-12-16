@@ -19,10 +19,15 @@ const Header = ({
     <HeaderWrapper
       initial={{
         transform:
-          headerColor === "black" ? "translateY(00px)" : "translateY(-200px)",
+          headerColor === "transparent" || "#000000"
+            ? "translateY(-200px)"
+            : "translateY(0px)",
       }}
       animate={{ transform: "translateY(0px)" }}
-      transition={{ duration: 0.5, delay: 1.8 }}
+      transition={{
+        duration: 0.5,
+        delay: headerColor === "transparent" ? 1.8 : 0,
+      }}
       style={{ backgroundColor: headerColor }}
     >
       <div className="d-flex justify-content-between align-items-center">
@@ -51,6 +56,7 @@ const HeaderWrapper = styled(motion.header)`
   width: 100vw;
   color: white;
   z-index: 10;
+  transition: background-color 0.3s ease-in;
   /* background-color: black; */
 `;
 

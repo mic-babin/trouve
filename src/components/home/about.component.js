@@ -23,7 +23,6 @@ const Reason = ({ data }) => {
               {title &&
                 title.split("<br>").map((word, index) => (
                   <motion.div
-                    className="d-inline-blockposition-relative"
                     key={index}
                     whileInView={{
                       opacity: 1,
@@ -53,6 +52,7 @@ const Reason = ({ data }) => {
                         type: "linear",
                       }}
                       className={"line-" + index}
+                      viewport={{ once: true }}
                     ></motion.div>
                   </motion.div>
                 ))}
@@ -84,7 +84,7 @@ const Reason = ({ data }) => {
                 delay: 1,
                 type: "linear",
               }}
-              className="line-2"
+              viewport={{ once: true }}
             ></motion.div>
           </div>
         </div>

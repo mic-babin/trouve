@@ -3,21 +3,90 @@ import styled from "styled-components";
 import { Kicker } from "../styled-components/kicker.style";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { NavLink } from "../styled-components/nav-link.style";
+import { motion, useAnimationControls } from "framer-motion";
+import Circle from "../animation/big-circle.components";
+import { useRef, useEffect, useState } from "react";
 
 const Experience = ({ data }) => {
   const { title, textFields, components } = data;
+  const round = useRef();
+  const [roundSize, setRoundSize] = useState(0);
+  const [hovered0, setHovered0] = useState(false);
+  const [hovered1, setHovered1] = useState(false);
+  const [hovered2, setHovered2] = useState(false);
+  const handleHover = (index) => {
+    // console.log("hovered", index, hovered0, hovered1, hovered2);
+    if (index === 0) {
+      setHovered0(!hovered0);
+    }
+    if (index === 1) {
+      setHovered1(!hovered1);
+    }
+    if (index === 2) {
+      setHovered2(!hovered2);
+    }
+  };
+
+  const getWidth = (index) => {
+    if (index === 0) {
+      return "-500";
+    }
+    return "500";
+  };
+
+  const handleResize = () => {
+    setRoundSize(round.current.offsetWidth);
+  };
+
+  useEffect(() => {
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      return () => window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <>
-      <div className="scroll-to" id="experience"></div>
+      {/* <div className="scroll-to" id="experience"></div> */}
       <Section>
-        <div className="container">
+        <Container className="container">
           {title && (
             <H2>
               {title &&
                 title.split("<br>").map((word, index) => (
-                  <div className="d-inline-block" key={index}>
+                  <motion.div
+                    key={index}
+                    whileInView={{
+                      opacity: 1,
+                      transform: "translateX(0px)",
+                    }}
+                    initial={{
+                      opacity: 0,
+                      transform: "translateX(" + getWidth(index) + "px)",
+                    }}
+                    transition={{
+                      duration: 0.8,
+                      delay: 0.5 + index / 5,
+                    }}
+                    viewport={{ once: true }}
+                  >
                     {word}{" "}
-                  </div>
+                    <motion.div
+                      initial={{
+                        height: "0px",
+                      }}
+                      whileInView={{
+                        height: "500px",
+                      }}
+                      transition={{
+                        duration: 5,
+                        delay: 0.7,
+                        type: "linear",
+                      }}
+                      className={"line-" + index}
+                      viewport={{ once: true }}
+                    ></motion.div>
+                  </motion.div>
                 ))}
             </H2>
           )}
@@ -27,28 +96,88 @@ const Experience = ({ data }) => {
                 <Paragraph key={el.id}>{el.text.text}</Paragraph>
               ))}
           </div>
-        </div>
+          <div className="position-relative w-100 h-0">
+            <motion.div
+              initial={{
+                height: "0px",
+                width: "1px",
+                background: "#000",
+                transform: "translateX(600px)",
+              }}
+              whileInView={{
+                height: "300px",
+                width: "1px",
+                background: "#000",
+                transform: "translateX(600px)",
+              }}
+              transition={{
+                duration: 5,
+                delay: 1,
+                type: "linear",
+              }}
+              viewport={{ once: true }}
+            ></motion.div>
+          </div>
+        </Container>
+        {/* <div className="scroll-to" id="experience-card"></div> */}
         <div className="row mx-0">
           {components &&
-            components.map((el) => {
+            components.map((el, index) => {
               const { image, title, description, link } = el;
+              // s
+
+              const getHoverState = () => {
+                if (index === 0) {
+                  return hovered0;
+                }
+                if (index === 1) {
+                  return hovered1;
+                }
+                if (index === 2) {
+                  return hovered2;
+                }
+              };
+              const hover = getHoverState();
+              console.log(hover);
               return (
-                <div key={el.id} className="col-lg-4">
+                <Card
+                  key={el.id}
+                  className="col-lg-4"
+                  onMouseEnter={() => handleHover(index)}
+                  onMouseLeave={() => handleHover(index)}
+                >
                   <ImageWrapper>
-                    <div className="round"></div>
-                    {image && (
-                      <Image
-                        image={getImage(image.gatsbyImageData)}
-                        alt="TODO"
-                      ></Image>
-                    )}
+                    <div className="round" ref={round}>
+                      <Circle
+                        roundSize={roundSize}
+                        hover={hover}
+                        color={"black"}
+                      />
+                    </div>
+                    <div className="invisible-wrapper">
+                      {image && (
+                        <Image
+                          className="img"
+                          image={getImage(image.gatsbyImageData)}
+                          alt="TODO"
+                        ></Image>
+                      )}
+                    </div>
                   </ImageWrapper>
                   {title && <Kicker className="mt-4">{title}</Kicker>}
                   <Description>
                     {description && <div>{description.description}</div>}
-                    {link && <CardLink to={link.url}>{link.text}</CardLink>}
+                    {link && (
+                      <CardLink
+                        to={link.url}
+                        target="blank"
+                        className="card-link"
+                      >
+                        {link.text}
+                      </CardLink>
+                    )}
                   </Description>
-                </div>
+                </Card>
               );
             })}
         </div>
@@ -60,9 +189,13 @@ const Experience = ({ data }) => {
 export default Experience;
 
 const Section = styled.div`
-  padding: 100px 0;
+  padding: 100px 15px;
   background-color: white;
   color: black;
+  overflow: hidden;
+`;
+const Container = styled.div`
+  padding-bottom: 200px;
 `;
 
 const H2 = styled.h2`
@@ -70,7 +203,7 @@ const H2 = styled.h2`
   line-height: 65px;
   display: flex;
   flex-direction: column;
-  padding-bottom: 50px;
+  padding-bottom: 75px;
 
   div:nth-of-type(1) {
     max-width: 1100px;
@@ -79,12 +212,41 @@ const H2 = styled.h2`
     font-family: "Neue-Italic";
     align-self: flex-end;
   }
+
+  .line-0,
+  .line-1 {
+    display: block;
+    width: 1px;
+    height: 100px;
+    background: #000;
+    left: 125px;
+    top: 125px;
+    position: absolute;
+  }
+  .line-1 {
+    left: 575px;
+  }
+`;
+
+const Card = styled.div`
+  &:hover .img {
+    transform: scale(1.05);
+  }
+
+  &:hover .card-link {
+    &:before {
+      width: 50px;
+      margin-left: -25px;
+    }
+  }
 `;
 
 const Paragraph = styled(Kicker)`
-  max-width: 600px;
+  max-width: 750px;
+  font-size: 30px;
   padding: 0 30px;
   padding-bottom: 50px;
+  letter-spacing: 0.5px;
 `;
 
 const Image = styled(GatsbyImage)`
@@ -98,16 +260,26 @@ const ImageWrapper = styled.div`
   width: 100%;
   padding-top: 100%; /* 1:1 Aspect Ratio */
   position: relative; /* If you want text inside of it */
+  /* overflow: hidden; */
 
-  &:hover .round {
+  .invisible-wrapper {
+    position: absolute;
+    top: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+  .round {
     position: absolute;
     top: 0;
     height: calc(100% + 20px);
     width: calc(100% + 20px);
-    border: 1px solid black;
     border-radius: 50%;
     z-index: 1;
     margin: -10px;
+  }
+  .img {
+    transition: all 0.2s ease;
   }
 `;
 
@@ -124,21 +296,27 @@ const CardLink = styled(NavLink)`
   color: black;
   padding-left: 50px;
   position: relative;
-
+  overflow: visible;
+  transition: all 0.2s all;
   &:before {
     content: "";
-    display: block;
-    width: 30px;
+    display: inline-block;
+    width: 25px;
     height: 1px;
     background: black !important;
-    top: 45%;
-    position: absolute;
     opacity: 1;
     z-index: 1;
-    transform: translateX(-50px);
+    margin-right: 10px;
+    transition: all 0.2s ease-in;
+    margin-bottom: 5px;
   }
 
   &:hover {
     color: black;
+
+    &:before {
+      width: 50px;
+      margin-left: -25px;
+    }
   }
 `;

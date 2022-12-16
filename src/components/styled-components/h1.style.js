@@ -7,7 +7,7 @@ export const H1 = styled.h1`
   margin-top: 0;
 
   div:nth-of-type(2) {
-    transform: translate(-60px, 60px);
+    padding-left: 60px;
     font-style: italic;
   }
 `;
