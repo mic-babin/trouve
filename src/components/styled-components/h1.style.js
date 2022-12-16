@@ -10,4 +10,12 @@ export const H1 = styled.h1`
     padding-left: 60px;
     font-style: italic;
   }
+
+  .w-wrapper:nth-of-type(2) {
+    padding-left: 60px;
+  }
+
+  .w-wrapper {
+    overflow: hidden;
+  }
 `;
