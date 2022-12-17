@@ -69,15 +69,15 @@ const Reason = ({ data }) => {
             <motion.div
               initial={{
                 height: "0px",
-                width: "1px",
+                width: "1.5px",
                 background: "#fff",
-                transform: "translateX(600px)",
+                transform: "translateX(580px)",
               }}
               whileInView={{
                 height: "1000px",
-                width: "1px",
+                width: "1.5px",
                 background: "#fff",
-                transform: "translateX(600px)",
+                transform: "translateX(580px)",
               }}
               transition={{
                 duration: 5,
@@ -95,7 +95,7 @@ const Reason = ({ data }) => {
 
 export default Reason;
 const Section = styled.div`
-  padding-top: 200px;
+  padding-top: 180px;
   padding-bottom: 100px;
   background-color: black;
   color: white;
@@ -120,19 +120,21 @@ const H2 = styled.h2`
   .line-0,
   .line-1 {
     display: block;
-    width: 1px;
+    width: 1.5px;
     height: 100px;
     background: #fff;
-    left: 125px;
+    left: 110px;
     top: 125px;
     position: absolute;
   }
   .line-1 {
-    left: 575px;
+    left: 570px;
   }
 `;
 
 const Paragraph = styled(Kicker)`
-  max-width: 60%;
+  max-width: 684px;
   padding-bottom: 50px;
+  font-size: 30px;
+  line-height: 40px;
 `;

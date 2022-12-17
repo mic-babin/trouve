@@ -4,26 +4,37 @@
 
 @font-face {
   font-family: "Neue";
-  src: local("Neue"), url(../fonts/PPNeueMontreal-Book.otf) format("truetype");
+  src: local("Neue"), url(../fonts/NeueMontreal-Regular.otf) format("truetype");
 }
 
 @font-face {
   font-family: "Neue-Italic";
   src: local("Neue-Italic"),
-    url(../fonts/PPNeueMontreal-Italic.otf) format("truetype");
+    url(../fonts/NeueMontreal-Italic.otf) format("truetype");
 }
 @font-face {
   font-family: "Neue-Medium";
   src: local("Neue-Medium"),
-    url(../fonts/PPNeueMontreal-Medium.otf) format("truetype");
+    url(../fonts/NeueMontreal-Medium.otf) format("truetype");
+}
+@font-face {
+  font-family: "Neue-Light";
+  src: local("Neue-Light"),
+    url(../fonts/NeueMontreal-Light.otf) format("truetype");
+}
+@font-face {
+  font-family: "Neue-LightItalic";
+  src: local("Neue-LightItalic"),
+    url(../fonts/NeueMontreal-LightItalic.otf) format("truetype");
 }
 
 body {
   font-family: "Neue";
+  scroll-behavior: auto;
 }
 
 .border-bottom-white {
-  border-bottom: 1px solid white;
+  border-bottom: 1.5px solid white;
 }
 
 .pointer {
@@ -36,4 +47,17 @@ body {
 
 .scroll-to {
   transform: translateX(-200px);
+}
+
+.container {
+  padding-left: 75px;
+  padding-right: 75px;
+}
+
+.bg-beige {
+  background-color: #e7e5e0;
+}
+
+.bg-black {
+  background-color: #000000;
 }

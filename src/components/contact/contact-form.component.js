@@ -70,7 +70,7 @@ function ContactForm({ data }) {
                   key={content.id}
                   className="d-flex flex-align-start align-items-center"
                 >
-                  <div>0{index + 1}</div>
+                  <Number>0{index + 1}</Number>
                   <Input
                     type={content.type}
                     placeholder={content.label}
@@ -82,7 +82,7 @@ function ContactForm({ data }) {
                 </InputGroup>
               ))}
             <InputGroup className="d-flex flex-align-start align-items-center">
-              <div>05</div>
+              <Number>05</Number>
               {!fileUploaded && lang === "fr" && (
                 <FileInput
                   type="file"
@@ -111,7 +111,7 @@ function ContactForm({ data }) {
               )}
             </InputGroup>
             <div className="d-flex flex-align-start align-items-center">
-              <div>06</div>
+              <Number>06</Number>
               <Label>{textArea.label}</Label>
             </div>
             <TextArea
@@ -138,9 +138,9 @@ const Form = styled.form`
 
 const FormButton = styled.button`
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 500;
   color: black;
-  padding: 0.75rem 0;
+  padding: 5px 0;
   text-decoration: none;
   background-color: transparent;
   border: none;
@@ -155,7 +155,7 @@ const Label = styled.div`
 `;
 
 const InputGroup = styled.div`
-  border-bottom: 1px solid black;
+  border-bottom: 1.5px solid black;
 `;
 
 const Input = styled.input`
@@ -183,7 +183,7 @@ const Input = styled.input`
 `;
 
 const TextArea = styled.textarea`
-  border: 1px solid black;
+  border: 1.5px solid black;
   height: 135px;
   resize: none;
 
@@ -212,6 +212,9 @@ const FileInputEn = styled(FileInput)`
   &::before {
     content: "ATTACH CV HERE";
   }
+`;
+const Number = styled.div`
+  font-family: "Neue-Italic";
 `;
 
 export default ContactForm;

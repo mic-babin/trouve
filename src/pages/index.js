@@ -59,6 +59,7 @@ export default function Homepage(props) {
         setShowContact={setShowContact}
         headerColor={headerColor}
       >
+        <div id="top"></div>
         {home.map((section) => {
           const { id, type, ...componentProps } = section;
           const Component = sections[type] || Fallback;

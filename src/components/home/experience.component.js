@@ -15,7 +15,6 @@ const Experience = ({ data }) => {
   const [hovered1, setHovered1] = useState(false);
   const [hovered2, setHovered2] = useState(false);
   const handleHover = (index) => {
-    // console.log("hovered", index, hovered0, hovered1, hovered2);
     if (index === 0) {
       setHovered0(!hovered0);
     }
@@ -100,15 +99,15 @@ const Experience = ({ data }) => {
             <motion.div
               initial={{
                 height: "0px",
-                width: "1px",
+                width: "1.5px",
                 background: "#000",
-                transform: "translateX(600px)",
+                transform: "translateX(585px)",
               }}
               whileInView={{
                 height: "300px",
-                width: "1px",
+                width: "1.5px",
                 background: "#000",
-                transform: "translateX(600px)",
+                transform: "translateX(585px)",
               }}
               transition={{
                 duration: 5,
@@ -138,7 +137,6 @@ const Experience = ({ data }) => {
                 }
               };
               const hover = getHoverState();
-              console.log(hover);
               return (
                 <Card
                   key={el.id}
@@ -189,13 +187,14 @@ const Experience = ({ data }) => {
 export default Experience;
 
 const Section = styled.div`
-  padding: 100px 15px;
-  background-color: white;
+  margin-top: -30px;
+  padding: 160px 15px;
+  background-color: #e7e5e0;
   color: black;
   overflow: hidden;
 `;
 const Container = styled.div`
-  padding-bottom: 200px;
+  padding-bottom: 160px;
 `;
 
 const H2 = styled.h2`
@@ -216,15 +215,15 @@ const H2 = styled.h2`
   .line-0,
   .line-1 {
     display: block;
-    width: 1px;
+    width: 1.5px;
     height: 100px;
     background: #000;
-    left: 125px;
+    left: 110px;
     top: 125px;
     position: absolute;
   }
   .line-1 {
-    left: 575px;
+    left: 510px;
   }
 `;
 
@@ -242,11 +241,11 @@ const Card = styled.div`
 `;
 
 const Paragraph = styled(Kicker)`
-  max-width: 750px;
+  max-width: 724px;
   font-size: 30px;
-  padding: 0 30px;
+  padding-left: 50px;
   padding-bottom: 50px;
-  letter-spacing: 0.5px;
+  letter-spacing: 0px;
 `;
 
 const Image = styled(GatsbyImage)`
@@ -302,7 +301,7 @@ const CardLink = styled(NavLink)`
     content: "";
     display: inline-block;
     width: 25px;
-    height: 1px;
+    height: 1.5px;
     background: black !important;
     opacity: 1;
     z-index: 1;

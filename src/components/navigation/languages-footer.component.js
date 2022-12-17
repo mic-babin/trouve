@@ -27,7 +27,9 @@ const LanguagesFooter = ({ langs }) => {
             className="flex-grow-1"
             style={{
               fontFamily:
-                i18n.resolvedLanguage === lng ? "Neue-Italic" : "Neue",
+                i18n.resolvedLanguage === lng
+                  ? "Neue-LightItalic"
+                  : "Neue-Light",
             }}
           >
             {getLang(lng)}
@@ -48,6 +50,7 @@ const Lang = styled(NavLink)`
   margin-right: 4rem;
   border-bottom: none;
   min-width: 25px;
+  letter-spacing: 1px;
   &:hover {
     text-decoration: underline;
   }

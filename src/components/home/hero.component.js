@@ -19,15 +19,15 @@ const Hero = ({ data }) => {
   let list = isMedium
     ? textFields[4].value
     : textFields[4].value.concat(textFields[4].value);
-  // console.log(isSmall);
-  // if (!isSmall) {
-  //   list = list.splice(list - 2, 2);
-  // }
 
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [hovered, setHovered] = useState(false);
   const handleScroll = () => {
     const position = window.pageYOffset;
     setScrollPosition(position);
+  };
+  const handleHover = () => {
+    setHovered(!hovered);
   };
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const Hero = ({ data }) => {
     <>
       <Section className="position-relative" id="hero">
         <motion.div
-          className="w-100 pt-5 mt-5"
+          className="w-100 pt-5 mt-4"
           initial={{ transform: "translateY(-50px)" }}
           animate={{ transform: "translateY(0px)" }}
           transition={{ duration: 0.5, delay: 1.8 }}
@@ -51,7 +51,7 @@ const Hero = ({ data }) => {
             <H3>
               <div className="word">
                 <motion.div
-                  initial={{ transform: "translateX(-350px)" }}
+                  initial={{ transform: "translateX(-400px)" }}
                   animate={{ transform: "translateX(0px)" }}
                   transition={{ duration: 0.5, delay: 0.8 }}
                 >
@@ -60,7 +60,7 @@ const Hero = ({ data }) => {
               </div>
               <div className="second-word">
                 <motion.div
-                  initial={{ transform: "translateX(-350px)" }}
+                  initial={{ transform: "translateX(-400px)" }}
                   animate={{ transform: "translateX(0px)" }}
                   transition={{ duration: 0.5, delay: 0.8 }}
                 >
@@ -69,13 +69,15 @@ const Hero = ({ data }) => {
               </div>
             </H3>
             <JobsLinkWrapper>
-              <Circle />
+              <Circle hovered={hovered} />
               <JobsLink
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.3, delay: 1.3 }}
                 href="http://jobs.trouvemtl.com"
                 target="_blank"
+                onMouseEnter={() => handleHover()}
+                onMouseLeave={() => handleHover()}
               >
                 {opportunities}
               </JobsLink>
@@ -152,7 +154,11 @@ const Image = styled(GatsbyImage)`
 
 const H1 = styled(motion.h1)`
   font-size: 145px;
-  line-height: 192px;
+  line-height: 160px;
+  font-weight: 500;
+  letter-spacing: 7px;
+  margin-bottom: 75px;
+  /* font-family: "Neue-Medium"; */
 
   .word-wrapper:nth-of-type(1),
   .word-wrapper:nth-of-type(2) {
@@ -171,8 +177,9 @@ const Container = styled.div`
 const H3 = styled.h3`
   position: absolute;
   font-size: 30px;
-  line-height: 65px;
-  top: 410px;
+  line-height: 40px;
+  top: 340px;
+  letter-spacing: 2px;
 
   .word,
   .second-word {
@@ -189,7 +196,8 @@ const JobsLinkWrapper = styled.div`
   font-size: 16px;
   display: flex;
   align-items: center;
-  top: 610px;
+  top: 520px;
+  letter-spacing: 2px;
 `;
 
 const JobsLink = styled(motion.a)`
@@ -198,11 +206,12 @@ const JobsLink = styled(motion.a)`
   margin-left: 50px;
   color: white;
   text-decoration: none;
+  font-family: "Neue-light";
   &:before {
     content: "";
     display: block;
     width: 60px;
-    height: 1px;
+    height: 1.5px;
     background: #fff;
     left: -70px;
     top: 45%;
@@ -214,17 +223,15 @@ const JobsLink = styled(motion.a)`
 
     &:before {
       content: "";
-
       width: 72px;
-
       left: -82px;
     }
   }
 `;
 
 const List = styled(motion.div)`
-  padding: 15px 0;
-  border-top: 1px solid white;
+  padding: 20px 0;
+  border-top: 1.5px solid white;
   border-bottom: 1px solid white;
   width: 190vw;
   transform: translateX(-50vw);

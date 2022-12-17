@@ -5,7 +5,7 @@ const Process = ({ data }) => {
   return (
     <>
       <div className="scroll-to" id="process"></div>
-      <Card data={data} titleHeight="-50px" />
+      <Card data={data} titleHeight="-30px" />
     </>
   );
 };

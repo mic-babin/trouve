@@ -135,7 +135,7 @@ const Round = styled.div`
   margin-top: max(0, calc(20vw));
   padding-top: min(100vh, 60vw);
   border-radius: 50%;
-  border: 1px solid black;
+  border: 1.5px solid black;
 `;
 
 export default Contact;

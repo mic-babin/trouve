@@ -15,7 +15,7 @@ const TeamHero = ({ hero, setShowContact }) => {
   return (
     <Section>
       <div className="position-relative">
-        <Container className="container">
+        <Container className="container postion-relative">
           <div className="row">
             <div className="col-lg-6">
               <H1>
@@ -35,7 +35,7 @@ const TeamHero = ({ hero, setShowContact }) => {
               </H1>
               {textFields &&
                 textFields.map((el) => (
-                  <Kicker
+                  <Paragraph
                     key={el.id}
                     className="my-4 pe-5 z-1"
                     initial={{ opacity: 0 }}
@@ -43,7 +43,7 @@ const TeamHero = ({ hero, setShowContact }) => {
                     transition={{ duration: 0.3, delay: 1.3 }}
                   >
                     {renderRichText(el.text)}
-                  </Kicker>
+                  </Paragraph>
                 ))}
 
               {link && (
@@ -85,6 +85,7 @@ const Section = styled.section`
   padding-top: 250px;
   padding-bottom: 200px;
   overflow: hidden;
+  height: 905px;
 `;
 
 const Image = styled(GatsbyImage)``;
@@ -105,7 +106,13 @@ const ImageWrapper = styled(motion.div)`
     z-index: 0;
   }
 `;
-const Container = styled.div``;
+const Container = styled.div`
+  z-index: 1;
+  .row {
+    position: absolute;
+    z-index: 1;
+  }
+`;
 
 const HeroLink = styled(NavLink)`
   color: white;
@@ -113,11 +120,13 @@ const HeroLink = styled(NavLink)`
   position: relative;
   overflow: visible;
   transition: all 0.2s all;
+  font-family: "Neue-Light";
+  letter-spacing: 1px;
   &:before {
     content: "";
     display: inline-block;
     width: 25px;
-    height: 1px;
+    height: 1.5px;
     background: white !important;
     opacity: 1;
     z-index: 1;
@@ -131,4 +140,9 @@ const HeroLink = styled(NavLink)`
       width: 50px;
     }
   }
+`;
+const Paragraph = styled(Kicker)`
+  padding-top: 30px;
+  font-size: 30px;
+  letter-spacing: 1px;
 `;

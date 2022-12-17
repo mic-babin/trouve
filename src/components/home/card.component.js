@@ -7,7 +7,6 @@ import { motion, useAnimationControls } from "framer-motion";
 import { renderRichText } from "gatsby-source-contentful/rich-text";
 
 const Card = ({ data, cardHeight, titleHeight }) => {
-  console.log(titleHeight);
   const box = useRef();
   // description, phone, email, image
   const { name, title, textFields, images, image, description, phone, email } =
@@ -16,6 +15,7 @@ const Card = ({ data, cardHeight, titleHeight }) => {
   const imageWrapperControls = useAnimationControls();
   const titleControls = useAnimationControls();
   const subTitleControls = useAnimationControls();
+  const subTitleClosedControls = useAnimationControls();
 
   const [isEmployee, setIsEmployee] = useState(false);
   const handleIsEmployee = () => setIsEmployee(true);
@@ -27,14 +27,26 @@ const Card = ({ data, cardHeight, titleHeight }) => {
       box.current.scrollIntoView({ block: "start", inline: "nearest" });
     }, 300);
   };
-  console.log(hovered);
 
   const getMarc = () => {
-    console.log(isEmployee);
     if (isEmployee) {
-      return name.toUpperCase() === "DAVID-MARC BOUCHARD";
+      return name === "DAVID-MARC BOUCHARD";
     }
     return false;
+  };
+
+  const getImageHeight = () => {
+    if (isEmployee) {
+      if (name === "ANNIE-CLAUDE ROY") return "-28vw";
+      if (name === "DAVID-MARC BOUCHARD") return "-24vw";
+      if (name === "RACHEL MARTIN") return "-14vw";
+      if (name === "DAPHNÉ SYLVAIN") return "-45vw";
+    } else {
+      if (title.includes("PROCESS")) return "-30vw";
+      if (title.includes("RECRUT")) return "-22vw";
+      if (title.includes("TALENT")) return "-122vw";
+    }
+    return "-200px";
   };
   useEffect(() => {
     if (name) handleIsEmployee();
@@ -49,26 +61,34 @@ const Card = ({ data, cardHeight, titleHeight }) => {
           height: "100%",
           maxHeight: cardHeight || "463px",
           transition: { duration: 0.75 },
+          type: "linear",
         });
         imageWrapperControls.start({
           width: "100%",
           marginLeft: "0vw",
-          marginTop: "0",
+          transform: "translateY(0vw)",
           height: "310px",
           transition: { duration: 0.75 },
+          type: "linear",
         });
         titleControls.start({
           marginTop: "0px",
           width: "330px",
-
           fontSize: "30px",
           lineHeight: "35px",
           transition: { duration: 0.75 },
+          type: "linear",
         });
         subTitleControls.start({
           opacity: 1,
           marginTop: getMarc() ? "85px" : "50px",
           transition: { duration: 0.5, delay: 0.5 },
+          type: "linear",
+        });
+        subTitleClosedControls.start({
+          opacity: 0,
+          transition: { duration: 0.375, delay: 0 },
+          type: "linear",
         });
       } else {
         // CLOSED
@@ -76,13 +96,15 @@ const Card = ({ data, cardHeight, titleHeight }) => {
           height: "100%",
           maxHeight: "250px",
           transition: { duration: 0.375 },
+          type: "linear",
         });
         imageWrapperControls.start({
           width: "102vw",
           marginLeft: "-68vw",
-          marginTop: "-50%",
+          transform: "translateY(" + getImageHeight() + ")",
           height: "100%",
           transition: { duration: 0.375 },
+          type: "linear",
         });
         titleControls.start({
           marginTop: titleHeight || "-33px",
@@ -90,11 +112,18 @@ const Card = ({ data, cardHeight, titleHeight }) => {
           fontSize: "65px",
           lineHeight: "70px",
           transition: { duration: 0.375 },
+          type: "linear",
         });
         subTitleControls.start({
           opacity: 0,
           marginTop: getMarc() ? "85px" : "50px",
           transition: { duration: 0.375, delay: 0 },
+          type: "linear",
+        });
+        subTitleClosedControls.start({
+          opacity: 1,
+          transition: { duration: 0.375, delay: 0 },
+          type: "linear",
         });
       }
     };
@@ -110,11 +139,16 @@ const Card = ({ data, cardHeight, titleHeight }) => {
       onMouseEnter={() => handleHover()}
       onMouseLeave={() => handleHover()}
     >
-      <div className="row">
-        <div className="col-lg-4 position-relative">
+      <div className="row position-relative">
+        <div className="col-lg-4 ">
           <Title animate={titleControls}>{isEmployee ? name : title}</Title>
           {isEmployee && (
             <SubTitle animate={subTitleControls}>{title}</SubTitle>
+          )}
+          {isEmployee && (
+            <SubTitleClosed animate={subTitleClosedControls}>
+              {title}
+            </SubTitleClosed>
           )}
         </div>
         <div className="col-lg-4">
@@ -184,6 +218,20 @@ const Title = styled(motion.h2)`
   overflow: visible;
 `;
 
+const SubTitleClosed = styled(motion.h3)`
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding-top: 25px;
+  z-index: 1;
+  padding-right: 15px;
+  font-size: 30px;
+  line-height: 35px;
+  letter-spacing: 1px;
+  font-family: "Neue-Italic";
+  overflow: visible;
+`;
+
 const Description = styled.p`
   max-width: 320px;
   letter-spacing: 1.5px;
@@ -192,6 +240,7 @@ const Description = styled.p`
 
 const ImageWrapper = styled(motion.div)`
   height: 310px;
+  margin-top: 0;
   overflow: hidden;
   display: flex;
   justify-content: center;

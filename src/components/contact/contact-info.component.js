@@ -7,12 +7,12 @@ const ContactInfo = ({ data }) => {
   const { title, textFields, components } = data;
 
   return (
-    <div className="d-flex flex-column justify-content-center h-100">
+    <Section className="d-flex flex-column justify-content-center h-100">
       <ContactH1>
         {title &&
           title.split(" ").map((word, index) => (
-            <div className="d-inline-block" key={index}>
-              {word}{" "}
+            <div key={index} className="w-wrapper">
+              <div className="word">{word} </div>
             </div>
           ))}
       </ContactH1>
@@ -28,10 +28,13 @@ const ContactInfo = ({ data }) => {
               ))}
           </React.Fragment>
         ))}
-    </div>
+    </Section>
   );
 };
 
+const Section = styled.div`
+  margin-top: -50px;
+`;
 const Address = styled.div`
   &:nth-of-type(4) {
     margin-top: 20px;
@@ -40,5 +43,8 @@ const Address = styled.div`
 
 const ContactH1 = styled(H1)`
   font-size: 65px;
+  .w-wrapper:nth-of-type(2) {
+    padding-left: 110px;
+  }
 `;
 export default ContactInfo;

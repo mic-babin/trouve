@@ -59,6 +59,6 @@ const Layout = ({
 const ContactWrapper = styled.div`
   max-height: 100vh;
   max-width: 100vw;
-  overflow: hidden;
+  /* overflow: hidden; */
 `;
 export default Layout;

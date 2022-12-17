@@ -28,8 +28,11 @@ const Equipe = (props) => {
       setShowContact={setShowContact}
       headerColor="#000000"
     >
-      <TeamHero hero={hero} setShowContact={setShowContact} />
-      <TeamMembers teamMembers={teamMembers} />
+      <div className="bg-black">
+        <div id="top"></div>
+        <TeamHero hero={hero} setShowContact={setShowContact} />
+        <TeamMembers teamMembers={teamMembers} />
+      </div>
     </Layout>
   );
 };

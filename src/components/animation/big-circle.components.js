@@ -6,19 +6,13 @@ const Circle = ({ roundSize, hover, color }) => {
   const roundControls = useAnimationControls();
   const round = useRef();
 
-  const handleMouseEnter = () => {};
-
-  const handleMouseLeave = () => {};
-
   useEffect(() => {
     if (hover) {
-      console.log("enter");
       roundControls.start({
         strokeDasharray: "360 360",
         // transition: { duration: 0.75 },
       });
     } else {
-      console.log("leave");
       roundControls.start({
         strokeDasharray: "0 360",
         // transition: { duration: 0.75 },
@@ -36,7 +30,7 @@ const Circle = ({ roundSize, hover, color }) => {
         strokeDasharray="0 360"
         pathLength="360"
         stroke={color}
-        strokeWidth="1"
+        strokeWidth="1.5"
         fill="transparent"
         initial={{
           strokeDasharray: "0 360",

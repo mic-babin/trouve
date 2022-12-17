@@ -5,6 +5,7 @@ import { renderRichText } from "gatsby-source-contentful/rich-text";
 import { NavLink } from "../styled-components/nav-link.style";
 import { Kicker } from "../styled-components/kicker.style";
 import { H1 } from "../styled-components/h1.style";
+import { motion } from "framer-motion";
 
 const Expertise = ({ expertise }) => {
   const { title, textFields, images, link } = expertise;
@@ -34,41 +35,111 @@ const Expertise = ({ expertise }) => {
     <Section>
       <div className="container">
         <div className="row">
-          <div className="col-lg-6 pe-5">
+          <div className="col-lg-6 ">
             <div className="pe-5">
               <H1>
                 {title &&
                   title.split(" ").map((word, index) => (
-                    <div className="d-inline-block" key={index}>
-                      {word}{" "}
+                    <div key={index} className="w-wrapper">
+                      <motion.div
+                        className="word"
+                        initial={{ transform: "translateY(200px)" }}
+                        animate={{ transform: "translateY(0px)" }}
+                        transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
+                      >
+                        {word}{" "}
+                      </motion.div>
                     </div>
                   ))}
               </H1>
-              {paragraph && <Kicker className="my-4">{paragraph}</Kicker>}
-              {link && (
-                <NavLink as="a" href={link.url} target="_blank">
-                  – {link.text}
-                </NavLink>
+              {paragraph && (
+                <Paragraph
+                  className="my-4 z-1"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3, delay: 1.3 }}
+                >
+                  {paragraph}
+                </Paragraph>
               )}
-              <div className="position-relative">
+              {link && (
+                <HeroLink
+                  as={motion.div}
+                  className="pointer"
+                  href={link.url}
+                  target="_blank"
+                  initial={{ opacity: 0, transform: "translateX(200px)" }}
+                  animate={{ opacity: 1, transform: "translateX(0px)" }}
+                  transition={{ duration: 0.5, delay: 1.5 }}
+                >
+                  {link.text}
+                </HeroLink>
+              )}
+
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 2.1 }}
+                className="position-relative"
+              >
+                {buildingImg && (
+                  <BuildingImage
+                    alt="TODO"
+                    image={getImage(buildingImg.gatsbyImageData)}
+                  />
+                )}
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 2.3 }}
+                className="position-relative"
+              >
                 {woodImg && (
                   <WoodImage
                     alt="TODO"
                     image={getImage(woodImg.gatsbyImageData)}
                   />
                 )}
-              </div>
-              {buildingImg && (
-                <BuildingImage
-                  alt="TODO"
-                  image={getImage(buildingImg.gatsbyImageData)}
-                />
-              )}
+              </motion.div>
             </div>
           </div>
 
-          <div className="col-lg-6 d-flex align-items-center p-5">
-            {richText && <div>{renderRichText(richText.text)}</div>}
+          <div className="col-lg-6 d-flex align-items-center px-5 position-relative">
+            <motion.div
+              initial={{
+                height: "0px",
+              }}
+              whileInView={{
+                height: "1225px",
+              }}
+              transition={{
+                duration: 5,
+                delay: 0.7,
+                type: "linear",
+              }}
+              className={"line"}
+              viewport={{ once: true }}
+            ></motion.div>
+            {richText && (
+              <TextWrapper>
+                <motion.div
+                  initial={{
+                    opacity: 0,
+                    transform: "translateX(200px)",
+                    zIndex: 1,
+                  }}
+                  animate={{
+                    opacity: 1,
+                    transform: "translateX(0px)",
+                    zIndex: 1,
+                  }}
+                  transition={{ duration: 0.5, delay: 1.5 }}
+                >
+                  {renderRichText(richText.text)}
+                </motion.div>
+              </TextWrapper>
+            )}
           </div>
         </div>
       </div>
@@ -82,6 +153,20 @@ const Section = styled.section`
   background-color: black;
   color: white;
   padding-top: 200px;
+  z-index: 2;
+  /* overflow-x: hidden;
+  overflow-y; */
+
+  .line {
+    display: block;
+    width: 1.5px;
+    height: 100px;
+    background: #fff;
+    mix-blend-mode: difference;
+    left: 50%;
+    top: -110px;
+    position: absolute;
+  }
 `;
 
 const BuildingImage = styled(GatsbyImage)`
@@ -92,9 +177,48 @@ const BuildingImage = styled(GatsbyImage)`
 
 const WoodImage = styled(GatsbyImage)`
   position: absolute;
-  top: 0;
+  top: -450px;
   right: 0;
-  width: 30%;
+  width: 40%;
   height: 350px;
+  z-index: 0;
+`;
+
+const HeroLink = styled(NavLink)`
+  color: white;
+  padding-bottom: 50px;
+  position: relative;
+  overflow: visible;
+  transition: all 0.2s all;
+  font-family: "Neue-Light";
+  &:before {
+    content: "";
+    display: inline-block;
+    width: 25px;
+    height: 1.5px;
+    background: white !important;
+    opacity: 1;
+    z-index: 1;
+    margin-right: 10px;
+    transition: all 0.2s ease-in;
+    margin-bottom: 5px;
+  }
+
+  &:hover {
+    &:before {
+      width: 50px;
+    }
+  }
+`;
+
+const TextWrapper = styled.div`
+  padding: 3rem 2rem;
+  background-color: black;
   z-index: 1;
+`;
+
+const Paragraph = styled(Kicker)`
+  padding-top: 30px;
+  font-size: 30px;
+  letter-spacing: 1px;
 `;

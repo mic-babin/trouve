@@ -9,6 +9,6 @@ export const ModalAnimation = {
     padding: 0,
     width: "0vw",
     height: "0vw",
-    transition: { duration: 1, type: "linear" },
+    transition: { duration: 1 },
   },
 };

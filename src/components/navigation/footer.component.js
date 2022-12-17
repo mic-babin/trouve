@@ -43,7 +43,7 @@ const FooterWrapper = styled.footer`
 const Copyright = styled.div`
   font-size: 10px;
   padding: 1rem;
-
+  font-family: "Neue-Light";
   a {
     color: white;
     text-decoration: none;

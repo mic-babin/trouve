@@ -20,6 +20,7 @@ const Success = (props) => {
       showContact={showContact}
       setShowContact={setShowContact}
     >
+      <div id="top"></div>
       <div>Success</div>;
     </Layout>
   );

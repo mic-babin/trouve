@@ -34,13 +34,17 @@ const NosServices = (props) => {
       contact={contact}
       showContact={showContact}
       setShowContact={setShowContact}
+      headerColor="#000000"
     >
-      <Expertise expertise={expertise} />
-      <Mandate
-        mandate={mandate}
-        contact={contact}
-        setShowContact={setShowContact}
-      />
+      <div className="bg-beige">
+        <div id="top"></div>
+        <Expertise expertise={expertise} />
+        <Mandate
+          mandate={mandate}
+          contact={contact}
+          setShowContact={setShowContact}
+        />
+      </div>
     </Layout>
   );
 };

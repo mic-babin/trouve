@@ -2,12 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import { NavLink } from "../styled-components/nav-link.style";
 import { motion } from "framer-motion";
+// import { Link, navigate, useI18next } from "gatsby-plugin-react-i18next";
 
 const NavLinks = ({ navLinks, setShowContact, setShowMenu }) => {
   const handleShowContact = () => {
     setShowMenu(false);
     setShowContact(true);
   };
+
+  // const handleLink = (link) => {
+  //   useI18next().navigate(link.url !== "/" ? "/" + link.url : link.url);
+  // };
 
   const isRealLink = (link) => {
     return link.url !== "http://jobs.trouvemtl.com/" && link.url !== undefined;
@@ -21,10 +26,11 @@ const NavLinks = ({ navLinks, setShowContact, setShowMenu }) => {
             {isRealLink(link, index) && (
               <NavLink
                 to={link.url !== "/" ? "/" + link.url : link.url}
+                // onClick={() => handleLink(link)}
                 className="d-flex border-bottom-white"
               >
-                <div className="me-4">0{index + 1}</div>
-                <div>{link.text}</div>
+                <Number className="me-4">0{index + 1}</Number>
+                <Text>{link.text}</Text>
               </NavLink>
             )}
             {link.url === "http://jobs.trouvemtl.com/" && (
@@ -34,15 +40,15 @@ const NavLinks = ({ navLinks, setShowContact, setShowMenu }) => {
                 target="_blank"
                 className="d-flex border-bottom-white"
               >
-                <div className="me-4">0{index + 1}</div>
-                <div>{link.text}</div>
+                <Number className="me-4">0{index + 1}</Number>
+                <Text>{link.text}</Text>
               </NavLink>
             )}
             {(link.title === "SOCIAL MEDIA" ||
               link.title === "RÉSEAUX SOCIAUX ") && (
               <Socials as="div" className="d-flex border-bottom-white pointer">
-                <div className="me-3">0{index + 1}</div>
-                <div className="me-4">{link.title}</div>
+                <Number className="me-3">0{index + 1}</Number>
+                <Text className="me-4">{link.title}</Text>
                 <div>
                   {link.socialLinks &&
                     link.socialLinks.map((socialLink) => (
@@ -65,8 +71,8 @@ const NavLinks = ({ navLinks, setShowContact, setShowMenu }) => {
                 onClick={handleShowContact}
                 className="d-flex border-bottom-white pointer"
               >
-                <div className="me-4">0{index + 1}</div>
-                <div>{link.text}</div>
+                <Number className="me-4">0{index + 1}</Number>
+                <Text>{link.text}</Text>
               </NavLink>
             )}
           </LinkWrapper>
@@ -87,7 +93,7 @@ const LinkWrapper = styled.div`
   @media (max-width: 991px) {
     &:nth-of-type(5) {
       .border-bottom-white {
-        border-bottom: 1px solid white;
+        border-bottom: 1.5px solid white;
       }
     }
   }
@@ -104,7 +110,8 @@ const Socials = styled(NavLink)`
       display: inline;
       opacity: 1;
       color: white;
-      font-family: "Neue-Italic";
+      font-family: "Neue-LightItalic";
+      letter-spacing: 2px;
 
       &:hover {
         font-family: "Neue";
@@ -115,4 +122,17 @@ const Socials = styled(NavLink)`
 
 const LinksWrapper = styled(motion.div)`
   overflow: hidden;
+`;
+
+const Number = styled.div`
+  font-family: "Neue-LightItalic";
+`;
+
+const Text = styled.div`
+  font-family: "Neue-Light";
+  letter-spacing: 2px;
+
+  &:hover {
+    font-family: "Neue";
+  }
 `;
