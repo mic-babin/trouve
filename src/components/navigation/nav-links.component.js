@@ -9,6 +9,8 @@ const NavLinks = ({ navLinks, setShowContact, setShowMenu }) => {
     setShowContact(true);
   };
 
+  const handleCloseMenu = () => setShowMenu(false);
+
   const isRealLink = (link) => {
     return link.url !== "http://jobs.trouvemtl.com/" && link.url !== undefined;
   };
@@ -22,6 +24,7 @@ const NavLinks = ({ navLinks, setShowContact, setShowMenu }) => {
               <NavLink
                 to={link.url !== "/" ? "/" + link.url : link.url}
                 className="d-flex border-bottom-white"
+                onClick={handleCloseMenu}
               >
                 <Number className="me-4">0{index + 1}</Number>
                 <Text>{link.text}</Text>
