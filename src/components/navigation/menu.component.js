@@ -103,7 +103,7 @@ const ModalWrapper = styled(motion.div)`
   top: 50vw;
   left: 50vw;
   height: 100vh;
-  width: calc(100vw - 17px);
+  width: calc(100vw);
   overflow: hidden;
   @media (max-width: 991px) {
     left: 100vw;
@@ -112,7 +112,7 @@ const ModalWrapper = styled(motion.div)`
 `;
 
 const ImageWrapper = styled.div`
-  width: calc(100vw - 17px);
+  width: calc(100vw);
   padding: 12px;
   overflow: hidden;
   @media (max-width: 991px) {
@@ -122,7 +122,7 @@ const ImageWrapper = styled.div`
 
 const Image = styled(GatsbyImage)`
   height: 40vh;
-  max-width: calc(100vw - 14px);
+  max-width: calc(100vw);
   @media (max-width: 991px) {
     width: calc(100vw) !important;
   }
