@@ -7,11 +7,8 @@ const TeamMembers = ({ teamMembers }) => {
       {teamMembers &&
         teamMembers.map((employee) => {
           const getTitleHeight = () => {
-            if (
-              employee.name.toUpperCase() === "ANNIE-CLAUDE ROY" ||
-              employee.name.toUpperCase() === "DAVID-MARC BOUCHARD"
-            ) {
-              return "10px";
+            if (employee.name.toUpperCase() === "DAVID-MARC BOUCHARD") {
+              return "-25px";
             }
             return "10px";
           };

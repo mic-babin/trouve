@@ -21,12 +21,12 @@ const Card = ({ data, cardHeight, titleHeight }) => {
   const handleIsEmployee = () => setIsEmployee(true);
   const [hovered, setHovered] = useState(false);
   const handleHover = () => setHovered(!hovered);
-  const executeScroll = () => {
-    box.current.scrollIntoView();
-    setTimeout(() => {
-      box.current.scrollIntoView({ block: "start", inline: "nearest" });
-    }, 300);
-  };
+  // const executeScroll = () => {
+  //   box.current.scrollIntoView();
+  //   setTimeout(() => {
+  //     box.current.scrollIntoView({ block: "start", inline: "nearest" });
+  //   }, 300);
+  // };
 
   const getMarc = () => {
     if (isEmployee) {
@@ -36,112 +36,116 @@ const Card = ({ data, cardHeight, titleHeight }) => {
   };
 
   const getImageHeight = () => {
-    if (isEmployee) {
-      if (name === "ANNIE-CLAUDE ROY") return "-28vw";
-      if (name === "DAVID-MARC BOUCHARD") return "-24vw";
-      if (name === "RACHEL MARTIN") return "-14vw";
-      if (name === "DAPHNÉ SYLVAIN") return "-45vw";
-    } else {
-      if (title.includes("PROCESS")) return "-30vw";
-      if (title.includes("RECRUT")) return "-22vw";
-      if (title.includes("TALENT")) return "-122vw";
-    }
+    if (name === "ANNIE-CLAUDE ROY") return "-28vw";
+    if (name === "DAVID-MARC BOUCHARD") return "-24vw";
+    if (name === "RACHEL MARTIN") return "-14vw";
+    if (name === "DAPHNÉ SYLVAIN") return "-45vw";
+
+    if (title.includes("PROCESS")) return "-30vw";
+    if (title.includes("RECRUT")) return "-22vw";
+    if (title.includes("TALENT")) return "-122vw";
+
     return "-200px";
   };
   useEffect(() => {
     if (name) handleIsEmployee();
-    const updatePosition = () => {
-      if (
-        // (box.current.getBoundingClientRect().top < 200 &&
-        //   box.current.getBoundingClientRect().top > 0) ||
-        hovered
-      ) {
-        // OPEN
-        cardWrapperControls.start({
-          height: "100%",
-          maxHeight: cardHeight || "463px",
-          transition: { duration: 0.75 },
-          type: "linear",
-        });
-        imageWrapperControls.start({
-          width: "100%",
-          marginLeft: "0vw",
-          transform: "translateY(0vw)",
-          height: "310px",
-          transition: { duration: 0.75 },
-          type: "linear",
-        });
-        titleControls.start({
-          marginTop: "0px",
-          width: "330px",
-          fontSize: "30px",
-          lineHeight: "35px",
-          transition: { duration: 0.75 },
-          type: "linear",
-        });
-        subTitleControls.start({
-          opacity: 1,
-          marginTop: getMarc() ? "85px" : "50px",
-          transition: { duration: 0.5, delay: 0.5 },
-          type: "linear",
-        });
-        subTitleClosedControls.start({
-          opacity: 0,
-          transition: { duration: 0.375, delay: 0 },
-          type: "linear",
-        });
-      } else {
-        // CLOSED
-        cardWrapperControls.start({
-          height: "100%",
-          maxHeight: "250px",
-          transition: { duration: 0.375 },
-          type: "linear",
-        });
-        imageWrapperControls.start({
-          width: "102vw",
-          marginLeft: "-68vw",
-          transform: "translateY(" + getImageHeight() + ")",
-          height: "100%",
-          transition: { duration: 0.375 },
-          type: "linear",
-        });
-        titleControls.start({
-          marginTop: titleHeight || "-33px",
-          width: "1000px",
-          fontSize: "65px",
-          lineHeight: "70px",
-          transition: { duration: 0.375 },
-          type: "linear",
-        });
-        subTitleControls.start({
-          opacity: 0,
-          marginTop: getMarc() ? "85px" : "50px",
-          transition: { duration: 0.375, delay: 0 },
-          type: "linear",
-        });
-        subTitleClosedControls.start({
-          opacity: 1,
-          transition: { duration: 0.375, delay: 0 },
-          type: "linear",
-        });
-      }
-    };
-    window.addEventListener("scroll", updatePosition);
-    updatePosition();
-    return () => window.removeEventListener("scroll", updatePosition);
+    console.log(isEmployee, getImageHeight());
+    if (
+      // (box.current.getBoundingClientRect().top < 200 &&
+      //   box.current.getBoundingClientRect().top > 0) ||
+      hovered
+    ) {
+      // OPEN
+      cardWrapperControls.start({
+        height: "100%",
+        maxHeight: cardHeight || "463px",
+        transition: { duration: 0.75 },
+        type: "linear",
+      });
+      imageWrapperControls.start({
+        width: "100%",
+        marginLeft: "0vw",
+        transform: "translateY(0vw)",
+        height: "310px",
+        transition: { duration: 0.75 },
+        type: "linear",
+      });
+      titleControls.start({
+        marginTop: "0px",
+        width: "330px",
+        fontSize: "30px",
+        lineHeight: "35px",
+        transition: { duration: 0.75 },
+        type: "linear",
+      });
+      subTitleControls.start({
+        opacity: 1,
+        marginTop: getMarc() ? "85px" : "50px",
+        transition: { duration: 0.5, delay: 0.5 },
+        type: "linear",
+      });
+      subTitleClosedControls.start({
+        opacity: 0,
+        transition: { duration: 0.375, delay: 0 },
+        type: "linear",
+      });
+    } else {
+      // CLOSED
+      cardWrapperControls.start({
+        height: "100%",
+        maxHeight: "250px",
+        transition: { duration: 0.375 },
+        type: "linear",
+      });
+      imageWrapperControls.start({
+        width: "102vw",
+        marginLeft: "-68vw",
+        transform: "translateY(" + getImageHeight() + ")",
+        height: "100%",
+        transition: { duration: 0.375 },
+        type: "linear",
+      });
+      titleControls.start({
+        marginTop: titleHeight || "-33px",
+        width: "1000px",
+        fontSize: "65px",
+        lineHeight: "70px",
+        transition: { duration: 0.375 },
+        type: "linear",
+      });
+      subTitleControls.start({
+        opacity: 0,
+        marginTop: getMarc() ? "85px" : "50px",
+        transition: { duration: 0.375, delay: 0 },
+        type: "linear",
+      });
+      subTitleClosedControls.start({
+        opacity: 1,
+        transition: { duration: 0.375, delay: 0 },
+        type: "linear",
+      });
+    }
+
+    // window.addEventListener("scroll", updatePosition);
+
+    // return () => window.removeEventListener("scroll", updatePosition);
   }, [hovered]);
   return (
     <CardWrapper
       ref={box}
       animate={cardWrapperControls}
-      onClick={executeScroll}
+      // onClick={executeScroll}
       onMouseEnter={() => handleHover()}
       onMouseLeave={() => handleHover()}
     >
       <div className="row position-relative">
         <div className="col-lg-4 ">
-          <Title animate={titleControls}>{isEmployee ? name : title}</Title>
+          <Title
+            animate={titleControls}
+            style={isEmployee && { maxWidth: "700px" }}
+          >
+            {isEmployee ? name : title}
+          </Title>
           {isEmployee && (
             <SubTitle animate={subTitleControls}>{title}</SubTitle>
           )}
@@ -181,6 +185,14 @@ const Card = ({ data, cardHeight, titleHeight }) => {
               <ImageWrapper
                 key={index}
                 animate={imageWrapperControls}
+                initial={{
+                  width: "102vw",
+                  marginLeft: "-68vw",
+                  transform: "translateY(" + getImageHeight() + ")",
+                  height: "100%",
+                  transition: { duration: 0.375 },
+                  type: "linear",
+                }}
                 className="img-wrapper"
               >
                 <Image image={getImage(img.gatsbyImageData)} alt="TODO"></Image>
@@ -189,6 +201,14 @@ const Card = ({ data, cardHeight, titleHeight }) => {
           {image && (
             <ImageWrapper
               animate={imageWrapperControls}
+              initial={{
+                width: "102vw",
+                marginLeft: "-68vw",
+                transform: "translateY(" + getImageHeight() + ")",
+                height: "100%",
+                transition: { duration: 0.375 },
+                type: "linear",
+              }}
               className="img-wrapper"
             >
               <Image image={getImage(image.gatsbyImageData)} alt="TODO"></Image>
