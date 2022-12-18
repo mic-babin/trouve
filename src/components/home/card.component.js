@@ -128,7 +128,17 @@ const Card = ({ data, cardHeight, titleHeight }) => {
     // window.addEventListener("scroll", updatePosition);
 
     // return () => window.removeEventListener("scroll", updatePosition);
-  }, [hovered]);
+  }, [
+    hovered,
+    cardHeight,
+    cardWrapperControls,
+    imageWrapperControls,
+    name,
+    subTitleClosedControls,
+    subTitleControls,
+    titleControls,
+    titleHeight,
+  ]);
   return (
     <CardWrapper
       ref={box}

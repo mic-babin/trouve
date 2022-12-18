@@ -21,7 +21,7 @@ export default function Homepage(props) {
 
   const [showContact, setShowContact] = useState(false);
   const [headerColor, setHeaderColor] = useState("transparent");
-  const [section, setSection] = useState("hero");
+  // const [section, setSection] = useState("hero");
 
   const handleHeaderColor = (color) => setHeaderColor(color);
 
@@ -59,7 +59,7 @@ export default function Homepage(props) {
       // layout.current.removeEventListener("scroll", handleScroll);
       // layout.current.removeEventListener("mousewheel", handleScroll);
     };
-  }, [section, showPage]);
+  }, [showPage]);
 
   return (
     <div ref={layout}>

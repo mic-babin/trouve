@@ -45,7 +45,7 @@ function ContactForm({ data }) {
   };
 
   const resetResumeField = () => {
-    setFields({ ...fields, ["resume"]: "" });
+    setFields({ ...fields, resume: "" });
     setFileUploaded(false);
   };
 

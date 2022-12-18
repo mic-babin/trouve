@@ -26,7 +26,7 @@ const Layout = ({
     } else {
       setShowModal(showMenu || showContact);
     }
-  }, [showMenu, showContact]);
+  }, [showMenu, showContact, showModal]);
 
   return (
     <div>
