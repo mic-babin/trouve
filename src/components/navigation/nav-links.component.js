@@ -2,17 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { NavLink } from "../styled-components/nav-link.style";
 import { motion } from "framer-motion";
-// import { Link, navigate, useI18next } from "gatsby-plugin-react-i18next";
 
 const NavLinks = ({ navLinks, setShowContact, setShowMenu }) => {
   const handleShowContact = () => {
     setShowMenu(false);
     setShowContact(true);
   };
-
-  // const handleLink = (link) => {
-  //   useI18next().navigate(link.url !== "/" ? "/" + link.url : link.url);
-  // };
 
   const isRealLink = (link) => {
     return link.url !== "http://jobs.trouvemtl.com/" && link.url !== undefined;
@@ -26,7 +21,6 @@ const NavLinks = ({ navLinks, setShowContact, setShowMenu }) => {
             {isRealLink(link, index) && (
               <NavLink
                 to={link.url !== "/" ? "/" + link.url : link.url}
-                // onClick={() => handleLink(link)}
                 className="d-flex border-bottom-white"
               >
                 <Number className="me-4">0{index + 1}</Number>

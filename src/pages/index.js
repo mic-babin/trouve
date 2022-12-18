@@ -25,30 +25,41 @@ export default function Homepage(props) {
 
   const handleHeaderColor = (color) => setHeaderColor(color);
 
+  const [showPage, setShowPage] = useState(false);
   useEffect(() => {
-    var observer = new IntersectionObserver(
-      function (entries) {
-        if (!entries[0].isIntersecting === true) {
-          handleHeaderColor("black");
-        } else {
-          handleHeaderColor("transparent");
-        }
-      },
-      { threshold: [0.1] }
-    );
+    if (!showPage) {
+      setTimeout(() => {
+        setShowPage(true);
+      }, 1);
+    }
 
-    observer.observe(document.querySelector("#hero"));
+    if (showPage) {
+      var observer = new IntersectionObserver(
+        function (entries) {
+          if (!entries[0].isIntersecting === true) {
+            handleHeaderColor("black");
+          } else {
+            handleHeaderColor("transparent");
+          }
+        },
+        { threshold: [0.1] }
+      );
+
+      observer.observe(document.querySelector("#hero"));
+    }
     // layout.current.addEventListener("scroll", handleScroll, false);
     // // layout.current.addEventListener("scroll", handleEvent, false);
     // layout.current.addEventListener("mousewheel", handleScroll, false);
     // // layout.current.addEventListener("touchmove", handleEvent, false);
 
     return () => {
-      observer.disconnect();
+      if (showPage) {
+        observer.disconnect();
+      }
       // layout.current.removeEventListener("scroll", handleScroll);
       // layout.current.removeEventListener("mousewheel", handleScroll);
     };
-  }, [section]);
+  }, [section, showPage]);
 
   return (
     <div ref={layout}>
@@ -60,12 +71,13 @@ export default function Homepage(props) {
         headerColor={headerColor}
       >
         <div id="top"></div>
-        {home.map((section) => {
-          const { id, type, ...componentProps } = section;
-          const Component = sections[type] || Fallback;
-          const data = home.filter((el) => el.type === type)[0];
-          return <Component key={id} {...componentProps} data={data} />;
-        })}
+        {showPage &&
+          home.map((section) => {
+            const { id, type, ...componentProps } = section;
+            const Component = sections[type] || Fallback;
+            const data = home.filter((el) => el.type === type)[0];
+            return <Component key={id} {...componentProps} data={data} />;
+          })}
       </Layout>
     </div>
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "../components/layout.component";
 import { graphql } from "gatsby";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TeamHero from "../components/team/team-hero.component";
 import TeamMembers from "../components/team/team-members.component";
 
@@ -20,6 +20,14 @@ const Equipe = (props) => {
       el.id !== "25d32986-3977-5e32-b3fb-27185ec42a7c"
   );
   const [showContact, setShowContact] = useState(false);
+  const [showPage, setShowPage] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShowPage(true);
+    }, 1);
+  }, []);
+
   return (
     <Layout
       menu={menu}
@@ -30,8 +38,12 @@ const Equipe = (props) => {
     >
       <div className="bg-black">
         <div id="top"></div>
-        <TeamHero hero={hero} setShowContact={setShowContact} />
-        <TeamMembers teamMembers={teamMembers} />
+        {showPage && (
+          <>
+            <TeamHero hero={hero} setShowContact={setShowContact} />
+            <TeamMembers teamMembers={teamMembers} />
+          </>
+        )}
       </div>
     </Layout>
   );

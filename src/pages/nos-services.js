@@ -3,7 +3,7 @@ import Layout from "../components/layout.component";
 import { graphql } from "gatsby";
 import Expertise from "../components/services/expertise.component";
 import Mandate from "../components/services/mandate.component";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const NosServices = (props) => {
   const menu = props.data.allContentfulHeader.edges[0].node;
@@ -27,6 +27,13 @@ const NosServices = (props) => {
   )[0];
 
   const [showContact, setShowContact] = useState(false);
+  const [showPage, setShowPage] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShowPage(true);
+    }, 1);
+  }, []);
 
   return (
     <Layout
@@ -38,12 +45,16 @@ const NosServices = (props) => {
     >
       <div className="bg-beige">
         <div id="top"></div>
-        <Expertise expertise={expertise} />
-        <Mandate
-          mandate={mandate}
-          contact={contact}
-          setShowContact={setShowContact}
-        />
+        {showPage && (
+          <>
+            <Expertise expertise={expertise} />
+            <Mandate
+              mandate={mandate}
+              contact={contact}
+              setShowContact={setShowContact}
+            />
+          </>
+        )}
       </div>
     </Layout>
   );

@@ -12,7 +12,6 @@ import { ModalMediumAnimation } from "../animation/modal-medium.animation";
 import { useIsMedium } from "../../utils/media-query.hook";
 import { useIsSmall } from "../../utils/media-query.hook";
 import { Link } from "gatsby-plugin-react-i18next";
-import { useEffect } from "react";
 
 const Menu = ({ showMenu, setShowMenu, menu, setShowContact }) => {
   const { closeTitle, navLinks, langs, featured, logo } = menu;
@@ -21,18 +20,6 @@ const Menu = ({ showMenu, setShowMenu, menu, setShowContact }) => {
   const isMedium = useIsMedium();
   const isSmall = useIsSmall();
   const ModalVariant = isMedium ? ModalMediumAnimation : ModalAnimation;
-
-  useEffect(() => {
-    if (showMenu) {
-      const top = document.getElementById("top");
-      setTimeout(() => {
-        top.scrollIntoView({
-          block: "start",
-          inline: "nearest",
-        });
-      }, "500");
-    }
-  }, [showMenu]);
 
   return (
     <>
