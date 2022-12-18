@@ -41,7 +41,7 @@ const Menu = ({ showMenu, setShowMenu, menu, setShowContact }) => {
               <div className="d-flex justify-content-between align-items-center ">
                 {logo && (
                   <>
-                    <LogoLink to="/">
+                    <LogoLink to="/" onClick={handleCloseMenu}>
                       <Logo src={logo.url} alt="Logo" />
                     </LogoLink>
                   </>

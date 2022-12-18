@@ -49,7 +49,6 @@ const Card = ({ data, cardHeight, titleHeight }) => {
   };
   useEffect(() => {
     if (name) handleIsEmployee();
-    console.log(isEmployee, getImageHeight());
     if (
       // (box.current.getBoundingClientRect().top < 200 &&
       //   box.current.getBoundingClientRect().top > 0) ||
