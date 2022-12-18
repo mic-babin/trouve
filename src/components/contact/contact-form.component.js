@@ -193,7 +193,9 @@ const TextArea = styled.textarea`
 `;
 
 const FileInput = styled(Input)`
-  width: 188px;
+  width: 195px;
+  user-select: none;
+  -webkit-user-select: none;
 
   /* TODO add variable */
   &::before {
