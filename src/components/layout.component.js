@@ -45,6 +45,7 @@ const Layout = ({
         menu={menu}
         setShowContact={setShowContact}
         setShowMenu={setShowMenu}
+        path={path}
       />
 
       <ContactWrapper>

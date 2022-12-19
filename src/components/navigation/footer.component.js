@@ -6,7 +6,7 @@ import { renderRichText } from "gatsby-source-contentful/rich-text";
 import NavLinks from "./nav-links.component";
 import LanguagesFooter from "./languages-footer.component";
 
-const Footer = ({ menu, setShowContact, setShowMenu }) => {
+const Footer = ({ menu, setShowContact, setShowMenu, path }) => {
   const { navLinks, langs, copyrights } = menu;
 
   return (
@@ -20,6 +20,7 @@ const Footer = ({ menu, setShowContact, setShowMenu }) => {
                 navLinks={navLinks}
                 setShowContact={setShowContact}
                 setShowMenu={setShowMenu}
+                path={path}
               />
             </div>
             <div className="d-flex flex-column flex-sm-row align-items-center justify-content-sm-between">
