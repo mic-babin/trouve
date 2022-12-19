@@ -6,6 +6,7 @@ import Mandate from "../components/services/mandate.component";
 import { useState, useEffect } from "react";
 
 const NosServices = (props) => {
+  const path = props.path;
   const menu = props.data.allContentfulHeader.edges[0].node;
   const contact = props.data.allContentfulPage.edges[0].node.sections.filter(
     (section) =>
@@ -42,6 +43,7 @@ const NosServices = (props) => {
       showContact={showContact}
       setShowContact={setShowContact}
       headerColor="#000000"
+      path={path}
     >
       <div className="bg-beige">
         <div id="top"></div>

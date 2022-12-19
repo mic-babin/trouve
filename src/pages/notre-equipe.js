@@ -6,6 +6,7 @@ import TeamHero from "../components/team/team-hero.component";
 import TeamMembers from "../components/team/team-members.component";
 
 const Equipe = (props) => {
+  const path = props.path;
   const menu = props.data.allContentfulHeader.edges[0].node;
   const contact = props.data.allContentfulPage.edges[1].node.sections;
   const team = props.data.allContentfulPage.edges[0].node.sections;
@@ -35,6 +36,7 @@ const Equipe = (props) => {
       showContact={showContact}
       setShowContact={setShowContact}
       headerColor="#000000"
+      path={path}
     >
       <div className="bg-black">
         <div id="top"></div>

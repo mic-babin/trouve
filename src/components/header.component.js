@@ -13,6 +13,7 @@ const Header = ({
   showMenu,
   setShowMenu,
   headerColor,
+  path,
 }) => {
   const handleShowMenu = ({ headerColor }) => setShowMenu(true);
   return (
@@ -43,6 +44,7 @@ const Header = ({
           menu={menu}
           contact={contact}
           setShowContact={setShowContact}
+          path={path}
         />
       </div>
     </HeaderWrapper>

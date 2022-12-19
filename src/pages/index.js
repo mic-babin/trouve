@@ -7,6 +7,7 @@ import Fallback from "../components/fallback.component";
 import { useState, useEffect, useRef } from "react";
 
 export default function Homepage(props) {
+  const path = props.path;
   const menu = props.data.allContentfulHeader.edges[0].node;
   const contact = props.data.allContentfulPage.edges[0].node.sections.filter(
     (section) =>
@@ -69,6 +70,7 @@ export default function Homepage(props) {
         showContact={showContact}
         setShowContact={setShowContact}
         headerColor={headerColor}
+        path={path}
       >
         <div id="top"></div>
         {showPage &&

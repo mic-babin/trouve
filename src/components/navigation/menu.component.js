@@ -13,7 +13,7 @@ import { useIsMedium } from "../../utils/media-query.hook";
 import { useIsSmall } from "../../utils/media-query.hook";
 import { Link } from "gatsby-plugin-react-i18next";
 
-const Menu = ({ showMenu, setShowMenu, menu, setShowContact }) => {
+const Menu = ({ showMenu, setShowMenu, menu, setShowContact, path }) => {
   const { closeTitle, navLinks, langs, featured, logo } = menu;
 
   const handleCloseMenu = () => setShowMenu(false);
@@ -66,6 +66,7 @@ const Menu = ({ showMenu, setShowMenu, menu, setShowContact }) => {
                   navLinks={navLinks}
                   setShowContact={setShowContact}
                   setShowMenu={setShowMenu}
+                  path={path}
                 />
                 {featured && (
                   <ImageWrapper>

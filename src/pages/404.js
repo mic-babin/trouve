@@ -4,6 +4,7 @@ import { graphql } from "gatsby";
 import { useState } from "react";
 
 const Error = (props) => {
+  const path = props.path;
   const menu = props.data.allContentfulHeader.edges[0].node;
   const contact = props.data.allContentfulPage.edges[0].node.sections.filter(
     (section) =>
@@ -20,6 +21,7 @@ const Error = (props) => {
       contact={contact}
       showContact={showContact}
       setShowContact={setShowContact}
+      path={path}
     >
       <div>Error</div>
     </Layout>

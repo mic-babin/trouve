@@ -4,7 +4,7 @@ import { graphql } from "gatsby";
 import { useState } from "react";
 
 const Success = (props) => {
-  console.log(props);
+  const path = props.path;
   const menu = props.data.allContentfulHeader.edges[0].node;
   const contact = props.data.allContentfulPage.edges[0].node.sections.filter(
     (section) =>
@@ -20,6 +20,7 @@ const Success = (props) => {
       contact={contact}
       showContact={showContact}
       setShowContact={setShowContact}
+      path={path}
     >
       <div id="top"></div>
       <div>Success</div>;
