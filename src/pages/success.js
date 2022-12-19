@@ -4,6 +4,7 @@ import { graphql } from "gatsby";
 import { useState } from "react";
 
 const Success = (props) => {
+  console.log(props);
   const menu = props.data.allContentfulHeader.edges[0].node;
   const contact = props.data.allContentfulPage.edges[0].node.sections.filter(
     (section) =>

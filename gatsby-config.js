@@ -28,6 +28,12 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     {
+      resolve: "gatsby-plugin-sitemap",
+      options: {
+        excludes: ["/**/404", "/**/success", "/**/404.html"],
+      },
+    },
+    {
       resolve: "gatsby-source-filesystem",
       options: {
         path: `${__dirname}/locales`,
@@ -52,6 +58,7 @@ module.exports = {
       options: {
         languages,
         defaultLanguage: "fr",
+        fallbackLanguage: "fr",
         siteUrl,
         i18nextOptions: {
           // debug: true,
