@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Kicker } from "../styled-components/kicker.style";
-import { renderRichText } from "gatsby-source-contentful/rich-text";
+import { useState } from "react";
 import { motion } from "framer-motion";
 
 const getWidth = (index) => {
@@ -13,6 +13,7 @@ const getWidth = (index) => {
 
 const Reason = ({ data }) => {
   const { title, textFields } = data;
+  const [isInView, setIsInView] = useState(false);
   return (
     <>
       <div className="scroll-to" id="about"></div>
@@ -59,12 +60,37 @@ const Reason = ({ data }) => {
             </H2>
           )}
 
-          <div className="d-flex justify-content-center">
+          <motion.div
+            className="d-flex align-items-center flex-column"
+            whileInView={() => {
+              setIsInView(true);
+              return {};
+            }}
+          >
             {textFields &&
-              textFields.map((el) => (
-                <Paragraph key={el.id}>{renderRichText(el.richText)}</Paragraph>
-              ))}
-          </div>
+              textFields.map((el, index) => {
+                let i = index;
+                return (
+                  <Paragraph key={el.id}>
+                    {el.text.text.split(" ").map((word, index) => (
+                      <motion.span
+                        key={index}
+                        initial={{ opacity: 0, filter: "blur(1)" }}
+                        animate={isInView && { opacity: 1, filter: "blur(0)" }}
+                        transition={{
+                          duration: 1,
+                          delay: index / 20 + i * 2.5,
+                          ease: [0.11, 0, 0.5, 0],
+                        }}
+                        viewport={{ once: true }}
+                      >
+                        {word + " "}{" "}
+                      </motion.span>
+                    ))}
+                  </Paragraph>
+                );
+              })}
+          </motion.div>
           <div className="position-relative w-100 h-0">
             <motion.div
               initial={{
@@ -102,7 +128,7 @@ const Section = styled.div`
   overflow: hidden;
 `;
 
-const H2 = styled.h2`
+const H2 = styled(motion.h2)`
   font-size: 65px;
   line-height: 65px;
   display: flex;

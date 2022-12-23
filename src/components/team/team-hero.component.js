@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { H1 } from "../styled-components/h1.style";
 import { Kicker } from "../styled-components/kicker.style";
-import { renderRichText } from "gatsby-source-contentful/rich-text";
 import { NavLink } from "../styled-components/nav-link.style";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { motion } from "framer-motion";
@@ -12,13 +11,29 @@ const TeamHero = ({ hero, setShowContact }) => {
   const handleShowContact = () => {
     setShowContact(true);
   };
+
+  const getWidth = (index) => {
+    if (index === 0) {
+      return "-300";
+    }
+    return "300";
+  };
   return (
     <Section>
       <div className="position-relative">
         <Container className="container postion-relative">
           <div className="row">
             <div className="col-lg-6">
-              <H1>
+              <H1
+                initial={{ transform: "translateX(400px)" }}
+                animate={{ transform: "translateX(0px)" }}
+                transition={{
+                  duration: 1,
+                  delay: 1.2,
+                  type: "tween",
+                  easeInOut: 0.3,
+                }}
+              >
                 {title &&
                   title.split(" ").map((word, index) => (
                     <div key={index} className="w-wrapper">
@@ -26,7 +41,12 @@ const TeamHero = ({ hero, setShowContact }) => {
                         className="word"
                         initial={{ transform: "translateY(200px)" }}
                         animate={{ transform: "translateY(0px)" }}
-                        transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
+                        transition={{
+                          duration: 0.5,
+                          delay: 0.6 + index * 0.1,
+                          type: "tween",
+                          easeInOut: 0.3,
+                        }}
                       >
                         {word}{" "}
                       </motion.div>
@@ -34,17 +54,36 @@ const TeamHero = ({ hero, setShowContact }) => {
                   ))}
               </H1>
               {textFields &&
-                textFields.map((el) => (
-                  <Paragraph
-                    key={el.id}
-                    className="my-4 pe-5 z-1"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.3, delay: 1.3 }}
-                  >
-                    {renderRichText(el.text)}
-                  </Paragraph>
-                ))}
+                textFields.map((el) => {
+                  console.log(el);
+                  return (
+                    <Paragraph
+                      key={el.id}
+                      className="my-4 pe-5 z-1"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.3, delay: 1.3 }}
+                    >
+                      {el.childContentfulParagraphTextTextNode.text
+                        .split(" ")
+                        .map((word, index) => (
+                          <motion.span
+                            key={index}
+                            initial={{ opacity: 0, filter: "blur(1)" }}
+                            whileInView={{ opacity: 1, filter: "blur(0)" }}
+                            transition={{
+                              duration: 1,
+                              delay: index / 10 + 6,
+                              ease: [0.11, 0, 0.5, 0],
+                            }}
+                            viewport={{ once: true }}
+                          >
+                            {word + " "}{" "}
+                          </motion.span>
+                        ))}
+                    </Paragraph>
+                  );
+                })}
 
               {link && (
                 <HeroLink
@@ -53,7 +92,7 @@ const TeamHero = ({ hero, setShowContact }) => {
                   onClick={handleShowContact}
                   initial={{ opacity: 0, transform: "translateX(200px)" }}
                   animate={{ opacity: 1, transform: "translateX(0px)" }}
-                  transition={{ duration: 0.5, delay: 1.5 }}
+                  transition={{ duration: 1, delay: 9 }}
                 >
                   {link.text}
                 </HeroLink>
@@ -65,9 +104,12 @@ const TeamHero = ({ hero, setShowContact }) => {
           images.map((img, index) => (
             <ImageWrapper
               key={index}
-              initial={{ opacity: 0, transform: "translateX(200px)" }}
-              animate={{ opacity: 1, transform: "translateX(0px)" }}
-              transition={{ duration: 0.5, delay: 1.5 + index / 3 }}
+              initial={{
+                opacity: 0,
+                transform: "translate(" + getWidth(index) + "px, 300px)",
+              }}
+              animate={{ opacity: 1, transform: "translate(0px, 0px)" }}
+              transition={{ duration: 1, delay: 10 + index / 2 }}
             >
               <Image image={getImage(img.gatsbyImageData)} alt="TODO"></Image>
             </ImageWrapper>

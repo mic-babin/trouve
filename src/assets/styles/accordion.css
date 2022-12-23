@@ -23,26 +23,7 @@
 }
 
 .accordion-button::after {
-  flex-shrink: 0;
   width: 0;
-  height: 0;
-  background-size: 0;
-}
-
-.accordion-button::before {
-  content: "";
-  display: block;
-  width: 25px;
-  height: 1px;
-  background: black !important;
-  opacity: 1;
-  z-index: 1;
-  margin-right: 10px;
-  transition: all 0.2s ease-in;
-}
-
-.accordion-button:not(.collapsed)::before {
-  width: 50px;
 }
 
 .accordion-body {

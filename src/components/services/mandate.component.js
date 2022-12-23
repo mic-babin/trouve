@@ -14,6 +14,13 @@ const Mandate = ({ mandate, setShowContact }) => {
     setShowContact(true);
   };
   const [isInView, setIsInView] = useState(false);
+
+  const getWidth = (index) => {
+    if (index === 0) {
+      return "-500";
+    }
+    return "500";
+  };
   return (
     <>
       <Section>
@@ -29,13 +36,28 @@ const Mandate = ({ mandate, setShowContact }) => {
             }}
           >
             {title && (
-              <H2
-                initial={{ opacity: 0, transform: "translateX(-200px)" }}
-                whileInView={{ opacity: 1, transform: "translateX(0px)" }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                viewport={{ once: true }}
-              >
-                {title}
+              <H2>
+                {title &&
+                  title.split("<br>").map((word, index) => (
+                    <motion.div
+                      key={index}
+                      whileInView={{
+                        opacity: 1,
+                        transform: "translateX(0px)",
+                      }}
+                      initial={{
+                        opacity: 0,
+                        transform: "translateX(" + getWidth(index) + "px)",
+                      }}
+                      transition={{
+                        duration: 0.8,
+                        delay: 0.5 + index / 5,
+                      }}
+                      viewport={{ once: true }}
+                    >
+                      {word}{" "}
+                    </motion.div>
+                  ))}
               </H2>
             )}
             {textFields &&
@@ -87,8 +109,20 @@ const Section = styled.section`
   }
 `;
 
-const H2 = styled(motion.h2)`
+const H2 = styled.h2`
   font-size: 65px;
+  line-height: 65px;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 75px;
+
+  div:nth-of-type(1) {
+    max-width: 1100px;
+  }
+  div:nth-of-type(2) {
+    font-family: "Neue-Italic";
+    align-self: flex-end;
+  }
 `;
 
 const HeroLink = styled(NavLink)`

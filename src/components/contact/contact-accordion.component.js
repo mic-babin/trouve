@@ -1,24 +1,20 @@
 import React from "react";
-import Accordion from "react-bootstrap/Accordion";
+import styled from "styled-components";
+import AccordionItem from "./accordion-item";
 
 const ContactAccordion = ({ textFields }) => {
   return (
-    <Accordion defaultActiveKey="0" flush>
+    <Accordion>
       {textFields &&
-        textFields.map((text, index) => {
-          return (
-            <Accordion.Item key={text.id} eventKey={index.toString()}>
-              <Accordion.Header bsPrefix="accordion-header">
-                {text.reference}
-              </Accordion.Header>
-              <Accordion.Body>
-                {text.childContentfulParagraphTextTextNode.text}
-              </Accordion.Body>
-            </Accordion.Item>
-          );
+        textFields.map((text) => {
+          return <AccordionItem text={text} />;
         })}
     </Accordion>
   );
 };
 
 export default ContactAccordion;
+
+const Accordion = styled.div`
+  padding-bottom: 2rem;
+`;

@@ -4,13 +4,13 @@ export const ModalMediumAnimation = {
     margin: "0 -200vw",
     width: "400vw",
     height: "400vw",
-    transition: { duration: 1, type: "linear" },
+    transition: { duration: 2, type: "linear" },
   },
   hidden: {
     padding: 0,
     margin: 0,
     width: "0vw",
     height: "0vw",
-    transition: { duration: 1, type: "linear" },
+    transition: { duration: 2, type: "linear" },
   },
 };

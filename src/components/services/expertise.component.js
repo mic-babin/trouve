@@ -37,7 +37,16 @@ const Expertise = ({ expertise }) => {
         <div className="row">
           <div className="col-lg-6 ">
             <div className="pe-5">
-              <H1>
+              <H1
+                initial={{ transform: "translateX(400px)" }}
+                animate={{ transform: "translateX(0px)" }}
+                transition={{
+                  duration: 1,
+                  delay: 1.2,
+                  type: "tween",
+                  easeInOut: 0.3,
+                }}
+              >
                 {title &&
                   title.split(" ").map((word, index) => (
                     <div key={index} className="w-wrapper">
@@ -45,7 +54,12 @@ const Expertise = ({ expertise }) => {
                         className="word"
                         initial={{ transform: "translateY(200px)" }}
                         animate={{ transform: "translateY(0px)" }}
-                        transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
+                        transition={{
+                          duration: 0.5,
+                          delay: 0.6 + index * 0.1,
+                          type: "tween",
+                          easeInOut: 0.3,
+                        }}
                       >
                         {word}{" "}
                       </motion.div>
@@ -57,7 +71,7 @@ const Expertise = ({ expertise }) => {
                   className="my-4 z-1"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ duration: 0.3, delay: 1.3 }}
+                  transition={{ duration: 0.6, delay: 2.3 }}
                 >
                   {paragraph}
                 </Paragraph>
@@ -70,38 +84,43 @@ const Expertise = ({ expertise }) => {
                   target="_blank"
                   initial={{ opacity: 0, transform: "translateX(200px)" }}
                   animate={{ opacity: 1, transform: "translateX(0px)" }}
-                  transition={{ duration: 0.5, delay: 1.5 }}
+                  transition={{ duration: 1, delay: 3 }}
                 >
                   {link.text}
                 </HeroLink>
               )}
-
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 2.1 }}
-                className="position-relative"
-              >
-                {buildingImg && (
-                  <BuildingImage
-                    alt="TODO"
-                    image={getImage(buildingImg.gatsbyImageData)}
-                  />
-                )}
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 2.3 }}
-                className="position-relative"
-              >
-                {woodImg && (
-                  <WoodImage
-                    alt="TODO"
-                    image={getImage(woodImg.gatsbyImageData)}
-                  />
-                )}
-              </motion.div>
+              <ImagesWrapper className="position-relative">
+                <BuildingWrapper
+                  initial={{ opacity: 0, transform: "translate(-300px,400px)" }}
+                  whileInView={{ opacity: 1, transform: "translate(0px,0px)" }}
+                  transition={{ duration: 0.75 }}
+                  viewport={{ once: true }}
+                >
+                  {buildingImg && (
+                    <BuildingImage
+                      alt="TODO"
+                      image={getImage(buildingImg.gatsbyImageData)}
+                    />
+                  )}
+                </BuildingWrapper>
+                <motion.div
+                  initial={{
+                    opacity: 0,
+                    transform: "translate(300px,400px)",
+                  }}
+                  whileInView={{ opacity: 1, transform: "translate(0px,0px)" }}
+                  transition={{ duration: 0.75 }}
+                  viewport={{ once: true }}
+                  className="wood"
+                >
+                  {woodImg && (
+                    <WoodImage
+                      alt="TODO"
+                      image={getImage(woodImg.gatsbyImageData)}
+                    />
+                  )}
+                </motion.div>
+              </ImagesWrapper>
             </div>
           </div>
 
@@ -115,7 +134,7 @@ const Expertise = ({ expertise }) => {
               }}
               transition={{
                 duration: 5,
-                delay: 0.7,
+                delay: 5,
                 type: "linear",
               }}
               className={"line"}
@@ -134,7 +153,7 @@ const Expertise = ({ expertise }) => {
                     transform: "translateX(0px)",
                     zIndex: 1,
                   }}
-                  transition={{ duration: 0.5, delay: 1.5 }}
+                  transition={{ duration: 1, delay: 4.5 }}
                 >
                   {renderRichText(richText.text)}
                 </motion.div>
@@ -168,17 +187,31 @@ const Section = styled.section`
     position: absolute;
   }
 `;
+const ImagesWrapper = styled.div`
+  margin-top: 75px;
+  height: 480px;
+
+  .building {
+  }
+`;
+
+const BuildingWrapper = styled(motion.div)`
+  position: relative;
+  top: 175px;
+`;
 
 const BuildingImage = styled(GatsbyImage)`
+  position: absolute;
+
   width: 80%;
   height: 480px;
-  transform: translateY(200px);
+  /* transform: translateY(200px); */
 `;
 
 const WoodImage = styled(GatsbyImage)`
   position: absolute;
-  top: -450px;
   right: 0;
+  top: 0;
   width: 40%;
   height: 350px;
   z-index: 0;
@@ -190,7 +223,7 @@ const HeroLink = styled(NavLink)`
   position: relative;
   overflow: visible;
   transition: all 0.2s all;
-  font-family: "Neue-Light";
+  letter-spacing: 1px;
   &:before {
     content: "";
     display: inline-block;

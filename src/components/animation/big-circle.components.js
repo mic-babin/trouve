@@ -36,7 +36,7 @@ const Circle = ({ roundSize, hover, color }) => {
           initial={{
             strokeDasharray: "0 360",
           }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 1 }}
           animate={roundControls}
         />
       </svg>

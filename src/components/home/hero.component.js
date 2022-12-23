@@ -5,8 +5,14 @@ import { useIsMedium, useIsSmall } from "../../utils/media-query.hook";
 import { motion } from "framer-motion";
 import Circle from "../animation/circle.components";
 import { useEffect, useState } from "react";
+import { useI18next } from "gatsby-plugin-react-i18next";
+import LogoSrc from "../../assets/img/trouve_blanc.svg";
 
 const Hero = ({ data }) => {
+  const {
+    i18n: { language },
+  } = useI18next();
+
   const { images, textFields } = data;
   const title = textFields[0].paragraph;
   const stopSearching = textFields[1].paragraph;
@@ -45,7 +51,12 @@ const Hero = ({ data }) => {
           className="w-100 pt-5 mt-4"
           initial={{ transform: "translateY(-50px)" }}
           animate={{ transform: "translateY(0px)" }}
-          transition={{ duration: 0.5, delay: 1.8 }}
+          transition={{
+            duration: 1,
+            delay: 2.4,
+            type: "tween",
+            easeInOut: 0.3,
+          }}
         >
           <Container className="container">
             <H3>
@@ -53,7 +64,12 @@ const Hero = ({ data }) => {
                 <motion.div
                   initial={{ transform: "translateX(-400px)" }}
                   animate={{ transform: "translateX(0px)" }}
-                  transition={{ duration: 0.5, delay: 0.8 }}
+                  transition={{
+                    duration: 1,
+                    delay: 1.2,
+                    type: "tween",
+                    easeInOut: 0.3,
+                  }}
                 >
                   {stopSearching}
                 </motion.div>
@@ -62,9 +78,15 @@ const Hero = ({ data }) => {
                 <motion.div
                   initial={{ transform: "translateX(-400px)" }}
                   animate={{ transform: "translateX(0px)" }}
-                  transition={{ duration: 0.5, delay: 0.8 }}
+                  transition={{
+                    duration: 1,
+                    delay: 1.2,
+                    type: "tween",
+                    easeInOut: 0.3,
+                  }}
                 >
-                  {youFound}
+                  {youFound}{" "}
+                  {language === "fr" && <Logo src={LogoSrc} alt="Logo" />}
                 </motion.div>
               </div>
             </H3>
@@ -73,7 +95,7 @@ const Hero = ({ data }) => {
               <JobsLink
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.3, delay: 1.3 }}
+                transition={{ duration: 0.6, delay: 7 }}
                 href="http://jobs.trouvemtl.com"
                 target="_blank"
                 onMouseEnter={() => handleHover()}
@@ -88,7 +110,12 @@ const Hero = ({ data }) => {
               className="text-end"
               initial={{ transform: "translateX(-200px)" }}
               animate={{ transform: "translateX(0px)" }}
-              transition={{ duration: 0.5, delay: 0.8 }}
+              transition={{
+                duration: 1,
+                delay: 1.2,
+                type: "tween",
+                easeInOut: 0.3,
+              }}
             >
               {title &&
                 title.split(" ").map((word, index) => (
@@ -97,7 +124,12 @@ const Hero = ({ data }) => {
                       className="word"
                       initial={{ transform: "translateY(200px)" }}
                       animate={{ transform: "translateY(0px)" }}
-                      transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
+                      transition={{
+                        duration: 1,
+                        delay: 0.2 + index * 0.2,
+                        type: "tween",
+                        easeInOut: 0.3,
+                      }}
                     >
                       {word}{" "}
                     </motion.div>
@@ -105,19 +137,40 @@ const Hero = ({ data }) => {
                 ))}
             </H1>
           </div>
+          <HorizontalLine
+            initial={{ width: "0vw" }}
+            animate={{ width: "100vw" }}
+            transition={{
+              duration: 2,
+              delay: 4,
+              type: "tween",
+              easeInOut: 0.3,
+            }}
+          />
           <List
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.3, delay: 2.3 }}
+            transition={{ duration: 0.3, delay: 6 }}
           >
             <div
               className="d-flex justify-content-between"
               id="list-wrapper"
               style={{ transform: "translate(" + scrollPosition / 3 + "px)" }}
             >
-              {list && list.map((el, index) => <div key={index}>{el}</div>)}
+              {list &&
+                list.map((el, index) => <ListItem key={index}>{el}</ListItem>)}
             </div>
           </List>
+          <HorizontalLine
+            initial={{ width: "0vw" }}
+            animate={{ width: "100vw" }}
+            transition={{
+              duration: 2,
+              delay: 4,
+              type: "tween",
+              easeInOut: 0.3,
+            }}
+          />
         </motion.div>
 
         {images &&
@@ -193,11 +246,9 @@ const H3 = styled.h3`
 
 const JobsLinkWrapper = styled.div`
   position: absolute;
-  font-size: 16px;
   display: flex;
   align-items: center;
   top: 520px;
-  letter-spacing: 2px;
 `;
 
 const JobsLink = styled(motion.a)`
@@ -206,7 +257,8 @@ const JobsLink = styled(motion.a)`
   margin-left: 50px;
   color: white;
   text-decoration: none;
-  font-family: "Neue-light";
+  letter-spacing: 2px;
+
   &:before {
     content: "";
     display: block;
@@ -228,12 +280,25 @@ const JobsLink = styled(motion.a)`
     }
   }
 `;
-
+const HorizontalLine = styled(motion.div)`
+  height: 1.5px;
+  background-color: #ffffff;
+`;
 const List = styled(motion.div)`
   padding: 20px 0;
-  border-top: 1.5px solid white;
-  border-bottom: 1px solid white;
+  /* border-top: 1.5px solid white;
+  border-bottom: 1px solid white; */
   width: 190vw;
   transform: translateX(-50vw);
   overflow-x: hidden !important;
+`;
+
+const ListItem = styled.div`
+  letter-spacing: 2px;
+`;
+
+const Logo = styled.img`
+  height: 52px;
+  margin-top: -10px;
+  margin-left: -7px;
 `;

@@ -5,6 +5,7 @@ import LogoSrc from "../../assets/img/trouve_blanc.svg";
 import { renderRichText } from "gatsby-source-contentful/rich-text";
 import NavLinks from "./nav-links.component";
 import LanguagesFooter from "./languages-footer.component";
+import { Link } from "gatsby";
 
 const Footer = ({ menu, setShowContact, setShowMenu, path }) => {
   const { navLinks, langs, copyrights } = menu;
@@ -13,7 +14,14 @@ const Footer = ({ menu, setShowContact, setShowMenu, path }) => {
     <>
       <FooterWrapper>
         <div className="d-flex flex-column flex-lg-row align-items-start px-3 px-lg-0">
-          <LogoFooter src={LogoSrc} alt="Logo" className="align-self-center" />
+          <Link to="/">
+            <LogoFooter
+              src={LogoSrc}
+              alt="Logo"
+              className="align-self-center"
+            />
+          </Link>
+
           <div className="flex-grow-1">
             <div className="d-flex flex-column justify-content-end ">
               <NavLinks
@@ -56,7 +64,9 @@ const Copyright = styled.div`
 `;
 
 const LogoFooter = styled(Logo)`
-  margin: 0 100px;
+  /* width: 257px */
+  height: 90px;
+  margin: -10px 100px;
   @media (max-width: 991px) {
     margin: 0;
   }

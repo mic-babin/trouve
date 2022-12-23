@@ -9,22 +9,19 @@ const LanguagesFooter = ({ langs }) => {
   const isXLarge = useIsXLarge();
 
   const getLang = (lng) => {
-    if (isXLarge) {
-      return lng.toUpperCase();
-    }
     return langs.value
       .filter((lang) => lang.toLowerCase().includes(lng))[0]
       .toUpperCase();
   };
   return (
-    <LanguagesWrapper className="d-flex justify-content-start ps-sm-3">
+    <div className="d-block">
       {languages &&
         languages.map((lng) => (
           <Lang
             key={lng}
             to={originalPath}
             language={lng}
-            className="flex-grow-1"
+            className="d-inline-block"
             style={{
               fontFamily:
                 i18n.resolvedLanguage === lng
@@ -35,22 +32,14 @@ const LanguagesFooter = ({ langs }) => {
             {getLang(lng)}
           </Lang>
         ))}
-    </LanguagesWrapper>
+    </div>
   );
 };
 
-const LanguagesWrapper = styled.div`
-  width: calc(50% - 145px);
-  @media (max-width: 574px) {
-    width: 100%;
-  }
-`;
-
 const Lang = styled(NavLink)`
-  margin-right: 4rem;
-  border-bottom: none;
-  min-width: 25px;
+  margin-right: 3rem;
   letter-spacing: 1px;
+
   &:hover {
     text-decoration: underline;
   }

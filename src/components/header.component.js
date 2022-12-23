@@ -26,8 +26,11 @@ const Header = ({
       }}
       animate={{ transform: "translateY(0px)" }}
       transition={{
-        duration: 0.5,
-        delay: headerColor === "transparent" ? 1.8 : 0,
+        duration: 1.5,
+        delay:
+          headerColor === "transparent" || headerColor === "#000000" ? 2 : 0,
+        type: "tween",
+        easeInOut: 0.3,
       }}
       style={{ backgroundColor: headerColor }}
     >
@@ -47,23 +50,31 @@ const Header = ({
           path={path}
         />
       </div>
+      <HorizontalLine
+        initial={{ width: "0vw" }}
+        animate={{ width: "100vw" }}
+        transition={{ duration: 2, delay: 4, type: "tween", easeInOut: 0.3 }}
+      />
     </HeaderWrapper>
   );
 };
 
 const HeaderWrapper = styled(motion.header)`
-  border-bottom: 1.5px solid white;
   position: fixed !important;
   top: 0;
   width: 100vw;
   color: white;
   z-index: 10;
   transition: background-color 0.3s ease-in;
-  /* background-color: black; */
 `;
 
 const Logo = styled.img`
   height: 90px;
+`;
+
+const HorizontalLine = styled(motion.div)`
+  height: 1.5px;
+  background-color: #ffffff;
 `;
 
 export default Header;

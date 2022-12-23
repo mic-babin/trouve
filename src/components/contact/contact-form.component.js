@@ -217,6 +217,7 @@ const FileInputEn = styled(FileInput)`
 `;
 const Number = styled.div`
   font-family: "Neue-Italic";
+  font-size: 14px;
 `;
 
 export default ContactForm;

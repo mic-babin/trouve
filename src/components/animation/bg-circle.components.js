@@ -7,7 +7,11 @@ const Circle = ({ roundSize, color, isInView }) => {
 
   return (
     roundSize && (
-      <svg height={roundSize.toString()} width={roundSize.toString()}>
+      <svg
+        style={{ transform: "rotate(-0.25turn)" }}
+        height={roundSize.toString()}
+        width={roundSize.toString()}
+      >
         <motion.circle
           ref={round}
           cx={(roundSize / 2).toString()}
@@ -15,7 +19,7 @@ const Circle = ({ roundSize, color, isInView }) => {
           r={((roundSize - 2) / 2).toString()}
           pathLength="360"
           stroke={color}
-          strokeWidth="1"
+          strokeWidth="1.5"
           fill="transparent"
           initial={{
             strokeDasharray: "0 360",
@@ -25,7 +29,7 @@ const Circle = ({ roundSize, color, isInView }) => {
               strokeDasharray: "360 360",
             }
           }
-          transition={{ duration: 0.5, delay: 1 }}
+          transition={{ duration: 1, delay: 2 }}
         />
       </svg>
     )

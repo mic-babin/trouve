@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
-export const H1 = styled.h1`
+export const H1 = styled(motion.h1)`
   font-size: 65px;
   line-height: 70px;
   height: 125px;

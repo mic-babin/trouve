@@ -12,8 +12,15 @@ import { ModalMediumAnimation } from "../animation/modal-medium.animation";
 import { useIsMedium } from "../../utils/media-query.hook";
 import { useIsSmall } from "../../utils/media-query.hook";
 import { ModalContactWrapperMediumAnimation } from "../animation/modal-wrapper-contact-medium.animation";
+import Circle from "../animation/bg-circle.components";
+import { useEffect, useState, useRef } from "react";
 
 const Contact = ({ contact, showContact, setShowContact }) => {
+  const round = useRef();
+  const [roundSize, setRoundSize] = useState(0);
+  const handleResize = () => {
+    setRoundSize(round?.current?.offsetWidth);
+  };
   const sections = contact;
   // TODO change title for id
   const contactInfo = sections[0];
@@ -27,6 +34,14 @@ const Contact = ({ contact, showContact, setShowContact }) => {
   const ModalWrapperVariant = isMedium
     ? ModalContactWrapperMediumAnimation
     : ModalWrapperAnimation;
+
+  useEffect(() => {
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      return () => window.removeEventListener("resize", handleResize);
+    };
+  }, [contact, showContact]);
   return (
     <AnimatePresence initial={false} custom={ModalAnimation}>
       {showContact && (
@@ -51,11 +66,19 @@ const Contact = ({ contact, showContact, setShowContact }) => {
             </div>
 
             {!isMedium && (
-              <Round>
-                <FormWrapper>
+              <>
+                <CircleWrapper>
+                  <Circle
+                    roundSize={roundSize}
+                    color={"black"}
+                    isInView={showContact}
+                  />
+                </CircleWrapper>
+
+                <FormWrapper ref={round}>
                   <ContactForm data={contactForm} />
                 </FormWrapper>
-              </Round>
+              </>
             )}
 
             <FullHeight className="row mx-0">
@@ -97,6 +120,7 @@ const FullHeight = styled.div`
 
 const CloseButton = styled(MenuButton)`
   color: black;
+  z-index: 2;
 `;
 const ModalWrapper = styled(motion.div)`
   position: absolute;
@@ -122,20 +146,21 @@ const FormWrapper = styled.div`
   position: absolute;
   right: 0;
   top: 50%;
-  width: 100%;
   padding: 0 125px;
   transform: translateY(-50%);
-`;
-
-const Round = styled.div`
-  position: absolute;
-  right: 0;
   width: 100vh;
   max-width: 60vw;
-  margin-top: max(0, calc(20vw));
-  padding-top: min(100vh, 60vw);
-  border-radius: 50%;
-  border: 1.5px solid black;
+  z-index: 1;
+
+  /* margin-top: max(0, calc(20vw));
+  padding-top: min(100vh, 60vw); */
+`;
+
+const CircleWrapper = styled.div`
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 0;
 `;
 
 export default Contact;

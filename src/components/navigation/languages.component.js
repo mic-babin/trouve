@@ -2,27 +2,26 @@ import React from "react";
 import { useI18next } from "gatsby-plugin-react-i18next";
 import styled from "styled-components";
 import { NavLink } from "../styled-components/nav-link.style";
-import { useIsMedium } from "../../utils/media-query.hook";
+import { useIsXLarge } from "../../utils/media-query.hook";
 
-const Languages = ({ langs }) => {
+const LanguagesFooter = ({ langs }) => {
   const { languages, originalPath, t, i18n } = useI18next();
-  const isMedium = useIsMedium();
+  const isXLarge = useIsXLarge();
+
   const getLang = (lng) => {
-    if (isMedium) {
-      return lng.toUpperCase();
-    }
     return langs.value
       .filter((lang) => lang.toLowerCase().includes(lng))[0]
       .toUpperCase();
   };
   return (
-    <LanguagesWrapper className="d-flex justify-content-end justify-content-md-center">
+    <div className="d-block">
       {languages &&
         languages.map((lng) => (
           <Lang
             key={lng}
             to={originalPath}
             language={lng}
+            className="d-inline-block"
             style={{
               fontFamily:
                 i18n.resolvedLanguage === lng
@@ -33,19 +32,14 @@ const Languages = ({ langs }) => {
             {getLang(lng)}
           </Lang>
         ))}
-    </LanguagesWrapper>
+    </div>
   );
 };
 
-const LanguagesWrapper = styled.div`
-  width: calc(50% - 145px);
-`;
-
 const Lang = styled(NavLink)`
-  margin-right: 4rem;
-  border-bottom: none;
-  min-width: 25px;
-  letter-spacing: 2px;
+  margin-right: 3rem;
+  letter-spacing: 1px;
+
   &:hover {
     text-decoration: underline;
   }
@@ -53,9 +47,12 @@ const Lang = styled(NavLink)`
     margin-right: 2rem;
   }
   @media (max-width: 767px) {
-    margin-right: 0;
-    margin-left: 1rem;
+    margin-right: 1rem;
+    /* margin-left: 1rem; */
+  }
+  @media (max-width: 574px) {
+    margin: 0 1rem;
   }
 `;
 
-export default Languages;
+export default LanguagesFooter;

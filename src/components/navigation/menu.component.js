@@ -46,7 +46,7 @@ const Menu = ({ showMenu, setShowMenu, menu, setShowContact, path }) => {
                     </LogoLink>
                   </>
                 )}
-                <div className="d-flex justify-content-end flex-grow-1">
+                <div className="d-flex justify-content-end flex-grow-1 me-5">
                   {isSmall && <Languages classname="" langs={langs} />}
                 </div>
 

@@ -21,7 +21,6 @@ const NavLinks = ({ navLinks, setShowContact, setShowMenu, path }) => {
         path &&
         navLinks.links.map((link, index) => {
           const active = path.includes(link.url);
-          console.log(active);
           return (
             <LinkWrapper key={link.id} className="col-lg-6">
               {isRealLink(link, index) && (
@@ -53,7 +52,7 @@ const NavLinks = ({ navLinks, setShowContact, setShowMenu, path }) => {
                   <Text>{link.text}</Text>
                 </NavLink>
               )}
-              {(link.title === "SOCIAL MEDIA" ||
+              {(link.title === "SOCIALS" ||
                 link.title === "RÉSEAUX SOCIAUX ") && (
                 <Socials
                   as="div"
@@ -140,6 +139,7 @@ const LinksWrapper = styled(motion.div)`
 
 const Number = styled.div`
   font-family: "Neue-LightItalic";
+  font-size: 14px;
 `;
 
 const Text = styled.div`

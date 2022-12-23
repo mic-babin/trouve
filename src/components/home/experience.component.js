@@ -48,6 +48,51 @@ const Experience = ({ data }) => {
     <>
       {/* <div className="scroll-to" id="experience"></div> */}
       <Section>
+        <motion.div
+          initial={{
+            height: "0px",
+          }}
+          whileInView={{
+            height: "500px",
+          }}
+          transition={{
+            duration: 5,
+            delay: 0.7,
+            type: "linear",
+          }}
+          className={"line-0"}
+          viewport={{ once: true }}
+        ></motion.div>
+        <motion.div
+          initial={{
+            height: "0px",
+          }}
+          whileInView={{
+            height: "500px",
+          }}
+          transition={{
+            duration: 5,
+            delay: 0.7,
+            type: "linear",
+          }}
+          className={"line-1"}
+          viewport={{ once: true }}
+        ></motion.div>
+        <motion.div
+          initial={{
+            height: "0px",
+          }}
+          whileInView={{
+            height: "300px",
+          }}
+          transition={{
+            duration: 5,
+            delay: 0.7,
+            type: "linear",
+          }}
+          className={"line-2"}
+          viewport={{ once: true }}
+        ></motion.div>
         <Container className="container">
           {title && (
             <H2>
@@ -70,21 +115,6 @@ const Experience = ({ data }) => {
                     viewport={{ once: true }}
                   >
                     {word}{" "}
-                    <motion.div
-                      initial={{
-                        height: "0px",
-                      }}
-                      whileInView={{
-                        height: "500px",
-                      }}
-                      transition={{
-                        duration: 5,
-                        delay: 0.7,
-                        type: "linear",
-                      }}
-                      className={"line-" + index}
-                      viewport={{ once: true }}
-                    ></motion.div>
                   </motion.div>
                 ))}
             </H2>
@@ -92,31 +122,26 @@ const Experience = ({ data }) => {
           <div className="d-flex justify-content-center">
             {textFields &&
               textFields.map((el) => (
-                <Paragraph key={el.id}>{el.text.text}</Paragraph>
+                <Paragraph key={el.id}>
+                  {el.text.text.split(" ").map((word, index) => (
+                    <motion.span
+                      key={index}
+                      initial={{ opacity: 0, filter: "blur(1)" }}
+                      whileInView={{ opacity: 1, filter: "blur(0)" }}
+                      transition={{
+                        duration: 1,
+                        delay: index / 20,
+                        ease: [0.11, 0, 0.5, 0],
+                      }}
+                      viewport={{ once: true }}
+                    >
+                      {word + " "}{" "}
+                    </motion.span>
+                  ))}
+                </Paragraph>
               ))}
           </div>
-          <div className="position-relative w-100 h-0">
-            <motion.div
-              initial={{
-                height: "0px",
-                width: "1.5px",
-                background: "#000",
-                transform: "translateX(585px)",
-              }}
-              whileInView={{
-                height: "300px",
-                width: "1.5px",
-                background: "#000",
-                transform: "translateX(585px)",
-              }}
-              transition={{
-                duration: 5,
-                delay: 1,
-                type: "linear",
-              }}
-              viewport={{ once: true }}
-            ></motion.div>
-          </div>
+          <div className="h-0"></div>
         </Container>
         {/* <div className="scroll-to" id="experience-card"></div> */}
         <div className="row mx-0">
@@ -192,6 +217,40 @@ const Section = styled.div`
   background-color: #e7e5e0;
   color: black;
   overflow: hidden;
+  position: relative;
+
+  .line-0,
+  .line-1,
+  .line-2 {
+    position: absolute;
+    display: block;
+    width: 2px;
+    height: 100px;
+    background: #000;
+    /* left: 110px; */
+    left: calc(16.66vw + 15px);
+    top: 275px;
+  }
+  .line-1 {
+    top: 350px;
+    left: calc(83.33vw - 15px);
+  }
+  .line-2 {
+    top: 550px;
+    left: 50vw;
+  }
+
+  @media (max-width: 1400px) {
+    .line-0 {
+      top: 340px;
+    }
+    .line-1 {
+      top: 415px;
+    }
+    .line-2 {
+      top: 615px;
+    }
+  }
 `;
 const Container = styled.div`
   padding-bottom: 160px;
@@ -211,31 +270,16 @@ const H2 = styled.h2`
     font-family: "Neue-Italic";
     align-self: flex-end;
   }
-
-  .line-0,
-  .line-1 {
-    display: block;
-    width: 1.5px;
-    height: 100px;
-    background: #000;
-    left: 110px;
-    top: 125px;
-    position: absolute;
-  }
-  .line-1 {
-    left: 510px;
-  }
 `;
 
 const Card = styled.div`
   &:hover .img {
-    transform: scale(1.05);
+    transform: scale(1.1);
   }
 
   &:hover .card-link {
     &:before {
       width: 50px;
-      margin-left: -25px;
     }
   }
 `;
@@ -278,7 +322,7 @@ const ImageWrapper = styled.div`
     margin: -10px;
   }
   .img {
-    transition: all 0.2s ease;
+    transition: all 1s ease-in-out;
   }
 `;
 
@@ -293,7 +337,7 @@ const Description = styled.div`
 
 const CardLink = styled(NavLink)`
   color: black;
-  padding-left: 50px;
+
   position: relative;
   overflow: visible;
   transition: all 0.2s all;
@@ -315,7 +359,6 @@ const CardLink = styled(NavLink)`
 
     &:before {
       width: 50px;
-      margin-left: -25px;
     }
   }
 `;
