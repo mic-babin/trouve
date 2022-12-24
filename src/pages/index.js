@@ -211,12 +211,6 @@ export const query = graphql`
                   id
                   value
                 }
-                ... on ContentfulRichText {
-                  id
-                  richText: text {
-                    raw
-                  }
-                }
               }
             }
             ... on ContentfulForm {

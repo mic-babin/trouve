@@ -169,7 +169,20 @@ const Card = ({ data, cardHeight, titleHeight }) => {
             !isEmployee &&
             textFields.map((el) => (
               <Description key={el.id} className="mb-4">
-                {el.text.text}
+                {el.text.text.split(" ").map((word, index) => (
+                  <motion.span
+                    key={index}
+                    initial={{ opacity: 0, filter: "blur(1)" }}
+                    animate={hovered && { opacity: 1, filter: "blur(0)" }}
+                    transition={{
+                      duration: 1,
+                      delay: index / 20,
+                      ease: [0.11, 0, 0.5, 0],
+                    }}
+                  >
+                    {word + " "}{" "}
+                  </motion.span>
+                ))}
               </Description>
             ))}
           {isEmployee && (

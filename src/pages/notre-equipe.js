@@ -150,12 +150,6 @@ export const query = graphql`
                     text
                   }
                 }
-                ... on ContentfulRichText {
-                  id
-                  text {
-                    raw
-                  }
-                }
               }
               images {
                 gatsbyImageData(placeholder: BLURRED)

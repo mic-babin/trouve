@@ -28,7 +28,7 @@ const Header = ({
       transition={{
         duration: 1.5,
         delay:
-          headerColor === "transparent" || headerColor === "#000000" ? 2 : 0,
+          headerColor === "transparent" ? 2 : headerColor === "#000000" ? 1 : 0,
         type: "tween",
         easeInOut: 0.3,
       }}
@@ -53,7 +53,17 @@ const Header = ({
       <HorizontalLine
         initial={{ width: "0vw" }}
         animate={{ width: "100vw" }}
-        transition={{ duration: 2, delay: 4, type: "tween", easeInOut: 0.3 }}
+        transition={{
+          duration: 2,
+          delay:
+            headerColor === "transparent"
+              ? 4
+              : headerColor === "#000000"
+              ? 2
+              : 2,
+          type: "tween",
+          easeInOut: 0.3,
+        }}
       />
     </HeaderWrapper>
   );

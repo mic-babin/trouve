@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { renderRichText } from "gatsby-source-contentful/rich-text";
 import { NavLink } from "../styled-components/nav-link.style";
 import { Kicker } from "../styled-components/kicker.style";
 import { motion } from "framer-motion";
@@ -62,16 +61,22 @@ const Mandate = ({ mandate, setShowContact }) => {
             )}
             {textFields &&
               textFields.map((textField) => (
-                <Paragraph
-                  className="py-4"
-                  key={textField.id}
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                  viewport={{ once: true }}
-                  s
-                >
-                  {renderRichText(textField.text)}
+                <Paragraph className="py-4">
+                  {textField.text.text.split(" ").map((word, index) => (
+                    <motion.span
+                      key={index}
+                      initial={{ opacity: 0, filter: "blur(1)" }}
+                      whileInView={{ opacity: 1, filter: "blur(0)" }}
+                      transition={{
+                        duration: 1,
+                        delay: index / 20,
+                        ease: [0.11, 0, 0.5, 0],
+                      }}
+                      viewport={{ once: true }}
+                    >
+                      {word + " "}{" "}
+                    </motion.span>
+                  ))}
                 </Paragraph>
               ))}
             {link && (
@@ -80,7 +85,7 @@ const Mandate = ({ mandate, setShowContact }) => {
                 className="pointer"
                 initial={{ opacity: 0, transform: "translateX(200px)" }}
                 whileInView={{ opacity: 1, transform: "translateX(0px)" }}
-                transition={{ duration: 0.5, delay: 0.2 }}
+                transition={{ duration: 0.5, delay: 2.2 }}
                 viewport={{ once: true }}
                 onClick={setShowContact}
               >

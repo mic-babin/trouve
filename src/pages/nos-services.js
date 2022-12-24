@@ -161,18 +161,9 @@ export const query = graphql`
                 ... on ContentfulParagraph {
                   id
                   reference
-                  childContentfulParagraphTextTextNode {
-                    text
-                  }
                   text {
                     text
                     id
-                  }
-                }
-                ... on ContentfulRichText {
-                  id
-                  text {
-                    raw
                   }
                 }
               }
