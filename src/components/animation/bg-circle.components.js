@@ -29,7 +29,7 @@ const Circle = ({ roundSize, color, isInView }) => {
               strokeDasharray: "360 360",
             }
           }
-          transition={{ duration: 1, delay: 2 }}
+          transition={{ duration: 2, delay: 2 }}
         />
       </svg>
     )

@@ -139,7 +139,7 @@ const LinksWrapper = styled(motion.div)`
 
 const Number = styled.div`
   font-family: "Neue-LightItalic";
-  font-size: 14px;
+  font-size: 12px;
 `;
 
 const Text = styled.div`
