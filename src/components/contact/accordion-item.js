@@ -1,16 +1,43 @@
 import React from "react";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
+import { motion, useAnimationControls } from "framer-motion";
 
 const AccordionItem = ({ text, index }) => {
   const [open, setOpen] = useState(index == 0 ? true : false);
   const handleEnter = () => setOpen(true);
   const handleLeave = () => setOpen(false);
+  const bodyControls = useAnimationControls();
+  console.log(open);
+
+  useEffect(() => {
+    if (open) {
+      // OPEN
+      bodyControls.start({
+        height: "110px",
+      });
+    } else {
+      // CLOSED
+      bodyControls.start({
+        height: "0px",
+      });
+    }
+  }, [open]);
 
   return (
     <div onMouseEnter={() => handleEnter()} onMouseLeave={() => handleLeave()}>
       <Toggler>{text.reference}</Toggler>
-      <Body>{text.childContentfulParagraphTextTextNode.text}</Body>
+      <Body
+        animate={bodyControls}
+        transition={{
+          duration: 0.3,
+          delay: 0,
+          type: "tween",
+          easeInOut: 0.3,
+        }}
+      >
+        {text.childContentfulParagraphTextTextNode.text}
+      </Body>
     </div>
   );
 };
@@ -18,6 +45,7 @@ const AccordionItem = ({ text, index }) => {
 export default AccordionItem;
 
 const Toggler = styled.div`
+  padding: 1rem 0;
   display: inline-block;
   &::before {
     content: "";
@@ -32,13 +60,14 @@ const Toggler = styled.div`
     transition: all 0.2s ease-in;
   }
 
-  &:not(.collapsed)::before {
+  &:hover::before {
     width: 50px;
   }
 `;
 
-const Body = styled.div`
-  padding: 1rem 0;
+const Body = styled(motion.div)`
+  padding: 0rem 0;
   font-family: "Neue-Italic";
   max-width: 400px;
+  overflow: hidden;
 `;
