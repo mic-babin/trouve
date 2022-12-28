@@ -163,6 +163,7 @@ const CircleWrapper = styled.div`
   position: absolute;
   top: 257px;
   left: -255px;
+  transform: rotate(-20deg);
 `;
 
 const Paragraph = styled(Kicker)`

@@ -4,6 +4,7 @@ import { graphql } from "gatsby";
 import Expertise from "../components/services/expertise.component";
 import Mandate from "../components/services/mandate.component";
 import { useState, useEffect } from "react";
+import Loader from "../components/common/loader.component";
 
 const NosServices = (props) => {
   const path = props.path;
@@ -45,6 +46,7 @@ const NosServices = (props) => {
       headerColor="#000000"
       path={path}
     >
+      {!showPage && <Loader />}
       <div className="bg-beige">
         <div id="top"></div>
         {showPage && (

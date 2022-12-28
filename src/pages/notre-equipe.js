@@ -4,6 +4,7 @@ import { graphql } from "gatsby";
 import { useState, useEffect } from "react";
 import TeamHero from "../components/team/team-hero.component";
 import TeamMembers from "../components/team/team-members.component";
+import Loader from "../components/common/loader.component";
 
 const Equipe = (props) => {
   const path = props.path;
@@ -38,6 +39,7 @@ const Equipe = (props) => {
       headerColor="#000000"
       path={path}
     >
+      {!showPage && <Loader />}
       <div className="bg-black">
         <div id="top"></div>
         {showPage && (
@@ -159,13 +161,16 @@ export const query = graphql`
               id
               name
               title
-              description {
-                raw
+              descriptions {
+                id
+                text {
+                  text
+                }
               }
               email
               phone
               image {
-                gatsbyImageData(placeholder: BLURRED)
+                gatsbyImageData(placeholder: BLURRED, layout: CONSTRAINED)
               }
             }
             ... on ContentfulForm {

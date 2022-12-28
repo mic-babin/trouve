@@ -58,7 +58,7 @@ const NavLinks = ({ navLinks, setShowContact, setShowMenu, path }) => {
                   as="div"
                   className="d-flex border-bottom-white pointer"
                 >
-                  <Number className="me-3">0{index + 1}</Number>
+                  <Number className="me-4">0{index + 1}</Number>
                   <Text className="me-4">{link.title}</Text>
                   <div>
                     {link.socialLinks &&

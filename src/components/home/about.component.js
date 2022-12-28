@@ -18,6 +18,51 @@ const Reason = ({ data }) => {
     <>
       <div className="scroll-to" id="about"></div>
       <Section>
+        <motion.div
+          initial={{
+            height: "0px",
+          }}
+          whileInView={{
+            height: "800px",
+          }}
+          transition={{
+            duration: 5,
+            delay: 0.7,
+            type: "linear",
+          }}
+          className={"line-0"}
+          viewport={{ once: true }}
+        ></motion.div>
+        <motion.div
+          initial={{
+            height: "0px",
+          }}
+          whileInView={{
+            height: "800px",
+          }}
+          transition={{
+            duration: 5,
+            delay: 0.7,
+            type: "linear",
+          }}
+          className={"line-1"}
+          viewport={{ once: true }}
+        ></motion.div>
+        <motion.div
+          initial={{
+            height: "0px",
+          }}
+          whileInView={{
+            height: "300px",
+          }}
+          transition={{
+            duration: 5,
+            delay: 0.7,
+            type: "linear",
+          }}
+          className={"line-2"}
+          viewport={{ once: true }}
+        ></motion.div>
         <div className="container">
           {title && (
             <H2>
@@ -40,21 +85,6 @@ const Reason = ({ data }) => {
                     viewport={{ once: true }}
                   >
                     {word}{" "}
-                    <motion.div
-                      initial={{
-                        height: "0px",
-                      }}
-                      whileInView={{
-                        height: "1000px",
-                      }}
-                      transition={{
-                        duration: 5,
-                        delay: 0.7,
-                        type: "linear",
-                      }}
-                      className={"line-" + index}
-                      viewport={{ once: true }}
-                    ></motion.div>
                   </motion.div>
                 ))}
             </H2>
@@ -91,28 +121,7 @@ const Reason = ({ data }) => {
                 );
               })}
           </motion.div>
-          <div className="position-relative w-100 h-0">
-            <motion.div
-              initial={{
-                height: "0px",
-                width: "1.5px",
-                background: "#fff",
-                transform: "translateX(580px)",
-              }}
-              whileInView={{
-                height: "1000px",
-                width: "1.5px",
-                background: "#fff",
-                transform: "translateX(580px)",
-              }}
-              transition={{
-                duration: 5,
-                delay: 1,
-                type: "linear",
-              }}
-              viewport={{ once: true }}
-            ></motion.div>
-          </div>
+          <div className="position-relative w-100 h-0"></div>
         </div>
       </Section>
     </>
@@ -126,6 +135,40 @@ const Section = styled.div`
   background-color: black;
   color: white;
   overflow: hidden;
+  position: relative;
+
+  .line-0,
+  .line-1,
+  .line-2 {
+    position: absolute;
+    display: block;
+    width: 2px;
+    height: 100px;
+    background: #fff;
+    /* left: 110px; */
+    left: calc(16.66vw + 10px);
+    top: 305px;
+  }
+  .line-1 {
+    top: 380px;
+    left: calc(83.33vw - 10px);
+  }
+  .line-2 {
+    top: 980px;
+    left: calc(50vw - 2px);
+  }
+
+  @media (max-width: 1200px) {
+    .line-0 {
+      top: 370px;
+    }
+    .line-1 {
+      top: 445px;
+    }
+    .line-2 {
+      top: 1050px;
+    }
+  }
 `;
 
 const H2 = styled(motion.h2)`
@@ -141,20 +184,6 @@ const H2 = styled(motion.h2)`
   div:nth-of-type(2) {
     font-family: "Neue-Italic";
     align-self: flex-end;
-  }
-
-  .line-0,
-  .line-1 {
-    display: block;
-    width: 1.5px;
-    height: 100px;
-    background: #fff;
-    left: 110px;
-    top: 125px;
-    position: absolute;
-  }
-  .line-1 {
-    left: 570px;
   }
 `;
 

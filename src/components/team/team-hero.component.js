@@ -73,7 +73,7 @@ const TeamHero = ({ hero, setShowContact }) => {
                             whileInView={{ opacity: 1, filter: "blur(0)" }}
                             transition={{
                               duration: 1,
-                              delay: index / 10 + 6,
+                              delay: index / 10 + 2,
                               ease: [0.11, 0, 0.5, 0],
                             }}
                             viewport={{ once: true }}
@@ -92,9 +92,14 @@ const TeamHero = ({ hero, setShowContact }) => {
                   onClick={handleShowContact}
                   initial={{ opacity: 0, transform: "translateX(200px)" }}
                   animate={{ opacity: 1, transform: "translateX(0px)" }}
-                  transition={{ duration: 1, delay: 9 }}
+                  transition={{ duration: 1, delay: 4 }}
                 >
-                  {link.text}
+                  <span class="mask">
+                    <div class="link-container">
+                      <span class="link-title1 title">{link.text}</span>
+                      <span class="link-title2 title">{link.text}</span>
+                    </div>
+                  </span>
                 </HeroLink>
               )}
             </div>
@@ -109,7 +114,7 @@ const TeamHero = ({ hero, setShowContact }) => {
                 transform: "translate(" + getWidth(index) + "px, 300px)",
               }}
               animate={{ opacity: 1, transform: "translate(0px, 0px)" }}
-              transition={{ duration: 1, delay: 10 + index / 2 }}
+              transition={{ duration: 1, delay: 5 + index / 2 }}
             >
               <Image image={getImage(img.gatsbyImageData)} alt="TODO"></Image>
             </ImageWrapper>
@@ -164,6 +169,11 @@ const HeroLink = styled(NavLink)`
   transition: all 0.2s all;
   font-family: "Neue-Light";
   letter-spacing: 1px;
+  height: 30px;
+  align-items: center;
+  text-decoration: none;
+  display: flex;
+
   &:before {
     content: "";
     display: inline-block;
@@ -181,6 +191,57 @@ const HeroLink = styled(NavLink)`
     &:before {
       width: 50px;
     }
+  }
+
+  /* Hide extra text */
+  .mask {
+    position: relative;
+    padding: 0;
+    height: 20px;
+
+    /*  Remove overflow to see how it works　:) */
+    overflow: hidden;
+  }
+
+  .link-container {
+    transition: transform 0.3s ease;
+    transition-delay: 250ms;
+  }
+
+  .title {
+    display: block;
+
+    /*  Set same font-size and line height  */
+    font-size: 20px;
+    line-height: 20px;
+    transition: transform 0.3s ease;
+    transition-delay: 250ms;
+  }
+
+  .link-title1 {
+    transform-origin: right center;
+  }
+
+  .link-title2 {
+    font-weight: 600;
+    transform-origin: left center;
+    transform: rotate(10deg);
+  }
+
+  /* Hover Action*/
+
+  /* Move up two texts (20px = font-size) */
+  &:hover .link-container {
+    transform: translateY(-20px);
+  }
+
+  /* Rotate texts a little bit */
+  &:hover .link-title1 {
+    transform: rotate(10deg);
+  }
+
+  &:hover .link-title2 {
+    transform: rotate(0);
   }
 `;
 const Paragraph = styled(Kicker)`

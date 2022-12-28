@@ -228,16 +228,16 @@ const Section = styled.div`
     height: 100px;
     background: #000;
     /* left: 110px; */
-    left: calc(16.66vw + 15px);
+    left: calc(16.66vw + 10px);
     top: 275px;
   }
   .line-1 {
     top: 350px;
-    left: calc(83.33vw - 15px);
+    left: calc(83.33vw - 10px);
   }
   .line-2 {
     top: 550px;
-    left: 50vw;
+    left: calc(50vw - 2px);
   }
 
   @media (max-width: 1400px) {
@@ -273,6 +273,10 @@ const H2 = styled.h2`
 `;
 
 const Card = styled.div`
+  &:hover {
+    font-family: "Neue-Italic";
+  }
+
   &:hover .img {
     transform: scale(1.1);
   }

@@ -5,6 +5,7 @@ import * as sections from "../components/home/index-sections.component";
 import Fallback from "../components/fallback.component";
 // import { SEO } from "../components/seo";
 import { useState, useEffect, useRef } from "react";
+import Loader from "../components/common/loader.component";
 
 export default function Homepage(props) {
   const path = props.path;
@@ -27,13 +28,13 @@ export default function Homepage(props) {
   const handleHeaderColor = (color) => setHeaderColor(color);
 
   const [showPage, setShowPage] = useState(false);
+
   useEffect(() => {
     if (!showPage) {
       setTimeout(() => {
         setShowPage(true);
       }, 1);
     }
-
     if (showPage) {
       var observer = new IntersectionObserver(
         function (entries) {
@@ -45,20 +46,13 @@ export default function Homepage(props) {
         },
         { threshold: [0.1] }
       );
-
       observer.observe(document.querySelector("#hero"));
     }
-    // layout.current.addEventListener("scroll", handleScroll, false);
-    // // layout.current.addEventListener("scroll", handleEvent, false);
-    // layout.current.addEventListener("mousewheel", handleScroll, false);
-    // // layout.current.addEventListener("touchmove", handleEvent, false);
 
     return () => {
       if (showPage) {
         observer.disconnect();
       }
-      // layout.current.removeEventListener("scroll", handleScroll);
-      // layout.current.removeEventListener("mousewheel", handleScroll);
     };
   }, [showPage]);
 
@@ -72,6 +66,7 @@ export default function Homepage(props) {
         headerColor={headerColor}
         path={path}
       >
+        {!showPage && <Loader />}
         <div id="top"></div>
         {showPage &&
           home.map((section) => {
