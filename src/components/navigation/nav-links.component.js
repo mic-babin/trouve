@@ -15,12 +15,20 @@ const NavLinks = ({ navLinks, setShowContact, setShowMenu, path }) => {
     return link.url !== "http://jobs.trouvemtl.com/" && link.url !== undefined;
   };
 
+  const getActive = (link) => {
+    console.log(link.url);
+    if (link.url === "/") {
+      return path === link.url;
+    } else {
+      return path.includes(link.url);
+    }
+  };
+
   return (
     <LinksWrapper className="row mx-0">
       {navLinks &&
         path &&
         navLinks.links.map((link, index) => {
-          const active = path.includes(link.url);
           return (
             <LinkWrapper key={link.id} className="col-lg-6">
               {isRealLink(link, index) && (
@@ -33,7 +41,7 @@ const NavLinks = ({ navLinks, setShowContact, setShowMenu, path }) => {
                   <Text>
                     <span
                       style={{
-                        fontFamily: active ? "Neue" : "",
+                        fontFamily: getActive(link) ? "Neue" : "",
                       }}
                     >
                       {link.text}
@@ -60,7 +68,7 @@ const NavLinks = ({ navLinks, setShowContact, setShowMenu, path }) => {
                 >
                   <Number className="me-4">0{index + 1}</Number>
                   <Text className="me-4">{link.title}</Text>
-                  <div>
+                  <div className="flex-grow-1 d-flex flex-column d-xxl-inline-block align-items-end ">
                     {link.socialLinks &&
                       link.socialLinks.map((socialLink) => (
                         <NavLink
@@ -68,7 +76,7 @@ const NavLinks = ({ navLinks, setShowContact, setShowMenu, path }) => {
                           as="a"
                           href={socialLink.url}
                           target="_blank"
-                          className="me-4 social"
+                          className="me-2 me-xxl-4 social p-0"
                         >
                           {socialLink.text}
                         </NavLink>
