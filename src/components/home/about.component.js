@@ -4,6 +4,8 @@ import { Paragraph } from "../styled-components/paragraph.style";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { H2 } from "../styled-components/h2.style";
+import { useIsMedium } from "../../utils/media-query.hook";
+import { useIsSmall } from "../../utils/media-query.hook";
 
 const getWidth = (index) => {
   if (index === 0) {
@@ -13,6 +15,8 @@ const getWidth = (index) => {
 };
 
 const Reason = ({ data }) => {
+  const isMedium = useIsMedium();
+  const isSmall = useIsSmall();
   const { title, textFields } = data;
   const [isInView, setIsInView] = useState(false);
   return (
@@ -24,7 +28,7 @@ const Reason = ({ data }) => {
             height: "0px",
           }}
           whileInView={{
-            height: "1300px",
+            height: isSmall ? "300px" : isMedium ? "500px" : "1300px",
           }}
           transition={{
             duration: 5,
@@ -139,6 +143,12 @@ const Section = styled.div`
   color: white;
   overflow: hidden;
   position: relative;
+
+  @media (max-width: 991px) {
+    .line-0 {
+      top: calc(350px);
+    }
+  }
 
   @media (max-width: 767px) {
     padding-top: calc(12vw);

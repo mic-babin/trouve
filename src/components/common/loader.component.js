@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 
 const Loader = () => {
-  return <Wrapper></Wrapper>;
+  return <Wrapper>Loading...</Wrapper>;
 };
 
 export default Loader;

@@ -41,10 +41,12 @@ const Mandate = ({ mandate, setShowContact }) => {
                   title.split("<br>").map((word, index) => (
                     <motion.div
                       key={index}
-                      whileInView={{
-                        opacity: 1,
-                        transform: "translateX(0px)",
-                      }}
+                      animate={
+                        isInView && {
+                          opacity: 1,
+                          transform: "translateX(0px)",
+                        }
+                      }
                       initial={{
                         opacity: 0,
                         transform: "translateX(" + getWidth(index) + "px)",
@@ -85,7 +87,9 @@ const Mandate = ({ mandate, setShowContact }) => {
                 as={motion.div}
                 className="pointer"
                 initial={{ opacity: 0, transform: "translateX(200px)" }}
-                whileInView={{ opacity: 1, transform: "translateX(0px)" }}
+                animate={
+                  isInView && { opacity: 1, transform: "translateX(0px)" }
+                }
                 transition={{ duration: 0.5, delay: 2.2 }}
                 viewport={{ once: true }}
                 onClick={setShowContact}
