@@ -194,15 +194,18 @@ const TextArea = styled.textarea`
 
 const FileInput = styled(Input)`
   width: 195px;
+  display: inline;
   user-select: none;
   -webkit-user-select: none;
+  opacity: 1;
 
   /* TODO add variable */
   &::before {
     content: "JOINDRE VOTRE CV ICI";
+    opacity: 1;
     visibility: visible;
     color: black;
-    display: inline-block;
+    display: inline;
     outline: none;
     white-space: nowrap;
     margin-right: 100px;
