@@ -1,13 +1,17 @@
 import React from "react";
 import styled from "styled-components";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { NavLink } from "../styled-components/nav-link.style";
 import { Kicker } from "../styled-components/kicker.style";
 import { H1 } from "../styled-components/h1.style";
 import { motion } from "framer-motion";
+import { useIsMedium } from "../../utils/media-query.hook";
+import { useIsSmall } from "../../utils/media-query.hook";
+import Images from "./Images.component";
+import { useState } from "react";
 
 const Expertise = ({ expertise }) => {
   const { title, textFields, images, link } = expertise;
+  const [isInView, setIsInView] = useState(false);
 
   const kicker = textFields.filter(
     (el) =>
@@ -23,24 +27,16 @@ const Expertise = ({ expertise }) => {
       el.id === "41dcc054-c0b0-51bb-a684-e3a8463e5823"
   );
 
-  const woodImg = images.filter(
-    (img) =>
-      img.id === "18559e1b-3530-5c5c-a3c7-f0efc5f1923b" ||
-      img.id === "9b2f4ede-7a32-5e65-afab-3fbddd396430"
-  )[0];
-  const buildingImg = images.filter(
-    (img) =>
-      img.id === "5b44726c-63ef-5c95-b5cb-2794b975ed7e" ||
-      img.id === "bdc1114e-abe4-5192-a587-5bb48b3c3b3f"
-  )[0];
+  const isMedium = useIsMedium();
+  const isSmall = useIsSmall();
 
   return (
     <Section>
       <div className="container">
         <div className="row">
           <div className="col-lg-6 ">
-            <div className="pe-5">
-              <H1
+            <div className="ps-0 ps-sm-2 ps-md-0 pe-md-5">
+              <Title
                 initial={{ transform: "translateX(400px)" }}
                 animate={{ transform: "translateX(0px)" }}
                 transition={{
@@ -68,7 +64,7 @@ const Expertise = ({ expertise }) => {
                       </motion.div>
                     </div>
                   ))}
-              </H1>
+              </Title>
               {kicker && (
                 <Paragraph className="my-4 z-1">
                   {kicker.split(" ").map((word, index) => (
@@ -101,58 +97,32 @@ const Expertise = ({ expertise }) => {
                   {link.text}
                 </HeroLink>
               )}
-              <ImagesWrapper className="position-relative">
-                <BuildingWrapper
-                  initial={{ opacity: 0, transform: "translate(-300px,400px)" }}
-                  whileInView={{ opacity: 1, transform: "translate(0px,0px)" }}
-                  transition={{ duration: 0.75 }}
-                  viewport={{ once: true }}
-                >
-                  {buildingImg && (
-                    <BuildingImage
-                      alt="TODO"
-                      image={getImage(buildingImg.gatsbyImageData)}
-                    />
-                  )}
-                </BuildingWrapper>
-                <motion.div
-                  initial={{
-                    opacity: 0,
-                    transform: "translate(300px,400px)",
-                  }}
-                  whileInView={{ opacity: 1, transform: "translate(0px,0px)" }}
-                  transition={{ duration: 0.75 }}
-                  viewport={{ once: true }}
-                  className="wood"
-                >
-                  {woodImg && (
-                    <WoodImage
-                      alt="TODO"
-                      image={getImage(woodImg.gatsbyImageData)}
-                    />
-                  )}
-                </motion.div>
-              </ImagesWrapper>
+              {!isMedium && <Images images={images}></Images>}
             </div>
           </div>
 
-          <div className="col-lg-6 d-flex flex-column justify-content-center px-5 position-relative">
+          <div className="col-lg-6 d-flex flex-column justify-content-center pb-5 pb-lg-0 px-lg-5 position-relative">
             <motion.div
               initial={{
                 height: "0px",
               }}
               whileInView={{
-                height: "1225px",
+                height: isSmall ? "390px" : isMedium ? "300px" : "1375px",
               }}
               transition={{
                 duration: 5,
                 delay: 2.9,
                 type: "linear",
               }}
-              className={"line"}
+              className="line"
               viewport={{ once: true }}
             ></motion.div>
-            <TextWrapper>
+            <TextWrapper
+              whileInView={() => {
+                setIsInView(true);
+                return {};
+              }}
+            >
               {paragraphs &&
                 paragraphs.map((paragraph, index) => {
                   let i = index;
@@ -165,7 +135,9 @@ const Expertise = ({ expertise }) => {
                         <motion.span
                           key={index}
                           initial={{ opacity: 0, filter: "blur(1)" }}
-                          whileInView={{ opacity: 1, filter: "blur(0)" }}
+                          animate={
+                            isInView && { opacity: 1, filter: "blur(0)" }
+                          }
                           transition={{
                             duration: 1,
                             delay: index / 20 + 2.3 + i * 2.6,
@@ -180,6 +152,7 @@ const Expertise = ({ expertise }) => {
                   );
                 })}
             </TextWrapper>
+            {isMedium && <Images images={images}></Images>}
           </div>
         </div>
       </div>
@@ -193,9 +166,9 @@ const Section = styled.section`
   background-color: black;
   color: white;
   padding-top: 200px;
-  z-index: 2;
-  /* overflow-x: hidden;
-  overflow-y; */
+  z-index: 1;
+  overflow-x: clip;
+  /* overflow-y: auto; */
 
   .line {
     display: block;
@@ -206,36 +179,35 @@ const Section = styled.section`
     left: 50%;
     top: -110px;
     position: absolute;
+    @media (max-width: 991px) {
+      top: 25px;
+      left: 0;
+    }
+    @media (max-width: 767px) {
+      top: 25px;
+    }
+    @media (max-width: 575px) {
+      left: 10px;
+    }
   }
 `;
-const ImagesWrapper = styled.div`
-  margin-top: 75px;
-  height: 480px;
 
-  .building {
+const Title = styled(H1)`
+  @media (max-width: 1199px) and (min-width: 992px) {
+    font-size: 50px;
   }
-`;
+  @media (max-width: 574px) {
+    font-size: 50px;
 
-const BuildingWrapper = styled(motion.div)`
-  position: relative;
-  top: 175px;
-`;
-
-const BuildingImage = styled(GatsbyImage)`
-  position: absolute;
-
-  width: 80%;
-  height: 480px;
-  /* transform: translateY(200px); */
-`;
-
-const WoodImage = styled(GatsbyImage)`
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 40%;
-  height: 350px;
-  z-index: 0;
+    .w-wrapper:nth-of-type(2) {
+      padding-left: 70px;
+    }
+  }
+  @media (max-width: 400px) {
+    .w-wrapper:nth-of-type(2) {
+      padding-left: 50px;
+    }
+  }
 `;
 
 const HeroLink = styled(NavLink)`
@@ -265,7 +237,7 @@ const HeroLink = styled(NavLink)`
   }
 `;
 
-const TextWrapper = styled.div`
+const TextWrapper = styled(motion.div)`
   padding: 3rem 2rem;
   background-color: black;
   z-index: 1;
@@ -275,4 +247,12 @@ const Paragraph = styled(Kicker)`
   padding-top: 30px;
   font-size: 30px;
   letter-spacing: 1px;
+
+  @media (max-width: 1199px) and (min-width: 992px) {
+    font-size: 25px;
+  }
+  @media (max-width: 574px) {
+    font-size: 22px;
+    line-height: 26px;
+  }
 `;

@@ -5,11 +5,13 @@ import { Kicker } from "../styled-components/kicker.style";
 import { motion } from "framer-motion";
 import Circle from "../animation/bg-circle.components";
 import { useState } from "react";
+import { useIsSmall } from "../../utils/media-query.hook";
 
 const Mandate = ({ mandate, setShowContact }) => {
   const { title, textFields, link } = mandate;
 
   const [isInView, setIsInView] = useState(false);
+  const isSmall = useIsSmall();
 
   const getWidth = (index) => {
     if (index === 0) {
@@ -20,10 +22,12 @@ const Mandate = ({ mandate, setShowContact }) => {
   return (
     <>
       <Section>
-        <CircleWrapper>
-          <Circle roundSize={636} color="black" isInView={isInView} />
-        </CircleWrapper>
-        <div className="container d-flex justify-content-end">
+        {!isSmall && (
+          <CircleWrapper>
+            <Circle roundSize={636} color="black" isInView={isInView} />
+          </CircleWrapper>
+        )}
+        <div className="container-md container-fluid d-flex justify-content-end">
           <motion.div
             className="w-80"
             whileInView={() => {
@@ -109,6 +113,17 @@ const Section = styled.section`
   .w-80 {
     width: 68%;
   }
+
+  @media (max-width: 991px) {
+    .w-80 {
+      width: 80%;
+    }
+  }
+  @media (max-width: 767px) {
+    .w-80 {
+      width: 100%;
+    }
+  }
 `;
 
 const H2 = styled.h2`
@@ -118,12 +133,22 @@ const H2 = styled.h2`
   flex-direction: column;
   padding-bottom: 75px;
 
+  @media (max-width: 991px) {
+    font-size: 50px;
+    line-height: 50px;
+  }
+  @media (max-width: 575px) {
+    font-size: 35px;
+    line-height: 35px;
+  }
+
   div:nth-of-type(1) {
     max-width: 1100px;
   }
   div:nth-of-type(2) {
     font-family: "Neue-Italic";
     align-self: flex-end;
+    text-align: end;
   }
 `;
 
@@ -161,9 +186,20 @@ const CircleWrapper = styled.div`
   top: 257px;
   left: -255px;
   transform: rotate(-20deg);
+
+  @media (max-width: 1100px) {
+    left: -355px;
+  }
+  @media (max-width: 991px) {
+    left: -475px;
+  }
 `;
 
 const Paragraph = styled(Kicker)`
   padding-top: 30px;
   font-size: 30px;
+  @media (max-width: 574px) {
+    font-size: 22px;
+    line-height: 26px;
+  }
 `;
