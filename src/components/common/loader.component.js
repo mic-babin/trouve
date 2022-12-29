@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 
 const Loader = () => {
-  return <Wrapper>Loader</Wrapper>;
+  return <Wrapper>Loading...</Wrapper>;
 };
 
 export default Loader;
@@ -17,4 +17,7 @@ const Wrapper = styled(motion.div)`
   color: white;
   background-color: black;
   z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
