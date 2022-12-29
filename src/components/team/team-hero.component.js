@@ -93,10 +93,10 @@ const TeamHero = ({ hero, setShowContact }) => {
                   animate={{ opacity: 1, transform: "translateX(0px)" }}
                   transition={{ duration: 1, delay: 4 }}
                 >
-                  <span class="mask">
-                    <div class="link-container">
-                      <span class="link-title1 title">{link.text}</span>
-                      <span class="link-title2 title">{link.text}</span>
+                  <span className="mask">
+                    <div className="link-container">
+                      <span className="link-title1 title">{link.text}</span>
+                      <span className="link-title2 title">{link.text}</span>
                     </div>
                   </span>
                 </HeroLink>

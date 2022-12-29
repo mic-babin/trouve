@@ -24,7 +24,7 @@ const Circle = (hovered) => {
         transition: { duration: 0.5, delay: 0.2 },
       });
     }
-  }, [hovered, animated]);
+  }, [hovered, animated, roundControls]);
 
   return (
     <svg height="64" width="64">

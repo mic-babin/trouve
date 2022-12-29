@@ -42,7 +42,7 @@ const Experience = ({ data }) => {
   };
 
   const handleResize = () => {
-    setRoundSize(round.current.offsetWidth);
+    setRoundSize(round.current.offsetWidth || 0);
   };
 
   useEffect(() => {

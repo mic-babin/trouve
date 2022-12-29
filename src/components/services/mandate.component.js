@@ -9,9 +9,6 @@ import { useState } from "react";
 const Mandate = ({ mandate, setShowContact }) => {
   const { title, textFields, link } = mandate;
 
-  const handleShowContact = () => {
-    setShowContact(true);
-  };
   const [isInView, setIsInView] = useState(false);
 
   const getWidth = (index) => {
@@ -60,8 +57,8 @@ const Mandate = ({ mandate, setShowContact }) => {
               </H2>
             )}
             {textFields &&
-              textFields.map((textField) => (
-                <Paragraph className="py-4">
+              textFields.map((textField, index) => (
+                <Paragraph className="py-4" key={index}>
                   {textField.text.text.split(" ").map((word, index) => (
                     <motion.span
                       key={index}
