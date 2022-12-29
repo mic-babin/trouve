@@ -8,7 +8,6 @@ const AccordionItem = ({ text, index }) => {
   const handleEnter = () => setOpen(true);
   const handleLeave = () => setOpen(false);
   const bodyControls = useAnimationControls();
-  console.log(open);
 
   useEffect(() => {
     if (open) {

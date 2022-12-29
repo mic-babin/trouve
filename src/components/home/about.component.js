@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { Kicker } from "../styled-components/kicker.style";
+import { Paragraph } from "../styled-components/paragraph.style";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { H2 } from "../styled-components/h2.style";
 
 const getWidth = (index) => {
   if (index === 0) {
@@ -23,7 +24,7 @@ const Reason = ({ data }) => {
             height: "0px",
           }}
           whileInView={{
-            height: "800px",
+            height: "1300px",
           }}
           transition={{
             duration: 5,
@@ -38,7 +39,7 @@ const Reason = ({ data }) => {
             height: "0px",
           }}
           whileInView={{
-            height: "800px",
+            height: "1300px",
           }}
           transition={{
             duration: 5,
@@ -53,7 +54,7 @@ const Reason = ({ data }) => {
             height: "0px",
           }}
           whileInView={{
-            height: "300px",
+            height: "500px",
           }}
           transition={{
             duration: 5,
@@ -63,17 +64,19 @@ const Reason = ({ data }) => {
           className={"line-2"}
           viewport={{ once: true }}
         ></motion.div>
-        <div className="container">
+        <div className="container-fluid container-lg">
           {title && (
             <H2>
               {title &&
                 title.split("<br>").map((word, index) => (
                   <motion.div
                     key={index}
-                    whileInView={{
-                      opacity: 1,
-                      transform: "translateX(0px)",
-                    }}
+                    animate={
+                      isInView && {
+                        opacity: 1,
+                        transform: "translateX(0px)",
+                      }
+                    }
                     initial={{
                       opacity: 0,
                       transform: "translateX(" + getWidth(index) + "px)",
@@ -137,59 +140,19 @@ const Section = styled.div`
   overflow: hidden;
   position: relative;
 
-  .line-0,
-  .line-1,
-  .line-2 {
-    position: absolute;
-    display: block;
-    width: 2px;
-    height: 100px;
-    background: #fff;
-    /* left: 110px; */
-    left: calc(16.66vw + 10px);
-    top: 305px;
-  }
-  .line-1 {
-    top: 380px;
-    left: calc(83.33vw - 10px);
-  }
-  .line-2 {
-    top: 980px;
-    left: calc(50vw - 2px);
-  }
-
-  @media (max-width: 1200px) {
+  @media (max-width: 767px) {
+    padding-top: calc(12vw);
+    padding-bottom: calc(6vw);
     .line-0 {
-      top: 370px;
-    }
-    .line-1 {
-      top: 445px;
-    }
-    .line-2 {
-      top: 1050px;
+      top: calc(10px + 31vw);
     }
   }
-`;
 
-const H2 = styled(motion.h2)`
-  font-size: 65px;
-  line-height: 65px;
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 75px;
-
-  div:nth-of-type(1) {
-    max-width: 1100px;
+  @media (max-width: 575px) {
+    padding-top: calc(45px);
+    padding-bottom: calc(30px);
+    .line-0 {
+      top: calc(175px);
+    }
   }
-  div:nth-of-type(2) {
-    font-family: "Neue-Italic";
-    align-self: flex-end;
-  }
-`;
-
-const Paragraph = styled(Kicker)`
-  max-width: 684px;
-  padding-bottom: 50px;
-  font-size: 30px;
-  line-height: 40px;
 `;

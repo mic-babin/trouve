@@ -1,7 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import { useIsMedium, useIsSmall } from "../../utils/media-query.hook";
+import {
+  useIsMedium,
+  useIsXSmall,
+  useIsLarge,
+} from "../../utils/media-query.hook";
 import { motion } from "framer-motion";
 import Circle from "../animation/circle.components";
 import { useEffect, useState } from "react";
@@ -20,11 +24,12 @@ const Hero = ({ data }) => {
   const opportunities = textFields[3].paragraph;
 
   const isMedium = useIsMedium();
-  const isSmall = useIsSmall();
-
-  let list = isMedium
-    ? textFields[4].value
-    : textFields[4].value.concat(textFields[4].value);
+  const isXSmall = useIsXSmall();
+  const isLarge = useIsXSmall();
+  const [list, setList] = useState(textFields[4].value);
+  const xSmallList = [...textFields[4].value].slice(0, -2);
+  const mediumList = [...textFields[4].value];
+  const largeList = [...textFields[4].value.concat(textFields[4].value)];
 
   const [scrollPosition, setScrollPosition] = useState(0);
   const [hovered, setHovered] = useState(false);
@@ -35,14 +40,23 @@ const Hero = ({ data }) => {
   const handleHover = () => {
     setHovered(!hovered);
   };
-
   useEffect(() => {
+    setList(largeList);
+    if (isLarge) {
+      setList(largeList);
+    }
+    if (isMedium) {
+      setList(mediumList);
+    }
+    if (isXSmall) {
+      setList(xSmallList);
+    }
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [isLarge, isMedium, isXSmall]);
 
   return (
     <>
@@ -58,7 +72,7 @@ const Hero = ({ data }) => {
             easeInOut: 0.3,
           }}
         >
-          <Container className="container">
+          <Container className="container-fluid container-lg">
             <H3>
               <div className="word">
                 <motion.div
@@ -105,7 +119,7 @@ const Hero = ({ data }) => {
               </JobsLink>
             </JobsLinkWrapper>
           </Container>
-          <div className="d-flex justify-content-end w-100 px-4">
+          <div className="d-flex justify-content-end w-100">
             <H1
               className="text-end"
               initial={{ transform: "translateX(-200px)" }}
@@ -211,6 +225,7 @@ const H1 = styled(motion.h1)`
   font-weight: 500;
   letter-spacing: 7px;
   margin-bottom: 75px;
+  padding-right: 30px;
   /* font-family: "Neue-Medium"; */
 
   .word-wrapper:nth-of-type(1),
@@ -220,6 +235,47 @@ const H1 = styled(motion.h1)`
 
   .word-wrapper {
     overflow: hidden;
+  }
+
+  @media (max-width: 1199px) {
+    font-size: 110px;
+    .word-wrapper:nth-of-type(1),
+    .word-wrapper:nth-of-type(2) {
+      padding-right: 230px;
+    }
+  }
+  @media (max-width: 991px) {
+    padding: 100px 0;
+    margin-right: 30px;
+    font-size: 80px;
+    line-height: 120px;
+    .word-wrapper:nth-of-type(1),
+    .word-wrapper:nth-of-type(2) {
+      padding-right: 175px;
+    }
+  }
+
+  @media (max-width: 991px) {
+    padding: 100px 0;
+    font-size: 80px;
+    line-height: 120px;
+    .word-wrapper:nth-of-type(1),
+    .word-wrapper:nth-of-type(2) {
+      padding-right: 175px;
+    }
+  }
+  @media (max-width: 768px) {
+    padding: 100px 0 300px 0;
+    margin-right: 19px;
+    font-size: 10vw;
+    line-height: 12vw;
+    .word-wrapper:nth-of-type(1),
+    .word-wrapper:nth-of-type(2) {
+      padding-right: calc(20vw + 14px);
+    }
+  }
+  @media (max-width: 470px) {
+    margin-right: 5px;
   }
 `;
 
@@ -242,6 +298,38 @@ const H3 = styled.h3`
   .second-word {
     transform: translateX(285px);
   }
+
+  @media (max-width: 1399px) {
+    .second-word {
+      transform: translateX(185px);
+    }
+  }
+  @media (max-width: 1199px) {
+    top: 323px;
+  }
+  @media (max-width: 1100px) {
+    .second-word {
+      transform: translateX(135px);
+    }
+  }
+  @media (max-width: 991px) {
+    padding-left: 30px;
+    top: 340px;
+    font-size: 25px;
+    line-height: 35px;
+  }
+  @media (max-width: 768px) {
+    top: calc(250px + 45vw);
+  }
+
+  @media (max-width: 470px) {
+    font-size: 4.5vw;
+    line-height: 7vw;
+    padding-left: 15px;
+    .second-word {
+      transform: translateX(30vw);
+    }
+  }
 `;
 
 const JobsLinkWrapper = styled.div`
@@ -249,6 +337,22 @@ const JobsLinkWrapper = styled.div`
   display: flex;
   align-items: center;
   top: 520px;
+  z-index: 2;
+  @media (max-width: 1199px) {
+    top: 500px;
+  }
+  @media (max-width: 991px) {
+    padding-left: 30px;
+    top: 575px;
+  }
+  @media (max-width: 768px) {
+    top: calc(350px + 45vw);
+    right: 30px;
+  }
+  @media (max-width: 470px) {
+    top: calc(330px + 45vw);
+    right: 15px;
+  }
 `;
 
 const JobsLink = styled(motion.a)`
@@ -301,4 +405,14 @@ const Logo = styled.img`
   height: 52px;
   margin-top: -10px;
   margin-left: -7px;
+
+  @media (max-width: 991px) {
+    height: 47px;
+    margin-top: -10px;
+    margin-left: -7px;
+  }
+  @media (max-width: 470px) {
+    margin-top: -1.6vw;
+    height: 8.8vw;
+  }
 `;

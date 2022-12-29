@@ -14,14 +14,14 @@ const LanguagesFooter = ({ langs }) => {
       .toUpperCase();
   };
   return (
-    <div className="d-block">
+    <div className="d-block mt-1 mt-xl-0 pt-4 pt-xl-0">
       {languages &&
         languages.map((lng) => (
           <Lang
             key={lng}
             to={originalPath}
             language={lng}
-            className="d-inline-block"
+            className="d-flex flex-column d-xl-inline-block"
             style={{
               fontFamily:
                 i18n.resolvedLanguage === lng
@@ -37,21 +37,16 @@ const LanguagesFooter = ({ langs }) => {
 };
 
 const Lang = styled(NavLink)`
+  padding: 0;
+  max-height: 30px;
   margin-right: 3rem;
   letter-spacing: 1px;
 
   &:hover {
     text-decoration: underline;
   }
-  @media (max-width: 991px) {
-    margin-right: 2rem;
-  }
-  @media (max-width: 767px) {
-    margin-right: 1rem;
-    /* margin-left: 1rem; */
-  }
-  @media (max-width: 574px) {
-    margin: 0 1rem;
+  @media (max-width: 1199px) {
+    margin-right: 0;
   }
 `;
 

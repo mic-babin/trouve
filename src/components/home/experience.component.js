@@ -1,11 +1,14 @@
 import React from "react";
 import styled from "styled-components";
+import { Paragraph } from "../styled-components/paragraph.style";
 import { Kicker } from "../styled-components/kicker.style";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { NavLink } from "../styled-components/nav-link.style";
-import { motion, useAnimationControls } from "framer-motion";
+import { motion } from "framer-motion";
 import Circle from "../animation/big-circle.components";
 import { useRef, useEffect, useState } from "react";
+import { H2 } from "../styled-components/h2.style";
+import { useIsMedium, useIsSmall } from "../../utils/media-query.hook";
 
 const Experience = ({ data }) => {
   const { title, textFields, components } = data;
@@ -14,6 +17,11 @@ const Experience = ({ data }) => {
   const [hovered0, setHovered0] = useState(false);
   const [hovered1, setHovered1] = useState(false);
   const [hovered2, setHovered2] = useState(false);
+  const [isInView, setIsInView] = useState(false);
+
+  const isMedium = useIsMedium();
+  const isSmall = useIsSmall();
+
   const handleHover = (index) => {
     if (index === 0) {
       setHovered0(!hovered0);
@@ -47,13 +55,13 @@ const Experience = ({ data }) => {
   return (
     <>
       {/* <div className="scroll-to" id="experience"></div> */}
-      <Section>
+      <Section className="experience">
         <motion.div
           initial={{
             height: "0px",
           }}
           whileInView={{
-            height: "500px",
+            height: isSmall ? "180px" : isMedium ? "220px" : "500px",
           }}
           transition={{
             duration: 5,
@@ -93,17 +101,25 @@ const Experience = ({ data }) => {
           className={"line-2"}
           viewport={{ once: true }}
         ></motion.div>
-        <Container className="container">
+        <Container
+          className="container"
+          whileInView={() => {
+            setIsInView(true);
+            return {};
+          }}
+        >
           {title && (
             <H2>
               {title &&
                 title.split("<br>").map((word, index) => (
                   <motion.div
                     key={index}
-                    whileInView={{
-                      opacity: 1,
-                      transform: "translateX(0px)",
-                    }}
+                    animate={
+                      isInView && {
+                        opacity: 1,
+                        transform: "translateX(0px)",
+                      }
+                    }
                     initial={{
                       opacity: 0,
                       transform: "translateX(" + getWidth(index) + "px)",
@@ -135,7 +151,7 @@ const Experience = ({ data }) => {
                       }}
                       viewport={{ once: true }}
                     >
-                      {word + " "}{" "}
+                      {word + " "}
                     </motion.span>
                   ))}
                 </Paragraph>
@@ -165,7 +181,7 @@ const Experience = ({ data }) => {
               return (
                 <Card
                   key={el.id}
-                  className="col-lg-4"
+                  className="col-lg-4 mb-4 mb-lg-0"
                   onMouseEnter={() => handleHover(index)}
                   onMouseLeave={() => handleHover(index)}
                 >
@@ -222,14 +238,7 @@ const Section = styled.div`
   .line-0,
   .line-1,
   .line-2 {
-    position: absolute;
-    display: block;
-    width: 2px;
-    height: 100px;
     background: #000;
-    /* left: 110px; */
-    left: calc(16.66vw + 10px);
-    top: 275px;
   }
   .line-1 {
     top: 350px;
@@ -237,38 +246,13 @@ const Section = styled.div`
   }
   .line-2 {
     top: 550px;
-    left: calc(50vw - 2px);
-  }
-
-  @media (max-width: 1400px) {
-    .line-0 {
-      top: 340px;
-    }
-    .line-1 {
-      top: 415px;
-    }
-    .line-2 {
-      top: 615px;
-    }
   }
 `;
-const Container = styled.div`
+const Container = styled(motion.div)`
   padding-bottom: 160px;
-`;
 
-const H2 = styled.h2`
-  font-size: 65px;
-  line-height: 65px;
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 75px;
-
-  div:nth-of-type(1) {
-    max-width: 1100px;
-  }
-  div:nth-of-type(2) {
-    font-family: "Neue-Italic";
-    align-self: flex-end;
+  @media (max-width: 991px) {
+    padding-bottom: 50px;
   }
 `;
 
@@ -286,14 +270,6 @@ const Card = styled.div`
       width: 50px;
     }
   }
-`;
-
-const Paragraph = styled(Kicker)`
-  max-width: 724px;
-  font-size: 30px;
-  padding-left: 50px;
-  padding-bottom: 50px;
-  letter-spacing: 0px;
 `;
 
 const Image = styled(GatsbyImage)`
