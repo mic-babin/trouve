@@ -5,9 +5,13 @@ import { Kicker } from "../styled-components/kicker.style";
 import { NavLink } from "../styled-components/nav-link.style";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { motion } from "framer-motion";
+import { useIsMedium } from "../../utils/media-query.hook";
+import { useState } from "react";
 
 const TeamHero = ({ hero, setShowContact }) => {
   const { title, link, images, textFields } = hero;
+  const [isInView, setIsInView] = useState(false);
+  const isMedium = useIsMedium();
   const handleShowContact = () => {
     setShowContact(true);
   };
@@ -20,11 +24,17 @@ const TeamHero = ({ hero, setShowContact }) => {
   };
   return (
     <Section>
-      <div className="position-relative">
+      <motion.div
+        className="position-relative"
+        whileInView={() => {
+          setIsInView(true);
+          return {};
+        }}
+      >
         <Container className="container postion-relative">
           <div className="row">
             <div className="col-lg-6">
-              <H1
+              <Title
                 initial={{ transform: "translateX(400px)" }}
                 animate={{ transform: "translateX(0px)" }}
                 transition={{
@@ -52,7 +62,7 @@ const TeamHero = ({ hero, setShowContact }) => {
                       </motion.div>
                     </div>
                   ))}
-              </H1>
+              </Title>
               {textFields &&
                 textFields.map((el) => {
                   return (
@@ -104,7 +114,9 @@ const TeamHero = ({ hero, setShowContact }) => {
             </div>
           </div>
         </Container>
+
         {images &&
+          !isMedium &&
           images.map((img, index) => (
             <ImageWrapper
               key={index}
@@ -112,18 +124,32 @@ const TeamHero = ({ hero, setShowContact }) => {
                 opacity: 0,
                 transform: "translate(" + getWidth(index) + "px, 300px)",
               }}
-              animate={{ opacity: 1, transform: "translate(0px, 0px)" }}
+              animate={
+                isInView && { opacity: 1, transform: "translate(0px, 0px)" }
+              }
               transition={{ duration: 1, delay: 5 + index / 2 }}
+              viewport={{ once: true }}
             >
               <Image image={getImage(img.gatsbyImageData)} alt="TODO"></Image>
             </ImageWrapper>
           ))}
-      </div>
+      </motion.div>
     </Section>
   );
 };
 
 export default TeamHero;
+
+const Title = styled(H1)`
+  @media (max-width: 767px) {
+    font-size: 50px;
+    line-height: 50px;
+
+    .w-wrapper:nth-of-type(2) {
+      padding-left: 70px;
+    }
+  }
+`;
 
 const Section = styled.section`
   background-color: black;
@@ -132,6 +158,13 @@ const Section = styled.section`
   padding-bottom: 200px;
   overflow: hidden;
   height: 905px;
+
+  @media (max-width: 767px) {
+    padding-top: 200px;
+    padding-bottom: 50px;
+
+    height: 705px;
+  }
 `;
 
 const Image = styled(GatsbyImage)``;
@@ -247,4 +280,9 @@ const Paragraph = styled(Kicker)`
   padding-top: 30px;
   font-size: 30px;
   letter-spacing: 1px;
+
+  @media (max-width: 767px) {
+    font-size: 22px;
+    line-height: 26px;
+  }
 `;

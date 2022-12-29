@@ -1,7 +1,9 @@
 import React from "react";
-import Card from "../home/card.component";
+import { useIsMedium } from "../../utils/media-query.hook";
+import Card from "../common/card.component";
 
 const TeamMembers = ({ teamMembers }) => {
+  const isMedium = useIsMedium();
   return (
     <>
       {teamMembers &&
@@ -10,14 +12,13 @@ const TeamMembers = ({ teamMembers }) => {
             if (employee.name.toUpperCase() === "DAVID-MARC BOUCHARD") {
               return "-25px";
             }
-            return "10px";
+            return isMedium ? "-25px" : "10px";
           };
 
           return (
             <Card
               data={employee}
               key={employee.id}
-              cardHeight="563px"
               titleHeight={getTitleHeight()}
             />
           );

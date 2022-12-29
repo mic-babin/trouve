@@ -4,9 +4,12 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import styled from "styled-components";
 import { useEffect, useRef, useState } from "react";
 import { motion, useAnimationControls } from "framer-motion";
+import { useIsMedium } from "../../utils/media-query.hook";
+import { useIsXSmall } from "../../utils/media-query.hook";
+import { useIsXXSmall } from "../../utils/media-query.hook";
+import { useIsSmall } from "../../utils/media-query.hook";
 
-const Card = ({ data, cardHeight, titleHeight }) => {
-  const box = useRef();
+const Card = ({ data, titleHeight }) => {
   const middleCol = useRef();
   const { name, title, textFields, images, image, descriptions, phone, email } =
     data;
@@ -15,11 +18,16 @@ const Card = ({ data, cardHeight, titleHeight }) => {
   const titleControls = useAnimationControls();
   const subTitleControls = useAnimationControls();
   const subTitleClosedControls = useAnimationControls();
+  console.log(textFields);
 
   const [isEmployee, setIsEmployee] = useState(false);
   const handleIsEmployee = () => setIsEmployee(true);
   const [hovered, setHovered] = useState(false);
   const handleHover = () => setHovered(!hovered);
+  const isMedium = useIsMedium();
+  const isSmall = useIsSmall();
+  const isXSmall = useIsXSmall();
+  const isXXSmall = useIsXXSmall();
 
   const getMarc = () => {
     if (isEmployee) {
@@ -29,10 +37,46 @@ const Card = ({ data, cardHeight, titleHeight }) => {
   };
 
   const getImageHeight = () => {
-    if (name === "ANNIE-CLAUDE ROY") return "-28vw";
-    if (name === "DAVID-MARC BOUCHARD") return "-24vw";
-    if (name === "RACHEL MARTIN") return "-58vw";
-    if (name === "DAPHNÉ SYLVAIN") return "-45vw";
+    if (name === "ANNIE-CLAUDE ROY")
+      return isXXSmall
+        ? "-210vw"
+        : isXSmall
+        ? "-170vw"
+        : isSmall
+        ? "-100vw"
+        : isMedium
+        ? "-85vw"
+        : "-28vw";
+    if (name === "DAVID-MARC BOUCHARD")
+      return isXXSmall
+        ? "-215vw"
+        : isXSmall
+        ? "-180vw"
+        : isSmall
+        ? "-110vw"
+        : isMedium
+        ? "-80vw"
+        : "-24vw";
+    if (name === "RACHEL MARTIN")
+      return isXXSmall
+        ? "-215vw"
+        : isXSmall
+        ? "-190vw"
+        : isSmall
+        ? "-130vw"
+        : isMedium
+        ? "-100vw"
+        : "-58vw";
+    if (name === "DAPHNÉ SYLVAIN")
+      return isXXSmall
+        ? "-215vw"
+        : isXSmall
+        ? "-180vw"
+        : isSmall
+        ? "-130vw"
+        : isMedium
+        ? "-90vw"
+        : "-45vw";
 
     if (title.includes("PROCESS")) return "-30vw";
     if (title.includes("RECRUT")) return "-22vw";
@@ -41,14 +85,25 @@ const Card = ({ data, cardHeight, titleHeight }) => {
     return "-200px";
   };
 
-  useEffect(() => {
-    if (name) handleIsEmployee();
+  const getVariableHeight = () => {
+    if (name === "DAVID-MARC BOUCHARD") return 40;
+    if (name === "DAPHNÉ SYLVAIN") return 30;
 
+    return 0;
+  };
+
+  useEffect(() => {
+    console.log("middleCol", middleCol.current.clientHeight);
+    if (name) handleIsEmployee();
     if (hovered) {
       // OPEN
       cardWrapperControls.start({
-        height: "100%",
-        maxHeight: cardHeight || "463px",
+        height: isMedium
+          ? middleCol.current.offsetHeight + 800 + getVariableHeight() + "px"
+          : middleCol.current.offsetHeight + 150 + "px",
+        maxHeight: isMedium
+          ? middleCol.current.offsetHeight + 800 + getVariableHeight() + "px"
+          : middleCol.current.offsetHeight + 150 + "px",
         transition: { duration: 0.75 },
         type: "linear",
       });
@@ -56,13 +111,13 @@ const Card = ({ data, cardHeight, titleHeight }) => {
         width: "100%",
         marginLeft: "0vw",
         transform: "translateY(0vw)",
-        height: middleCol.current.clientHeight || "310px",
+        height: !isMedium ? middleCol.current.clientHeight || "310px" : "500px",
         transition: { duration: 0.75 },
         type: "linear",
       });
       titleControls.start({
         marginTop: "0px",
-        width: "330px",
+        width: !isMedium ? "330px" : "90%",
         fontSize: "30px",
         lineHeight: "35px",
         transition: { duration: 0.75 },
@@ -82,14 +137,14 @@ const Card = ({ data, cardHeight, titleHeight }) => {
     } else {
       // CLOSED
       cardWrapperControls.start({
-        height: "100%",
+        height: "250px",
         maxHeight: "250px",
         transition: { duration: 0.375 },
         type: "linear",
       });
       imageWrapperControls.start({
         width: "102vw",
-        marginLeft: "-68vw",
+        marginLeft: isMedium ? "-24px" : "-68vw",
         transform: "translateY(" + getImageHeight() + ")",
         height: "100%",
         transition: { duration: 0.375 },
@@ -97,8 +152,8 @@ const Card = ({ data, cardHeight, titleHeight }) => {
       });
       titleControls.start({
         marginTop: titleHeight || "-33px",
-        width: "1000px",
-        fontSize: "65px",
+        width: isMedium ? "100%" : "1000px",
+        fontSize: isMedium ? "50px" : "65px",
         lineHeight: "70px",
         transition: { duration: 0.375 },
         type: "linear",
@@ -117,7 +172,6 @@ const Card = ({ data, cardHeight, titleHeight }) => {
     }
   }, [
     hovered,
-    cardHeight,
     cardWrapperControls,
     imageWrapperControls,
     name,
@@ -125,10 +179,12 @@ const Card = ({ data, cardHeight, titleHeight }) => {
     subTitleControls,
     titleControls,
     titleHeight,
+    getMarc,
+    getImageHeight,
+    isMedium,
   ]);
   return (
     <CardWrapper
-      ref={box}
       animate={cardWrapperControls}
       // onClick={executeScroll}
       onMouseEnter={() => handleHover()}
@@ -138,97 +194,106 @@ const Card = ({ data, cardHeight, titleHeight }) => {
         <div className="col-lg-4 ">
           <Title
             animate={titleControls}
-            style={isEmployee && { maxWidth: "700px" }}
+            style={isEmployee && { maxWidth: !isMedium ? "700px" : "400px" }}
           >
             {isEmployee ? name : title}
           </Title>
           {isEmployee && (
             <SubTitle animate={subTitleControls}>{title}</SubTitle>
           )}
-          {isEmployee && (
+          {isEmployee && !isMedium && (
             <SubTitleClosed animate={subTitleClosedControls}>
               {title}
             </SubTitleClosed>
           )}
         </div>
-        <div className="col-lg-4">
-          {textFields &&
-            !isEmployee &&
-            hovered &&
-            textFields.map((el) => (
-              <Description key={el.id} className="mb-4">
-                {el.text.text.split(" ").map((word, index) => (
-                  <motion.span
-                    key={index}
-                    initial={{ opacity: 0, filter: "blur(1)" }}
-                    animate={hovered && { opacity: 1, filter: "blur(0)" }}
-                    transition={{
-                      duration: 1,
-                      delay: index / 20,
-                      ease: [0.11, 0, 0.5, 0],
-                    }}
+        <div className="col-lg-4 my-5 my-lg-0 mb-lg-4">
+          {!isEmployee && (
+            <div ref={middleCol}>
+              {textFields &&
+                textFields.map((el, index) => (
+                  <Description
+                    key={el.id}
+                    className={
+                      el.id === "0d9059c5-50af-562a-9699-22c1c143dd15"
+                        ? "mt-5 pt-2 mt-lg-0 "
+                        : "mt-3 mt-lg-0 "
+                    }
                   >
-                    {word + " "}{" "}
-                  </motion.span>
-                ))}
-              </Description>
-            ))}
-          <div ref={middleCol}>
-            {isEmployee &&
-              descriptions &&
-              hovered &&
-              descriptions.map((description, index) => {
-                let i = index;
-                return (
-                  <div key={description.id} className="mb-4">
-                    {description.text.text.split(" ").map((word, index) => (
+                    {el.text.text.split(" ").map((word, index) => (
                       <motion.span
                         key={index}
                         initial={{ opacity: 0, filter: "blur(1)" }}
                         animate={hovered && { opacity: 1, filter: "blur(0)" }}
                         transition={{
                           duration: 1,
-                          delay: index / 20 + i * 2.5,
+                          delay: index / 20,
                           ease: [0.11, 0, 0.5, 0],
                         }}
                       >
                         {word + " "}{" "}
                       </motion.span>
                     ))}
-                  </div>
-                );
-              })}
-            {isEmployee && hovered && (
-              <div className="d-flex flex-column align-items-end pe-5">
-                <Address
-                  initial={{ opacity: 0, filter: "blur(1)" }}
-                  animate={hovered && { opacity: 1, filter: "blur(0)" }}
-                  transition={{
-                    duration: 1,
-                    delay: 5,
-                    ease: [0.11, 0, 0.5, 0],
-                  }}
-                  href={"mailTo:" + email}
-                  className="mb-2"
-                >
-                  {email.toUpperCase()}
-                </Address>
-                <Address
-                  initial={{ opacity: 0, filter: "blur(1)" }}
-                  animate={hovered && { opacity: 1, filter: "blur(0)" }}
-                  transition={{
-                    duration: 1,
-                    delay: 5.3,
-                    ease: [0.11, 0, 0.5, 0],
-                  }}
-                  href={"phoneTo:" + phone}
-                  className=""
-                >
-                  {phone}
-                </Address>
-              </div>
-            )}
-          </div>
+                  </Description>
+                ))}
+            </div>
+          )}
+          {isEmployee && (
+            <div ref={middleCol}>
+              {descriptions &&
+                descriptions.map((description, index) => {
+                  let i = index;
+                  return (
+                    <div key={description.id} className="mb-4">
+                      {description.text.text.split(" ").map((word, index) => (
+                        <motion.span
+                          key={index}
+                          initial={{ opacity: 0, filter: "blur(1)" }}
+                          animate={hovered && { opacity: 1, filter: "blur(0)" }}
+                          transition={{
+                            duration: 1,
+                            delay: index / 20 + i * 2.5,
+                            ease: [0.11, 0, 0.5, 0],
+                          }}
+                        >
+                          {word + " "}{" "}
+                        </motion.span>
+                      ))}
+                    </div>
+                  );
+                })}
+              {
+                <div className="d-flex flex-column align-items-end pe-5">
+                  <Address
+                    initial={{ opacity: 0, filter: "blur(1)" }}
+                    animate={hovered && { opacity: 1, filter: "blur(0)" }}
+                    transition={{
+                      duration: 1,
+                      delay: 5,
+                      ease: [0.11, 0, 0.5, 0],
+                    }}
+                    href={"mailTo:" + email}
+                    className="mb-2"
+                  >
+                    {email.toUpperCase()}
+                  </Address>
+                  <Address
+                    initial={{ opacity: 0, filter: "blur(1)" }}
+                    animate={hovered && { opacity: 1, filter: "blur(0)" }}
+                    transition={{
+                      duration: 1,
+                      delay: 5.3,
+                      ease: [0.11, 0, 0.5, 0],
+                    }}
+                    href={"phoneTo:" + phone}
+                    className=""
+                  >
+                    {phone}
+                  </Address>
+                </div>
+              }
+            </div>
+          )}
         </div>
         <div className="col-lg-4">
           {images &&
@@ -291,7 +356,7 @@ const Title = styled(motion.h2)`
 
 const SubTitleClosed = styled(motion.h3)`
   position: absolute;
-  top: 0;
+  top: 30px;
   right: 0;
   padding-top: 25px;
   z-index: 1;
@@ -300,13 +365,24 @@ const SubTitleClosed = styled(motion.h3)`
   line-height: 35px;
   letter-spacing: 1px;
   font-family: "Neue-Italic";
-  overflow: visible;
+  text-align: end;
+  transform: translateY(-50%);
+  @media (max-width: 1399px) {
+    max-width: 700px;
+  }
+  @media (max-width: 1199px) {
+    max-width: 400px;
+  }
 `;
 
 const Description = styled.p`
   max-width: 320px;
   letter-spacing: 1.5px;
   line-height: 20px;
+
+  @media (max-width: 992px) {
+    max-width: 100%;
+  }
 `;
 
 const ImageWrapper = styled(motion.div)`
