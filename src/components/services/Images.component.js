@@ -37,7 +37,7 @@ const Images = ({ images }) => {
             transform: "translate(0px,0px)",
           }
         }
-        transition={{ duration: 0.75 }}
+        transition={{ duration: 0.75, delay: 0.375 }}
         viewport={{ once: true }}
       >
         {buildingImg && (
@@ -60,7 +60,7 @@ const Images = ({ images }) => {
             transform: "translate(0px,0px)",
           }
         }
-        transition={{ duration: 0.75, delay: 0.375 }}
+        transition={{ duration: 0.75, delay: 0.75 }}
         viewport={{ once: true }}
         className="wood"
       >

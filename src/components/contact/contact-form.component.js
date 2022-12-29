@@ -83,31 +83,26 @@ function ContactForm({ data }) {
               ))}
             <InputGroup className="d-flex flex-align-start align-items-center">
               <Number>05</Number>
-              {!fileUploaded && lang === "fr" && (
-                <FileInput
-                  type="file"
-                  placeholder={fileUpload.label}
-                  required={fileUpload.required}
-                  onChange={handleChange}
-                  name={fileUpload.fieldName}
-                  value={fields[fileUpload.fieldName]}
-                />
+              {!fileUploaded && (
+                <>
+                  <FileInput
+                    type="file"
+                    required={fileUpload.required}
+                    onChange={handleChange}
+                    name={fileUpload.fieldName}
+                    value={fields[fileUpload.fieldName]}
+                  />
+                  <Label for="file">{fileUpload.label}</Label>
+                </>
               )}
-              {!fileUploaded && lang === "en" && (
-                <FileInputEn
-                  type="file"
-                  placeholder={fileUpload.label}
-                  required={fileUpload.required}
-                  onChange={handleChange}
-                  name={fileUpload.fieldName}
-                  value={fields[fileUpload.fieldName]}
-                />
-              )}
-              {fileUploaded && <Label>{getFileName()}</Label>}
               {fileUploaded && (
-                <Label onClick={resetResumeField} className="pointer">
-                  &#x2715;
-                </Label>
+                <div className="d-flex justify-content-between w-100">
+                  <Label>{getFileName()}</Label>
+
+                  <Label onClick={resetResumeField} className="pointer">
+                    &#x2715;
+                  </Label>
+                </div>
               )}
             </InputGroup>
             <div className="d-flex flex-align-start align-items-center">
@@ -193,14 +188,15 @@ const TextArea = styled.textarea`
 `;
 
 const FileInput = styled(Input)`
-  width: 195px;
-  display: inline;
-  user-select: none;
-  -webkit-user-select: none;
-  opacity: 1;
+  opacity: 0;
+  position: absolute;
+  z-index: 2;
+  height: 100%;
+  width: 210px;
+  cursor: pointer;
 
   /* TODO add variable */
-  &::before {
+  /* &::before {
     content: "JOINDRE VOTRE CV ICI";
     opacity: 1;
     visibility: visible;
@@ -210,13 +206,13 @@ const FileInput = styled(Input)`
     white-space: nowrap;
     margin-right: 100px;
     cursor: pointer;
-  }
+  }*/
 `;
 
 const FileInputEn = styled(FileInput)`
-  &::before {
+  /* &::before {
     content: "ATTACH CV HERE";
-  }
+  }  */
 `;
 const Number = styled.div`
   font-family: "Neue-Italic";
