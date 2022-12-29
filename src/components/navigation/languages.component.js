@@ -2,13 +2,15 @@ import React from "react";
 import { useI18next } from "gatsby-plugin-react-i18next";
 import styled from "styled-components";
 import { NavLink } from "../styled-components/nav-link.style";
-import { useIsXLarge } from "../../utils/media-query.hook";
+import { useIsXSmall } from "../../utils/media-query.hook";
 
 const LanguagesFooter = ({ langs }) => {
   const { languages, originalPath, t, i18n } = useI18next();
-  const isXLarge = useIsXLarge();
+  const isXSmall = useIsXSmall();
 
+  console.log(isXSmall);
   const getLang = (lng) => {
+    if (isXSmall) return lng.toUpperCase();
     return langs.value
       .filter((lang) => lang.toLowerCase().includes(lng))[0]
       .toUpperCase();
@@ -21,7 +23,7 @@ const LanguagesFooter = ({ langs }) => {
             key={lng}
             to={originalPath}
             language={lng}
-            className="d-inline-block"
+            className="d-inline-block d-sm-flex flex-column d-lg-inline-block align-items-end"
             style={{
               fontFamily:
                 i18n.resolvedLanguage === lng
@@ -37,17 +39,21 @@ const LanguagesFooter = ({ langs }) => {
 };
 
 const Lang = styled(NavLink)`
-  margin-right: 3rem;
+  margin-left: 3rem;
+  margin-right: 12px;
+  margin-top: -6px;
   letter-spacing: 1px;
+  max-height: 30px;
 
   &:hover {
     text-decoration: underline;
   }
   @media (max-width: 991px) {
-    margin-right: 2rem;
+    margin-left: 2rem;
+    margin-top: 0px;
   }
   @media (max-width: 767px) {
-    margin-right: 1rem;
+    margin-left: 1rem;
     /* margin-left: 1rem; */
   }
   @media (max-width: 574px) {

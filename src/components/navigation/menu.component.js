@@ -10,7 +10,6 @@ import { ModalAnimation } from "../animation/modal.animation";
 import { ModalWrapperAnimation } from "../animation/modal-wrapper.animation";
 import { ModalMediumAnimation } from "../animation/modal-medium.animation";
 import { useIsMedium } from "../../utils/media-query.hook";
-import { useIsSmall } from "../../utils/media-query.hook";
 import { Link } from "gatsby-plugin-react-i18next";
 
 const Menu = ({ showMenu, setShowMenu, menu, setShowContact, path }) => {
@@ -18,7 +17,6 @@ const Menu = ({ showMenu, setShowMenu, menu, setShowContact, path }) => {
 
   const handleCloseMenu = () => setShowMenu(false);
   const isMedium = useIsMedium();
-  const isSmall = useIsSmall();
   const ModalVariant = isMedium ? ModalMediumAnimation : ModalAnimation;
 
   return (
@@ -46,9 +44,11 @@ const Menu = ({ showMenu, setShowMenu, menu, setShowContact, path }) => {
                     </LogoLink>
                   </>
                 )}
-                <div className="d-flex justify-content-end flex-grow-1 me-5">
-                  {isSmall && <Languages classname="" langs={langs} />}
-                </div>
+                {!isMedium && (
+                  <div className="d-flex justify-content-end flex-grow-1 me-5">
+                    <Languages classname="" langs={langs} />
+                  </div>
+                )}
 
                 {closeTitle && (
                   <MenuButton onClick={handleCloseMenu}>
@@ -56,8 +56,8 @@ const Menu = ({ showMenu, setShowMenu, menu, setShowContact, path }) => {
                   </MenuButton>
                 )}
               </div>
-              {!isSmall && (
-                <SmallLanguagesWrapper className="d-flex justify-content-end">
+              {isMedium && (
+                <SmallLanguagesWrapper>
                   <Languages langs={langs} />
                 </SmallLanguagesWrapper>
               )}
@@ -130,11 +130,21 @@ const Image = styled(GatsbyImage)`
 `;
 
 const SmallLanguagesWrapper = styled.div`
-  transform: translateY(-40px);
+  position: absolute;
+  top: 65px;
+  right: 0px;
+
+  @media (max-width: 575px) {
+    top: 50px;
+  }
 `;
 
 const LogoLink = styled(Link)`
-  height: 90x;
+  max-height: 90x;
   min-width: 373px;
+
+  @media (max-width: 575px) {
+    min-width: calc(100% - 150px);
+  }
 `;
 export default Menu;

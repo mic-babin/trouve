@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { NavLink } from "../styled-components/nav-link.style";
-import { motion } from "framer-motion";
+import { motion, useAnimationControls } from "framer-motion";
+import { useIsXLarge } from "../../utils/media-query.hook";
 
 const NavLinks = ({ navLinks, setShowContact, setShowMenu, path }) => {
+  const isXLarge = useIsXLarge();
   const handleShowContact = () => {
     setShowMenu(false);
     setShowContact(true);
@@ -23,6 +25,25 @@ const NavLinks = ({ navLinks, setShowContact, setShowMenu, path }) => {
       return path.includes(link.url);
     }
   };
+
+  const [open, setOpen] = useState(false);
+  const handleEnter = () => setOpen(true);
+  const handleLeave = () => setOpen(false);
+  const socialsControls = useAnimationControls();
+
+  useEffect(() => {
+    if (open) {
+      // OPEN
+      socialsControls.start({
+        height: isXLarge ? "105px" : "57px",
+      });
+    } else {
+      // CLOSED
+      socialsControls.start({
+        height: "57px",
+      });
+    }
+  }, [open]);
 
   return (
     <LinksWrapper className="row mx-0">
@@ -63,8 +84,17 @@ const NavLinks = ({ navLinks, setShowContact, setShowMenu, path }) => {
               {(link.title === "SOCIALS" ||
                 link.title === "RÉSEAUX SOCIAUX ") && (
                 <Socials
-                  as="div"
+                  as={motion.div}
                   className="d-flex border-bottom-white pointer"
+                  onMouseEnter={() => handleEnter()}
+                  onMouseLeave={() => handleLeave()}
+                  animate={socialsControls}
+                  transition={{
+                    duration: 0.3,
+                    delay: 0,
+                    type: "tween",
+                    easeInOut: 0.3,
+                  }}
                 >
                   <Number className="me-4">0{index + 1}</Number>
                   <Text className="me-4">{link.title}</Text>
@@ -121,6 +151,7 @@ const LinkWrapper = styled.div`
 `;
 
 const Socials = styled(NavLink)`
+  overflow: hidden;
   .social {
     display: none;
     opacity: 0;
