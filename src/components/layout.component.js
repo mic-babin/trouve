@@ -18,6 +18,7 @@ const Layout = ({
   setShowContact,
   headerColor,
   path,
+  showPage,
 }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -32,23 +33,27 @@ const Layout = ({
 
   return (
     <div>
-      <Header
-        menu={menu}
-        contact={contact}
-        setShowContact={setShowContact}
-        showContact={showContact}
-        showMenu={showMenu}
-        setShowMenu={setShowMenu}
-        headerColor={headerColor}
-        path={path}
-      />
+      {showPage && (
+        <Header
+          menu={menu}
+          contact={contact}
+          setShowContact={setShowContact}
+          showContact={showContact}
+          showMenu={showMenu}
+          setShowMenu={setShowMenu}
+          headerColor={headerColor}
+          path={path}
+        />
+      )}
       {children}
-      <Footer
-        menu={menu}
-        setShowContact={setShowContact}
-        setShowMenu={setShowMenu}
-        path={path}
-      />
+      {showPage && (
+        <Footer
+          menu={menu}
+          setShowContact={setShowContact}
+          setShowMenu={setShowMenu}
+          path={path}
+        />
+      )}
     </div>
   );
 };

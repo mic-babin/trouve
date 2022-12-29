@@ -65,6 +65,7 @@ export default function Homepage(props) {
         setShowContact={setShowContact}
         headerColor={headerColor}
         path={path}
+        showPage={showPage}
       >
         {!showPage && <Loader />}
         <div id="top"></div>

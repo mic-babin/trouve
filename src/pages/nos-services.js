@@ -45,6 +45,7 @@ const NosServices = (props) => {
       setShowContact={setShowContact}
       headerColor="#000000"
       path={path}
+      showPage={showPage}
     >
       {!showPage && <Loader />}
       <div className="bg-beige">
