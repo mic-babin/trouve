@@ -55,7 +55,6 @@ const TeamHero = ({ hero, setShowContact }) => {
               </H1>
               {textFields &&
                 textFields.map((el) => {
-                  console.log(el);
                   return (
                     <Paragraph
                       key={el.id}

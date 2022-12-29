@@ -5,6 +5,7 @@ import LogoSrc from "../assets/img/trouve_blanc.svg";
 import styled from "styled-components";
 import { Link } from "gatsby-plugin-react-i18next";
 import { motion } from "framer-motion";
+import Contact from "./navigation/nous-joindre.component";
 
 const Header = ({
   menu,
@@ -14,8 +15,10 @@ const Header = ({
   setShowMenu,
   headerColor,
   path,
+  showContact,
 }) => {
   const handleShowMenu = ({ headerColor }) => setShowMenu(true);
+
   return (
     <HeaderWrapper
       initial={{
@@ -45,9 +48,14 @@ const Header = ({
           showMenu={showMenu}
           setShowMenu={setShowMenu}
           menu={menu}
+          path={path}
           contact={contact}
           setShowContact={setShowContact}
-          path={path}
+        />
+        <Contact
+          showContact={showContact}
+          setShowContact={setShowContact}
+          contact={contact}
         />
       </div>
       <HorizontalLine

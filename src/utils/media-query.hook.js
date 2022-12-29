@@ -18,6 +18,7 @@ export function useMediaQuery(query) {
   return matches;
 }
 
+export const useIsXXSmall = () => useMediaQuery("(max-width: 392px)");
 export const useIsXSmall = () => useMediaQuery("(max-width: 575px)");
 export const useIsSmall = () => useMediaQuery("(max-width: 767px)");
 export const useIsMedium = () => useMediaQuery("(max-width: 991px)");

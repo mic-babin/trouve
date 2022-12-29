@@ -21,6 +21,7 @@ const Layout = ({
 }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [showModal, setShowModal] = useState(false);
+
   useEffect(() => {
     if (showModal) {
       setShowModal(showMenu || showContact);
@@ -35,6 +36,7 @@ const Layout = ({
         menu={menu}
         contact={contact}
         setShowContact={setShowContact}
+        showContact={showContact}
         showMenu={showMenu}
         setShowMenu={setShowMenu}
         headerColor={headerColor}
@@ -47,14 +49,6 @@ const Layout = ({
         setShowMenu={setShowMenu}
         path={path}
       />
-
-      <ContactWrapper>
-        <Contact
-          showContact={showContact}
-          setShowContact={setShowContact}
-          contact={contact}
-        />
-      </ContactWrapper>
     </div>
   );
 };

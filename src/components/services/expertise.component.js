@@ -14,7 +14,6 @@ const Expertise = ({ expertise }) => {
       el.id === "d6b12550-a826-5fb2-9a3a-bda485011e7d" ||
       el.id === "9e6fea19-4c90-5212-bfc5-056f9a815821"
   )[0].text.text;
-  console.log(kicker);
 
   const paragraphs = textFields.filter(
     (el) =>

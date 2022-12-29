@@ -8,7 +8,6 @@ const LanguagesFooter = ({ langs }) => {
   const { languages, originalPath, t, i18n } = useI18next();
   const isXSmall = useIsXSmall();
 
-  console.log(isXSmall);
   const getLang = (lng) => {
     if (isXSmall) return lng.toUpperCase();
     return langs.value

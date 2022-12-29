@@ -1,26 +1,23 @@
 import React from "react";
-import ContactInfo from "../contact/contact-info.component";
-import ContactForm from "../contact/contact-form.component";
-import LogoSrc from "../../assets/img/trouve.svg";
 import styled from "styled-components";
+import { motion, AnimatePresence } from "framer-motion";
 import { MenuButton } from "../styled-components/menu-button.style";
 import { Logo } from "../styled-components/logo.style";
-import { motion, AnimatePresence } from "framer-motion";
+import { GatsbyImage } from "gatsby-plugin-image";
+import ContactInfo from "../contact/contact-info.component";
+import ContactForm from "../contact/contact-form.component";
+import Circle from "../animation/bg-circle.components";
 import { ModalAnimation } from "../animation/modal.animation";
 import { ModalWrapperAnimation } from "../animation/modal-wrapper.animation";
 import { ModalMediumAnimation } from "../animation/modal-medium.animation";
 import { useIsMedium } from "../../utils/media-query.hook";
-import { useIsSmall } from "../../utils/media-query.hook";
-import { ModalContactWrapperMediumAnimation } from "../animation/modal-wrapper-contact-medium.animation";
-import Circle from "../animation/bg-circle.components";
+import { useIsLarge } from "../../utils/media-query.hook";
+import { useIsXLarge } from "../../utils/media-query.hook";
+import { Link } from "gatsby-plugin-react-i18next";
+import LogoSrc from "../../assets/img/trouve.svg";
 import { useEffect, useState, useRef } from "react";
 
-const Contact = ({ contact, showContact, setShowContact }) => {
-  const round = useRef();
-  const [roundSize, setRoundSize] = useState(0);
-  const handleResize = () => {
-    setRoundSize(round?.current?.offsetWidth);
-  };
+const Menu = ({ setShowContact, showContact, contact }) => {
   const sections = contact;
   // TODO change title for id
   const contactInfo = sections[0];
@@ -29,11 +26,15 @@ const Contact = ({ contact, showContact, setShowContact }) => {
   const handleCloseContact = () => setShowContact(false);
 
   const isMedium = useIsMedium();
-  const isSmall = useIsSmall();
+  const isLarge = useIsLarge();
+  const isXLarge = useIsXLarge();
   const ModalVariant = isMedium ? ModalMediumAnimation : ModalAnimation;
-  const ModalWrapperVariant = isMedium
-    ? ModalContactWrapperMediumAnimation
-    : ModalWrapperAnimation;
+
+  const round = useRef();
+  const [roundSize, setRoundSize] = useState(0);
+  const handleResize = () => {
+    setRoundSize(round?.current?.offsetWidth);
+  };
 
   useEffect(() => {
     handleResize();
@@ -42,92 +43,86 @@ const Contact = ({ contact, showContact, setShowContact }) => {
       return () => window.removeEventListener("resize", handleResize);
     };
   }, [contact, showContact]);
+
   return (
-    <AnimatePresence initial={false} custom={ModalAnimation}>
-      {showContact && (
-        <Container
-          variants={ModalVariant}
-          animate="visible"
-          initial="hidden"
-          exit="hidden"
-        >
-          <ModalWrapper
-            className="d-flex flex-column justify-content-between"
-            variants={ModalWrapperVariant}
+    <>
+      <AnimatePresence initial={false} custom={ModalAnimation}>
+        {showContact && (
+          <NavBg
+            variants={ModalVariant}
             animate="visible"
             initial="hidden"
             exit="hidden"
           >
-            <div className="d-flex justify-content-between align-items-center">
-              <Logo src={LogoSrc} alt="Logo" />
-              {close && (
-                <CloseButton onClick={handleCloseContact}>{close}</CloseButton>
+            <ModalWrapper
+              className="d-flex flex-column justify-content-between"
+              variants={ModalWrapperAnimation}
+              animate="visible"
+              initial="hidden"
+              exit="hidden"
+            >
+              <div className="d-flex justify-content-between align-items-center">
+                <Logo src={LogoSrc} alt="Logo" />
+                {close && (
+                  <CloseButton onClick={handleCloseContact}>
+                    {close}
+                  </CloseButton>
+                )}
+              </div>
+              {!isLarge && (
+                <>
+                  {!isXLarge && (
+                    <CircleWrapper>
+                      <Circle
+                        roundSize={roundSize}
+                        color={"black"}
+                        isInView={showContact}
+                      />
+                    </CircleWrapper>
+                  )}
+
+                  <FormWrapper ref={round}>
+                    <ContactForm data={contactForm} />
+                  </FormWrapper>
+                </>
               )}
-            </div>
 
-            {!isMedium && (
-              <>
-                <CircleWrapper>
-                  <Circle
-                    roundSize={roundSize}
-                    color={"black"}
-                    isInView={showContact}
-                  />
-                </CircleWrapper>
-
-                <FormWrapper ref={round}>
-                  <ContactForm data={contactForm} />
-                </FormWrapper>
-              </>
-            )}
-
-            <FullHeight className="row mx-0">
-              <div className="col-lg-6">
-                <ContactInfo data={contactInfo} />
-              </div>
-              <div className="col-lg-6">
-                {isMedium && <ContactForm data={contactForm} />}
-              </div>
-            </FullHeight>
-          </ModalWrapper>
-        </Container>
-      )}
-    </AnimatePresence>
+              <FullHeight className="row mx-0">
+                <div className="col-xl-6">
+                  <ContactInfo data={contactInfo} />
+                </div>
+                <div className="col-xl-6 py-5 py-xl-0">
+                  {isLarge && <ContactForm data={contactForm} />}
+                </div>
+              </FullHeight>
+            </ModalWrapper>
+          </NavBg>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 
-const Container = styled(motion.div)`
+const NavBg = styled(motion.div)`
   background-color: white;
   color: black;
-  position: fixed;
+  position: absolute;
   top: -50vw;
-  right: -51vw;
+  right: -50vw;
   min-height: 100%;
-  overflow-x: hidden;
+  overflow: hidden;
   border-radius: 50%;
-  z-index: 10;
-
   @media (max-width: 991px) {
-    top: -100vw;
     right: 0vw;
   }
 `;
 
-const FullHeight = styled.div`
-  min-height: calc(100vh - 90px);
-  padding-left: 100px;
-`;
-
-const CloseButton = styled(MenuButton)`
-  color: black;
-  z-index: 2;
-`;
 const ModalWrapper = styled(motion.div)`
   position: absolute;
   top: 50vw;
   left: 50vw;
-  width: calc(100vw - 17px);
   height: 100vh;
+  width: 100vw;
   overflow: auto;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
@@ -142,6 +137,19 @@ const ModalWrapper = styled(motion.div)`
   }
 `;
 
+const CloseButton = styled(MenuButton)`
+  color: black;
+  z-index: 2;
+`;
+
+const FullHeight = styled.div`
+  min-height: calc(100vh - 90px);
+  padding: 120px;
+  @media (max-width: 767px) {
+    padding: 100px 5vw;
+  }
+`;
+
 const FormWrapper = styled.div`
   position: absolute;
   right: 0;
@@ -151,9 +159,6 @@ const FormWrapper = styled.div`
   width: 100vh;
   max-width: 60vw;
   z-index: 1;
-
-  /* margin-top: max(0, calc(20vw));
-  padding-top: min(100vh, 60vw); */
 `;
 
 const CircleWrapper = styled.div`
@@ -161,6 +166,8 @@ const CircleWrapper = styled.div`
   right: 0;
   top: 0;
   z-index: 0;
+  @media (max-width: 1560px) {
+    margin-top: calc((100vh - 60vw) / 2);
+  }
 `;
-
-export default Contact;
+export default Menu;

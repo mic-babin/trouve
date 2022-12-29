@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { motion, useAnimationControls } from "framer-motion";
+import { useIsXXSmall } from "../../utils/media-query.hook";
 
 const AccordionItem = ({ text, index }) => {
   const [open, setOpen] = useState(index == 0 ? true : false);
@@ -9,11 +10,12 @@ const AccordionItem = ({ text, index }) => {
   const handleLeave = () => setOpen(false);
   const bodyControls = useAnimationControls();
 
+  const isXXSmall = useIsXXSmall();
   useEffect(() => {
     if (open) {
       // OPEN
       bodyControls.start({
-        height: "110px",
+        height: isXXSmall ? "130px" : "110px",
       });
     } else {
       // CLOSED

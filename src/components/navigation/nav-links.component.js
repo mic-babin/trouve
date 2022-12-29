@@ -18,7 +18,6 @@ const NavLinks = ({ navLinks, setShowContact, setShowMenu, path }) => {
   };
 
   const getActive = (link) => {
-    console.log(link.url);
     if (link.url === "/") {
       return path === link.url;
     } else {

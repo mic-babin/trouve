@@ -6,6 +6,18 @@ import ContactAccordion from "./contact-accordion.component";
 const ContactInfo = ({ data }) => {
   const { title, textFields, components } = data;
 
+  const getHref = (el) => {
+    switch (el.type) {
+      case "Phone":
+        return "tel:" + el.address;
+      case "Email":
+        return "mailTo:" + el.address;
+      case "Address":
+        return "http://maps.google.com/?q=" + el.address;
+      default:
+        return "";
+    }
+  };
   return (
     <Section className="d-flex flex-column justify-content-center h-100">
       <ContactH1>
@@ -24,7 +36,9 @@ const ContactInfo = ({ data }) => {
           <React.Fragment key={element.id}>
             {element &&
               element.contactInformations.map((el) => (
-                <Address key={el.id}>{el.address}</Address>
+                <Address href={getHref(el)} key={el.id} target="_blank">
+                  {el.address}
+                </Address>
               ))}
           </React.Fragment>
         ))}
@@ -35,8 +49,15 @@ const ContactInfo = ({ data }) => {
 const Section = styled.div`
   margin-top: -50px;
 `;
-const Address = styled.div`
-  &:nth-of-type(4) {
+const Address = styled.a`
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+  &:hover {
+    color: black;
+  }
+
+  &:nth-of-type(3) {
     margin-top: 20px;
   }
 `;
@@ -45,6 +66,13 @@ const ContactH1 = styled(H1)`
   font-size: 65px;
   .w-wrapper:nth-of-type(2) {
     padding-left: 110px;
+  }
+
+  @media (max-width: 575px) {
+    font-size: 50px;
+    .w-wrapper:nth-of-type(2) {
+      padding-left: 70px;
+    }
   }
 `;
 export default ContactInfo;
