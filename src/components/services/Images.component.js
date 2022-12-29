@@ -1,6 +1,7 @@
 import React from "react";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { motion } from "framer-motion";
+import { useState } from "react";
 import styled from "styled-components";
 
 const Images = ({ images }) => {
@@ -15,17 +16,27 @@ const Images = ({ images }) => {
       img.id === "bdc1114e-abe4-5192-a587-5bb48b3c3b3f"
   )[0];
 
+  const [isInView, setIsInView] = useState(false);
+
   return (
-    <ImagesWrapper className="position-relative">
+    <ImagesWrapper
+      className="position-relative"
+      whileInView={() => {
+        setIsInView(true);
+        return {};
+      }}
+    >
       <BuildingWrapper
         initial={{
           opacity: 0,
           transform: "translate(-300px,400px)",
         }}
-        whileInView={{
-          opacity: 1,
-          transform: "translate(0px,0px)",
-        }}
+        animate={
+          isInView && {
+            opacity: 1,
+            transform: "translate(0px,0px)",
+          }
+        }
         transition={{ duration: 0.75 }}
         viewport={{ once: true }}
       >
@@ -43,11 +54,13 @@ const Images = ({ images }) => {
           opacity: 0,
           transform: "translate(300px,400px)",
         }}
-        whileInView={{
-          opacity: 1,
-          transform: "translate(0px,0px)",
-        }}
-        transition={{ duration: 0.75 }}
+        animate={
+          isInView && {
+            opacity: 1,
+            transform: "translate(0px,0px)",
+          }
+        }
+        transition={{ duration: 0.75, delay: 0.375 }}
         viewport={{ once: true }}
         className="wood"
       >
@@ -59,7 +72,7 @@ const Images = ({ images }) => {
   );
 };
 
-const ImagesWrapper = styled.div`
+const ImagesWrapper = styled(motion.div)`
   margin-top: 75px;
   height: 480px;
 
