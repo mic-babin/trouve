@@ -11,7 +11,8 @@ export default function Homepage(props) {
   const path = props.path;
   const menu = props.data.allContentfulHeader.edges[0].node;
 
-  let data = window != undefined ? sessionStorage.getItem("loader") : "";
+  let data =
+    typeof window !== "undefined" ? sessionStorage.getItem("loader") : "";
 
   const contact = props.data.allContentfulPage.edges[1].node.sections.filter(
     (section) =>
@@ -39,7 +40,7 @@ export default function Homepage(props) {
   useEffect(() => {
     if (showLoader) {
       setTimeout(() => {
-        if (window !== undefined) {
+        if (typeof window !== "undefined") {
           sessionStorage.setItem("loader", "shown");
         }
         setShowLoader(false);
