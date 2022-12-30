@@ -4,7 +4,7 @@ import { graphql } from "gatsby";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Loader from "../components/common/loader.component";
-import { NavLink } from "../components/styled-components/nav-link.style";
+// import { NavLink } from "../components/styled-components/nav-link.style";
 import { Trans } from "gatsby-plugin-react-i18next";
 
 const Success = (props) => {
@@ -12,17 +12,7 @@ const Success = (props) => {
   const path = props.path;
   const menu = props.data.allContentfulHeader.edges[0].node;
   const contact = props.data.allContentfulPage.edges[1].node.sections;
-  const team = props.data.allContentfulPage.edges[0].node.sections;
-  const hero = team.filter(
-    (el) =>
-      el.id === "8a5acd35-6c67-5045-bde6-39ecf7bb1cc2" ||
-      el.id === "25d32986-3977-5e32-b3fb-27185ec42a7c"
-  )[0];
-  const teamMembers = team.filter(
-    (el) =>
-      el.id !== "8a5acd35-6c67-5045-bde6-39ecf7bb1cc2" &&
-      el.id !== "25d32986-3977-5e32-b3fb-27185ec42a7c"
-  );
+
   const [showContact, setShowContact] = useState(false);
   const [showPage, setShowPage] = useState(false);
 
@@ -43,7 +33,7 @@ const Success = (props) => {
       showPage={showPage}
     >
       {!showPage && <Loader />}
-      <Section>
+      {/* <Section>
         <h1>
           <Trans>title</Trans>
         </h1>
@@ -53,7 +43,7 @@ const Success = (props) => {
         <NavLink to="/">
           <Trans>button</Trans>
         </NavLink>
-      </Section>
+      </Section> */}
     </Layout>
   );
 };
