@@ -3,7 +3,15 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 
 const Loader = () => {
-  return <Wrapper>Loading...</Wrapper>;
+  return (
+    <Wrapper>
+      <div class="loadingio-spinner-eclipse-a54yjl7evdn">
+        <div class="ldio-yhfkxwg3sg">
+          <div></div>
+        </div>
+      </div>
+    </Wrapper>
+  );
 };
 
 export default Loader;
