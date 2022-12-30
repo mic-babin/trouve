@@ -1,34 +1,78 @@
 import React from "react";
 import Layout from "../components/layout.component";
 import { graphql } from "gatsby";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import styled from "styled-components";
+import Loader from "../components/common/loader.component";
+import { NavLink } from "../components/styled-components/nav-link.style";
+import { Trans } from "gatsby-plugin-react-i18next";
 
 const Success = (props) => {
+  // const {t} = useTranslation();
   const path = props.path;
   const menu = props.data.allContentfulHeader.edges[0].node;
-  const contact = props.data.allContentfulPage.edges[0].node.sections.filter(
-    (section) =>
-      section.id === "b8dc3482-8f6b-52e3-9c2a-cdf3971f3a76" ||
-      section.id === "7245ed4c-7485-59f3-bcf3-2825bfce37a1" ||
-      section.id === "33167fe8-1da1-59ca-8cae-8aed5506436b" ||
-      section.id === "6609d98c-4bf8-5936-9f03-9e293bbd3542"
+  const contact = props.data.allContentfulPage.edges[1].node.sections;
+  const team = props.data.allContentfulPage.edges[0].node.sections;
+  const hero = team.filter(
+    (el) =>
+      el.id === "8a5acd35-6c67-5045-bde6-39ecf7bb1cc2" ||
+      el.id === "25d32986-3977-5e32-b3fb-27185ec42a7c"
+  )[0];
+  const teamMembers = team.filter(
+    (el) =>
+      el.id !== "8a5acd35-6c67-5045-bde6-39ecf7bb1cc2" &&
+      el.id !== "25d32986-3977-5e32-b3fb-27185ec42a7c"
   );
   const [showContact, setShowContact] = useState(false);
+  const [showPage, setShowPage] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShowPage(true);
+    }, 1);
+  }, []);
+
   return (
     <Layout
       menu={menu}
       contact={contact}
       showContact={showContact}
       setShowContact={setShowContact}
+      headerColor="#000000"
       path={path}
+      showPage={showPage}
     >
-      <div id="top"></div>
-      <div>Success</div>;
+      {!showPage && <Loader />}
+      <Section>
+        <h1>
+          <Trans>title</Trans>
+        </h1>
+        <p className="px-3">
+          <Trans>message</Trans>
+        </p>
+        <NavLink to="/">
+          <Trans>button</Trans>
+        </NavLink>
+      </Section>
     </Layout>
   );
 };
 
 export default Success;
+
+const Section = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  width: 100vw;
+  padding-top: 200px;
+  padding-bottom: 100px;
+  background: black;
+  color: white;
+  border-bottom: 2px solid white;
+`;
 
 export const query = graphql`
   query ($language: String!) {
@@ -87,7 +131,10 @@ export const query = graphql`
       }
     }
     allContentfulPage(
-      filter: { title: { eq: "Contact" }, node_locale: { eq: $language } }
+      filter: {
+        title: { in: ["Contact", "Team", "Équipe"] }
+        node_locale: { eq: $language }
+      }
     ) {
       edges {
         node {
@@ -110,6 +157,11 @@ export const query = graphql`
                   id
                   text
                 }
+                ... on ContentfulLink {
+                  id
+                  text
+                  url
+                }
               }
               textFields {
                 ... on ContentfulParagraph {
@@ -119,6 +171,25 @@ export const query = graphql`
                     text
                   }
                 }
+              }
+              images {
+                gatsbyImageData(placeholder: BLURRED)
+              }
+            }
+            ... on ContentfulTeamMember {
+              id
+              name
+              title
+              descriptions {
+                id
+                text {
+                  text
+                }
+              }
+              email
+              phone
+              image {
+                gatsbyImageData(placeholder: BLURRED, layout: CONSTRAINED)
               }
             }
             ... on ContentfulForm {

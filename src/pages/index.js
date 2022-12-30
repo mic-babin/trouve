@@ -32,7 +32,10 @@ export default function Homepage(props) {
   // const [section, setSection] = useState("hero");
 
   const handleHeaderColor = (color) => setHeaderColor(color);
-  let data = sessionStorage.getItem("firstLoader");
+
+  let data =
+    typeof window !== "undefined" ? sessionStorage.getItem("firstLoader") : "";
+
   const [showPage, setShowPage] = useState(false);
   const [showFirstLoader, setShowFirstLoader] = useState(
     data === "shown" ? false : true
