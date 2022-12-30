@@ -66,7 +66,9 @@ export default function Homepage(props) {
         },
         { threshold: [0.1] }
       );
-      observer.observe(document.querySelector("#hero"));
+      if (document.querySelector("#hero")) {
+        observer.observe(document.querySelector("#hero"));
+      }
     }
 
     return () => {
