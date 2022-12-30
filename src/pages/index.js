@@ -33,21 +33,21 @@ export default function Homepage(props) {
 
   const handleHeaderColor = (color) => setHeaderColor(color);
 
-  let data =
-    typeof window !== "undefined" ? sessionStorage.getItem("firstLoader") : "";
+  // let data =
+  //   typeof window !== "undefined" ? sessionStorage.getItem("firstLoader") : "";
 
   const [showPage, setShowPage] = useState(false);
-  const [showFirstLoader, setShowFirstLoader] = useState(
-    data === "shown" ? false : true
-  );
-  // const [showFirstLoader, setShowFirstLoader] = useState(true);
+  // const [showFirstLoader, setShowFirstLoader] = useState(
+  //   data === "shown" ? false : true
+  // );
+  const [showFirstLoader, setShowFirstLoader] = useState(true);
   useEffect(() => {
     if (showFirstLoader) {
       setTimeout(() => {
         setShowFirstLoader(false);
-        if (typeof window !== "undefined") {
-          sessionStorage.setItem("firstLoader", "shown");
-        }
+        // if (typeof window !== "undefined") {
+        //   sessionStorage.setItem("firstLoader", "shown");
+        // }
       }, 2100);
     }
     if (!showPage) {
