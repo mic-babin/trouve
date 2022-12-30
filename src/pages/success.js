@@ -4,7 +4,7 @@ import { graphql } from "gatsby";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Loader from "../components/common/loader.component";
-// import { NavLink } from "../components/styled-components/nav-link.style";
+import { NavLink } from "../components/styled-components/nav-link.style";
 import { Trans } from "gatsby-plugin-react-i18next";
 
 const Success = (props) => {
@@ -33,7 +33,7 @@ const Success = (props) => {
       showPage={showPage}
     >
       {!showPage && <Loader />}
-      {/* <Section>
+      <Section>
         <h1>
           <Trans>title</Trans>
         </h1>
@@ -43,7 +43,7 @@ const Success = (props) => {
         <NavLink to="/">
           <Trans>button</Trans>
         </NavLink>
-      </Section> */}
+      </Section>
     </Layout>
   );
 };

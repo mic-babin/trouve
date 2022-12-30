@@ -5,6 +5,7 @@ import * as sections from "../components/home/index-sections.component";
 import Fallback from "../components/fallback.component";
 // import { SEO } from "../components/seo";
 import { useState, useEffect, useRef } from "react";
+import FirstLoader from "../components/common/first-loader.component";
 
 export default function Homepage(props) {
   const path = props.path;
@@ -20,23 +21,32 @@ export default function Homepage(props) {
   const home = props.data.allContentfulPage.edges[0].node.sections;
   console.log(home);
   const layout = useRef();
-
+  const loader = home.filter(
+    (section) =>
+      section.id === "92e9cacb-db9a-506c-8711-563d732976d5" ||
+      section.id === "0fa3a0bf-6404-5dd4-b9da-129729d5e326"
+  )[0];
   const [showContact, setShowContact] = useState(false);
   const [headerColor, setHeaderColor] = useState("transparent");
-  // const [section, setSection] = useState("hero");
 
   const handleHeaderColor = (color) => setHeaderColor(color);
 
   const [showPage, setShowPage] = useState(false);
+  const [showLoader, setShowLoader] = useState(true);
   console.log(showPage);
   useEffect(() => {
+    if (showLoader) {
+      setTimeout(() => {
+        setShowLoader(false);
+      }, 2100);
+    }
     if (!showPage) {
       setTimeout(() => {
         setShowPage(true);
       }, 1);
     }
 
-    if (showPage) {
+    if (showPage && !showLoader) {
       var observer = new IntersectionObserver(
         function (entries) {
           if (!entries[0].isIntersecting === true) {
@@ -53,11 +63,11 @@ export default function Homepage(props) {
     }
 
     return () => {
-      if (showPage) {
+      if (showPage && !showLoader) {
         observer.disconnect();
       }
     };
-  }, [showPage]);
+  }, [showPage, showLoader]);
 
   return (
     <div ref={layout}>
@@ -68,9 +78,12 @@ export default function Homepage(props) {
         setShowContact={setShowContact}
         headerColor={headerColor}
         path={path}
+        showPage={showPage}
       >
         <div id="top"></div>
+        <FirstLoader image={loader} show={showLoader}></FirstLoader>
         {showPage &&
+          !showLoader &&
           home.map((section) => {
             const { id, type, ...componentProps } = section;
             const Component = sections[type] || Fallback;
@@ -150,6 +163,12 @@ export const query = graphql`
         node {
           id
           sections {
+            ... on ContentfulLoader {
+              id
+              loaderImage {
+                gatsbyImageData(placeholder: BLURRED)
+              }
+            }
             ... on ContentfulSection {
               id
               type
