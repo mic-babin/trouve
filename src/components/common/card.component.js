@@ -111,7 +111,7 @@ const Card = ({ data, titleHeight, titleMargin }) => {
 
   useEffect(() => {
     if (name) handleIsEmployee();
-    if (!hovered) {
+    if (hovered) {
       // OPEN
       cardWrapperControls.start({
         height: isMedium
