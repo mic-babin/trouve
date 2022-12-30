@@ -191,7 +191,7 @@ const FileInput = styled(Input)`
   opacity: 0;
   position: absolute;
   z-index: 2;
-  height: 100%;
+  height: 50px;
   width: 210px;
   cursor: pointer;
 
