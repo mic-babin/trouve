@@ -69,6 +69,9 @@ const Section = styled.div`
   width: 100vw;
   padding-top: 200px;
   padding-bottom: 100px;
+  padding-left: 15px;
+  padding-right: 15px;
+  text-align: center;
   background: black;
   color: white;
   border-bottom: 2px solid white;
