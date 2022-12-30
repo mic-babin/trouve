@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 const Loader = () => {
   return (
     <Wrapper>
-      <div class="loadingio-spinner-eclipse-a54yjl7evdn">
-        <div class="ldio-yhfkxwg3sg">
+      <div className="loadingio-spinner-eclipse-a54yjl7evdn">
+        <div className="ldio-yhfkxwg3sg">
           <div></div>
         </div>
       </div>

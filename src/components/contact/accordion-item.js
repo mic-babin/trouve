@@ -37,7 +37,7 @@ const AccordionItem = ({ text, index }) => {
           easeInOut: 0.3,
         }}
       >
-        {text.childContentfulParagraphTextTextNode.text}
+        {text.childContentfulParagraphTextTextNode?.text || text.text.text}
       </Body>
     </div>
   );

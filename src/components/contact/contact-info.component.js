@@ -5,6 +5,7 @@ import ContactAccordion from "./contact-accordion.component";
 
 const ContactInfo = ({ data }) => {
   const { title, textFields, components } = data;
+  console.log(data);
 
   const getHref = (el) => {
     switch (el.type) {

@@ -42,7 +42,9 @@ export default function Homepage(props) {
     if (showFirstLoader) {
       setTimeout(() => {
         setShowFirstLoader(false);
-        sessionStorage.setItem("firstLoader", "shown");
+        if (typeof window !== "undefined") {
+          sessionStorage.setItem("firstLoader", "shown");
+        }
       }, 2100);
     }
     if (!showPage) {
