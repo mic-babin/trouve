@@ -22,7 +22,7 @@ const Menu = ({ setShowContact, showContact, contact }) => {
   // TODO change title for id
   const contactInfo = sections[0];
   const contactForm = sections[1];
-  const close = contactInfo.link.text;
+  const close = contactInfo ? contactInfo.link.text : "";
   const handleCloseContact = () => setShowContact(false);
 
   const isMedium = useIsMedium();
