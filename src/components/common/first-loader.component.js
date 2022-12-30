@@ -8,6 +8,7 @@ import {
 } from "../animation/loader-animation";
 
 const FirstLoader = ({ image, show }) => {
+  console.log(image);
   const number = "100";
   const duration = 2;
   const [count, setCount] = useState("0");
@@ -36,16 +37,20 @@ const FirstLoader = ({ image, show }) => {
           initial="hidden"
           exit="hidden"
         >
-          <GatsbyImage
-            image={getImage(image.loaderImage.gatsbyImageData)}
-            alt="TODO"
-            className="img"
-          ></GatsbyImage>
-          <GatsbyImage
-            image={getImage(image.loaderImage.gatsbyImageData)}
-            alt="TODO"
-            className="img img-grey"
-          ></GatsbyImage>
+          {image.loaderImage && (
+            <>
+              <GatsbyImage
+                image={getImage(image.loaderImage.gatsbyImageData)}
+                alt="TODO"
+                className="img"
+              ></GatsbyImage>
+              <GatsbyImage
+                image={getImage(image.loaderImage.gatsbyImageData)}
+                alt="TODO"
+                className="img img-grey"
+              ></GatsbyImage>
+            </>
+          )}
           <Number>{count}%</Number>
         </Wrapper>
       )}
