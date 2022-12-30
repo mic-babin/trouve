@@ -40,16 +40,16 @@ export default function Homepage(props) {
   // const [showFirstLoader, setShowFirstLoader] = useState(
   //   data === "shown" ? false : true
   // );
-  const [showFirstLoader, setShowFirstLoader] = useState(true);
+  const [showFirstLoader, setShowFirstLoader] = useState(false);
   useEffect(() => {
-    if (showFirstLoader) {
-      setTimeout(() => {
-        setShowFirstLoader(false);
-        // if (typeof window !== "undefined") {
-        //   sessionStorage.setItem("firstLoader", "shown");
-        // }
-      }, 2100);
-    }
+    // if (showFirstLoader) {
+    //   setTimeout(() => {
+    //     setShowFirstLoader(false);
+    //     // if (typeof window !== "undefined") {
+    //     //   sessionStorage.setItem("firstLoader", "shown");
+    //     // }
+    //   }, 2100);
+    // }
     if (!showPage) {
       setTimeout(() => {
         setShowPage(true);
