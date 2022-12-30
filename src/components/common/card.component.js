@@ -9,7 +9,7 @@ import { useIsXSmall } from "../../utils/media-query.hook";
 import { useIsXXSmall } from "../../utils/media-query.hook";
 import { useIsSmall } from "../../utils/media-query.hook";
 
-const Card = ({ data, titleHeight }) => {
+const Card = ({ data, titleHeight, titleMargin }) => {
   const middleCol = useRef();
   const { name, title, textFields, images, image, descriptions, phone, email } =
     data;
@@ -77,8 +77,26 @@ const Card = ({ data, titleHeight }) => {
         ? "-90vw"
         : "-45vw";
 
-    if (title.includes("PROCESS")) return "-30vw";
-    if (title.includes("RECRUT")) return "-22vw";
+    if (title.includes("PROCESS"))
+      return isXXSmall
+        ? "-150vw"
+        : isXSmall
+        ? "-130vw"
+        : isSmall
+        ? "-130vw"
+        : isMedium
+        ? "-100vw"
+        : "-58vw";
+    if (title.includes("RECRUT"))
+      return isXXSmall
+        ? "-120vw"
+        : isXSmall
+        ? "-93vw"
+        : isSmall
+        ? "-75vw"
+        : isMedium
+        ? "-60vw"
+        : "-40vw";
     if (title.includes("TALENT")) return "-122vw";
 
     return "-200px";
@@ -93,7 +111,7 @@ const Card = ({ data, titleHeight }) => {
 
   useEffect(() => {
     if (name) handleIsEmployee();
-    if (hovered) {
+    if (!hovered) {
       // OPEN
       cardWrapperControls.start({
         height: isMedium
@@ -115,7 +133,7 @@ const Card = ({ data, titleHeight }) => {
       });
       titleControls.start({
         marginTop: "0px",
-        width: !isMedium ? "330px" : "90%",
+        width: !isMedium ? "330px" : isXSmall ? "100%" : "90%",
         fontSize: "30px",
         lineHeight: "35px",
         transition: { duration: 0.75 },
@@ -151,8 +169,22 @@ const Card = ({ data, titleHeight }) => {
       titleControls.start({
         marginTop: titleHeight || "-33px",
         width: isMedium ? "100%" : "1000px",
-        fontSize: isMedium ? "50px" : "65px",
-        lineHeight: "70px",
+        fontSize:
+          isXXSmall && !isEmployee
+            ? "30px"
+            : isXSmall && !isEmployee
+            ? "35px"
+            : isMedium
+            ? "50px"
+            : "65px",
+        lineHeight:
+          isXXSmall && !isEmployee
+            ? "33px"
+            : isXSmall && !isEmployee
+            ? "34px"
+            : isMedium
+            ? "55px"
+            : "70px",
         transition: { duration: 0.375 },
         type: "linear",
       });
@@ -212,11 +244,8 @@ const Card = ({ data, titleHeight }) => {
                 textFields.map((el, index) => (
                   <Description
                     key={el.id}
-                    className={
-                      el.id === "0d9059c5-50af-562a-9699-22c1c143dd15"
-                        ? "mt-5 pt-2 mt-lg-0 "
-                        : "mt-3 mt-lg-0 "
-                    }
+                    className="mt-3 mt-lg-0 "
+                    style={{ paddingTop: titleMargin }}
                   >
                     {el.text.text.split(" ").map((word, index) => (
                       <motion.span
@@ -309,7 +338,11 @@ const Card = ({ data, titleHeight }) => {
                 }}
                 className="img-wrapper"
               >
-                <Image image={getImage(img.gatsbyImageData)} alt="TODO"></Image>
+                <Image
+                  image={getImage(img.gatsbyImageData)}
+                  alt="TODO"
+                  class="img"
+                ></Image>
               </ImageWrapper>
             ))}
           {image && (
@@ -325,7 +358,12 @@ const Card = ({ data, titleHeight }) => {
               }}
               className="img-wrapper"
             >
-              <Image image={getImage(image.gatsbyImageData)} alt="TODO"></Image>
+              <Image
+                test={middleCol.current.offsetHeight}
+                image={getImage(image.gatsbyImageData)}
+                style={{ height: middleCol.current.offsetHeight }}
+                alt="TODO"
+              ></Image>
             </ImageWrapper>
           )}
         </div>
@@ -338,6 +376,8 @@ export default Card;
 
 const Image = styled(GatsbyImage)`
   object-position: top;
+
+  height: ${(props) => props.test};
 `;
 
 const Title = styled(motion.h2)`
@@ -390,6 +430,10 @@ const ImageWrapper = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  /* .img {
+    height: 100%;
+  } */
 `;
 
 const SubTitle = styled(motion.h3)`

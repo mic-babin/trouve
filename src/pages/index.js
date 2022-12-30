@@ -22,7 +22,6 @@ export default function Homepage(props) {
       section.id === "6609d98c-4bf8-5936-9f03-9e293bbd3542"
   );
   const home = props.data.allContentfulPage.edges[0].node.sections;
-  console.log(home);
   const layout = useRef();
   const loader = home.filter(
     (section) =>
@@ -36,7 +35,7 @@ export default function Homepage(props) {
 
   const [showPage, setShowPage] = useState(false);
   const [showLoader, setShowLoader] = useState(data === "shown" ? false : true);
-  console.log(showPage);
+
   useEffect(() => {
     if (showLoader) {
       setTimeout(() => {

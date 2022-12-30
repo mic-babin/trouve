@@ -8,8 +8,6 @@ import {
 } from "../animation/loader-animation";
 
 const FirstLoader = ({ image, show }) => {
-  console.log(show);
-  console.log(image.loaderImage);
   const number = "100";
   const duration = 2;
   const [count, setCount] = useState("0");
