@@ -97,7 +97,16 @@ const Card = ({ data, titleHeight, titleMargin }) => {
         : isMedium
         ? "-60vw"
         : "-40vw";
-    if (title.includes("TALENT")) return "-122vw";
+    if (title.includes("TALENT"))
+      return isXXSmall
+        ? "-150vw"
+        : isXSmall
+        ? "-120vw"
+        : isSmall
+        ? "-75vw"
+        : isMedium
+        ? "-60vw"
+        : "-40vw";
 
     return "-200px";
   };
@@ -358,12 +367,7 @@ const Card = ({ data, titleHeight, titleMargin }) => {
               }}
               className="img-wrapper"
             >
-              <Image
-                test={middleCol.current.offsetHeight}
-                image={getImage(image.gatsbyImageData)}
-                style={{ height: middleCol.current.offsetHeight }}
-                alt="TODO"
-              ></Image>
+              <Image image={getImage(image.gatsbyImageData)} alt="TODO"></Image>
             </ImageWrapper>
           )}
         </div>
@@ -376,8 +380,6 @@ export default Card;
 
 const Image = styled(GatsbyImage)`
   object-position: top;
-
-  height: ${(props) => props.test};
 `;
 
 const Title = styled(motion.h2)`
