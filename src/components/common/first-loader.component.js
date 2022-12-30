@@ -37,7 +37,7 @@ const FirstLoader = ({ image, show }) => {
           initial="hidden"
           exit="hidden"
         >
-          {image.loaderImage && (
+          {image && (
             <>
               <GatsbyImage
                 image={getImage(image.loaderImage.gatsbyImageData)}
