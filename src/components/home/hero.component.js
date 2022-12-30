@@ -1,11 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import {
-  useIsMedium,
-  useIsXSmall,
-  useIsLarge,
-} from "../../utils/media-query.hook";
+import { useIsMedium, useIsXSmall } from "../../utils/media-query.hook";
 import { motion } from "framer-motion";
 import Circle from "../animation/circle.components";
 import { useEffect, useState } from "react";

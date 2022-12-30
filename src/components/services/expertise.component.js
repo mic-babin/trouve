@@ -86,7 +86,7 @@ const Expertise = ({ expertise }) => {
               )}
               {link && (
                 <HeroLink
-                  as={motion.div}
+                  as={motion.a}
                   className="pointer"
                   href={link.url}
                   target="_blank"

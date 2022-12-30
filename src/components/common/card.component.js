@@ -218,9 +218,10 @@ const Card = ({ data, titleHeight, titleMargin }) => {
     subTitleControls,
     titleControls,
     titleHeight,
-    getMarc,
-    getImageHeight,
     isMedium,
+    isEmployee,
+    isXSmall,
+    isXXSmall,
   ]);
   return (
     <CardWrapper

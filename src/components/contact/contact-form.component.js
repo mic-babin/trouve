@@ -1,12 +1,6 @@
 import React from "react";
-// import { graphql, useStaticQuery } from "gatsby";
 import styled from "styled-components";
-// import Modal from "react-bootstrap/Modal";
 import { useState } from "react";
-// import InputMask from "react-input-mask";
-// import axios from "axios";
-// import { motion } from "framer-motion";
-import { useI18next } from "gatsby-plugin-react-i18next";
 
 function ContactForm({ data }) {
   const { formFields, button } = data;
@@ -15,9 +9,6 @@ function ContactForm({ data }) {
   );
   const textArea = formFields.filter((field) => field.type === "textArea")[0];
   const fileUpload = formFields.filter((field) => field.type === "file")[0];
-
-  const { i18n } = useI18next();
-  const lang = i18n.language;
 
   const defaultFields = {
     firstName: "",
@@ -209,11 +200,6 @@ const FileInput = styled(Input)`
   }*/
 `;
 
-const FileInputEn = styled(FileInput)`
-  /* &::before {
-    content: "ATTACH CV HERE";
-  }  */
-`;
 const Number = styled.div`
   font-family: "Neue-Italic";
   font-size: 14px;

@@ -2,11 +2,9 @@ import React from "react";
 import { useI18next } from "gatsby-plugin-react-i18next";
 import styled from "styled-components";
 import { NavLink } from "../styled-components/nav-link.style";
-import { useIsXLarge } from "../../utils/media-query.hook";
 
 const LanguagesFooter = ({ langs }) => {
   const { languages, originalPath, t, i18n } = useI18next();
-  const isXLarge = useIsXLarge();
 
   const getLang = (lng) => {
     return langs.value

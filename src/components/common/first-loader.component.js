@@ -59,8 +59,6 @@ const FirstLoader = ({ image, show }) => {
 
 export default FirstLoader;
 
-const vari = 30;
-
 const Wrapper = styled(motion.div)`
   position: fixed;
   top: 0;

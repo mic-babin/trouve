@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import { MenuButton } from "../styled-components/menu-button.style";
 import { Logo } from "../styled-components/logo.style";
-import { GatsbyImage } from "gatsby-plugin-image";
 import ContactInfo from "../contact/contact-info.component";
 import ContactForm from "../contact/contact-form.component";
 import Circle from "../animation/bg-circle.components";
@@ -13,7 +12,6 @@ import { ModalMediumAnimation } from "../animation/modal-medium.animation";
 import { useIsMedium } from "../../utils/media-query.hook";
 import { useIsLarge } from "../../utils/media-query.hook";
 import { useIsXLarge } from "../../utils/media-query.hook";
-import { Link } from "gatsby-plugin-react-i18next";
 import LogoSrc from "../../assets/img/trouve.svg";
 import { useEffect, useState, useRef } from "react";
 

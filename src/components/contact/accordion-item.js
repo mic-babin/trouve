@@ -5,7 +5,7 @@ import { motion, useAnimationControls } from "framer-motion";
 import { useIsXXSmall } from "../../utils/media-query.hook";
 
 const AccordionItem = ({ text, index }) => {
-  const [open, setOpen] = useState(index == 0 ? true : false);
+  const [open, setOpen] = useState(index === 0 ? true : false);
   const handleEnter = () => setOpen(true);
   const handleLeave = () => setOpen(false);
   const bodyControls = useAnimationControls();
@@ -23,7 +23,7 @@ const AccordionItem = ({ text, index }) => {
         height: "0px",
       });
     }
-  }, [open]);
+  }, [open, bodyControls, isXXSmall]);
 
   return (
     <div onMouseEnter={() => handleEnter()} onMouseLeave={() => handleLeave()}>
