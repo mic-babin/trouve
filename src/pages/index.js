@@ -11,6 +11,8 @@ export default function Homepage(props) {
   const path = props.path;
   const menu = props.data.allContentfulHeader.edges[0].node;
 
+  let data = window != undefined ? sessionStorage.getItem("loader") : "";
+
   const contact = props.data.allContentfulPage.edges[1].node.sections.filter(
     (section) =>
       section.id === "b8dc3482-8f6b-52e3-9c2a-cdf3971f3a76" ||
@@ -32,11 +34,14 @@ export default function Homepage(props) {
   const handleHeaderColor = (color) => setHeaderColor(color);
 
   const [showPage, setShowPage] = useState(false);
-  const [showLoader, setShowLoader] = useState(true);
+  const [showLoader, setShowLoader] = useState(data === "shown" ? false : true);
   console.log(showPage);
   useEffect(() => {
     if (showLoader) {
       setTimeout(() => {
+        if (window !== undefined) {
+          sessionStorage.setItem("loader", "shown");
+        }
         setShowLoader(false);
       }, 2100);
     }
