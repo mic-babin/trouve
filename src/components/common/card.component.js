@@ -18,7 +18,6 @@ const Card = ({ data, titleHeight }) => {
   const titleControls = useAnimationControls();
   const subTitleControls = useAnimationControls();
   const subTitleClosedControls = useAnimationControls();
-  console.log(textFields);
 
   const [isEmployee, setIsEmployee] = useState(false);
   const handleIsEmployee = () => setIsEmployee(true);
@@ -93,7 +92,6 @@ const Card = ({ data, titleHeight }) => {
   };
 
   useEffect(() => {
-    console.log("middleCol", middleCol.current.clientHeight);
     if (name) handleIsEmployee();
     if (hovered) {
       // OPEN
