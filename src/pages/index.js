@@ -40,7 +40,7 @@ export default function Homepage(props) {
   // const [showFirstLoader, setShowFirstLoader] = useState(
   //   data === "shown" ? false : true
   // );
-  const [showFirstLoader, setShowFirstLoader] = useState(false);
+  // const [showFirstLoader, setShowFirstLoader] = useState(false);
   useEffect(() => {
     // if (showFirstLoader) {
     //   setTimeout(() => {
@@ -55,7 +55,7 @@ export default function Homepage(props) {
         setShowPage(true);
       }, 1);
     }
-    if (showPage && !showFirstLoader) {
+    if (showPage) {
       var observer = new IntersectionObserver(
         function (entries) {
           if (!entries[0].isIntersecting === true) {
@@ -72,11 +72,11 @@ export default function Homepage(props) {
     }
 
     return () => {
-      if (showPage && !showFirstLoader) {
+      if (showPage) {
         observer.disconnect();
       }
     };
-  }, [showPage, showFirstLoader]);
+  }, [showPage]);
 
   return (
     <div ref={layout}>
@@ -89,11 +89,10 @@ export default function Homepage(props) {
         path={path}
         showPage={showPage}
       >
-        <FirstLoader image={firstLoader} show={showFirstLoader} />
+        {/* <FirstLoader image={firstLoader} show={showFirstLoader} /> */}
         {!showPage && <Loader />}
         <div id="top"></div>
         {showPage &&
-          !showFirstLoader &&
           home.map((section) => {
             const { id, type, ...componentProps } = section;
             const Component = sections[type] || Fallback;
