@@ -33,6 +33,7 @@ function ContactForm({ data }) {
             name="fileForm"
             enctype="multipart/form-data"
             data-netlify="true"
+            data-netlify-honeypot="bot-field"
           >
             <p>
               <label>
