@@ -1,117 +1,105 @@
 import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
+import { navigate } from "gatsby-link";
+
+function encode(data) {
+  const formData = new FormData();
+
+  for (const key of Object.keys(data)) {
+    formData.append(key, data[key]);
+  }
+
+  return formData;
+}
 
 function ContactForm({ data }) {
-  const { formFields, button } = data;
-  const inputs = formFields.filter(
-    (field) => field.type !== "textArea" && field.type !== "file"
-  );
-  const textArea = formFields.filter((field) => field.type === "textArea")[0];
-  const fileUpload = formFields.filter((field) => field.type === "file")[0];
+  // const { formFields, button } = data;
+  // const inputs = formFields.filter(
+  //   (field) => field.type !== "textArea" && field.type !== "file"
+  // );
+  // const textArea = formFields.filter((field) => field.type === "textArea")[0];
+  // const fileUpload = formFields.filter((field) => field.type === "file")[0];
+  const [state, setState] = useState({});
 
-  const defaultFields = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    linkedIn: "",
-    resume: "",
-    message: "",
+  const handleChange = (e) => {
+    setState({ ...state, [e.target.name]: e.target.value });
   };
-  const [fields, setFields] = useState(defaultFields);
-  const [fileUploaded, setFileUploaded] = useState(false);
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    if (name === "resume") {
-      setFileUploaded(true);
+  const handleAttachment = (e) => {
+    setState({ ...state, [e.target.name]: e.target.files[0] });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    fetch("/", {
+      method: "POST",
+      body: encode({
+        "form-name": form.getAttribute("name"),
+        ...state,
+      }),
+    })
+      .then(() => navigate(form.getAttribute("action")))
+      .catch((error) => alert(error));
+  };
+
+  function encode(data) {
+    const formData = new FormData();
+
+    for (const key of Object.keys(data)) {
+      formData.append(key, data[key]);
     }
-    setFields({ ...fields, [name]: value });
-  };
 
-  const getFileName = () => {
-    return fields["resume"]
-      .split("\\")
-      [fields["resume"].split("\\").length - 1].toUpperCase();
-  };
-
-  const resetResumeField = () => {
-    setFields({ ...fields, resume: "" });
-    setFileUploaded(false);
-  };
+    return formData;
+  }
 
   return (
     <>
       <section className="d-flex flex-column justify-content-center h-100">
         <div className="">
-          <Form
-            name="contact-form"
+          <form
+            name="file-upload"
             method="post"
-            netlify-honeypot="bot-field"
+            action="/success/"
             data-netlify="true"
-            action="/success"
-            enctype="multipart/form-data"
-            className="d-flex flex-column"
+            data-netlify-honeypot="bot-field"
+            onSubmit={handleSubmit}
           >
-            <input type="hidden" name="bot-field" />
-            <input type="hidden" name="form-name" value="contact-form" />
-            {inputs &&
-              inputs.map((content, index) => (
-                <InputGroup
-                  key={content.id}
-                  className="d-flex flex-align-start align-items-center"
-                >
-                  <Number>0{index + 1}</Number>
-                  <Input
-                    type={content.type}
-                    placeholder={content.label}
-                    required={content.required}
-                    onChange={handleChange}
-                    name={content.fieldName}
-                    value={fields[content.fieldName]}
-                  />
-                </InputGroup>
-              ))}
-            <InputGroup className="d-flex flex-align-start align-items-center">
-              <Number>05</Number>
-              {!fileUploaded && (
-                <>
-                  <FileInput
-                    type="file"
-                    required={fileUpload.required}
-                    onChange={handleChange}
-                    name={fileUpload.fieldName}
-                    value={fields[fileUpload.fieldName]}
-                  />
-                  <Label for="file">{fileUpload.label}</Label>
-                </>
-              )}
-              {fileUploaded && (
-                <div className="d-flex justify-content-between w-100">
-                  <Label>{getFileName()}</Label>
-
-                  <Label onClick={resetResumeField} className="pointer">
-                    &#x2715;
-                  </Label>
-                </div>
-              )}
-            </InputGroup>
-            <div className="d-flex flex-align-start align-items-center">
-              <Number>06</Number>
-              <Label>{textArea.label}</Label>
-            </div>
-            <TextArea
-              required={textArea.required}
-              onChange={handleChange}
-              name={textArea.fieldName}
-              value={fields[textArea.fieldName]}
-            />
-            {button && (
-              <FormButton type="submit" className="align-self-end mt-3">
-                {button}
-              </FormButton>
-            )}
-          </Form>
+            {/* The `form-name` hidden field is required to support form submissions without JavaScript */}
+            <input type="hidden" name="form-name" value="file-upload" />
+            <p hidden>
+              <label>
+                Don’t fill this out:{" "}
+                <input name="bot-field" onChange={handleChange} />
+              </label>
+            </p>
+            <p>
+              <label>
+                Your name:
+                <br />
+                <input type="text" name="name" onChange={handleChange} />
+              </label>
+            </p>
+            <p>
+              <label>
+                File:
+                <br />
+                <input
+                  type="file"
+                  name="attachment"
+                  onChange={handleAttachment}
+                />
+              </label>
+            </p>
+            <p>
+              <button type="submit">Send</button>
+            </p>
+            <p>
+              Note: multiple file uploads are not supported by Netlify at this
+              time.
+            </p>
+          </form>
         </div>
       </section>
     </>
@@ -120,89 +108,6 @@ function ContactForm({ data }) {
 
 const Form = styled.form`
   display: block;
-`;
-
-const FormButton = styled.button`
-  font-size: 18px;
-  font-weight: 500;
-  color: black;
-  padding: 5px 0;
-  text-decoration: none;
-  background-color: transparent;
-  border: none;
-  transition: all 0.2s ease-in;
-  &:hover {
-    transform: scale(1.1);
-  }
-`;
-
-const Label = styled.div`
-  padding: 1rem 1.5rem;
-`;
-
-const InputGroup = styled.div`
-  border-bottom: 1.5px solid black;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  border: none;
-  padding: 1rem 1.5rem;
-
-  &:focus {
-    border: none;
-    outline: none !important;
-  }
-
-  ::placeholder {
-    color: black;
-    opacity: 1;
-  }
-
-  :-ms-input-placeholder {
-    color: black;
-  }
-
-  ::-ms-input-placeholder {
-    color: black;
-  }
-`;
-
-const TextArea = styled.textarea`
-  border: 1.5px solid black;
-  height: 135px;
-  resize: none;
-
-  &:focus {
-    outline: none !important;
-  }
-`;
-
-const FileInput = styled(Input)`
-  opacity: 0;
-  position: absolute;
-  z-index: 2;
-  height: 50px;
-  width: 210px;
-  cursor: pointer;
-
-  /* TODO add variable */
-  /* &::before {
-    content: "JOINDRE VOTRE CV ICI";
-    opacity: 1;
-    visibility: visible;
-    color: black;
-    display: inline;
-    outline: none;
-    white-space: nowrap;
-    margin-right: 100px;
-    cursor: pointer;
-  }*/
-`;
-
-const Number = styled.div`
-  font-family: "Neue-Italic";
-  font-size: 14px;
 `;
 
 export default ContactForm;
