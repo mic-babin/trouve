@@ -16,7 +16,7 @@ const authData = nodemailer.createTransport({
 
 exports.handler = async (event, context) => {
   const method = event.httpMethod;
-  const { firstName, lastName, email, linkedIn, file, message } = JSON.parse(
+  const { firstName, lastName, email, linkedIn, resume, message } = JSON.parse(
     event.body
   );
   // const from = "Formulaire de contact <noreply.lecoute@gmail.com>";
@@ -68,6 +68,7 @@ exports.handler = async (event, context) => {
                                                                                 <li>Nom: ${lastName}</li>
                                                                                 <li>Courriel: ${email}</li>
                                                                                 <li>LinkedIn: ${linkedIn}</li>
+                                                                                <li>resume: ${resume}</li>
                                                                                 <li>message: ${message}</li>
                                                                             </ul>
                                                                         </p>

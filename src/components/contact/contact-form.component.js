@@ -6,6 +6,8 @@ import { useState } from "react";
 import InputMask from "react-input-mask";
 import axios from "axios";
 import { motion } from "framer-motion";
+import { Trans } from "gatsby-plugin-react-i18next";
+import { NavLink } from "../styled-components/nav-link.style";
 
 function ContactForm({ data }) {
   const { title, formFields, button } = data;
@@ -27,11 +29,13 @@ function ContactForm({ data }) {
   const [show, setShow] = useState(false);
   const resetFields = () => {
     setFields(defaultFields);
+    setFileUploaded(false);
   };
+  const [fileUploaded, setFileUploaded] = useState(false);
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("hello");
     const { firstName, lastName, email, linkedIn, resume, message } = fields;
+    console.log(resume);
     try {
       await axios.post("/.netlify/functions/email", {
         firstName,
@@ -50,15 +54,29 @@ function ContactForm({ data }) {
   };
   const handleChange = (event) => {
     const { name, value } = event.target;
+    if (name === "resume") {
+      setFileUploaded(true);
+      console.log(value);
+    }
     setFields({ ...fields, [name]: value });
   };
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const getFileName = () => {
+    return fields["resume"]
+      .split("\\")
+      [fields["resume"].split("\\").length - 1].toUpperCase();
+  };
+
+  const resetResumeField = () => {
+    setFields({ ...fields, resume: "" });
+    setFileUploaded(false);
+  };
   return (
     <>
       <section className="d-flex flex-column justify-content-center h-100">
         <div className="">
-          {title && <H2 className="text-center">{title}</H2>}
           <Form
             // onSubmit={handleSubmit}
             className="d-flex flex-column"
@@ -84,15 +102,29 @@ function ContactForm({ data }) {
                 </InputGroup>
               ))}
             <InputGroup className="d-flex flex-align-start align-items-center">
-              <div>05</div>
-              <FileInput
-                type={fileUpload.type}
-                placeholder={fileUpload.label}
-                required={fileUpload.required}
-                onChange={handleChange}
-                name={fileUpload.fieldName}
-                value={fields[fileUpload.fieldName]}
-              />
+              <Number>05</Number>
+              {!fileUploaded && (
+                <>
+                  <FileInput
+                    type={fileUpload.type}
+                    placeholder={fileUpload.label}
+                    required={fileUpload.required}
+                    onChange={handleChange}
+                    name={fileUpload.fieldName}
+                    value={fields[fileUpload.fieldName]}
+                  />
+                  <Label htmlFor="file">{fileUpload.label}</Label>
+                </>
+              )}
+              {fileUploaded && (
+                <div className="d-flex justify-content-between w-100">
+                  <Label>{getFileName()}</Label>
+
+                  <Label onClick={resetResumeField} className="pointer">
+                    &#x2715;
+                  </Label>
+                </div>
+              )}
             </InputGroup>
             <div className="d-flex flex-align-start align-items-center">
               <div>06</div>
@@ -114,13 +146,17 @@ function ContactForm({ data }) {
       </section>
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Body>
-          <h3 className="p-3">Merci de communiquer avec moi</h3>
-          <p className="px-3">
-            Votre message a bien été envoyé et sera traité dans les plus bref
-            délais. Merci!
+          <h1 className="text-center">
+            <Trans>title</Trans>
+          </h1>
+          <p className="px-3 text-center pt-2 mb-0">
+            <Trans>message</Trans>
           </p>
+          <NavLink to="/">
+            <Trans>button</Trans>
+          </NavLink>
           <ModalButton className="pe-3" onClick={handleClose}>
-            Fermer
+            <Trans>close</Trans>
           </ModalButton>
         </Modal.Body>
       </Modal>
@@ -132,14 +168,17 @@ const Form = styled.form`
   display: block;
 `;
 
-const FormButton = styled.a`
+const FormButton = styled.button`
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 500;
   color: black;
-  padding: 0.75rem 0;
+  padding: 5px 0;
   text-decoration: none;
+  background-color: transparent;
+  border: none;
+  transition: all 0.2s ease-in;
   &:hover {
-    color: red;
+    transform: scale(1.1);
   }
 `;
 
@@ -148,10 +187,10 @@ const Label = styled.div`
 `;
 
 const InputGroup = styled.div`
-  border-bottom: 1px solid black;
+  border-bottom: 1.5px solid black;
 `;
 
-const Input = styled(InputMask)`
+const Input = styled.input`
   width: 100%;
   border: none;
   padding: 1rem 1.5rem;
@@ -176,8 +215,8 @@ const Input = styled(InputMask)`
 `;
 
 const TextArea = styled.textarea`
-  border: 1px solid black;
-  height: 85px;
+  border: 1.5px solid black;
+  height: 135px;
   resize: none;
 
   &:focus {
@@ -185,33 +224,25 @@ const TextArea = styled.textarea`
   }
 `;
 
-const H2 = styled.h2`
-  @media only screen and (max-width: 576px) {
-    font-size: 30px !important;
-  }
+const FileInput = styled(Input)`
+  opacity: 0;
+  position: absolute;
+  z-index: 2;
+  height: 50px;
+  width: 210px;
+  cursor: pointer;
 `;
+
+const Number = styled.div`
+  font-family: "Neue-Italic";
+  font-size: 14px;
+`;
+
+export default ContactForm;
 
 const ModalButton = styled.p`
   cursor: pointer;
   text-align: right;
   font-weight: bold;
-  color: #395266;
+  color: black;
 `;
-
-const FileInput = styled(Input)`
-  visibility: hidden;
-
-  /* TODO add variable */
-  &::before {
-    content: "SELECT SOME FILES";
-    visibility: visible;
-    color: transparent;
-    display: inline-block;
-    outline: none;
-    white-space: nowrap;
-    -webkit-user-select: none;
-    cursor: pointer;
-  }
-`;
-
-export default ContactForm;

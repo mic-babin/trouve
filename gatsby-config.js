@@ -71,5 +71,18 @@ module.exports = {
         },
       },
     },
+    {
+      resolve: "gatsby-plugin-firebase",
+      options: {
+        credentials: {
+          apiKey: "AIzaSyB--qL0bjAp8FC9K3xOKpiiTvFgGk0of5Y",
+          authDomain: "trouve-mtl.firebaseapp.com",
+          projectId: "trouve-mtl",
+          storageBucket: "trouve-mtl.appspot.com",
+          messagingSenderId: "688256534695",
+          appId: "1:688256534695:web:11ab18501bfb275ec6f382",
+        },
+      },
+    },
   ],
 };

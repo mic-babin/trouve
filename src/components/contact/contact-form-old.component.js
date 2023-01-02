@@ -185,19 +185,6 @@ const FileInput = styled(Input)`
   height: 50px;
   width: 210px;
   cursor: pointer;
-
-  /* TODO add variable */
-  /* &::before {
-    content: "JOINDRE VOTRE CV ICI";
-    opacity: 1;
-    visibility: visible;
-    color: black;
-    display: inline;
-    outline: none;
-    white-space: nowrap;
-    margin-right: 100px;
-    cursor: pointer;
-  }*/
 `;
 
 const Number = styled.div`
