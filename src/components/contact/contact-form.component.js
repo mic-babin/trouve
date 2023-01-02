@@ -45,7 +45,7 @@ function ContactForm({ data }) {
       <section className="d-flex flex-column justify-content-center h-100">
         <div className="">
           <Form
-            name="contact-form"
+            name="contact-form-file"
             method="post"
             netlify-honeypot="bot-field"
             data-netlify="true"
@@ -54,7 +54,7 @@ function ContactForm({ data }) {
             className="d-flex flex-column"
           >
             <input type="hidden" name="bot-field" />
-            <input type="hidden" name="form-name" value="contact-form" />
+            <input type="hidden" name="form-name" value="contact-form-file" />
             {inputs &&
               inputs.map((content, index) => (
                 <InputGroup
