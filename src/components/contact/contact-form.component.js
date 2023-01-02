@@ -1,9 +1,14 @@
 import React from "react";
+import { graphql, useStaticQuery } from "gatsby";
 import styled from "styled-components";
+import Modal from "react-bootstrap/Modal";
 import { useState } from "react";
+import InputMask from "react-input-mask";
+import axios from "axios";
+import { motion } from "framer-motion";
 
 function ContactForm({ data }) {
-  const { formFields, button } = data;
+  const { title, formFields, button } = data;
   const inputs = formFields.filter(
     (field) => field.type !== "textArea" && field.type !== "file"
   );
@@ -19,52 +24,58 @@ function ContactForm({ data }) {
     message: "",
   };
   const [fields, setFields] = useState(defaultFields);
-  const [fileUploaded, setFileUploaded] = useState(false);
-
+  const [show, setShow] = useState(false);
+  const resetFields = () => {
+    setFields(defaultFields);
+  };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    console.log("hello");
+    const { firstName, lastName, email, linkedIn, resume, message } = fields;
+    try {
+      await axios.post("/.netlify/functions/email", {
+        firstName,
+        lastName,
+        email,
+        linkedIn,
+        resume,
+        message,
+      });
+      resetFields();
+      handleShow();
+    } catch (error) {
+      alert("Une erreur est survenue");
+      console.log(error.response.data);
+    }
+  };
   const handleChange = (event) => {
     const { name, value } = event.target;
-    if (name === "resume") {
-      setFileUploaded(true);
-    }
     setFields({ ...fields, [name]: value });
   };
-
-  const getFileName = () => {
-    return fields["resume"]
-      .split("\\")
-      [fields["resume"].split("\\").length - 1].toUpperCase();
-  };
-
-  const resetResumeField = () => {
-    setFields({ ...fields, resume: "" });
-    setFileUploaded(false);
-  };
-
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   return (
     <>
       <section className="d-flex flex-column justify-content-center h-100">
         <div className="">
+          {title && <H2 className="text-center">{title}</H2>}
           <Form
-            name="contact-form-file"
-            method="post"
-            netlify-honeypot="bot-field"
-            data-netlify="true"
-            action="/success"
-            enctype="multipart/form-data"
+            // onSubmit={handleSubmit}
             className="d-flex flex-column"
           >
-            <input type="hidden" name="bot-field" />
-            <input type="hidden" name="form-name" value="contact-form-file" />
             {inputs &&
               inputs.map((content, index) => (
                 <InputGroup
                   key={content.id}
                   className="d-flex flex-align-start align-items-center"
                 >
-                  <Number>0{index + 1}</Number>
+                  <div>0{index + 1}</div>
                   <Input
                     type={content.type}
                     placeholder={content.label}
+                    mask={
+                      content.fieldName === "phone" ? "(+1) 999 999-9999" : null
+                    }
                     required={content.required}
                     onChange={handleChange}
                     name={content.fieldName}
@@ -73,31 +84,18 @@ function ContactForm({ data }) {
                 </InputGroup>
               ))}
             <InputGroup className="d-flex flex-align-start align-items-center">
-              <Number>05</Number>
-              {!fileUploaded && (
-                <>
-                  <FileInput
-                    type="file"
-                    required={fileUpload.required}
-                    onChange={handleChange}
-                    name={fileUpload.fieldName}
-                    value={fields[fileUpload.fieldName]}
-                  />
-                  <Label for="file">{fileUpload.label}</Label>
-                </>
-              )}
-              {fileUploaded && (
-                <div className="d-flex justify-content-between w-100">
-                  <Label>{getFileName()}</Label>
-
-                  <Label onClick={resetResumeField} className="pointer">
-                    &#x2715;
-                  </Label>
-                </div>
-              )}
+              <div>05</div>
+              <FileInput
+                type={fileUpload.type}
+                placeholder={fileUpload.label}
+                required={fileUpload.required}
+                onChange={handleChange}
+                name={fileUpload.fieldName}
+                value={fields[fileUpload.fieldName]}
+              />
             </InputGroup>
             <div className="d-flex flex-align-start align-items-center">
-              <Number>06</Number>
+              <div>06</div>
               <Label>{textArea.label}</Label>
             </div>
             <TextArea
@@ -107,13 +105,25 @@ function ContactForm({ data }) {
               value={fields[textArea.fieldName]}
             />
             {button && (
-              <FormButton type="submit" className="align-self-end mt-3">
+              <FormButton onClick={handleSubmit} className="align-self-end">
                 {button}
               </FormButton>
             )}
           </Form>
         </div>
       </section>
+      <Modal show={show} onHide={handleClose} centered>
+        <Modal.Body>
+          <h3 className="p-3">Merci de communiquer avec moi</h3>
+          <p className="px-3">
+            Votre message a bien été envoyé et sera traité dans les plus bref
+            délais. Merci!
+          </p>
+          <ModalButton className="pe-3" onClick={handleClose}>
+            Fermer
+          </ModalButton>
+        </Modal.Body>
+      </Modal>
     </>
   );
 }
@@ -122,17 +132,14 @@ const Form = styled.form`
   display: block;
 `;
 
-const FormButton = styled.button`
+const FormButton = styled.a`
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 600;
   color: black;
-  padding: 5px 0;
+  padding: 0.75rem 0;
   text-decoration: none;
-  background-color: transparent;
-  border: none;
-  transition: all 0.2s ease-in;
   &:hover {
-    transform: scale(1.1);
+    color: red;
   }
 `;
 
@@ -141,10 +148,10 @@ const Label = styled.div`
 `;
 
 const InputGroup = styled.div`
-  border-bottom: 1.5px solid black;
+  border-bottom: 1px solid black;
 `;
 
-const Input = styled.input`
+const Input = styled(InputMask)`
   width: 100%;
   border: none;
   padding: 1rem 1.5rem;
@@ -169,8 +176,8 @@ const Input = styled.input`
 `;
 
 const TextArea = styled.textarea`
-  border: 1.5px solid black;
-  height: 135px;
+  border: 1px solid black;
+  height: 85px;
   resize: none;
 
   &:focus {
@@ -178,31 +185,33 @@ const TextArea = styled.textarea`
   }
 `;
 
-const FileInput = styled(Input)`
-  opacity: 0;
-  position: absolute;
-  z-index: 2;
-  height: 50px;
-  width: 210px;
-  cursor: pointer;
-
-  /* TODO add variable */
-  /* &::before {
-    content: "JOINDRE VOTRE CV ICI";
-    opacity: 1;
-    visibility: visible;
-    color: black;
-    display: inline;
-    outline: none;
-    white-space: nowrap;
-    margin-right: 100px;
-    cursor: pointer;
-  }*/
+const H2 = styled.h2`
+  @media only screen and (max-width: 576px) {
+    font-size: 30px !important;
+  }
 `;
 
-const Number = styled.div`
-  font-family: "Neue-Italic";
-  font-size: 14px;
+const ModalButton = styled.p`
+  cursor: pointer;
+  text-align: right;
+  font-weight: bold;
+  color: #395266;
+`;
+
+const FileInput = styled(Input)`
+  visibility: hidden;
+
+  /* TODO add variable */
+  &::before {
+    content: "SELECT SOME FILES";
+    visibility: visible;
+    color: transparent;
+    display: inline-block;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+  }
 `;
 
 export default ContactForm;
