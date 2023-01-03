@@ -75,12 +75,12 @@ module.exports = {
       resolve: "gatsby-plugin-firebase-v9.0",
       options: {
         credentials: {
-          apiKey: "AIzaSyB--qL0bjAp8FC9K3xOKpiiTvFgGk0of5Y",
-          authDomain: "trouve-mtl.firebaseapp.com",
-          projectId: "trouve-mtl",
-          storageBucket: "trouve-mtl.appspot.com",
-          messagingSenderId: "688256534695",
-          appId: "1:688256534695:web:11ab18501bfb275ec6f382",
+          apiKey: process.env.GATSBY_API_KEY,
+          authDomain: process.env.GATSBY_AUTH_DOMAIN,
+          projectId: process.env.GATSBY_PROJECT_ID,
+          storageBucket: process.env.GATSBY_STORAGE_BUCKET,
+          messagingSenderId: process.env.GATSBY_MESSAGING_SENDER_ID,
+          appId: process.env.GATSBY_APP_ID,
         },
       },
     },
