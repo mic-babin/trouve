@@ -3,7 +3,7 @@ import { graphql } from "gatsby";
 import Layout from "../components/layout.component";
 import * as sections from "../components/home/index-sections.component";
 import Fallback from "../components/fallback.component";
-// import { SEO } from "../components/seo";
+import { SEO } from "../components/seo";
 import { useState, useEffect, useRef } from "react";
 import FirstLoader from "../components/common/first-loader.component";
 
@@ -100,7 +100,7 @@ export default function Homepage(props) {
   );
 }
 
-// export const Head = () => <SEO />;
+export const Head = () => <SEO />;
 
 export const query = graphql`
   query ($language: String!) {

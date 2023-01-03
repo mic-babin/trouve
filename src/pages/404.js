@@ -2,6 +2,7 @@ import React from "react";
 import Layout from "../components/layout.component";
 import { graphql } from "gatsby";
 import { useState } from "react";
+import { SEO } from "../components/seo";
 
 const Error = (props) => {
   const path = props.path;
@@ -29,7 +30,7 @@ const Error = (props) => {
 };
 
 export default Error;
-
+export const Head = () => <SEO title="404 - " />;
 export const query = graphql`
   query ($language: String!) {
     locales: allLocale(

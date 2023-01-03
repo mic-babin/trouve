@@ -6,9 +6,9 @@ import styled from "styled-components";
 import Loader from "../components/common/loader.component";
 import { NavLink } from "../components/styled-components/nav-link.style";
 import { Trans } from "gatsby-plugin-react-i18next";
+import { SEO } from "../components/seo";
 
 const Success = (props) => {
-  // const {t} = useTranslation();
   const path = props.path;
   const menu = props.data.allContentfulHeader.edges[0].node;
   const contact = props.data.allContentfulPage.edges[1].node.sections;
@@ -49,7 +49,7 @@ const Success = (props) => {
 };
 
 export default Success;
-
+export const Head = () => <SEO title="Merci - " />;
 const Section = styled.div`
   display: flex;
   flex-direction: column;

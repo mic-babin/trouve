@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import TeamHero from "../components/team/team-hero.component";
 import TeamMembers from "../components/team/team-members.component";
 import Loader from "../components/common/loader.component";
+import { SEO } from "../components/seo";
 
 const Equipe = (props) => {
   const path = props.path;
@@ -53,7 +54,7 @@ const Equipe = (props) => {
     </Layout>
   );
 };
-
+export const Head = () => <SEO title="Notre équipe - " />;
 export default Equipe;
 
 export const query = graphql`
