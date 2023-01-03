@@ -72,7 +72,7 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-plugin-firebase",
+      resolve: "gatsby-plugin-firebase-v9.0",
       options: {
         credentials: {
           apiKey: "AIzaSyB--qL0bjAp8FC9K3xOKpiiTvFgGk0of5Y",

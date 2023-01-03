@@ -1,16 +1,14 @@
 import React from "react";
-import { graphql, useStaticQuery } from "gatsby";
 import styled from "styled-components";
 import Modal from "react-bootstrap/Modal";
 import { useState } from "react";
-import InputMask from "react-input-mask";
 import axios from "axios";
-import { motion } from "framer-motion";
 import { Trans } from "gatsby-plugin-react-i18next";
 import { NavLink } from "../styled-components/nav-link.style";
+import FileUploader from "./upload-file.component";
 
 function ContactForm({ data }) {
-  const { title, formFields, button } = data;
+  const { formFields, button } = data;
   const inputs = formFields.filter(
     (field) => field.type !== "textArea" && field.type !== "file"
   );
@@ -31,6 +29,8 @@ function ContactForm({ data }) {
     setFields(defaultFields);
     setFileUploaded(false);
   };
+
+  console.log(fields);
   const [fileUploaded, setFileUploaded] = useState(false);
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -69,10 +69,6 @@ function ContactForm({ data }) {
       [fields["resume"].split("\\").length - 1].toUpperCase();
   };
 
-  const resetResumeField = () => {
-    setFields({ ...fields, resume: "" });
-    setFileUploaded(false);
-  };
   return (
     <>
       <section className="d-flex flex-column justify-content-center h-100">
@@ -87,7 +83,7 @@ function ContactForm({ data }) {
                   key={content.id}
                   className="d-flex flex-align-start align-items-center"
                 >
-                  <div>0{index + 1}</div>
+                  <Number>0{index + 1}</Number>
                   <Input
                     type={content.type}
                     placeholder={content.label}
@@ -101,33 +97,16 @@ function ContactForm({ data }) {
                   />
                 </InputGroup>
               ))}
-            <InputGroup className="d-flex flex-align-start align-items-center">
-              <Number>05</Number>
-              {!fileUploaded && (
-                <>
-                  <FileInput
-                    type={fileUpload.type}
-                    placeholder={fileUpload.label}
-                    required={fileUpload.required}
-                    onChange={handleChange}
-                    name={fileUpload.fieldName}
-                    value={fields[fileUpload.fieldName]}
-                  />
-                  <Label htmlFor="file">{fileUpload.label}</Label>
-                </>
-              )}
-              {fileUploaded && (
-                <div className="d-flex justify-content-between w-100">
-                  <Label>{getFileName()}</Label>
+            <FileUploader
+              fileUpload={fileUpload}
+              fileUploaded={fileUploaded}
+              setFileUploaded={setFileUploaded}
+              fields={fields}
+              setFields={setFields}
+            />
 
-                  <Label onClick={resetResumeField} className="pointer">
-                    &#x2715;
-                  </Label>
-                </div>
-              )}
-            </InputGroup>
             <div className="d-flex flex-align-start align-items-center">
-              <div>06</div>
+              <Number>06</Number>
               <Label>{textArea.label}</Label>
             </div>
             <TextArea
@@ -222,15 +201,6 @@ const TextArea = styled.textarea`
   &:focus {
     outline: none !important;
   }
-`;
-
-const FileInput = styled(Input)`
-  opacity: 0;
-  position: absolute;
-  z-index: 2;
-  height: 50px;
-  width: 210px;
-  cursor: pointer;
 `;
 
 const Number = styled.div`
