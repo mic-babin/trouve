@@ -29,13 +29,10 @@ function ContactForm({ data }) {
     setFields(defaultFields);
     setFileUploaded(false);
   };
-
-  console.log(fields);
   const [fileUploaded, setFileUploaded] = useState(false);
   const handleSubmit = async (event) => {
     event.preventDefault();
     const { firstName, lastName, email, linkedIn, resume, message } = fields;
-    console.log(resume);
     try {
       await axios.post("/.netlify/functions/email", {
         firstName,
@@ -56,7 +53,6 @@ function ContactForm({ data }) {
     const { name, value } = event.target;
     if (name === "resume") {
       setFileUploaded(true);
-      console.log(value);
     }
     setFields({ ...fields, [name]: value });
   };
