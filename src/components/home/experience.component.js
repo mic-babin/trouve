@@ -212,7 +212,16 @@ const Experience = ({ data }) => {
                         target="blank"
                         className="card-link"
                       >
-                        {link.text}
+                        <span className="mask">
+                          <div className="link-container">
+                            <span className="link-title1 title">
+                              {link.text}
+                            </span>
+                            <span className="link-title2 title">
+                              {link.text}
+                            </span>
+                          </div>
+                        </span>
                       </CardLink>
                     )}
                   </Description>
@@ -299,7 +308,8 @@ const ImageWrapper = styled.div`
     width: calc(100% + 20px);
     border-radius: 50%;
     z-index: 1;
-    margin: -10px;
+    margin: -9px;
+    transform: rotate(-90deg);
   }
   .img {
     transition: all 1s ease-in-out;
@@ -331,7 +341,7 @@ const CardLink = styled(NavLink)`
     z-index: 1;
     margin-right: 10px;
     transition: all 0.2s ease-in;
-    margin-bottom: 5px;
+    margin-bottom: 7px;
   }
 
   &:hover {
@@ -340,5 +350,54 @@ const CardLink = styled(NavLink)`
     &:before {
       width: 50px;
     }
+  }
+
+  /* Hide extra text */
+  .mask {
+    position: relative;
+    display: inline-block;
+    padding: 0;
+    height: 16px;
+    overflow: hidden;
+  }
+
+  .link-container {
+    transition: transform 0.3s ease;
+    transition-delay: 250ms;
+  }
+
+  .title {
+    display: block;
+
+    /*  Set same font-size and line height  */
+    font-size: 16px;
+    line-height: 16px;
+    transition: transform 0.3s ease;
+    transition-delay: 250ms;
+  }
+
+  .link-title1 {
+    transform-origin: right center;
+  }
+
+  .link-title2 {
+    transform-origin: left center;
+    transform: rotate(10deg);
+  }
+
+  /* Hover Action*/
+
+  /* Move up two texts (20px = font-size) */
+  &:hover .link-container {
+    transform: translateY(-16px);
+  }
+
+  /* Rotate texts a little bit */
+  &:hover .link-title1 {
+    transform: rotate(10deg);
+  }
+
+  &:hover .link-title2 {
+    transform: rotate(0);
   }
 `;

@@ -8,6 +8,7 @@ import { useIsMedium } from "../../utils/media-query.hook";
 import { useIsSmall } from "../../utils/media-query.hook";
 import Images from "./Images.component";
 import { useState } from "react";
+import AnimatedHeroLink from "../common/animated-hero-link.component";
 
 const Expertise = ({ expertise }) => {
   const { title, textFields, images, link } = expertise;
@@ -85,17 +86,7 @@ const Expertise = ({ expertise }) => {
                 </Paragraph>
               )}
               {link && (
-                <HeroLink
-                  as={motion.a}
-                  className="pointer"
-                  href={link.url}
-                  target="_blank"
-                  initial={{ opacity: 0, transform: "translateY(200px)" }}
-                  animate={{ opacity: 1, transform: "translateY(0px)" }}
-                  transition={{ duration: 1, delay: 4 }}
-                >
-                  {link.text}
-                </HeroLink>
+                <AnimatedHeroLink link={link} type={motion.a} color="white" />
               )}
               {!isMedium && <Images images={images}></Images>}
             </div>
@@ -206,33 +197,6 @@ const Title = styled(H1)`
   @media (max-width: 400px) {
     .w-wrapper:nth-of-type(2) {
       padding-left: 50px;
-    }
-  }
-`;
-
-const HeroLink = styled(NavLink)`
-  color: white;
-  padding-bottom: 50px;
-  position: relative;
-  overflow: visible;
-  transition: all 0.2s all;
-  letter-spacing: 1px;
-  &:before {
-    content: "";
-    display: inline-block;
-    width: 25px;
-    height: 1.5px;
-    background: white !important;
-    opacity: 1;
-    z-index: 1;
-    margin-right: 10px;
-    transition: all 0.2s ease-in;
-    margin-bottom: 5px;
-  }
-
-  &:hover {
-    &:before {
-      width: 50px;
     }
   }
 `;

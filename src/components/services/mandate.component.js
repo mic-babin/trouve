@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import Circle from "../animation/bg-circle.components";
 import { useState } from "react";
 import { useIsSmall } from "../../utils/media-query.hook";
+import AnimatedHeroLink from "../common/animated-hero-link.component";
 
 const Mandate = ({ mandate, setShowContact }) => {
   const { title, textFields, link } = mandate;
@@ -83,19 +84,9 @@ const Mandate = ({ mandate, setShowContact }) => {
                 </Paragraph>
               ))}
             {link && (
-              <HeroLink
-                as={motion.div}
-                className="pointer"
-                initial={{ opacity: 0, transform: "translateX(200px)" }}
-                animate={
-                  isInView && { opacity: 1, transform: "translateX(0px)" }
-                }
-                transition={{ duration: 0.5, delay: 2.2 }}
-                viewport={{ once: true }}
-                onClick={setShowContact}
-              >
-                {link.text}
-              </HeroLink>
+              <div onClick={setShowContact}>
+                <AnimatedHeroLink link={link} type={motion.div} color="black" />
+              </div>
             )}
           </motion.div>
         </div>
@@ -156,35 +147,6 @@ const H2 = styled.h2`
   }
 `;
 
-const HeroLink = styled(NavLink)`
-  color: black;
-  margin-top: -10px;
-  padding-bottom: 50px;
-  position: relative;
-  overflow: visible;
-  transition: all 0.2s all;
-  letter-spacing: 1px;
-  z-index: 1;
-  &:before {
-    content: "";
-    display: inline-block;
-    width: 25px;
-    height: 1px;
-    background: black !important;
-    opacity: 1;
-    z-index: 1;
-    margin-right: 10px;
-    transition: all 0.2s ease-in;
-    margin-bottom: 5px;
-  }
-
-  &:hover {
-    color: black;
-    &:before {
-      width: 50px;
-    }
-  }
-`;
 const CircleWrapper = styled.div`
   position: absolute;
   top: 257px;

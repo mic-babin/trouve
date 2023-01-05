@@ -10,7 +10,7 @@ const Circle = (hovered) => {
     if (!animated) {
       setTimeout(() => {
         setAnimated(true);
-      }, 7700);
+      }, 4400);
     }
 
     if (hovered.hovered) {

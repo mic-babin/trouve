@@ -11,8 +11,17 @@ import { useIsSmall } from "../../utils/media-query.hook";
 
 const Card = ({ data, titleHeight, titleMargin }) => {
   const middleCol = useRef();
-  const { name, title, textFields, images, image, descriptions, phone, email } =
-    data;
+  const {
+    name,
+    title,
+    textFields,
+    images,
+    image,
+    descriptions,
+    phone,
+    email,
+    id,
+  } = data;
   const cardWrapperControls = useAnimationControls();
   const imageWrapperControls = useAnimationControls();
   const titleControls = useAnimationControls();
@@ -22,12 +31,12 @@ const Card = ({ data, titleHeight, titleMargin }) => {
   const [isEmployee, setIsEmployee] = useState(false);
   const handleIsEmployee = () => setIsEmployee(true);
   const [hovered, setHovered] = useState(false);
-  const handleHover = () => setHovered(!hovered);
+  const handleEnter = () => setHovered(true);
+  const handleLeave = () => setHovered(false);
   const isMedium = useIsMedium();
   const isSmall = useIsSmall();
   const isXSmall = useIsXSmall();
   const isXXSmall = useIsXXSmall();
-
   const getMarc = () => {
     if (isEmployee) {
       return name === "DAVID-MARC BOUCHARD";
@@ -142,7 +151,14 @@ const Card = ({ data, titleHeight, titleMargin }) => {
       });
       titleControls.start({
         marginTop: "0px",
-        width: !isMedium ? "330px" : isXSmall ? "100%" : "90%",
+        width:
+          id === "68c1ff62-4b3f-5183-9186-05b7acbe5281" && !isMedium
+            ? "300px"
+            : !isMedium
+            ? "330px"
+            : isXSmall
+            ? "100%"
+            : "90%",
         fontSize: "30px",
         lineHeight: "35px",
         transition: { duration: 0.75 },
@@ -227,8 +243,8 @@ const Card = ({ data, titleHeight, titleMargin }) => {
     <CardWrapper
       animate={cardWrapperControls}
       // onClick={executeScroll}
-      onMouseEnter={() => handleHover()}
-      onMouseLeave={() => handleHover()}
+      onMouseOver={() => handleEnter()}
+      onMouseOut={() => handleLeave()}
     >
       <div className="row position-relative">
         <div className="col-lg-4 ">
@@ -281,54 +297,71 @@ const Card = ({ data, titleHeight, titleMargin }) => {
                 descriptions.map((description, index) => {
                   let i = index;
                   return (
-                    <div key={description.id} className="mb-4">
-                      {description.text.text.split(" ").map((word, index) => (
-                        <motion.span
-                          key={index}
-                          initial={{ opacity: 0, filter: "blur(1)" }}
-                          animate={hovered && { opacity: 1, filter: "blur(0)" }}
-                          transition={{
-                            duration: 1,
-                            delay: index / 20 + i * 2.5,
-                            ease: [0.11, 0, 0.5, 0],
-                          }}
-                        >
-                          {word + " "}{" "}
-                        </motion.span>
-                      ))}
-                    </div>
+                    <Description key={description.id} className="mb-4">
+                      <div>
+                        {description.text.text.split(" ").map((word, index) => (
+                          <motion.span
+                            key={index}
+                            initial={{ opacity: 0, filter: "blur(1)" }}
+                            animate={
+                              hovered && { opacity: 1, filter: "blur(0)" }
+                            }
+                            transition={{
+                              duration: 1,
+                              delay: index / 20 + i * 2.5,
+                              ease: [0.11, 0, 0.5, 0],
+                            }}
+                          >
+                            {word + " "}{" "}
+                          </motion.span>
+                        ))}
+                      </div>
+                    </Description>
                   );
                 })}
-              {
-                <div className="d-flex flex-column align-items-end pe-5">
-                  <Address
-                    initial={{ opacity: 0, filter: "blur(1)" }}
-                    animate={hovered && { opacity: 1, filter: "blur(0)" }}
-                    transition={{
-                      duration: 1,
-                      delay: 5,
-                      ease: [0.11, 0, 0.5, 0],
-                    }}
-                    href={"mailTo:" + email}
-                    className="mb-2"
-                  >
-                    {email.toUpperCase()}
-                  </Address>
-                  <Address
-                    initial={{ opacity: 0, filter: "blur(1)" }}
-                    animate={hovered && { opacity: 1, filter: "blur(0)" }}
-                    transition={{
-                      duration: 1,
-                      delay: 5.3,
-                      ease: [0.11, 0, 0.5, 0],
-                    }}
-                    href={"phoneTo:" + phone}
-                    className=""
-                  >
-                    {phone}
-                  </Address>
-                </div>
-              }
+
+              <AddressesWrapper className="">
+                <Address
+                  initial={{ opacity: 0, filter: "blur(1)" }}
+                  animate={hovered && { opacity: 1, filter: "blur(0)" }}
+                  transition={{
+                    duration: 1,
+                    delay: 5,
+                    ease: [0.11, 0, 0.5, 0],
+                  }}
+                  href={"mailTo:" + email}
+                  className="mb-2"
+                >
+                  <span className="mask">
+                    <div className="link-container">
+                      <span className="link-title1 title">
+                        {email.toUpperCase()}
+                      </span>
+                      <span className="link-title2 title">
+                        {email.toUpperCase()}
+                      </span>
+                    </div>
+                  </span>
+                </Address>
+                <Address
+                  initial={{ opacity: 0, filter: "blur(1)" }}
+                  animate={hovered && { opacity: 1, filter: "blur(0)" }}
+                  transition={{
+                    duration: 1,
+                    delay: 5.3,
+                    ease: [0.11, 0, 0.5, 0],
+                  }}
+                  href={"phoneTo:" + phone}
+                  className=""
+                >
+                  <span className="mask">
+                    <div className="link-container">
+                      <span className="link-title1 title">{phone}</span>
+                      <span className="link-title2 title">{phone}</span>
+                    </div>
+                  </span>
+                </Address>
+              </AddressesWrapper>
             </div>
           )}
         </div>
@@ -444,6 +477,17 @@ const SubTitle = styled(motion.h3)`
   font-size: 16px;
   font-family: "Neue-Italic";
 `;
+
+const AddressesWrapper = styled.div`
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  @media (max-width: 992px) {
+    width: 100%;
+  }
+`;
 const Address = styled(motion.a)`
   color: white;
   text-decoration: none;
@@ -475,5 +519,53 @@ const Address = styled(motion.a)`
       width: 50px;
       margin-left: -60px;
     }
+  }
+  /* Hide extra text */
+  .mask {
+    position: relative;
+    display: inline-block;
+    padding: 0;
+    height: 16px;
+    overflow: hidden;
+  }
+
+  .link-container {
+    transition: transform 0.3s ease;
+    transition-delay: 250ms;
+  }
+
+  .title {
+    display: block;
+
+    /*  Set same font-size and line height  */
+    font-size: 16px;
+    line-height: 16px;
+    transition: transform 0.3s ease;
+    transition-delay: 250ms;
+  }
+
+  .link-title1 {
+    transform-origin: right center;
+  }
+
+  .link-title2 {
+    transform-origin: left center;
+    transform: rotate(10deg);
+  }
+
+  /* Hover Action*/
+
+  /* Move up two texts (20px = font-size) */
+  &:hover .link-container {
+    transform: translateY(-16px);
+  }
+
+  /* Rotate texts a little bit */
+  &:hover .link-title1 {
+    transform: rotate(10deg);
+  }
+
+  &:hover .link-title2 {
+    transform: rotate(0);
   }
 `;

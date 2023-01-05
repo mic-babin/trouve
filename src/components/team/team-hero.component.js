@@ -7,6 +7,7 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { motion } from "framer-motion";
 import { useIsMedium } from "../../utils/media-query.hook";
 import { useState } from "react";
+import AnimatedHeroLink from "../common/animated-hero-link.component";
 
 const TeamHero = ({ hero, setShowContact }) => {
   const { title, link, images, textFields } = hero;
@@ -95,21 +96,15 @@ const TeamHero = ({ hero, setShowContact }) => {
                 })}
 
               {link && (
-                <HeroLink
-                  as={motion.div}
-                  className="pointer"
-                  onClick={handleShowContact}
-                  initial={{ opacity: 0, transform: "translateX(200px)" }}
-                  animate={{ opacity: 1, transform: "translateX(0px)" }}
-                  transition={{ duration: 1, delay: 4 }}
-                >
-                  <span className="mask">
-                    <div className="link-container">
-                      <span className="link-title1 title">{link.text}</span>
-                      <span className="link-title2 title">{link.text}</span>
-                    </div>
-                  </span>
-                </HeroLink>
+                <>
+                  <div onClick={handleShowContact}>
+                    <AnimatedHeroLink
+                      type={motion.div}
+                      link={link}
+                      color={"white"}
+                    />
+                  </div>
+                </>
               )}
             </div>
           </div>
@@ -193,89 +188,6 @@ const Container = styled.div`
   }
 `;
 
-const HeroLink = styled(NavLink)`
-  color: white;
-  /* padding-left: 50px; */
-  position: relative;
-  overflow: visible;
-  transition: all 0.2s all;
-  font-family: "Neue-Light";
-  letter-spacing: 1px;
-  height: 30px;
-  align-items: center;
-  text-decoration: none;
-  display: flex;
-
-  &:before {
-    content: "";
-    display: inline-block;
-    width: 25px;
-    height: 1.5px;
-    background: white !important;
-    opacity: 1;
-    z-index: 1;
-    margin-right: 10px;
-    transition: all 0.2s ease-in;
-    margin-bottom: 5px;
-  }
-
-  &:hover {
-    &:before {
-      width: 50px;
-    }
-  }
-
-  /* Hide extra text */
-  .mask {
-    position: relative;
-    padding: 0;
-    height: 20px;
-
-    /*  Remove overflow to see how it works　:) */
-    overflow: hidden;
-  }
-
-  .link-container {
-    transition: transform 0.3s ease;
-    transition-delay: 250ms;
-  }
-
-  .title {
-    display: block;
-
-    /*  Set same font-size and line height  */
-    font-size: 20px;
-    line-height: 20px;
-    transition: transform 0.3s ease;
-    transition-delay: 250ms;
-  }
-
-  .link-title1 {
-    transform-origin: right center;
-  }
-
-  .link-title2 {
-    font-weight: 600;
-    transform-origin: left center;
-    transform: rotate(10deg);
-  }
-
-  /* Hover Action*/
-
-  /* Move up two texts (20px = font-size) */
-  &:hover .link-container {
-    transform: translateY(-20px);
-  }
-
-  /* Rotate texts a little bit */
-  &:hover .link-title1 {
-    transform: rotate(10deg);
-  }
-
-  &:hover .link-title2 {
-    transform: rotate(0);
-  }
-`;
 const Paragraph = styled(Kicker)`
   padding-top: 30px;
   font-size: 30px;

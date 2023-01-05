@@ -28,7 +28,7 @@ const Footer = ({ menu, setShowContact, setShowMenu, path }) => {
           </div>
 
           <div className="flex-grow-1 w-100">
-            <div className="d-flex flex-column justify-content-end ">
+            <div className="d-flex flex-column justify-content-end pe-3">
               <NavLinks
                 navLinks={navLinks}
                 setShowContact={setShowContact}
@@ -36,8 +36,12 @@ const Footer = ({ menu, setShowContact, setShowMenu, path }) => {
                 path={path}
               />
             </div>
-            <div className="d-flex flex-row align-items-center justify-content-end justify-content-xl-between">
-              {!isLarge && <LanguagesFooter langs={langs} />}
+            <div className="d-flex align-items-center justify-content-end justify-content-xl-between pt-5 pe-3">
+              {!isLarge && (
+                <div className="ps-2 ms-1">
+                  <LanguagesFooter langs={langs} />
+                </div>
+              )}
               <Copyright>{renderRichText(copyrights)}</Copyright>
             </div>
           </div>

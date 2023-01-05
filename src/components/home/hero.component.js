@@ -105,13 +105,18 @@ const Hero = ({ data }) => {
               <JobsLink
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 7 }}
+                transition={{ duration: 0.6, delay: 4 }}
                 href="http://jobs.trouvemtl.com"
                 target="_blank"
                 onMouseEnter={() => handleHover()}
                 onMouseLeave={() => handleHover()}
               >
-                {opportunities}
+                <span className="mask">
+                  <div className="link-container">
+                    <span className="link-title1 title">{opportunities}</span>
+                    <span className="link-title2 title">{opportunities}</span>
+                  </div>
+                </span>
               </JobsLink>
             </JobsLinkWrapper>
           </Container>
@@ -152,7 +157,7 @@ const Hero = ({ data }) => {
             animate={{ width: "100vw" }}
             transition={{
               duration: 2,
-              delay: 4,
+              delay: 2.4,
               type: "tween",
               easeInOut: 0.3,
             }}
@@ -160,7 +165,7 @@ const Hero = ({ data }) => {
           <List
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.3, delay: 6 }}
+            transition={{ duration: 0.3, delay: 3.5 }}
           >
             <div
               className="d-flex justify-content-between"
@@ -176,7 +181,7 @@ const Hero = ({ data }) => {
             animate={{ width: "100vw" }}
             transition={{
               duration: 2,
-              delay: 4,
+              delay: 2.4,
               type: "tween",
               easeInOut: 0.3,
             }}
@@ -226,7 +231,7 @@ const H1 = styled(motion.h1)`
 
   .word-wrapper:nth-of-type(1),
   .word-wrapper:nth-of-type(2) {
-    padding-right: 298px;
+    padding-right: 295px;
   }
 
   .word-wrapper {
@@ -378,6 +383,54 @@ const JobsLink = styled(motion.a)`
       width: 72px;
       left: -82px;
     }
+  }
+  /* Hide extra text */
+  .mask {
+    position: relative;
+    display: block;
+    padding: 0;
+    height: 16px;
+    overflow: hidden;
+  }
+
+  .link-container {
+    transition: transform 0.3s ease;
+    transition-delay: 250ms;
+  }
+
+  .title {
+    display: block;
+
+    /*  Set same font-size and line height  */
+    font-size: 16px;
+    line-height: 16px;
+    transition: transform 0.3s ease;
+    transition-delay: 250ms;
+  }
+
+  .link-title1 {
+    transform-origin: right center;
+  }
+
+  .link-title2 {
+    transform-origin: left center;
+    transform: rotate(10deg);
+  }
+
+  /* Hover Action*/
+
+  /* Move up two texts (20px = font-size) */
+  &:hover .link-container {
+    transform: translateY(-16px);
+  }
+
+  /* Rotate texts a little bit */
+  &:hover .link-title1 {
+    transform: rotate(10deg);
+  }
+
+  &:hover .link-title2 {
+    transform: rotate(0);
   }
 `;
 const HorizontalLine = styled(motion.div)`

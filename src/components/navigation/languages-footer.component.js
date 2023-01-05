@@ -27,7 +27,12 @@ const LanguagesFooter = ({ langs }) => {
                   : "Neue-Light",
             }}
           >
-            {getLang(lng)}
+            <span className="mask">
+              <div className="link-container">
+                <span className="link-title1 title">{getLang(lng)}</span>
+                <span className="link-title2 title">{getLang(lng)}</span>
+              </div>
+            </span>
           </Lang>
         ))}
     </div>
@@ -40,9 +45,6 @@ const Lang = styled(NavLink)`
   margin-right: 3rem;
   letter-spacing: 1px;
 
-  &:hover {
-    text-decoration: underline;
-  }
   @media (max-width: 1199px) {
     margin-right: 0;
   }

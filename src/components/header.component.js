@@ -31,7 +31,11 @@ const Header = ({
       transition={{
         duration: 1.5,
         delay:
-          headerColor === "transparent" ? 2 : headerColor === "#000000" ? 1 : 0,
+          headerColor === "transparent"
+            ? 4.1
+            : headerColor === "#000000"
+            ? 1
+            : 0,
         type: "tween",
         easeInOut: 0.3,
       }}
@@ -65,7 +69,7 @@ const Header = ({
           duration: 2,
           delay:
             headerColor === "transparent"
-              ? 4
+              ? 4.6
               : headerColor === "#000000"
               ? 2
               : 2,

@@ -22,6 +22,23 @@ const Layout = ({
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
+    // let x, y;
+
+    // document.onmousemove = function (e) {
+    //   x = e.clientX;
+    //   y = e.clientY;
+    //   updateProps();
+    // };
+
+    // document.onscroll = updateProps;
+
+    // function updateProps() {
+    //   document.body.style.setProperty("--x", x + "px");
+    //   document.body.style.setProperty(
+    //     "--y",
+    //     y + document.documentElement.scrollTop + "px"
+    //   );
+    // }
     if (showModal) {
       setShowModal(showMenu || showContact);
     } else {
@@ -43,6 +60,7 @@ const Layout = ({
           path={path}
         />
       )}
+      {/* <div id="invertedcursor"></div> */}
       {children}
       {showPage && (
         <Footer

@@ -80,10 +80,10 @@ const Wrapper = styled(motion.div)`
   .img-grey {
     filter: grayscale(1);
     animation-name: ${loaderAnimation};
-    animation-duration: 1.6s;
+    animation-duration: 2s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
-    animation-delay: 0.5s;
+    animation-delay: 0s;
   }
 `;
 

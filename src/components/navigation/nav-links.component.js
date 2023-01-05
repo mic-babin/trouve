@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { NavLink } from "../styled-components/nav-link.style";
 import { motion, useAnimationControls } from "framer-motion";
 import { useIsXLarge } from "../../utils/media-query.hook";
+import { AnimatedLink } from "../styled-components/animated-link.style";
 
 const NavLinks = ({ navLinks, setShowContact, setShowMenu, path }) => {
   const isXLarge = useIsXLarge();
@@ -59,12 +60,18 @@ const NavLinks = ({ navLinks, setShowContact, setShowMenu, path }) => {
                 >
                   <Number className="me-4">0{index + 1}</Number>
                   <Text>
-                    <span
-                      style={{
-                        fontFamily: getActive(link) ? "Neue" : "",
-                      }}
-                    >
-                      {link.text}
+                    <span className="mask">
+                      <div className="link-container">
+                        <span
+                          className="link-title1 title"
+                          style={{
+                            fontFamily: getActive(link) ? "Neue" : "",
+                          }}
+                        >
+                          {link.text}
+                        </span>
+                        <span className="link-title2 title">{link.text}</span>
+                      </div>
                     </span>
                   </Text>
                 </NavLink>
@@ -77,7 +84,14 @@ const NavLinks = ({ navLinks, setShowContact, setShowMenu, path }) => {
                   className="d-flex border-bottom-white"
                 >
                   <Number className="me-4">0{index + 1}</Number>
-                  <Text>{link.text}</Text>
+                  <Text>
+                    <span className="mask">
+                      <div className="link-container">
+                        <span className="link-title1 title">{link.text}</span>
+                        <span className="link-title2 title">{link.text}</span>
+                      </div>
+                    </span>
+                  </Text>
                 </NavLink>
               )}
               {(link.title === "SOCIALS" ||
@@ -96,7 +110,14 @@ const NavLinks = ({ navLinks, setShowContact, setShowMenu, path }) => {
                   }}
                 >
                   <Number className="me-4">0{index + 1}</Number>
-                  <Text className="me-4">{link.title}</Text>
+                  <Text className="me-4">
+                    <span className="mask">
+                      <div className="link-container">
+                        <span className="link-title1 title">{link.title}</span>
+                        <span className="link-title2 title">{link.title}</span>
+                      </div>
+                    </span>
+                  </Text>
                   <div className="flex-grow-1 d-flex flex-column d-xxl-inline-block align-items-end ">
                     {link.socialLinks &&
                       link.socialLinks.map((socialLink) => (
@@ -121,7 +142,14 @@ const NavLinks = ({ navLinks, setShowContact, setShowMenu, path }) => {
                   className="d-flex border-bottom-white pointer"
                 >
                   <Number className="me-4">0{index + 1}</Number>
-                  <Text>{link.text}</Text>
+                  <Text>
+                    <span className="mask">
+                      <div className="link-container">
+                        <span className="link-title1 title">{link.text}</span>
+                        <span className="link-title2 title">{link.text}</span>
+                      </div>
+                    </span>
+                  </Text>
                 </NavLink>
               )}
             </LinkWrapper>
@@ -180,11 +208,7 @@ const Number = styled.div`
   font-size: 12px;
 `;
 
-const Text = styled.div`
+const Text = styled(AnimatedLink)`
   font-family: "Neue-Light";
   letter-spacing: 2px;
-
-  &:hover {
-    font-family: "Neue";
-  }
 `;

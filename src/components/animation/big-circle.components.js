@@ -35,7 +35,7 @@ const Circle = ({ roundSize, hover, color }) => {
           fill="transparent"
           initial={{
             strokeDasharray: "0 360",
-            transform: "rotate(-90deg)",
+            // transform: "rotate(-90deg)",
           }}
           transition={{ duration: 1 }}
           animate={roundControls}
