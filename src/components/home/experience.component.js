@@ -77,7 +77,7 @@ const Experience = ({ data }) => {
         <motion.div
           initial={{
             height: "0px",
-            left: isSafari ? "calc(83.33vw - 13px)" : "calc(83.33vw - 10px)",
+            left: isSafari ? "calc(83.33vw - 15px)" : "calc(83.33vw - 10px)",
           }}
           whileInView={{
             height: "500px",
