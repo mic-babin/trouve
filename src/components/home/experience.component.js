@@ -9,8 +9,10 @@ import Circle from "../animation/big-circle.components";
 import { useRef, useEffect, useState } from "react";
 import { H2 } from "../styled-components/h2.style";
 import { useIsMedium, useIsSmall } from "../../utils/media-query.hook";
+import { isSafari } from "react-device-detect";
 
 const Experience = ({ data }) => {
+  console.log(isSafari);
   const { title, textFields, components } = data;
   const round = useRef();
   const [roundSize, setRoundSize] = useState(0);
@@ -59,6 +61,7 @@ const Experience = ({ data }) => {
         <motion.div
           initial={{
             height: "0px",
+            left: isSafari ? "calc(16.66vw + 13px)" : "calc(16.66vw + 10px)",
           }}
           whileInView={{
             height: isSmall ? "180px" : isMedium ? "220px" : "500px",
@@ -74,6 +77,7 @@ const Experience = ({ data }) => {
         <motion.div
           initial={{
             height: "0px",
+            left: isSafari ? "calc(83.33vw - 7px)" : "calc(83.33vw - 10px)",
           }}
           whileInView={{
             height: "500px",
@@ -89,6 +93,7 @@ const Experience = ({ data }) => {
         <motion.div
           initial={{
             height: "0px",
+            left: isSafari ? "calc(50vw)" : "calc(50vw - 2px)",
           }}
           whileInView={{
             height: "300px",
@@ -308,7 +313,7 @@ const ImageWrapper = styled.div`
     width: calc(100% + 20px);
     border-radius: 50%;
     z-index: 1;
-    margin: -9px;
+    margin: -10px;
     transform: rotate(-90deg);
   }
   .img {
