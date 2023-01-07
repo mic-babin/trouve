@@ -115,9 +115,15 @@ const Section = styled.section`
     }
   }
   @media (max-width: 767px) {
+    padding-left: 15px;
+    padding-right: 15px;
     .w-80 {
       width: 100%;
     }
+  }
+  @media (max-width: 767px) {
+    padding-top: 200px;
+    padding-bottom: 75px;
   }
 `;
 
@@ -135,6 +141,7 @@ const H2 = styled.h2`
   @media (max-width: 575px) {
     font-size: 35px;
     line-height: 35px;
+    padding-bottom: 30px;
   }
 
   div:nth-of-type(1) {

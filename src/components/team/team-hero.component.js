@@ -157,8 +157,14 @@ const Section = styled.section`
   @media (max-width: 767px) {
     padding-top: 200px;
     padding-bottom: 50px;
-
+    padding-left: 15px;
+    padding-right: 15px;
     height: 705px;
+  }
+
+  @media (max-width: 574px) {
+    padding-top: 150px;
+    height: 665px;
   }
 `;
 
@@ -196,5 +202,8 @@ const Paragraph = styled(Kicker)`
   @media (max-width: 767px) {
     font-size: 22px;
     line-height: 26px;
+  }
+  @media (max-width: 574px) {
+    padding-top: 0px;
   }
 `;

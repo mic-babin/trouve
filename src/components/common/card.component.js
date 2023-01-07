@@ -156,6 +156,8 @@ const Card = ({ data, titleHeight, titleMargin }) => {
             ? "300px"
             : !isMedium
             ? "330px"
+            : isXSmall && id === "68c1ff62-4b3f-5183-9186-05b7acbe5281"
+            ? "300px"
             : isXSmall
             ? "100%"
             : "90%",
@@ -193,7 +195,12 @@ const Card = ({ data, titleHeight, titleMargin }) => {
       });
       titleControls.start({
         marginTop: titleHeight || "-33px",
-        width: isMedium ? "100%" : "1000px",
+        width:
+          isXSmall && id === "68c1ff62-4b3f-5183-9186-05b7acbe5281"
+            ? "300px"
+            : isMedium
+            ? "100%"
+            : "1000px",
         fontSize:
           isXXSmall && !isEmployee
             ? "30px"
@@ -202,6 +209,7 @@ const Card = ({ data, titleHeight, titleMargin }) => {
             : isMedium
             ? "50px"
             : "65px",
+
         lineHeight:
           isXXSmall && !isEmployee
             ? "33px"

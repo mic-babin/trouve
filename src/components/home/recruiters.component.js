@@ -10,7 +10,7 @@ const Recruiters = ({ data }) => {
   const isMedium = useIsMedium();
 
   const titleHeight = isXSmall
-    ? "10px"
+    ? "17px"
     : isSmall
     ? "-10px"
     : isMedium

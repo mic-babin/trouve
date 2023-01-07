@@ -70,6 +70,7 @@ const ContactH1 = styled(H1)`
 
   @media (max-width: 575px) {
     font-size: 50px;
+    line-height: 50px;
     .w-wrapper:nth-of-type(2) {
       padding-left: 70px;
     }

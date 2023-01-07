@@ -120,7 +120,7 @@ const Hero = ({ data }) => {
               </JobsLink>
             </JobsLinkWrapper>
           </Container>
-          <div className="d-flex justify-content-end w-100">
+          <div className="d-flex justify-content-center justify-content-md-end w-100">
             <H1
               className="text-end"
               initial={{ transform: "translateX(-200px)" }}
@@ -245,16 +245,6 @@ const H1 = styled(motion.h1)`
       padding-right: 230px;
     }
   }
-  @media (max-width: 991px) {
-    padding: 100px 0;
-    margin-right: 30px;
-    font-size: 80px;
-    line-height: 120px;
-    .word-wrapper:nth-of-type(1),
-    .word-wrapper:nth-of-type(2) {
-      padding-right: 175px;
-    }
-  }
 
   @media (max-width: 991px) {
     padding: 100px 0;
@@ -268,8 +258,9 @@ const H1 = styled(motion.h1)`
   @media (max-width: 768px) {
     padding: 100px 0 300px 0;
     margin-right: 19px;
-    font-size: 10vw;
+    font-size: 11.5vw;
     line-height: 12vw;
+    letter-spacing: 1vw;
     .word-wrapper:nth-of-type(1),
     .word-wrapper:nth-of-type(2) {
       padding-right: calc(20vw + 14px);

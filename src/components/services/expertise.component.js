@@ -6,6 +6,7 @@ import { H1 } from "../styled-components/h1.style";
 import { motion } from "framer-motion";
 import { useIsMedium } from "../../utils/media-query.hook";
 import { useIsSmall } from "../../utils/media-query.hook";
+import { useIsXSmall } from "../../utils/media-query.hook";
 import Images from "./Images.component";
 import { useState } from "react";
 import AnimatedHeroLink from "../common/animated-hero-link.component";
@@ -30,6 +31,7 @@ const Expertise = ({ expertise }) => {
 
   const isMedium = useIsMedium();
   const isSmall = useIsSmall();
+  const isXSmall = useIsXSmall();
 
   return (
     <Section>
@@ -98,7 +100,13 @@ const Expertise = ({ expertise }) => {
                 height: "0px",
               }}
               whileInView={{
-                height: isSmall ? "390px" : isMedium ? "300px" : "1375px",
+                height: isXSmall
+                  ? "500px"
+                  : isSmall
+                  ? "390px"
+                  : isMedium
+                  ? "300px"
+                  : "1375px",
               }}
               transition={{
                 duration: 5,
@@ -160,6 +168,13 @@ const Section = styled.section`
   z-index: 1;
   overflow-x: clip;
   /* overflow-y: auto; */
+  @media (max-width: 767px) {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  @media (max-width: 574px) {
+    padding-top: 150px;
+  }
 
   .line {
     display: block;
@@ -186,9 +201,11 @@ const Section = styled.section`
 const Title = styled(H1)`
   @media (max-width: 1199px) and (min-width: 992px) {
     font-size: 50px;
+    line-height: 50px;
   }
   @media (max-width: 574px) {
     font-size: 50px;
+    line-height: 50px;
 
     .w-wrapper:nth-of-type(2) {
       padding-left: 70px;
@@ -205,6 +222,9 @@ const TextWrapper = styled(motion.div)`
   padding: 3rem 2rem;
   background-color: black;
   z-index: 1;
+  @media (max-width: 574px) {
+    padding-bottom: 0;
+  }
 `;
 
 const Paragraph = styled(Kicker)`
@@ -218,5 +238,6 @@ const Paragraph = styled(Kicker)`
   @media (max-width: 574px) {
     font-size: 22px;
     line-height: 26px;
+    padding-top: 0px;
   }
 `;

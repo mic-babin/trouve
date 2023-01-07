@@ -10,6 +10,7 @@ import { ModalAnimation } from "../animation/modal.animation";
 import { ModalWrapperAnimation } from "../animation/modal-wrapper.animation";
 import { ModalMediumAnimation } from "../animation/modal-medium.animation";
 import { useIsMedium } from "../../utils/media-query.hook";
+import { useIsSmall } from "../../utils/media-query.hook";
 import { Link } from "gatsby-plugin-react-i18next";
 
 const Menu = ({ showMenu, setShowMenu, menu, setShowContact, path }) => {
@@ -17,6 +18,7 @@ const Menu = ({ showMenu, setShowMenu, menu, setShowContact, path }) => {
 
   const handleCloseMenu = () => setShowMenu(false);
   const isMedium = useIsMedium();
+  const isSmall = useIsSmall();
   const ModalVariant = isMedium ? ModalMediumAnimation : ModalAnimation;
 
   return (
@@ -52,7 +54,7 @@ const Menu = ({ showMenu, setShowMenu, menu, setShowContact, path }) => {
 
                 {closeTitle && (
                   <MenuButton onClick={handleCloseMenu}>
-                    {closeTitle}
+                    {isSmall ? <span>&#10006;</span> : closeTitle}
                   </MenuButton>
                 )}
               </div>

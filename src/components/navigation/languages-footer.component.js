@@ -19,7 +19,7 @@ const LanguagesFooter = ({ langs }) => {
             key={lng}
             to={originalPath}
             language={lng}
-            className="d-flex flex-column d-xl-inline-block"
+            className="d-flex flex-column d-xl-inline-block pb-2 "
             style={{
               fontFamily:
                 i18n.resolvedLanguage === lng
@@ -47,6 +47,9 @@ const Lang = styled(NavLink)`
 
   @media (max-width: 1199px) {
     margin-right: 0;
+    .title {
+      text-align: end;
+    }
   }
 `;
 

@@ -10,6 +10,7 @@ import { ModalAnimation } from "../animation/modal.animation";
 import { ModalWrapperAnimation } from "../animation/modal-wrapper.animation";
 import { ModalMediumAnimation } from "../animation/modal-medium.animation";
 import { useIsMedium } from "../../utils/media-query.hook";
+import { useIsSmall } from "../../utils/media-query.hook";
 import { useIsLarge } from "../../utils/media-query.hook";
 import { useIsXLarge } from "../../utils/media-query.hook";
 import LogoSrc from "../../assets/img/trouve.svg";
@@ -26,6 +27,7 @@ const Menu = ({ setShowContact, showContact, contact }) => {
   const isMedium = useIsMedium();
   const isLarge = useIsLarge();
   const isXLarge = useIsXLarge();
+  const isSmall = useIsSmall();
   const ModalVariant = isMedium ? ModalMediumAnimation : ModalAnimation;
 
   const round = useRef();
@@ -63,7 +65,7 @@ const Menu = ({ setShowContact, showContact, contact }) => {
                 <Logo src={LogoSrc} alt="Logo" />
                 {close && (
                   <CloseButton onClick={handleCloseContact}>
-                    {close}
+                    {isSmall ? <span>&#10006;</span> : close}
                   </CloseButton>
                 )}
               </div>

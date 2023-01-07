@@ -24,11 +24,15 @@ const Footer = ({ menu, setShowContact, setShowMenu, path }) => {
                 className="align-self-center"
               />
             </Link>
-            {isLarge && <LanguagesFooter langs={langs} />}
+            {isLarge && (
+              <div className="pe-2">
+                <LanguagesFooter langs={langs} />
+              </div>
+            )}
           </div>
 
           <div className="flex-grow-1 w-100">
-            <div className="d-flex flex-column justify-content-end pe-3">
+            <div className="d-flex flex-column justify-content-end pe-xl-3">
               <NavLinks
                 navLinks={navLinks}
                 setShowContact={setShowContact}
@@ -36,7 +40,7 @@ const Footer = ({ menu, setShowContact, setShowMenu, path }) => {
                 path={path}
               />
             </div>
-            <div className="d-flex align-items-center justify-content-end justify-content-xl-between pt-5 pe-3">
+            <div className="d-flex align-items-center justify-content-end justify-content-xl-between pt-5 pe-xl-3">
               {!isLarge && (
                 <div className="ps-2 ms-1">
                   <LanguagesFooter langs={langs} />
@@ -62,12 +66,18 @@ const FooterWrapper = styled.footer`
       width: auto !important;
     }
   }
+
+  @media (max-width: 768px) {
+    padding-bottom: 0;
+    padding-top: 75px;
+  }
 `;
 
 const Copyright = styled.div`
   font-size: 10px;
   padding: 1rem;
   font-family: "Neue-Light";
+  margin-top: 7px;
   a {
     color: white;
     text-decoration: none;
@@ -85,6 +95,10 @@ const LogoFooter = styled(Logo)`
   @media (max-width: 1199px) {
     margin: 0;
     margin-bottom: 100px;
+  }
+  @media (max-width: 767px) {
+    margin-left: -10px;
+    margin-bottom: 50px;
   }
 `;
 

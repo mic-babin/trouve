@@ -10,7 +10,7 @@ const Talent = ({ data }) => {
   const isMedium = useIsMedium();
 
   const titleHeight = isXSmall
-    ? "20px"
+    ? "32px"
     : isSmall
     ? "15px"
     : isMedium

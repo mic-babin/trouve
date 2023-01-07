@@ -32,7 +32,7 @@ export const H2 = styled(motion.h2)`
     line-height: 34px;
 
     div:nth-of-type(2) {
-      margin: 15px 0;
+      margin: 0px 0;
     }
   }
 `;

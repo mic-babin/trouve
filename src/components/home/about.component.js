@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { H2 } from "../styled-components/h2.style";
 import { useIsMedium } from "../../utils/media-query.hook";
 import { useIsSmall } from "../../utils/media-query.hook";
+import { useIsXSmall } from "../../utils/media-query.hook";
 
 const getWidth = (index) => {
   if (index === 0) {
@@ -17,6 +18,7 @@ const getWidth = (index) => {
 const Reason = ({ data }) => {
   const isMedium = useIsMedium();
   const isSmall = useIsSmall();
+  const isXSmall = useIsXSmall();
   const { title, textFields } = data;
   const [isInView, setIsInView] = useState(false);
   return (
@@ -28,7 +30,13 @@ const Reason = ({ data }) => {
             height: "0px",
           }}
           whileInView={{
-            height: isSmall ? "300px" : isMedium ? "500px" : "1300px",
+            height: isXSmall
+              ? "540px"
+              : isSmall
+              ? "300px"
+              : isMedium
+              ? "500px"
+              : "1300px",
           }}
           transition={{
             duration: 5,
@@ -70,7 +78,7 @@ const Reason = ({ data }) => {
         ></motion.div>
         <div className="container-fluid container-lg">
           {title && (
-            <H2>
+            <H2 style={{ maxWidth: isXSmall && "320px" }}>
               {title &&
                 title.split("<br>").map((word, index) => (
                   <motion.div
@@ -156,6 +164,8 @@ const Section = styled.div`
     .line-0 {
       top: calc(10px + 31vw);
     }
+    padding-left: 15px;
+    padding-right: 15px;
   }
 
   @media (max-width: 575px) {

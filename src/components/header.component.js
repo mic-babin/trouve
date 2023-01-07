@@ -2,10 +2,12 @@ import React from "react";
 import Menu from "./navigation/menu.component";
 import { MenuButton } from "./styled-components/menu-button.style";
 import LogoSrc from "../assets/img/trouve_blanc.svg";
+import HamburgerSrc from "../assets/img/hamburger.svg";
 import styled from "styled-components";
 import { Link } from "gatsby-plugin-react-i18next";
 import { motion } from "framer-motion";
 import Contact from "./navigation/nous-joindre.component";
+import { useIsSmall } from "../utils/media-query.hook";
 
 const Header = ({
   menu,
@@ -18,6 +20,7 @@ const Header = ({
   showContact,
 }) => {
   const handleShowMenu = ({ headerColor }) => setShowMenu(true);
+  const isSmall = useIsSmall();
 
   return (
     <HeaderWrapper
@@ -46,7 +49,7 @@ const Header = ({
           <Logo src={LogoSrc} alt="Logo" />
         </Link>
         <MenuButton className="pe-2" onClick={handleShowMenu}>
-          MENU
+          {isSmall ? <Hamburger src={HamburgerSrc} alt="Logo" /> : "MENU"}
         </MenuButton>
         <Menu
           showMenu={showMenu}
@@ -92,6 +95,14 @@ const HeaderWrapper = styled(motion.header)`
 
 const Logo = styled.img`
   height: 90px;
+  @media (max-width: 767px) {
+    height: 70px;
+  }
+`;
+
+const Hamburger = styled.img`
+  margin-top: -15px;
+  margin-right: 10px;
 `;
 
 const HorizontalLine = styled(motion.div)`

@@ -10,9 +10,9 @@ import { useRef, useEffect, useState } from "react";
 import { H2 } from "../styled-components/h2.style";
 import { useIsMedium, useIsSmall } from "../../utils/media-query.hook";
 import { isSafari } from "react-device-detect";
+import { Link } from "gatsby-plugin-react-i18next";
 
 const Experience = ({ data }) => {
-  console.log(isSafari);
   const { title, textFields, components } = data;
   const round = useRef();
   const [roundSize, setRoundSize] = useState(0);
@@ -23,7 +23,6 @@ const Experience = ({ data }) => {
 
   const isMedium = useIsMedium();
   const isSmall = useIsSmall();
-
   const handleHover = (index) => {
     if (index === 0) {
       setHovered0(!hovered0);
@@ -35,7 +34,8 @@ const Experience = ({ data }) => {
       setHovered2(!hovered2);
     }
   };
-
+  console.log("isMedium", isMedium);
+  console.log("isSafari", isSafari);
   const getWidth = (index) => {
     if (index === 0) {
       return "-500";
@@ -58,22 +58,42 @@ const Experience = ({ data }) => {
     <>
       {/* <div className="scroll-to" id="experience"></div> */}
       <Section className="experience">
-        <motion.div
-          initial={{
-            height: "0px",
-            left: isSafari ? "calc(16.66vw + 8px)" : "calc(16.66vw + 10px)",
-          }}
-          whileInView={{
-            height: isSmall ? "180px" : isMedium ? "220px" : "500px",
-          }}
-          transition={{
-            duration: 5,
-            delay: 0.7,
-            type: "linear",
-          }}
-          className={"line-0"}
-          viewport={{ once: true }}
-        ></motion.div>
+        {!isMedium && (
+          <motion.div
+            initial={{
+              height: "0px",
+              left: isSafari ? "calc(16.66vw + 8px)" : "calc(16.66vw + 10px)",
+            }}
+            whileInView={{
+              height: isSmall ? "180px" : isMedium ? "220px" : "500px",
+            }}
+            transition={{
+              duration: 5,
+              delay: 0.7,
+              type: "linear",
+            }}
+            className={"line-0"}
+            viewport={{ once: true }}
+          ></motion.div>
+        )}
+        {isMedium && (
+          <motion.div
+            initial={{
+              height: "0px",
+              left: "5vw",
+            }}
+            whileInView={{
+              height: isSmall ? "180px" : isMedium ? "220px" : "500px",
+            }}
+            transition={{
+              duration: 5,
+              delay: 0.7,
+              type: "linear",
+            }}
+            className={"line-0"}
+            viewport={{ once: true }}
+          ></motion.div>
+        )}
         <motion.div
           initial={{
             height: "0px",
@@ -93,7 +113,7 @@ const Experience = ({ data }) => {
         <motion.div
           initial={{
             height: "0px",
-            left: isSafari ? "calc(50vw - 4px)" : "calc(50vw - 2px)",
+            left: isSafari ? "calc(50vw - 5px)" : "calc(50vw - 2px)",
           }}
           whileInView={{
             height: "300px",
@@ -189,6 +209,7 @@ const Experience = ({ data }) => {
                   className="col-lg-4 mb-4 mb-lg-0"
                   onMouseEnter={() => handleHover(index)}
                   onMouseLeave={() => handleHover(index)}
+                  to={link.url}
                 >
                   <ImageWrapper>
                     <div className="round" ref={round}>
@@ -212,11 +233,7 @@ const Experience = ({ data }) => {
                   <Description>
                     {description && <div>{description.description}</div>}
                     {link && (
-                      <CardLink
-                        to={link.url}
-                        target="blank"
-                        className="card-link"
-                      >
+                      <CardLink target="blank" className="card-link pt-3">
                         <span className="mask">
                           <div className="link-container">
                             <span className="link-title1 title">
@@ -261,7 +278,12 @@ const Section = styled.div`
   .line-2 {
     top: 550px;
   }
+  @media (max-width: 767px) {
+    padding-top: 75px;
+    padding-bottom: 25px;
+  }
 `;
+
 const Container = styled(motion.div)`
   padding-bottom: 160px;
 
@@ -270,9 +292,12 @@ const Container = styled(motion.div)`
   }
 `;
 
-const Card = styled.div`
+const Card = styled(Link)`
+  color: black;
+  text-decoration: none;
   &:hover {
     font-family: "Neue-Italic";
+    color: black;
   }
 
   &:hover .img {
@@ -330,7 +355,7 @@ const Description = styled.div`
   padding-left: 20%;
 `;
 
-const CardLink = styled(NavLink)`
+const CardLink = styled.div`
   color: black;
 
   position: relative;
