@@ -101,7 +101,7 @@ const Expertise = ({ expertise }) => {
               }}
               whileInView={{
                 height: isXSmall
-                  ? "500px"
+                  ? "537px"
                   : isSmall
                   ? "390px"
                   : isMedium
@@ -194,6 +194,7 @@ const Section = styled.section`
     }
     @media (max-width: 575px) {
       left: 10px;
+      top: 52px;
     }
   }
 `;
