@@ -65,7 +65,7 @@ const Experience = ({ data }) => {
               left: isSafari ? "calc(16.66vw + 8px)" : "calc(16.66vw + 10px)",
             }}
             whileInView={{
-              height: isSmall ? "180px" : isMedium ? "220px" : "500px",
+              height: isSmall ? "182px" : isMedium ? "220px" : "500px",
             }}
             transition={{
               duration: 5,
@@ -80,10 +80,10 @@ const Experience = ({ data }) => {
           <motion.div
             initial={{
               height: "0px",
-              left: "5vw",
+              left: "25px",
             }}
             whileInView={{
-              height: isSmall ? "180px" : isMedium ? "220px" : "500px",
+              height: isSmall ? "150px" : isMedium ? "220px" : "500px",
             }}
             transition={{
               duration: 5,

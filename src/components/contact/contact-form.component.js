@@ -59,12 +59,6 @@ function ContactForm({ data }) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const getFileName = () => {
-    return fields["resume"]
-      .split("\\")
-      [fields["resume"].split("\\").length - 1].toUpperCase();
-  };
-
   return (
     <>
       <section className="d-flex flex-column justify-content-center h-100">
@@ -90,6 +84,7 @@ function ContactForm({ data }) {
                     onChange={handleChange}
                     name={content.fieldName}
                     value={fields[content.fieldName]}
+                    style={{ paddingLeft: index === 0 && "28px" }}
                   />
                 </InputGroup>
               ))}

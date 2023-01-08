@@ -10,9 +10,9 @@ const TeamMembers = ({ teamMembers }) => {
         teamMembers.map((employee) => {
           const getTitleHeight = () => {
             if (employee.name.toUpperCase() === "DAVID-MARC BOUCHARD") {
-              return "-25px";
+              return "-8px";
             }
-            return isMedium ? "-25px" : "10px";
+            return isMedium ? "-8px" : "10px";
           };
 
           return (

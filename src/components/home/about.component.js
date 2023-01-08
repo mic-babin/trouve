@@ -31,7 +31,7 @@ const Reason = ({ data }) => {
           }}
           whileInView={{
             height: isXSmall
-              ? "540px"
+              ? "545px"
               : isSmall
               ? "300px"
               : isMedium
@@ -172,7 +172,8 @@ const Section = styled.div`
     padding-top: calc(45px);
     padding-bottom: calc(30px);
     .line-0 {
-      top: calc(175px);
+      top: calc(182px);
+      left: 25px;
     }
   }
 `;

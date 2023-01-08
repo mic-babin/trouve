@@ -11,6 +11,7 @@ import { useIsSmall } from "../../utils/media-query.hook";
 
 const Card = ({ data, titleHeight, titleMargin }) => {
   const middleCol = useRef();
+  const imageRef = useRef();
   const {
     name,
     title,
@@ -22,6 +23,7 @@ const Card = ({ data, titleHeight, titleMargin }) => {
     email,
     id,
   } = data;
+
   const cardWrapperControls = useAnimationControls();
   const imageWrapperControls = useAnimationControls();
   const titleControls = useAnimationControls();
@@ -121,19 +123,29 @@ const Card = ({ data, titleHeight, titleMargin }) => {
   };
 
   const getVariableHeight = () => {
-    if (name === "DAVID-MARC BOUCHARD") return 40;
-    if (name === "DAPHNÉ SYLVAIN") return 30;
-
+    if (title === "UN PROCESSUS QUE NOUS  NE PRENONS PAS À LA LÉGÈRE ")
+      return -25;
+    if (title === "DES RECRUTEURS À L’AFFÛT") return -25;
+    if (title === "LE TALENT DOMINE") return -5;
+    if (name === "ANNIE-CLAUDE ROY") return 30;
+    if (name === "DAVID-MARC BOUCHARD") return 100;
+    if (name === "RACHEL MARTIN") return 45;
+    if (name === "DAPHNÉ SYLVAIN") return 70;
     return 0;
   };
 
   useEffect(() => {
     if (name) handleIsEmployee();
     if (hovered) {
+      console.log(imageRef.current);
       // OPEN
       cardWrapperControls.start({
         height: isMedium
-          ? middleCol.current.offsetHeight + 800 + getVariableHeight() + "px"
+          ? middleCol.current.offsetHeight +
+            imageRef.current.offsetHeight +
+            450 +
+            getVariableHeight() +
+            "px"
           : middleCol.current.offsetHeight + 150 + "px",
         maxHeight: isMedium
           ? middleCol.current.offsetHeight + 800 + getVariableHeight() + "px"
@@ -246,6 +258,7 @@ const Card = ({ data, titleHeight, titleMargin }) => {
     isEmployee,
     isXSmall,
     isXXSmall,
+    imageRef,
   ]);
   return (
     <CardWrapper
@@ -253,6 +266,12 @@ const Card = ({ data, titleHeight, titleMargin }) => {
       // onClick={executeScroll}
       onMouseOver={() => handleEnter()}
       onMouseOut={() => handleLeave()}
+      style={{
+        borderBottom:
+          (id === "37168fc0-987d-52df-a37a-6a20c07a594d" ||
+            id === "085f2a0d-992e-5534-b0ba-3a914f31944c") &&
+          "2px solid white",
+      }}
     >
       <div className="row position-relative">
         <div className="col-lg-4 ">
@@ -373,7 +392,7 @@ const Card = ({ data, titleHeight, titleMargin }) => {
             </div>
           )}
         </div>
-        <div className="col-lg-4">
+        <div className="col-lg-4" ref={imageRef}>
           {images &&
             images.map((img, index) => (
               <ImageWrapper

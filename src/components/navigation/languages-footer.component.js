@@ -12,7 +12,7 @@ const LanguagesFooter = ({ langs }) => {
       .toUpperCase();
   };
   return (
-    <div className="d-block mt-1 mt-xl-0 pt-4 pt-xl-0">
+    <div className="d-block mt-2 mt-xl-0 pt-2  pt-xl-0">
       {languages &&
         languages.map((lng) => (
           <Lang

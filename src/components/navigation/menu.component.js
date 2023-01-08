@@ -12,6 +12,8 @@ import { ModalMediumAnimation } from "../animation/modal-medium.animation";
 import { useIsMedium } from "../../utils/media-query.hook";
 import { useIsSmall } from "../../utils/media-query.hook";
 import { Link } from "gatsby-plugin-react-i18next";
+import LogoSrc from "../../assets/img/trouve_blanc.svg";
+import CloseSrc from "../../assets/img/close-white.svg";
 
 const Menu = ({ showMenu, setShowMenu, menu, setShowContact, path }) => {
   const { closeTitle, navLinks, langs, featured, logo } = menu;
@@ -42,7 +44,7 @@ const Menu = ({ showMenu, setShowMenu, menu, setShowContact, path }) => {
                 {logo && (
                   <>
                     <LogoLink to="/" onClick={handleCloseMenu}>
-                      <Logo src={logo.url} alt="Logo" />
+                      <Logo src={isSmall ? LogoSrc : logo.url} alt="Logo" />
                     </LogoLink>
                   </>
                 )}
@@ -54,7 +56,11 @@ const Menu = ({ showMenu, setShowMenu, menu, setShowContact, path }) => {
 
                 {closeTitle && (
                   <MenuButton onClick={handleCloseMenu}>
-                    {isSmall ? <span>&#10006;</span> : closeTitle}
+                    {isSmall ? (
+                      <Close src={CloseSrc} alt="Close" />
+                    ) : (
+                      closeTitle
+                    )}
                   </MenuButton>
                 )}
               </div>
@@ -64,12 +70,15 @@ const Menu = ({ showMenu, setShowMenu, menu, setShowContact, path }) => {
                 </SmallLanguagesWrapper>
               )}
               <motion.div className="d-flex flex-column justify-content-end">
-                <NavLinks
-                  navLinks={navLinks}
-                  setShowContact={setShowContact}
-                  setShowMenu={setShowMenu}
-                  path={path}
-                />
+                <div className="ps-2">
+                  <NavLinks
+                    navLinks={navLinks}
+                    setShowContact={setShowContact}
+                    setShowMenu={setShowMenu}
+                    path={path}
+                  />
+                </div>
+
                 {featured && (
                   <ImageWrapper>
                     <Image
@@ -100,6 +109,10 @@ const NavBg = styled(motion.div)`
     right: 0vw;
   }
 `;
+const Close = styled.img`
+  margin-top: -10px;
+  height: 30px;
+`;
 
 const ModalWrapper = styled(motion.div)`
   position: absolute;
@@ -115,8 +128,8 @@ const ModalWrapper = styled(motion.div)`
 `;
 
 const ImageWrapper = styled.div`
-  width: calc(100vw);
-  padding: 12px;
+  width: calc(100vw - 20px);
+  padding: 20px;
   overflow: hidden;
   @media (max-width: 991px) {
     width: calc(100vw -10px) !important;

@@ -15,6 +15,7 @@ import { useIsLarge } from "../../utils/media-query.hook";
 import { useIsXLarge } from "../../utils/media-query.hook";
 import LogoSrc from "../../assets/img/trouve.svg";
 import { useEffect, useState, useRef } from "react";
+import CloseSrc from "../../assets/img/close.svg";
 
 const Menu = ({ setShowContact, showContact, contact }) => {
   const sections = contact;
@@ -65,7 +66,7 @@ const Menu = ({ setShowContact, showContact, contact }) => {
                 <Logo src={LogoSrc} alt="Logo" />
                 {close && (
                   <CloseButton onClick={handleCloseContact}>
-                    {isSmall ? <span>&#10006;</span> : close}
+                    {isSmall ? <Close src={CloseSrc} alt="Close" /> : close}
                   </CloseButton>
                 )}
               </div>
@@ -140,6 +141,11 @@ const ModalWrapper = styled(motion.div)`
 const CloseButton = styled(MenuButton)`
   color: black;
   z-index: 2;
+`;
+
+const Close = styled.img`
+  height: 30px;
+  margin-top: -10px;
 `;
 
 const FullHeight = styled.div`

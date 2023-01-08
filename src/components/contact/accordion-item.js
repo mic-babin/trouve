@@ -52,8 +52,8 @@ const Toggler = styled.div`
     content: "";
     display: inline-block;
     width: 25px;
-    height: 1px;
-    margin-bottom: 6px;
+    height: 2px;
+    margin-bottom: 5px;
     background: black !important;
     opacity: 1;
     z-index: 1;

@@ -85,7 +85,12 @@ const Mandate = ({ mandate, setShowContact }) => {
               ))}
             {link && (
               <div onClick={setShowContact}>
-                <AnimatedHeroLink link={link} type={motion.div} color="black" />
+                <AnimatedHeroLink
+                  link={link}
+                  type={motion.div}
+                  color="black"
+                  bold={true}
+                />
               </div>
             )}
           </motion.div>

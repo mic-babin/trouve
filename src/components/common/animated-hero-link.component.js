@@ -2,7 +2,7 @@ import React from "react";
 import { AnimatedHeroLink as Link } from "../styled-components/animated-hero-link.style";
 import { motion } from "framer-motion";
 
-const AnimatedHeroLink = ({ link, type, color }) => {
+const AnimatedHeroLink = ({ link, type, color, bold }) => {
   return (
     <Link
       color={color}
@@ -15,8 +15,18 @@ const AnimatedHeroLink = ({ link, type, color }) => {
     >
       <span className="mask">
         <div className="link-container">
-          <span className="link-title1 title">{link.text}</span>
-          <span className="link-title2 title">{link.text}</span>
+          <span
+            className="link-title1 title"
+            style={{ fontFamily: bold && "Neue" }}
+          >
+            {link.text}
+          </span>
+          <span
+            className="link-title2 title"
+            style={{ fontFamily: bold && "Neue" }}
+          >
+            {link.text}
+          </span>
         </div>
       </span>
     </Link>
