@@ -61,7 +61,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .scroll-to {
-  transform: translateX(-200px);
+  transform: translateY(-75px);
 }
 
 .bg-beige {

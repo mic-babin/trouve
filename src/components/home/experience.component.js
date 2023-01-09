@@ -34,8 +34,7 @@ const Experience = ({ data }) => {
       setHovered2(!hovered2);
     }
   };
-  console.log("isMedium", isMedium);
-  console.log("isSafari", isSafari);
+
   const getWidth = (index) => {
     if (index === 0) {
       return "-500";

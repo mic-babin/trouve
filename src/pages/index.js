@@ -34,6 +34,11 @@ export default function Homepage(props) {
   const [showLoader, setShowLoader] = useState(true);
 
   useEffect(() => {
+    let about = document.getElementById("about");
+    if (about && props.location.hash === "#a-propos") {
+      about.scrollIntoView({ behavior: "smooth" }, true);
+    }
+
     if (showLoader) {
       setTimeout(() => {
         setShowLoader(false);
@@ -66,7 +71,7 @@ export default function Homepage(props) {
         observer.disconnect();
       }
     };
-  }, [showPage, showLoader]);
+  }, [showPage, showLoader, props.location.hash]);
 
   return (
     <div ref={layout}>
