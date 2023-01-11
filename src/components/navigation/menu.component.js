@@ -53,7 +53,11 @@ const Menu = ({ showMenu, setShowMenu, menu, setShowContact, path }) => {
                     <Languages classname="" langs={langs} />
                   </div>
                 )}
-
+                {isMedium && (
+                  <SmallLanguagesWrapper>
+                    <Languages langs={langs} />
+                  </SmallLanguagesWrapper>
+                )}
                 {closeTitle && (
                   <MenuButton onClick={handleCloseMenu}>
                     {isSmall ? (
@@ -64,11 +68,7 @@ const Menu = ({ showMenu, setShowMenu, menu, setShowContact, path }) => {
                   </MenuButton>
                 )}
               </div>
-              {isMedium && (
-                <SmallLanguagesWrapper>
-                  <Languages langs={langs} />
-                </SmallLanguagesWrapper>
-              )}
+
               <motion.div className="d-flex flex-column justify-content-end">
                 <div className="ps-2">
                   <NavLinks
@@ -110,7 +110,7 @@ const NavBg = styled(motion.div)`
   }
 `;
 const Close = styled.img`
-  margin-top: -10px;
+  margin-top: -2px;
   height: 30px;
 `;
 
@@ -142,12 +142,16 @@ const Image = styled(GatsbyImage)`
   @media (max-width: 991px) {
     width: calc(100vw) !important;
   }
+  @media (max-width: 574px) {
+    height: 30vh;
+  }
 `;
 
 const SmallLanguagesWrapper = styled.div`
   position: absolute;
-  top: 65px;
-  right: 0px;
+  top: 0px;
+  right: 50px;
+  margin-top: -37px;
 
   @media (max-width: 575px) {
     top: 50px;

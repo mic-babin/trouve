@@ -159,7 +159,7 @@ const Experience = ({ data }) => {
                 ))}
             </H2>
           )}
-          <div className="d-flex justify-content-center">
+          <div className="d-flex justify-content-center ps-3 ps-md-0">
             {textFields &&
               textFields.map((el) => (
                 <Paragraph key={el.id}>

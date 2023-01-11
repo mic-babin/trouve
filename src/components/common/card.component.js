@@ -213,23 +213,21 @@ const Card = ({ data, titleHeight, titleMargin }) => {
             : isMedium
             ? "100%"
             : "1000px",
-        fontSize:
-          isXXSmall && !isEmployee
-            ? "30px"
-            : isXSmall && !isEmployee
-            ? "35px"
-            : isMedium
-            ? "50px"
-            : "65px",
+        fontSize: isXXSmall
+          ? "30px"
+          : isXSmall
+          ? "35px"
+          : isMedium
+          ? "50px"
+          : "65px",
 
-        lineHeight:
-          isXXSmall && !isEmployee
-            ? "33px"
-            : isXSmall && !isEmployee
-            ? "34px"
-            : isMedium
-            ? "55px"
-            : "70px",
+        lineHeight: isXXSmall
+          ? "33px"
+          : isXSmall
+          ? "34px"
+          : isMedium
+          ? "55px"
+          : "70px",
         transition: { duration: 0.375 },
         type: "linear",
       });
@@ -243,6 +241,9 @@ const Card = ({ data, titleHeight, titleMargin }) => {
         opacity: 1,
         transition: { duration: 0.375, delay: 0 },
         type: "linear",
+        top: getMarc()
+          ? `calc(3.25rem + ${titleHeight})`
+          : `calc(1rem + ${titleHeight})`,
       });
     }
   }, [
@@ -284,7 +285,7 @@ const Card = ({ data, titleHeight, titleMargin }) => {
           {isEmployee && (
             <SubTitle animate={subTitleControls}>{title}</SubTitle>
           )}
-          {isEmployee && !isMedium && (
+          {(isXSmall || !isMedium) && isEmployee && (
             <SubTitleClosed animate={subTitleClosedControls}>
               {title}
             </SubTitleClosed>
@@ -473,6 +474,15 @@ const SubTitleClosed = styled(motion.h3)`
   }
   @media (max-width: 1199px) {
     max-width: 400px;
+  }
+  @media (max-width: 574px) {
+    top: calc(0.5rem);
+    left: 15px;
+    line-height: 22.5px;
+    text-align: start;
+    font-size: 16px;
+    font-family: "Neue-Italic";
+    transform: translateY(0%);
   }
 `;
 

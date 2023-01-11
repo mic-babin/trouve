@@ -106,7 +106,7 @@ const Reason = ({ data }) => {
           )}
 
           <motion.div
-            className="d-flex align-items-center flex-column"
+            className="d-flex align-items-center flex-column ps-4  ps-md-0"
             whileInView={() => {
               setIsInView(true);
               return {};
@@ -169,10 +169,10 @@ const Section = styled.div`
   }
 
   @media (max-width: 575px) {
-    padding-top: calc(45px);
-    padding-bottom: calc(30px);
+    padding-top: calc(75px);
+    padding-bottom: calc(75px);
     .line-0 {
-      top: calc(182px);
+      top: calc(212px);
       left: 25px;
     }
   }

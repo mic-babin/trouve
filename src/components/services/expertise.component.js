@@ -101,7 +101,7 @@ const Expertise = ({ expertise }) => {
               }}
               whileInView={{
                 height: isXSmall
-                  ? "537px"
+                  ? "490px"
                   : isSmall
                   ? "390px"
                   : isMedium
@@ -224,6 +224,7 @@ const TextWrapper = styled(motion.div)`
   background-color: black;
   z-index: 1;
   @media (max-width: 574px) {
+    padding: 3rem 1.5rem;
     padding-bottom: 0;
   }
 `;

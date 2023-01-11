@@ -3,12 +3,11 @@ import styled from "styled-components";
 
 export const AnimatedHeroLink = styled(NavLink)`
   color: ${(props) => props.color};
-  font-weight: 600;
   /* padding-left: 50px; */
   position: relative;
   overflow: visible;
   transition: all 0.2s all;
-  font-family: "Neue-Light";
+  font-family: "Neue";
   letter-spacing: 2px;
   height: 30px;
   align-items: center;
