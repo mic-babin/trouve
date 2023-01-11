@@ -137,7 +137,7 @@ const H2 = styled.h2`
   line-height: 65px;
   display: flex;
   flex-direction: column;
-  padding-bottom: 75px;
+  padding-bottom: 50px;
 
   @media (max-width: 991px) {
     font-size: 50px;
