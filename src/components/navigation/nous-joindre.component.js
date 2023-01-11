@@ -145,7 +145,7 @@ const CloseButton = styled(MenuButton)`
 
 const Close = styled.img`
   height: 30px;
-  margin-top: -10px;
+  margin-top: -6px;
 `;
 
 const FullHeight = styled.div`
