@@ -23,11 +23,20 @@ const TeamMembers = ({ teamMembers }) => {
             return isXSmall ? "15px" : isMedium ? "-8px" : "10px";
           };
 
+          const getImgPosition = () => {
+            if (employee.name.toUpperCase() === "RACHEL MARTIN")
+              return "center center";
+            if (employee.name.toUpperCase() === "DAPHNÉ SYLVAIN")
+              return "0% 20%";
+            return "left top";
+          };
+
           return (
             <Card
               data={employee}
               key={employee.id}
               titleHeight={getTitleHeight()}
+              imgPosition={getImgPosition()}
             />
           );
         })}
