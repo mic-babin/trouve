@@ -101,7 +101,9 @@ export const Title = styled(motion.h2)`
   overflow: visible;
 `;
 
-export const Department = styled.div``;
+export const Department = styled.div`
+  padding-top: 5px;
+`;
 export const DepartmentClosed = styled.div`
   font-size: 18px;
   letter-spacing: 2px;
