@@ -1,6 +1,3 @@
-* {
-  cursor: url("../img/cursor.png"), auto !important;
-}
 .h-100 {
   height: 100%;
 }
@@ -177,18 +174,6 @@ body::-webkit-scrollbar-thumb {
   box-sizing: content-box;
 }
 
-/* body:before {
-  content: "";
-  position: absolute;
-  z-index: 1;
-  top: var(--y);
-  left: var(--x);
-  right: 0;
-  bottom: 0;
-  width: 1.5em;
-  height: 1.5em;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  background: #fff;
-  mix-blend-mode: difference;
-} */
+.pointer {
+  cursor: pointer;
+}

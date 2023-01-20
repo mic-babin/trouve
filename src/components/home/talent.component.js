@@ -16,11 +16,16 @@ const Talent = ({ data }) => {
     : isMedium
     ? "15px"
     : "10px";
+  const getImgPosition = () => {
+    return "0% 20%";
+  };
+
   return (
-    <>
-      {/* <div className="scroll-to" id="talent"></div> */}
-      <Card data={data} titleHeight={titleHeight} />;
-    </>
+    <Card
+      data={data}
+      titleHeight={titleHeight}
+      imgPosition={getImgPosition()}
+    />
   );
 };
 

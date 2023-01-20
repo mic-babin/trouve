@@ -42,6 +42,7 @@ const Mandate = ({ mandate, setShowContact }) => {
                   title.split("<br>").map((word, index) => (
                     <motion.div
                       key={index}
+                      className={"text-" + index}
                       animate={
                         isInView && {
                           opacity: 1,
@@ -64,27 +65,30 @@ const Mandate = ({ mandate, setShowContact }) => {
               </H2>
             )}
             {textFields &&
-              textFields.map((textField, index) => (
-                <Paragraph className="py-4" key={index}>
-                  {textField.text.text.split(" ").map((word, index) => (
-                    <motion.span
-                      key={index}
-                      initial={{ opacity: 0, filter: "blur(1)" }}
-                      whileInView={{ opacity: 1, filter: "blur(0)" }}
-                      transition={{
-                        duration: 1,
-                        delay: index / 20,
-                        ease: [0.11, 0, 0.5, 0],
-                      }}
-                      viewport={{ once: true }}
-                    >
-                      {word + " "}{" "}
-                    </motion.span>
-                  ))}
-                </Paragraph>
-              ))}
+              textFields.map((textField, index) => {
+                let i = index;
+                return (
+                  <Paragraph className="py-3" key={index}>
+                    {textField.text.text.split(" ").map((word, index) => (
+                      <motion.span
+                        key={index}
+                        initial={{ opacity: 0, filter: "blur(1)" }}
+                        animate={isInView && { opacity: 1, filter: "blur(0)" }}
+                        transition={{
+                          duration: 1,
+                          delay: i * 1.5 + index / 20,
+                          ease: [0.11, 0, 0.5, 0],
+                        }}
+                        viewport={{ once: true }}
+                      >
+                        {word + " "}{" "}
+                      </motion.span>
+                    ))}
+                  </Paragraph>
+                );
+              })}
             {link && (
-              <div onClick={setShowContact}>
+              <div onClick={setShowContact} className="pt-2">
                 <AnimatedHeroLink
                   link={link}
                   type={motion.div}
@@ -103,7 +107,7 @@ const Mandate = ({ mandate, setShowContact }) => {
 export default Mandate;
 
 const Section = styled.section`
-  padding-top: 300px;
+  padding-top: 225px;
   padding-bottom: 150px;
   color: black;
 
@@ -122,13 +126,11 @@ const Section = styled.section`
   @media (max-width: 767px) {
     padding-left: 15px;
     padding-right: 15px;
+    padding-top: 75px;
+    padding-bottom: 75px;
     .w-80 {
       width: 100%;
     }
-  }
-  @media (max-width: 767px) {
-    padding-top: 200px;
-    padding-bottom: 75px;
   }
 `;
 
@@ -137,7 +139,17 @@ const H2 = styled.h2`
   line-height: 65px;
   display: flex;
   flex-direction: column;
-  padding-bottom: 50px;
+  padding-bottom: 20px;
+
+  .text-0 {
+    width: 90%;
+  }
+
+  @media (max-width: 1399px) {
+    .text-0 {
+      width: 100%;
+    }
+  }
 
   @media (max-width: 991px) {
     font-size: 50px;
@@ -161,7 +173,7 @@ const H2 = styled.h2`
 
 const CircleWrapper = styled.div`
   position: absolute;
-  top: 257px;
+  top: 367px;
   left: -255px;
   transform: rotate(-20deg);
 

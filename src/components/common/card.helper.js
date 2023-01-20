@@ -70,7 +70,7 @@ export const getImageHeight = (
       ? "-75vw"
       : isMedium
       ? "-60vw"
-      : "-40vw";
+      : "-35vw";
   if (title.includes("TALENT"))
     return isXXSmall
       ? "-150vw"
@@ -99,6 +99,19 @@ export const Title = styled(motion.h2)`
   line-height: 35px;
   letter-spacing: 1px;
   overflow: visible;
+`;
+
+export const Department = styled.div``;
+export const DepartmentClosed = styled.div`
+  font-size: 18px;
+  letter-spacing: 2px;
+  font-family: "Neue-LightItalic";
+  font-weight: 600;
+
+  @media (max-width: 570px) {
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
 `;
 
 export const SubTitleClosed = styled(motion.h3)`

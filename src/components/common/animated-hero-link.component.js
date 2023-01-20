@@ -12,6 +12,7 @@ const AnimatedHeroLink = ({ link, type, color, bold }) => {
       initial={{ opacity: 0, transform: "translateX(200px)" }}
       animate={{ opacity: 1, transform: "translateX(0px)" }}
       transition={{ duration: 1, delay: 4 }}
+      style={{ cursor: "pointer" }}
     >
       <span className="mask">
         <div className="link-container">

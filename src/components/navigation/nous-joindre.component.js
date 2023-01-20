@@ -13,9 +13,9 @@ import { useIsMedium } from "../../utils/media-query.hook";
 import { useIsSmall } from "../../utils/media-query.hook";
 import { useIsLarge } from "../../utils/media-query.hook";
 import { useIsXLarge } from "../../utils/media-query.hook";
-import LogoSrc from "../../assets/img/trouve.svg";
+import LogoSrc from "../../assets/img/trouve_blanc.svg";
 import { useEffect, useState, useRef } from "react";
-import CloseSrc from "../../assets/img/close.svg";
+import CloseSrc from "../../assets/img/close-white.svg";
 
 const Menu = ({ setShowContact, showContact, contact }) => {
   const sections = contact;
@@ -62,14 +62,14 @@ const Menu = ({ setShowContact, showContact, contact }) => {
               initial="hidden"
               exit="hidden"
             >
-              <div className="d-flex justify-content-between align-items-center">
+              <Header className="d-flex justify-content-between align-items-center">
                 <Logo src={LogoSrc} alt="Logo" />
                 {close && (
                   <CloseButton onClick={handleCloseContact}>
                     {isSmall ? <Close src={CloseSrc} alt="Close" /> : close}
                   </CloseButton>
                 )}
-              </div>
+              </Header>
               {!isLarge && (
                 <>
                   {!isXLarge && (
@@ -104,8 +104,14 @@ const Menu = ({ setShowContact, showContact, contact }) => {
   );
 };
 
+const Header = styled.div`
+  background-color: black;
+  color: white;
+  border-bottom: 2px solid white;
+`;
+
 const NavBg = styled(motion.div)`
-  background-color: white;
+  background-color: #e7e5e0;
   color: black;
   position: absolute;
   top: -50vw;
@@ -134,12 +140,11 @@ const ModalWrapper = styled(motion.div)`
 
   @media (max-width: 991px) {
     left: 100vw;
-    width: calc(100vw - 10px) !important;
+    width: calc(100vw) !important;
   }
 `;
 
 const CloseButton = styled(MenuButton)`
-  color: black;
   z-index: 2;
 `;
 

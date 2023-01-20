@@ -61,7 +61,7 @@ const FileUploader = ({
       )}
       {fileUploaded && (
         <div className="d-flex justify-content-between w-100">
-          <Label>{name}</Label>
+          <Label>{name.toUpperCase()}</Label>
 
           <Label onClick={resetResumeField} className="pointer">
             &#x2715;

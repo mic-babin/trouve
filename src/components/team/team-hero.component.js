@@ -101,7 +101,7 @@ const TeamHero = ({ hero, setShowContact }) => {
                     <AnimatedHeroLink
                       type={motion.div}
                       link={link}
-                      color={"white"}
+                      color={"black"}
                     />
                   </div>
                 </>
@@ -147,8 +147,8 @@ const Title = styled(H1)`
 `;
 
 const Section = styled.section`
-  background-color: black;
-  color: white;
+  background-color: #e7e5e0;
+  color: black;
   padding-top: 250px;
   padding-bottom: 200px;
   overflow: hidden;
@@ -181,8 +181,8 @@ const ImageWrapper = styled(motion.div)`
   &:nth-of-type(2) {
     top: 100px;
     right: 300px;
-    height: 330px;
-    width: 550px;
+    height: 350px;
+    width: 350px;
     z-index: 0;
   }
 `;

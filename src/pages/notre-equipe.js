@@ -163,6 +163,7 @@ export const query = graphql`
               id
               name
               title
+              department
               descriptions {
                 id
                 text {

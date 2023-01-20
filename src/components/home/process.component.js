@@ -18,11 +18,17 @@ const Process = ({ data }) => {
     : "-25px";
 
   const titleMargin = isXSmall ? "70px" : isMedium ? "50px" : "0px";
+  const getImgPosition = () => {
+    return "0% 50%";
+  };
+
   return (
-    <>
-      <div className="scroll-to" id="process"></div>
-      <Card data={data} titleHeight={titleHeight} titleMargin={titleMargin} />
-    </>
+    <Card
+      data={data}
+      titleHeight={titleHeight}
+      titleMargin={titleMargin}
+      imgPosition={getImgPosition()}
+    />
   );
 };
 

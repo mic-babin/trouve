@@ -24,9 +24,7 @@ const Expertise = ({ expertise }) => {
   const paragraphs = textFields.filter(
     (el) =>
       el.id === "b0776a44-230d-5640-a1a4-4cf2ed423a28" ||
-      el.id === "13a7cf44-f861-55be-9c1d-d338af42ce6b" ||
-      el.id === "f88f83b9-82e1-5bfe-8599-6ddd3c1a859f" ||
-      el.id === "41dcc054-c0b0-51bb-a684-e3a8463e5823"
+      el.id === "f88f83b9-82e1-5bfe-8599-6ddd3c1a859f"
   );
 
   const isMedium = useIsMedium();
@@ -88,25 +86,25 @@ const Expertise = ({ expertise }) => {
                 </Paragraph>
               )}
               {link && (
-                <AnimatedHeroLink link={link} type={motion.a} color="white" />
+                <AnimatedHeroLink link={link} type={motion.a} color="black" />
               )}
-              {!isMedium && <Images images={images}></Images>}
+              {/* {!isMedium && <Images images={images}></Images>} */}
             </div>
           </div>
 
-          <div className="col-lg-6 d-flex flex-column justify-content-center pb-5 pb-lg-0 px-lg-5 position-relative">
+          <div className="col-lg-9 offset-lg-3 d-flex flex-column justify-content-center pb-5 pb-lg-0 px-lg-5 position-relative">
             <motion.div
               initial={{
                 height: "0px",
               }}
               whileInView={{
                 height: isXSmall
-                  ? "490px"
+                  ? "412px"
                   : isSmall
                   ? "390px"
                   : isMedium
                   ? "300px"
-                  : "1375px",
+                  : "1175px",
               }}
               transition={{
                 duration: 5,
@@ -126,7 +124,7 @@ const Expertise = ({ expertise }) => {
                 paragraphs.map((paragraph, index) => {
                   let i = index;
                   return (
-                    <div
+                    <Paragraph
                       className={index === 1 ? "mt-3" : ""}
                       key={paragraph.id}
                     >
@@ -147,11 +145,10 @@ const Expertise = ({ expertise }) => {
                           {word + " "}{" "}
                         </motion.span>
                       ))}
-                    </div>
+                    </Paragraph>
                   );
                 })}
             </TextWrapper>
-            {isMedium && <Images images={images}></Images>}
           </div>
         </div>
       </div>
@@ -162,8 +159,8 @@ const Expertise = ({ expertise }) => {
 export default Expertise;
 
 const Section = styled.section`
-  background-color: black;
-  color: white;
+  background-color: #e7e5e0;
+  color: black;
   padding-top: 200px;
   z-index: 1;
   overflow-x: clip;
@@ -183,7 +180,7 @@ const Section = styled.section`
     background: #fff;
     mix-blend-mode: difference;
     left: 50%;
-    top: -110px;
+    top: -610px;
     position: absolute;
     @media (max-width: 991px) {
       top: 25px;
@@ -221,7 +218,7 @@ const Title = styled(H1)`
 
 const TextWrapper = styled(motion.div)`
   padding: 3rem 2rem;
-  background-color: black;
+  background-color: #e7e5e0;
   z-index: 1;
   @media (max-width: 574px) {
     padding: 3rem 1.5rem;

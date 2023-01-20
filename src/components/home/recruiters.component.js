@@ -19,11 +19,17 @@ const Recruiters = ({ data }) => {
 
   const titleMargin = isXSmall ? "30px" : 0;
 
+  const getImgPosition = () => {
+    return "0% 20%";
+  };
+
   return (
-    <>
-      {/* <div className="scroll-to" id="recruiters"></div> */}
-      <Card data={data} titleHeight={titleHeight} titleMargin={titleMargin} />
-    </>
+    <Card
+      data={data}
+      titleHeight={titleHeight}
+      titleMargin={titleMargin}
+      imgPosition={getImgPosition()}
+    />
   );
 };
 

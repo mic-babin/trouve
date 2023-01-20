@@ -15,12 +15,11 @@ const TeamMembers = ({ teamMembers }) => {
               isXSmall &&
               employee.name.toUpperCase() === "DAVID-MARC BOUCHARD"
             )
-              return "-12px";
+              return "-20px";
             if (employee.name.toUpperCase() === "DAVID-MARC BOUCHARD")
-              return "-8px";
-            if (isXSmall && employee.name.toUpperCase() === "DAPHNÉ SYLVAIN")
-              return "7px";
-            return isXSmall ? "15px" : isMedium ? "-8px" : "10px";
+              return "-25px";
+
+            return isXSmall ? "0px" : isMedium ? "-8px" : "10px";
           };
 
           const getImgPosition = () => {

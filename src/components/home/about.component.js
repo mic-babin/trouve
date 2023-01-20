@@ -31,11 +31,11 @@ const Reason = ({ data }) => {
           }}
           whileInView={{
             height: isXSmall
-              ? "545px"
+              ? "572px"
               : isSmall
               ? "300px"
               : isMedium
-              ? "500px"
+              ? "575px"
               : "1300px",
           }}
           transition={{

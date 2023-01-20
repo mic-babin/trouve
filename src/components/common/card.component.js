@@ -17,14 +17,18 @@ import {
   SubTitle,
   AddressesWrapper,
   Address,
+  Department,
+  DepartmentClosed,
 } from "./card.helper";
 
 const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
+  console.log(imgPosition);
   const middleCol = useRef();
   const imageRef = useRef();
   const {
     name,
     title,
+    department,
     textFields,
     images,
     image,
@@ -33,7 +37,7 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
     email,
     id,
   } = data;
-
+  console.log(department);
   const cardWrapperControls = useAnimationControls();
   const imageWrapperControls = useAnimationControls();
   const titleControls = useAnimationControls();
@@ -71,7 +75,6 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
   useEffect(() => {
     if (name) handleIsEmployee();
     if (hovered) {
-      console.log(imageRef.current);
       // OPEN
       cardWrapperControls.start({
         height: isMedium
@@ -179,8 +182,8 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
         transition: { duration: 0.375, delay: 0 },
         type: "linear",
         top: getMarc()
-          ? `calc(3.25rem + ${titleHeight})`
-          : `calc(1rem + ${titleHeight})`,
+          ? `calc(4rem + ${titleHeight})`
+          : `calc(1.7rem + ${titleHeight})`,
       });
     }
   }, [
@@ -220,11 +223,15 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
             {isEmployee ? name : title}
           </Title>
           {isEmployee && (
-            <SubTitle animate={subTitleControls}>{title}</SubTitle>
+            <SubTitle animate={subTitleControls}>
+              <div>{title}</div>
+              <Department>{department}</Department>
+            </SubTitle>
           )}
           {(isXSmall || !isMedium) && isEmployee && (
             <SubTitleClosed animate={subTitleClosedControls}>
-              {title}
+              <div>{title}</div>
+              <DepartmentClosed>{department.toUpperCase()}</DepartmentClosed>
             </SubTitleClosed>
           )}
         </div>
@@ -355,14 +362,16 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
               className="img-wrapper"
               style={{ alignItems: isEmployee ? "start" : "center" }}
             >
-              <Image
-                image={getImage(
-                  image?.gatsbyImageData || images[0].gatsbyImageData
-                )}
-                alt={name}
-                objectPosition={imgPosition || "center center"}
-                loading="eager"
-              ></Image>
+              {imgPosition && (
+                <Image
+                  image={getImage(
+                    image?.gatsbyImageData || images[0].gatsbyImageData
+                  )}
+                  alt={name}
+                  objectPosition={imgPosition || "center center"}
+                  loading="eager"
+                ></Image>
+              )}
             </ImageWrapper>
           )}
         </div>

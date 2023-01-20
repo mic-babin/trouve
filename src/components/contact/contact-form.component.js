@@ -164,6 +164,7 @@ const Input = styled.input`
   width: 100%;
   border: none;
   padding: 1rem 1.5rem;
+  background-color: #e7e5e0;
 
   &:focus {
     border: none;
@@ -188,6 +189,7 @@ const TextArea = styled.textarea`
   border: 1.5px solid black;
   height: 135px;
   resize: none;
+  background-color: #e7e5e0;
 
   &:focus {
     outline: none !important;

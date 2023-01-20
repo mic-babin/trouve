@@ -8,6 +8,7 @@ export const NavLink = styled(motion(Link))`
   color: white;
   padding: 1rem 0;
   height: 100%;
+  cursor: pointer;
 
   &:hover {
     color: white;

@@ -30,7 +30,7 @@ const Hero = ({ data }) => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [hovered, setHovered] = useState(false);
   const handleScroll = () => {
-    const position = window.pageYOffset;
+    const position = window.pageYOffset * 1.2;
     setScrollPosition(position);
   };
   const handleHover = () => {
@@ -72,7 +72,7 @@ const Hero = ({ data }) => {
             <H3>
               <div className="word">
                 <motion.div
-                  initial={{ transform: "translateX(-400px)" }}
+                  initial={{ transform: "translateX(-450px)" }}
                   animate={{ transform: "translateX(0px)" }}
                   transition={{
                     duration: 1,
@@ -86,7 +86,7 @@ const Hero = ({ data }) => {
               </div>
               <div className="second-word">
                 <motion.div
-                  initial={{ transform: "translateX(-400px)" }}
+                  initial={{ transform: "translateX(-450px)" }}
                   animate={{ transform: "translateX(0px)" }}
                   transition={{
                     duration: 1,
@@ -328,11 +328,9 @@ const JobsLinkWrapper = styled.div`
   position: absolute;
   display: flex;
   align-items: center;
-  top: 520px;
+  top: 450px;
   z-index: 2;
-  @media (max-width: 1199px) {
-    top: 500px;
-  }
+
   @media (max-width: 991px) {
     padding-left: 30px;
     top: 575px;
@@ -380,7 +378,7 @@ const JobsLink = styled(motion.a)`
     position: relative;
     display: block;
     padding: 0;
-    height: 16px;
+    height: 30px;
     overflow: hidden;
   }
 
@@ -393,8 +391,8 @@ const JobsLink = styled(motion.a)`
     display: block;
 
     /*  Set same font-size and line height  */
-    font-size: 16px;
-    line-height: 16px;
+    font-size: 30px;
+    line-height: 30px;
     transition: transform 0.3s ease;
     transition-delay: 250ms;
   }
@@ -412,7 +410,7 @@ const JobsLink = styled(motion.a)`
 
   /* Move up two texts (20px = font-size) */
   &:hover .link-container {
-    transform: translateY(-16px);
+    transform: translateY(-30px);
   }
 
   /* Rotate texts a little bit */
@@ -423,7 +421,37 @@ const JobsLink = styled(motion.a)`
   &:hover .link-title2 {
     transform: rotate(0);
   }
+
+  @media (max-width: 991px) {
+    .mask {
+      height: 25px;
+    }
+
+    .title {
+      font-size: 25px;
+      line-height: 25px;
+    }
+
+    &:hover .link-container {
+      transform: translateY(-25px);
+    }
+  }
+  @media (max-width: 470px) {
+    .mask {
+      height: 4.5vw;
+    }
+
+    .title {
+      font-size: 4.5vw;
+      line-height: 4.5vw;
+    }
+
+    &:hover .link-container {
+      transform: translateY(-4.5vw);
+    }
+  }
 `;
+
 const HorizontalLine = styled(motion.div)`
   height: 1.5px;
   background-color: #ffffff;
@@ -432,7 +460,7 @@ const List = styled(motion.div)`
   padding: 20px 0;
   /* border-top: 1.5px solid white;
   border-bottom: 1px solid white; */
-  width: 190vw;
+  width: 250vw;
   transform: translateX(-50vw);
   overflow-x: hidden !important;
 `;
