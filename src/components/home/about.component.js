@@ -147,10 +147,16 @@ export default Reason;
 const Section = styled.div`
   padding-top: 180px;
   padding-bottom: 100px;
-  background-color: black;
-  color: white;
+  background-color: rgb(231, 229, 224);
+  color: black;
   overflow: hidden;
   position: relative;
+
+  .line-0,
+  .line-1,
+  .line-2 {
+    background-color: black;
+  }
 
   @media (max-width: 991px) {
     .line-0 {

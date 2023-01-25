@@ -7,4 +7,5 @@ export const CardWrapper = styled(motion.section)`
   padding: 75px 20px;
   border-top: 2px solid white;
   overflow: hidden;
+  cursor: pointer;
 `;

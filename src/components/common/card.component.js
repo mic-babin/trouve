@@ -49,6 +49,7 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
   const [hovered, setHovered] = useState(false);
   const handleEnter = () => setHovered(true);
   const handleLeave = () => setHovered(false);
+  const toggleOpen = () => setHovered(!hovered);
   const isMedium = useIsMedium();
   const isSmall = useIsSmall();
   const isXSmall = useIsXSmall();
@@ -205,8 +206,9 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
     <CardWrapper
       animate={cardWrapperControls}
       // onClick={executeScroll}
-      onMouseOver={() => handleEnter()}
-      onMouseOut={() => handleLeave()}
+      onClick={isEmployee && toggleOpen}
+      onMouseOver={() => !isEmployee && handleEnter()}
+      onMouseOut={() => !isEmployee && handleLeave()}
       style={{
         borderBottom:
           (id === "37168fc0-987d-52df-a37a-6a20c07a594d" ||

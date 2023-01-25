@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import LogoSrc from "../../assets/img/trouve.svg";
-
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   loaderAnimation,
@@ -9,6 +8,25 @@ import {
 } from "../animation/loader-animation";
 
 const FirstLoader = ({ image, show }) => {
+  const number = "100";
+  const duration = 2;
+  const [count, setCount] = useState("0");
+  useEffect(() => {
+    let start = 0;
+    const end = parseInt(number.substring(0, 3));
+    if (start === end) return;
+
+    // find duration per increment
+    let totalMilSecDur = parseInt(duration);
+    let incrementTime = (totalMilSecDur / end) * 1000;
+
+    let timer = setInterval(() => {
+      start += 1;
+      setCount(String(start) + number.substring(3));
+      if (start === end) clearInterval(timer);
+    }, incrementTime);
+  }, [number, duration]);
+
   return (
     <AnimatePresence initial={false} custom={WrapperAnimation}>
       {show && (
@@ -20,12 +38,19 @@ const FirstLoader = ({ image, show }) => {
         >
           {image && (
             <>
-              <div className="img">
-                <img src={LogoSrc} alt="" />
-              </div>
-              <div className="img bg-black"></div>
+              <GatsbyImage
+                image={getImage(image.loaderImage.gatsbyImageData)}
+                alt="TODO"
+                className="img"
+              ></GatsbyImage>
+              <GatsbyImage
+                image={getImage(image.loaderImage.gatsbyImageData)}
+                alt="TODO"
+                className="img img-grey"
+              ></GatsbyImage>
             </>
           )}
+          <Number>{count}%</Number>
         </Wrapper>
       )}
     </AnimatePresence>
@@ -41,7 +66,7 @@ const Wrapper = styled(motion.div)`
   height: 100vh;
   width: 100vw;
   color: white;
-  background-color: #e7e5e0;
+  background-color: black;
   z-index: 9999;
   display: flex;
   justify-content: center;
@@ -51,18 +76,9 @@ const Wrapper = styled(motion.div)`
     position: absolute;
     top: 0;
     height: 100vh;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    img {
-      height: 20vh;
-    }
   }
-  .bg-black {
-    background-color: #000;
-    z-index: 10000;
+  .img-grey {
+    filter: grayscale(1);
     animation-name: ${loaderAnimation};
     animation-duration: 2s;
     animation-iteration-count: 1;

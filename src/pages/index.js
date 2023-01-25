@@ -42,7 +42,7 @@ export default function Homepage(props) {
     if (showLoader) {
       setTimeout(() => {
         setShowLoader(false);
-      }, 2100);
+      }, 1800);
     }
     if (!showPage) {
       setTimeout(() => {
