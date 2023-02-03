@@ -173,7 +173,11 @@ export const query = graphql`
               email
               phone
               image {
-                gatsbyImageData(placeholder: BLURRED, layout: CONSTRAINED)
+                gatsbyImageData(
+                  placeholder: BLURRED
+                  layout: CONSTRAINED
+                  quality: 100
+                )
               }
             }
             ... on ContentfulForm {
