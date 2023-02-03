@@ -104,7 +104,7 @@ const Expertise = ({ expertise }) => {
                   ? "390px"
                   : isMedium
                   ? "300px"
-                  : "1175px",
+                  : "1085px",
               }}
               transition={{
                 duration: 5,
@@ -228,7 +228,7 @@ const TextWrapper = styled(motion.div)`
 
 const Paragraph = styled(Kicker)`
   padding-top: 30px;
-  font-size: 30px;
+  font-size: 24px;
   letter-spacing: 1px;
 
   @media (max-width: 1199px) and (min-width: 992px) {

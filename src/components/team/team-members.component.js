@@ -23,11 +23,14 @@ const TeamMembers = ({ teamMembers }) => {
           };
 
           const getImgPosition = () => {
+            if (employee.name.toUpperCase() === "ANNIE-CLAUDE ROY")
+              return "0% 60%";
             if (employee.name.toUpperCase() === "RACHEL MARTIN")
-              return "center center";
+              return "0% 60%";
             if (employee.name.toUpperCase() === "DAPHNÉ SYLVAIN")
-              return "0% 20%";
-            return "left top";
+              return "0% 40%";
+            if (employee.name.toUpperCase() === "DAVID-MARC BOUCHARD")
+              return "0% 60%";
           };
 
           return (

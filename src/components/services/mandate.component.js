@@ -173,7 +173,7 @@ const H2 = styled.h2`
 
 const CircleWrapper = styled.div`
   position: absolute;
-  top: 367px;
+  top: 230px;
   left: -255px;
   transform: rotate(-20deg);
 
@@ -187,7 +187,7 @@ const CircleWrapper = styled.div`
 
 const Paragraph = styled(Kicker)`
   padding-top: 30px;
-  font-size: 30px;
+  font-size: 24px;
   @media (max-width: 574px) {
     font-size: 22px;
     line-height: 26px;

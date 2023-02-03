@@ -150,11 +150,12 @@ const Section = styled.section`
   background-color: #e7e5e0;
   color: black;
   padding-top: 250px;
-  padding-bottom: 200px;
+  margin-bottom: -100px;
   overflow: hidden;
   height: 905px;
 
   @media (max-width: 767px) {
+    margin-bottom: 0px;
     padding-top: 200px;
     padding-bottom: 50px;
     padding-left: 15px;
@@ -196,7 +197,7 @@ const Container = styled.div`
 
 const Paragraph = styled(Kicker)`
   padding-top: 30px;
-  font-size: 30px;
+  font-size: 24px;
   letter-spacing: 1px;
 
   @media (max-width: 767px) {
