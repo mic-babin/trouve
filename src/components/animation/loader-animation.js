@@ -20,7 +20,7 @@ export const loaderAnimation = keyframes`
  1% { mask-image: radial-gradient(
       circle at center,
       rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 1) 3%
+      rgba(0, 0, 0, 1) 1%
     );}
  2% { mask-image: radial-gradient(
       circle at center,

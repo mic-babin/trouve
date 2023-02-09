@@ -120,7 +120,7 @@ const Hero = ({ data }) => {
               </JobsLink>
             </JobsLinkWrapper>
           </Container>
-          <div className="d-flex justify-content-center justify-content-md-end w-100">
+          <TitleContainer className="d-flex justify-content-center justify-content-md-end w-100">
             <H1
               className="text-end"
               initial={{ transform: "translateX(-200px)" }}
@@ -151,41 +151,45 @@ const Hero = ({ data }) => {
                   </div>
                 ))}
             </H1>
-          </div>
-          <HorizontalLine
-            initial={{ width: "0vw" }}
-            animate={{ width: "100vw" }}
-            transition={{
-              duration: 2,
-              delay: 2.4,
-              type: "tween",
-              easeInOut: 0.3,
-            }}
-          />
-          <List
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3, delay: 3.5 }}
-          >
-            <div
-              className="d-flex justify-content-between"
-              id="list-wrapper"
-              style={{ transform: "translate(" + scrollPosition / 3 + "px)" }}
+          </TitleContainer>
+          <ListContainer>
+            <HorizontalLine
+              initial={{ width: "0vw" }}
+              animate={{ width: "100vw" }}
+              transition={{
+                duration: 2,
+                delay: 2.4,
+                type: "tween",
+                easeInOut: 0.3,
+              }}
+            />
+            <List
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3, delay: 3.5 }}
             >
-              {list &&
-                list.map((el, index) => <ListItem key={index}>{el}</ListItem>)}
-            </div>
-          </List>
-          <HorizontalLine
-            initial={{ width: "0vw" }}
-            animate={{ width: "100vw" }}
-            transition={{
-              duration: 2,
-              delay: 2.4,
-              type: "tween",
-              easeInOut: 0.3,
-            }}
-          />
+              <div
+                className="d-flex justify-content-between"
+                id="list-wrapper"
+                style={{ transform: "translate(" + scrollPosition / 3 + "px)" }}
+              >
+                {list &&
+                  list.map((el, index) => (
+                    <ListItem key={index}>{el}</ListItem>
+                  ))}
+              </div>
+            </List>
+            <HorizontalLine
+              initial={{ width: "0vw" }}
+              animate={{ width: "100vw" }}
+              transition={{
+                duration: 2,
+                delay: 2.4,
+                type: "tween",
+                easeInOut: 0.3,
+              }}
+            />
+          </ListContainer>
         </motion.div>
 
         {images &&
@@ -211,6 +215,8 @@ const Section = styled.section`
     z-index: 2;
   }
   overflow-x: hidden;
+  min-height: 771px;
+  height: 100vh;
 `;
 
 const Image = styled(GatsbyImage)`
@@ -220,8 +226,14 @@ const Image = styled(GatsbyImage)`
   z-index: 0;
 `;
 
+const TitleContainer = styled.div`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+`;
+
 const H1 = styled(motion.h1)`
-  font-size: 145px;
+  font-size: 115px;
   line-height: 160px;
   font-weight: 500;
   letter-spacing: 7px;
@@ -231,7 +243,7 @@ const H1 = styled(motion.h1)`
 
   .word-wrapper:nth-of-type(1),
   .word-wrapper:nth-of-type(2) {
-    padding-right: 295px;
+    padding-right: 240px;
   }
 
   .word-wrapper {
@@ -279,7 +291,7 @@ const H3 = styled.h3`
   position: absolute;
   font-size: 30px;
   line-height: 40px;
-  top: 340px;
+  top: 45vh;
   letter-spacing: 2px;
 
   .word,
@@ -296,9 +308,7 @@ const H3 = styled.h3`
       transform: translateX(185px);
     }
   }
-  @media (max-width: 1199px) {
-    top: 323px;
-  }
+
   @media (max-width: 1100px) {
     .second-word {
       transform: translateX(135px);
@@ -306,12 +316,12 @@ const H3 = styled.h3`
   }
   @media (max-width: 991px) {
     padding-left: 30px;
-    top: 340px;
+
     font-size: 25px;
     line-height: 35px;
   }
   @media (max-width: 768px) {
-    top: calc(250px + 45vw);
+    top: calc(250px + 55vw);
   }
 
   @media (max-width: 470px) {
@@ -322,26 +332,31 @@ const H3 = styled.h3`
       transform: translateX(30vw);
     }
   }
+  @media (max-height: 800px) and (max-width: 470px) {
+    top: calc(250px + 45vw) !important;
+  }
 `;
 
 const JobsLinkWrapper = styled.div`
   position: absolute;
   display: flex;
   align-items: center;
-  top: 450px;
+  top: 62vh;
   z-index: 2;
 
   @media (max-width: 991px) {
     padding-left: 30px;
-    top: 575px;
   }
   @media (max-width: 768px) {
     top: calc(350px + 45vw);
     right: 30px;
   }
   @media (max-width: 470px) {
-    top: calc(330px + 45vw);
+    top: calc(330px + 65vw);
     right: 15px;
+  }
+  @media (max-height: 800px) and (max-width: 470px) {
+    top: calc(330px + 45vw) !important;
   }
 `;
 
@@ -455,6 +470,11 @@ const JobsLink = styled(motion.a)`
 const HorizontalLine = styled(motion.div)`
   height: 1.5px;
   background-color: #ffffff;
+`;
+
+const ListContainer = styled.div`
+  position: absolute;
+  bottom: 0;
 `;
 const List = styled(motion.div)`
   padding: 20px 0;

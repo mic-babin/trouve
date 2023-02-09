@@ -12,44 +12,44 @@ export const getImageHeight = (
 ) => {
   if (name === "ANNIE-CLAUDE ROY")
     return isXXSmall
-      ? "-225vw"
-      : isXSmall
       ? "-210vw"
+      : isXSmall
+      ? "-190vw"
       : isSmall
-      ? "-180vw"
+      ? "-120vw"
       : isMedium
-      ? "-115vw"
-      : "-68vw";
+      ? "-98vw"
+      : "-44vw";
   if (name === "DAVID-MARC BOUCHARD")
     return isXXSmall
-      ? "-240vw"
+      ? "-210vw"
       : isXSmall
-      ? "-215vw"
+      ? "-190vw"
       : isSmall
-      ? "-180vw"
-      : isMedium
       ? "-120vw"
-      : "-65vw";
+      : isMedium
+      ? "-98vw"
+      : "-44vw";
   if (name === "RACHEL MARTIN")
     return isXXSmall
-      ? "-250vw"
+      ? "-245vw"
       : isXSmall
       ? "-225vw"
       : isSmall
-      ? "-180vw"
+      ? "-140vw"
       : isMedium
       ? "-120vw"
       : "-65vw";
   if (name === "DAPHNÉ SYLVAIN")
     return isXXSmall
-      ? "-210vw"
+      ? "-195vw"
       : isXSmall
-      ? "-192vw"
+      ? "-180vw"
       : isSmall
-      ? "-130vw"
+      ? "-108vw"
       : isMedium
-      ? "-110vw"
-      : "-56vw";
+      ? "-90vw"
+      : "-40vw";
 
   if (title.includes("PROCESS"))
     return isXXSmall

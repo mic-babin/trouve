@@ -20,6 +20,7 @@ import {
   Department,
   DepartmentClosed,
 } from "./card.helper";
+import { isMobile } from "react-device-detect";
 
 const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
   console.log(imgPosition);
@@ -74,6 +75,7 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
   };
 
   useEffect(() => {
+    console.log(isMobile);
     if (name) handleIsEmployee();
     if (hovered) {
       // OPEN
@@ -201,14 +203,15 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
     isXSmall,
     isXXSmall,
     imageRef,
+    isMobile,
   ]);
   return (
     <CardWrapper
       animate={cardWrapperControls}
       // onClick={executeScroll}
-      onClick={isEmployee && toggleOpen}
-      onMouseOver={() => !isEmployee && handleEnter()}
-      onMouseOut={() => !isEmployee && handleLeave()}
+      onClick={(isEmployee || isMobile) && toggleOpen}
+      onMouseOver={() => !isEmployee && !isMobile && handleEnter()}
+      onMouseOut={() => !isEmployee && !isMobile && handleLeave()}
       style={{
         borderBottom:
           (id === "37168fc0-987d-52df-a37a-6a20c07a594d" ||
