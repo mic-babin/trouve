@@ -7,8 +7,13 @@ import Circle from "../animation/bg-circle.components";
 import { useState } from "react";
 import { useIsSmall } from "../../utils/media-query.hook";
 import AnimatedHeroLink from "../common/animated-hero-link.component";
+import { useI18next } from "gatsby-plugin-react-i18next";
 
 const Mandate = ({ mandate, setShowContact }) => {
+  const {
+    i18n: { language },
+  } = useI18next();
+
   const { title, textFields, link } = mandate;
 
   const [isInView, setIsInView] = useState(false);
@@ -24,7 +29,7 @@ const Mandate = ({ mandate, setShowContact }) => {
     <>
       <Section>
         {!isSmall && (
-          <CircleWrapper>
+          <CircleWrapper className={`${language == "en" && "en"}`}>
             <Circle roundSize={636} color="black" isInView={isInView} />
           </CircleWrapper>
         )}
@@ -176,6 +181,10 @@ const CircleWrapper = styled.div`
   top: 230px;
   left: -255px;
   transform: rotate(-20deg);
+
+  &.en {
+    top: 200px;
+  }
 
   @media (max-width: 1100px) {
     left: -355px;

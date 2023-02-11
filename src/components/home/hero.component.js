@@ -37,6 +37,7 @@ const Hero = ({ data }) => {
     setHovered(!hovered);
   };
   useEffect(() => {
+    console.log(language);
     setList(largeList);
     if (isLarge) {
       setList(largeList);
@@ -84,7 +85,7 @@ const Hero = ({ data }) => {
                   {stopSearching}
                 </motion.div>
               </div>
-              <div className="second-word">
+              <div className={`second-word ${language == "en" && "en"}`}>
                 <motion.div
                   initial={{ transform: "translateX(-450px)" }}
                   animate={{ transform: "translateX(0px)" }}
@@ -136,7 +137,7 @@ const Hero = ({ data }) => {
                 title.split(" ").map((word, index) => (
                   <div key={index} className="word-wrapper">
                     <motion.div
-                      className="word"
+                      className={`word ${language == "en" && "en"}`}
                       initial={{ transform: "translateY(200px)" }}
                       animate={{ transform: "translateY(0px)" }}
                       transition={{
@@ -241,6 +242,10 @@ const H1 = styled(motion.h1)`
   padding-right: 30px;
   /* font-family: "Neue-Medium"; */
 
+  /* .word.en {
+    line-height: 300px;
+  } */
+
   .word-wrapper:nth-of-type(1),
   .word-wrapper:nth-of-type(2) {
     padding-right: 240px;
@@ -302,16 +307,25 @@ const H3 = styled.h3`
   .second-word {
     transform: translateX(285px);
   }
+  .second-word.en {
+    transform: translateX(135px);
+  }
 
   @media (max-width: 1399px) {
     .second-word {
       transform: translateX(185px);
+      .second-word.en {
+        transform: translateX(135px);
+      }
     }
   }
 
   @media (max-width: 1100px) {
     .second-word {
       transform: translateX(135px);
+      .second-word.en {
+        transform: translateX(85px);
+      }
     }
   }
   @media (max-width: 991px) {

@@ -7,6 +7,7 @@ import { H2 } from "../styled-components/h2.style";
 import { useIsMedium } from "../../utils/media-query.hook";
 import { useIsSmall } from "../../utils/media-query.hook";
 import { useIsXSmall } from "../../utils/media-query.hook";
+import { useI18next } from "gatsby-plugin-react-i18next";
 
 const getWidth = (index) => {
   if (index === 0) {
@@ -16,6 +17,9 @@ const getWidth = (index) => {
 };
 
 const Reason = ({ data }) => {
+  const {
+    i18n: { language },
+  } = useI18next();
   const isMedium = useIsMedium();
   const isSmall = useIsSmall();
   const isXSmall = useIsXSmall();
@@ -73,7 +77,7 @@ const Reason = ({ data }) => {
             delay: 0.7,
             type: "linear",
           }}
-          className={"line-2"}
+          className={`line-2 ${language == "en" && "en"}`}
           viewport={{ once: true }}
         ></motion.div>
         <div className="container-fluid container-lg">

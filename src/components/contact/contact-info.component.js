@@ -2,8 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import { H1 } from "../styled-components/h1.style";
 import ContactAccordion from "./contact-accordion.component";
+import { useI18next } from "gatsby-plugin-react-i18next";
 
 const ContactInfo = ({ data }) => {
+  const {
+    i18n: { language },
+  } = useI18next();
+
   const { title, textFields, components } = data;
 
   const getHref = (el) => {
@@ -23,7 +28,10 @@ const ContactInfo = ({ data }) => {
       <ContactH1>
         {title &&
           title.split(" ").map((word, index) => (
-            <div key={index} className="w-wrapper">
+            <div
+              key={index}
+              className={`w-wrapper ${language == "en" && "en"}`}
+            >
               <div className="word">{word} </div>
             </div>
           ))}
@@ -64,8 +72,11 @@ const Address = styled.a`
 
 const ContactH1 = styled(H1)`
   font-size: 65px;
-  .w-wrapper:nth-of-type(2) {
+  .div:nth-of-type(2) {
     padding-left: 110px;
+  }
+  .w-wrapper.en:nth-of-type(2) {
+    padding-left: 290px;
   }
 
   @media (max-width: 575px) {

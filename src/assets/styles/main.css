@@ -89,6 +89,10 @@ body::-webkit-scrollbar-thumb {
   left: calc(50vw - 2px);
 }
 
+.line-2.en {
+  top: 750px;
+}
+
 @media (max-width: 1099px) {
   .line-2 {
     top: 1020px;

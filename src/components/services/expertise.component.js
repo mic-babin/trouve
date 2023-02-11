@@ -10,8 +10,13 @@ import { useIsXSmall } from "../../utils/media-query.hook";
 import Images from "./Images.component";
 import { useState } from "react";
 import AnimatedHeroLink from "../common/animated-hero-link.component";
+import { useI18next } from "gatsby-plugin-react-i18next";
 
 const Expertise = ({ expertise }) => {
+  const {
+    i18n: { language },
+  } = useI18next();
+
   const { title, textFields, images, link } = expertise;
   const [isInView, setIsInView] = useState(false);
 
@@ -97,15 +102,20 @@ const Expertise = ({ expertise }) => {
               initial={{
                 height: "0px",
               }}
-              whileInView={{
-                height: isXSmall
-                  ? "412px"
-                  : isSmall
-                  ? "390px"
-                  : isMedium
-                  ? "300px"
-                  : "1085px",
-              }}
+              animate={
+                isInView && {
+                  height:
+                    language == "en"
+                      ? "1035px"
+                      : isXSmall
+                      ? "412px"
+                      : isSmall
+                      ? "390px"
+                      : isMedium
+                      ? "300px"
+                      : "1085px",
+                }
+              }
               transition={{
                 duration: 5,
                 delay: 2.9,
