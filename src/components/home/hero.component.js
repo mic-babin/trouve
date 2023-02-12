@@ -37,7 +37,6 @@ const Hero = ({ data }) => {
     setHovered(!hovered);
   };
   useEffect(() => {
-    console.log(language);
     setList(largeList);
     if (isLarge) {
       setList(largeList);
@@ -280,7 +279,7 @@ const H1 = styled(motion.h1)`
     letter-spacing: 1vw;
     .word-wrapper:nth-of-type(1),
     .word-wrapper:nth-of-type(2) {
-      padding-right: calc(20vw + 14px);
+      padding-right: calc(25vw);
     }
   }
   @media (max-width: 470px) {
@@ -335,10 +334,14 @@ const H3 = styled.h3`
     line-height: 35px;
   }
   @media (max-width: 768px) {
-    top: calc(250px + 55vw);
+    top: calc(250px + 40vw);
+  }
+  @media (max-width: 576px) {
+    top: calc(250px + 45vw);
   }
 
   @media (max-width: 470px) {
+    top: calc(250px + 55vw);
     font-size: 4.5vw;
     line-height: 7vw;
     padding-left: 15px;
@@ -347,7 +350,7 @@ const H3 = styled.h3`
     }
   }
   @media (max-height: 800px) and (max-width: 470px) {
-    top: calc(250px + 45vw) !important;
+    top: calc(250px + 42vw) !important;
   }
 `;
 

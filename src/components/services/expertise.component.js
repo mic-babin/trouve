@@ -1,14 +1,13 @@
-import React from "react";
+import React, { useRef, useEffect, useState } from "react";
 import styled from "styled-components";
-import { NavLink } from "../styled-components/nav-link.style";
+
 import { Kicker } from "../styled-components/kicker.style";
 import { H1 } from "../styled-components/h1.style";
 import { motion } from "framer-motion";
 import { useIsMedium } from "../../utils/media-query.hook";
 import { useIsSmall } from "../../utils/media-query.hook";
 import { useIsXSmall } from "../../utils/media-query.hook";
-import Images from "./Images.component";
-import { useState } from "react";
+import { useIsLarge } from "../../utils/media-query.hook";
 import AnimatedHeroLink from "../common/animated-hero-link.component";
 import { useI18next } from "gatsby-plugin-react-i18next";
 
@@ -32,10 +31,23 @@ const Expertise = ({ expertise }) => {
       el.id === "f88f83b9-82e1-5bfe-8599-6ddd3c1a859f"
   );
 
+  const isLarge = useIsLarge();
   const isMedium = useIsMedium();
   const isSmall = useIsSmall();
   const isXSmall = useIsXSmall();
+  const handleResize = () => {
+    if (parap.current) setHeight(parap.current?.offsetHeight - 48);
+  };
+  const [height, setHeight] = useState(null);
+  const parap = useRef(null);
 
+  useEffect(() => {
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      return () => window.removeEventListener("resize", handleResize);
+    };
+  }, [parap]);
   return (
     <Section>
       <div className="container">
@@ -104,16 +116,19 @@ const Expertise = ({ expertise }) => {
               }}
               animate={
                 isInView && {
-                  height:
-                    language == "en"
-                      ? "1035px"
-                      : isXSmall
-                      ? "412px"
-                      : isSmall
-                      ? "390px"
-                      : isMedium
-                      ? "300px"
-                      : "1085px",
+                  height: isXSmall
+                    ? height
+                    : isSmall
+                    ? "390px"
+                    : isMedium
+                    ? "300px"
+                    : isLarge && language == "en"
+                    ? "1135px"
+                    : isLarge
+                    ? "1185px"
+                    : language == "en"
+                    ? "1035px"
+                    : "1085px",
                 }
               }
               transition={{
@@ -122,9 +137,9 @@ const Expertise = ({ expertise }) => {
                 type: "linear",
               }}
               className="line"
-              viewport={{ once: true }}
             ></motion.div>
             <TextWrapper
+              ref={parap}
               whileInView={() => {
                 setIsInView(true);
                 return {};

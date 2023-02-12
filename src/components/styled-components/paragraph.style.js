@@ -16,4 +16,13 @@ export const Paragraph = styled(Kicker)`
     line-height: 26px;
     padding-bottom: 30px;
   }
+
+  @media (max-width: 576px) {
+    &.about-paragraph:nth-of-type(2) {
+      padding-bottom: 0px;
+    }
+    &.experience-paragraph {
+      padding-bottom: 0px;
+    }
+  }
 `;

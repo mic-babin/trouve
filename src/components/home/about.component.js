@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useRef, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Paragraph } from "../styled-components/paragraph.style";
-import { useState } from "react";
+
 import { motion } from "framer-motion";
 import { H2 } from "../styled-components/h2.style";
 import { useIsMedium } from "../../utils/media-query.hook";
@@ -25,6 +25,15 @@ const Reason = ({ data }) => {
   const isXSmall = useIsXSmall();
   const { title, textFields } = data;
   const [isInView, setIsInView] = useState(false);
+  const [height, setHeight] = useState(null);
+  const box = useRef(null);
+
+  useEffect(() => {
+    if (box.current) {
+      setHeight(box.current.offsetHeight);
+    }
+  }, [box]);
+
   return (
     <>
       <div className="scroll-to" id="about"></div>
@@ -35,7 +44,7 @@ const Reason = ({ data }) => {
           }}
           whileInView={{
             height: isXSmall
-              ? "572px"
+              ? `${height}px`
               : isSmall
               ? "300px"
               : isMedium
@@ -110,6 +119,7 @@ const Reason = ({ data }) => {
           )}
 
           <motion.div
+            ref={box}
             className="d-flex align-items-center flex-column ps-4  ps-md-0"
             whileInView={() => {
               setIsInView(true);
@@ -120,7 +130,7 @@ const Reason = ({ data }) => {
               textFields.map((el, index) => {
                 let i = index;
                 return (
-                  <Paragraph key={el.id}>
+                  <Paragraph key={el.id} className="about-paragraph">
                     {el.text.text.split(" ").map((word, index) => (
                       <motion.span
                         key={index}

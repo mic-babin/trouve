@@ -1,12 +1,10 @@
-import React from "react";
+import React, { useRef, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Paragraph } from "../styled-components/paragraph.style";
 import { Kicker } from "../styled-components/kicker.style";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import { NavLink } from "../styled-components/nav-link.style";
 import { motion } from "framer-motion";
 import Circle from "../animation/big-circle.components";
-import { useRef, useEffect, useState } from "react";
 import { H2 } from "../styled-components/h2.style";
 import { useIsMedium, useIsSmall } from "../../utils/media-query.hook";
 import { isSafari } from "react-device-detect";
@@ -44,7 +42,10 @@ const Experience = ({ data }) => {
 
   const handleResize = () => {
     if (round.current) setRoundSize(round.current?.offsetWidth);
+    if (box.current) setHeight(box.current?.offsetHeight);
   };
+  const [height, setHeight] = useState(null);
+  const box = useRef(null);
 
   useEffect(() => {
     handleResize();
@@ -82,7 +83,7 @@ const Experience = ({ data }) => {
               left: "25px",
             }}
             whileInView={{
-              height: isSmall ? "150px" : isMedium ? "220px" : "500px",
+              height: isSmall ? height : isMedium ? "220px" : "500px",
             }}
             transition={{
               duration: 5,
@@ -162,7 +163,11 @@ const Experience = ({ data }) => {
           <div className="d-flex justify-content-center ps-3 ps-md-0">
             {textFields &&
               textFields.map((el) => (
-                <Paragraph key={el.id}>
+                <Paragraph
+                  key={el.id}
+                  ref={box}
+                  className="experience-paragraph"
+                >
                   {el.text.text.split(" ").map((word, index) => (
                     <motion.span
                       key={index}
@@ -258,7 +263,6 @@ const Experience = ({ data }) => {
 export default Experience;
 
 const Section = styled.div`
-  margin-top: -30px;
   padding: 160px 15px;
   background-color: #e7e5e0;
   color: black;

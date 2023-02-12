@@ -8,7 +8,8 @@ export const getImageHeight = (
   isXXSmall,
   isXSmall,
   isSmall,
-  isMedium
+  isMedium,
+  language
 ) => {
   if (name === "ANNIE-CLAUDE ROY")
     return isXXSmall
@@ -62,15 +63,26 @@ export const getImageHeight = (
       ? "-100vw"
       : "-58vw";
   if (title.includes("RECRUT"))
-    return isXXSmall
-      ? "-120vw"
-      : isXSmall
-      ? "-93vw"
-      : isSmall
-      ? "-75vw"
-      : isMedium
-      ? "-60vw"
-      : "-35vw";
+    if (language == "en") {
+      return isXXSmall
+        ? "-120vw"
+        : isXSmall
+        ? "-93vw"
+        : isSmall
+        ? "-75vw"
+        : isMedium
+        ? "-60vw"
+        : "-35vw";
+    }
+  return isXXSmall
+    ? "-120vw"
+    : isXSmall
+    ? "-93vw"
+    : isSmall
+    ? "-75vw"
+    : isMedium
+    ? "-60vw"
+    : "-35vw";
   if (title.includes("TALENT"))
     return isXXSmall
       ? "-150vw"

@@ -92,10 +92,18 @@ body::-webkit-scrollbar-thumb {
 .line-2.en {
   top: 750px;
 }
+@media (max-width: 1399px) {
+  .line-2.en {
+    top: 800px;
+  }
+}
 
 @media (max-width: 1099px) {
   .line-2 {
     top: 1020px;
+  }
+  .line-2.en {
+    top: 830px;
   }
 }
 @media (max-width: 1081px) {

@@ -20,10 +20,14 @@ import {
   Department,
   DepartmentClosed,
 } from "./card.helper";
+import { useI18next } from "gatsby-plugin-react-i18next";
 import { isMobile } from "react-device-detect";
 
 const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
-  console.log(imgPosition);
+  const {
+    i18n: { language },
+  } = useI18next();
+  // console.log(imgPosition);
   const middleCol = useRef();
   const imageRef = useRef();
   const {
@@ -38,7 +42,7 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
     email,
     id,
   } = data;
-  console.log(department);
+  // console.log(department);
   const cardWrapperControls = useAnimationControls();
   const imageWrapperControls = useAnimationControls();
   const titleControls = useAnimationControls();
@@ -142,7 +146,15 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
         marginLeft: isMedium ? "-24px" : "-68vw",
         transform:
           "translateY(" +
-          getImageHeight(name, title, isXXSmall, isXSmall, isSmall, isMedium) +
+          getImageHeight(
+            name,
+            title,
+            isXXSmall,
+            isXSmall,
+            isSmall,
+            isMedium,
+            language
+          ) +
           ")",
         height: "100%",
         transition: { duration: 0.375 },
@@ -214,8 +226,7 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
       onMouseOut={() => !isEmployee && !isMobile && handleLeave()}
       style={{
         borderBottom:
-          (id === "37168fc0-987d-52df-a37a-6a20c07a594d" ||
-            id === "085f2a0d-992e-5534-b0ba-3a914f31944c") &&
+          (name === "DAPHNÉ SYLVAIN" || title.includes("TALENT")) &&
           "2px solid white",
       }}
     >

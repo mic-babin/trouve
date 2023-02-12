@@ -85,6 +85,9 @@ const ContactH1 = styled(H1)`
     .w-wrapper:nth-of-type(2) {
       padding-left: 70px;
     }
+    .w-wrapper.en:nth-of-type(2) {
+      padding-left: 210px;
+    }
   }
 `;
 export default ContactInfo;
