@@ -71,10 +71,10 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
       return -25;
     if (title === "DES RECRUTEURS À L’AFFÛT") return -25;
     if (title === "LE TALENT DOMINE") return -5;
-    if (name === "ANNIE-CLAUDE ROY") return 30;
-    if (name === "DAVID-MARC BOUCHARD") return 100;
+    if (name === "ANNIE-CLAUDE ROY") return 45;
+    if (name === "DAVID-MARC BOUCHARD") return 80;
     if (name === "RACHEL MARTIN") return 45;
-    if (name === "DAPHNÉ SYLVAIN") return 70;
+    if (name === "DAPHNÉ SYLVAIN") return 45;
     return 0;
   };
 
