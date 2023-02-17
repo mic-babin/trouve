@@ -13,9 +13,9 @@ export const getImageHeight = (
 ) => {
   if (name === "ANNIE-CLAUDE ROY")
     return isXXSmall
-      ? "-210vw"
+      ? "-200vw"
       : isXSmall
-      ? "-190vw"
+      ? "-180vw"
       : isSmall
       ? "-120vw"
       : isMedium
