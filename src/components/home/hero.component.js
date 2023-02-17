@@ -68,7 +68,11 @@ const Hero = ({ data }) => {
             easeInOut: 0.3,
           }}
         >
-          <Container className="container-fluid container-lg">
+          <Container
+            className={`container-fluid ${
+              language == "en" ? "container-xl" : "container-lg"
+            }`}
+          >
             <H3>
               <div className="word">
                 <motion.div
@@ -242,11 +246,6 @@ const H1 = styled(motion.h1)`
   letter-spacing: 7px;
   margin-bottom: 75px;
   padding-right: 30px;
-  /* font-family: "Neue-Medium"; */
-
-  /* .word.en {
-    line-height: 300px;
-  } */
 
   .word-wrapper:nth-of-type(1),
   .word-wrapper:nth-of-type(2) {
@@ -264,46 +263,30 @@ const H1 = styled(motion.h1)`
     overflow: hidden;
 
     @media (max-width: 1199px) {
-      font-size: 110px;
       .word-wrapper:nth-of-type(1),
       .word-wrapper:nth-of-type(2) {
         padding-right: 230px;
-      }
-
-      &.en {
-        font-size: 70px;
-      }
-    }
-    @media (max-width: 768px) {
-      &.en {
-        font-size: 11.5vw;
       }
     }
   }
 
   @media (max-width: 1299px) {
     &.en {
-      font-size: 90px;
       .word-wrapper:nth-of-type(2) {
-        padding-right: 234px;
+        padding-right: 0px;
       }
       .word-wrapper:nth-of-type(1) {
-        padding-right: 102px;
+        padding-right: 217px;
       }
-    }
-    font-size: 110px;
-    .word-wrapper:nth-of-type(1),
-    .word-wrapper:nth-of-type(2) {
-      padding-right: 230px;
     }
   }
   @media (max-width: 1199px) {
     &.en {
       .word-wrapper:nth-of-type(2) {
-        padding-right: 188px;
+        padding-right: 0px;
       }
       .word-wrapper:nth-of-type(1) {
-        padding-right: 82px;
+        padding-right: 217px;
       }
     }
     font-size: 110px;
@@ -322,9 +305,11 @@ const H1 = styled(motion.h1)`
       padding-right: 175px;
     }
     &.en {
-      .word-wrapper:nth-of-type(2),
-      .word-wrapper:nth-of-type(1) {
+      .word-wrapper:nth-of-type(2) {
         padding-right: 0px;
+      }
+      .word-wrapper:nth-of-type(1) {
+        padding-right: 157px;
       }
     }
   }
