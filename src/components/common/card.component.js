@@ -167,6 +167,8 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
             ? "300px"
             : isMedium
             ? "100%"
+            : title.includes("PROCESS")
+            ? "1200px"
             : "1000px",
         fontSize: isXXSmall
           ? "30px"

@@ -122,7 +122,7 @@ const Hero = ({ data }) => {
           </Container>
           <TitleContainer className="d-flex justify-content-center justify-content-md-end w-100">
             <H1
-              className="text-end"
+              className={`text-end ${language == "en" && "en"}`}
               initial={{ transform: "translateX(-200px)" }}
               animate={{ transform: "translateX(0px)" }}
               transition={{
@@ -134,7 +134,10 @@ const Hero = ({ data }) => {
             >
               {title &&
                 title.split(" ").map((word, index) => (
-                  <div key={index} className="word-wrapper">
+                  <div
+                    key={index}
+                    className={`word-wrapper ${language == "en" && "en"}`}
+                  >
                     <motion.div
                       className={`word ${language == "en" && "en"}`}
                       initial={{ transform: "translateY(200px)" }}
@@ -250,11 +253,59 @@ const H1 = styled(motion.h1)`
     padding-right: 240px;
   }
 
-  .word-wrapper {
-    overflow: hidden;
+  .word-wrapper.en:nth-of-type(2) {
+    padding-right: 290px;
+  }
+  .word-wrapper.en:nth-of-type(1) {
+    padding-right: 125px;
   }
 
+  .word-wrapper {
+    overflow: hidden;
+
+    @media (max-width: 1199px) {
+      font-size: 110px;
+      .word-wrapper:nth-of-type(1),
+      .word-wrapper:nth-of-type(2) {
+        padding-right: 230px;
+      }
+
+      &.en {
+        font-size: 70px;
+      }
+    }
+    @media (max-width: 768px) {
+      &.en {
+        font-size: 11.5vw;
+      }
+    }
+  }
+
+  @media (max-width: 1299px) {
+    &.en {
+      font-size: 90px;
+      .word-wrapper:nth-of-type(2) {
+        padding-right: 234px;
+      }
+      .word-wrapper:nth-of-type(1) {
+        padding-right: 102px;
+      }
+    }
+    font-size: 110px;
+    .word-wrapper:nth-of-type(1),
+    .word-wrapper:nth-of-type(2) {
+      padding-right: 230px;
+    }
+  }
   @media (max-width: 1199px) {
+    &.en {
+      .word-wrapper:nth-of-type(2) {
+        padding-right: 188px;
+      }
+      .word-wrapper:nth-of-type(1) {
+        padding-right: 82px;
+      }
+    }
     font-size: 110px;
     .word-wrapper:nth-of-type(1),
     .word-wrapper:nth-of-type(2) {
@@ -270,7 +321,14 @@ const H1 = styled(motion.h1)`
     .word-wrapper:nth-of-type(2) {
       padding-right: 175px;
     }
+    &.en {
+      .word-wrapper:nth-of-type(2),
+      .word-wrapper:nth-of-type(1) {
+        padding-right: 0px;
+      }
+    }
   }
+
   @media (max-width: 768px) {
     padding: 100px 0 300px 0;
     margin-right: 19px;
@@ -280,6 +338,14 @@ const H1 = styled(motion.h1)`
     .word-wrapper:nth-of-type(1),
     .word-wrapper:nth-of-type(2) {
       padding-right: calc(25vw);
+    }
+    &.en {
+      .word-wrapper:nth-of-type(1) {
+        padding-right: calc(13.2vw);
+      }
+      .word-wrapper:nth-of-type(2) {
+        padding-right: calc(30.7vw);
+      }
     }
   }
   @media (max-width: 470px) {

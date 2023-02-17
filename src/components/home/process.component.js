@@ -24,6 +24,8 @@ const Process = ({ data }) => {
       ? "-33px"
       : isMedium
       ? "-10px"
+      : language == "en"
+      ? "10px"
       : "-25px";
 
   const titleMargin = isXSmall ? "70px" : isMedium ? "50px" : "0px";

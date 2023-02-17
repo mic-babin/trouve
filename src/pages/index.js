@@ -178,7 +178,7 @@ export const query = graphql`
               type
               title
               images {
-                gatsbyImageData(placeholder: BLURRED)
+                gatsbyImageData(placeholder: BLURRED, quality: 75)
               }
               components {
                 ... on ContentfulContacts {
