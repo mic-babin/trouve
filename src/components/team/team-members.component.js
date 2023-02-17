@@ -26,7 +26,7 @@ const TeamMembers = ({ teamMembers }) => {
             if (employee.name.toUpperCase() === "ANNIE-CLAUDE ROY")
               return "center 60%";
             if (employee.name.toUpperCase() === "RACHEL MARTIN")
-              return "center 50%";
+              return "center 60%";
             if (employee.name.toUpperCase() === "DAPHNÉ SYLVAIN")
               return "center 40%";
             if (employee.name.toUpperCase() === "DAVID-MARC BOUCHARD")

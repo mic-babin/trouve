@@ -33,19 +33,19 @@ export const getImageHeight = (
       : "-44vw";
   if (name === "RACHEL MARTIN")
     return isXXSmall
-      ? "-245vw"
-      : isXSmall
       ? "-225vw"
+      : isXSmall
+      ? "-200vw"
       : isSmall
-      ? "-140vw"
-      : isMedium
       ? "-120vw"
-      : "-65vw";
+      : isMedium
+      ? "-98vw"
+      : "-44vw";
   if (name === "DAPHNÉ SYLVAIN")
     return isXXSmall
-      ? "-195vw"
+      ? "-190vw"
       : isXSmall
-      ? "-180vw"
+      ? "-170vw"
       : isSmall
       ? "-108vw"
       : isMedium
@@ -62,18 +62,17 @@ export const getImageHeight = (
       : isMedium
       ? "-100vw"
       : "-58vw";
-  if (title.includes("RECRUT"))
-    if (language == "en") {
-      return isXXSmall
-        ? "-120vw"
-        : isXSmall
-        ? "-93vw"
-        : isSmall
-        ? "-75vw"
-        : isMedium
-        ? "-60vw"
-        : "-35vw";
-    }
+  if (title.includes("RECRU")) {
+    return isXXSmall
+      ? "-120vw"
+      : isXSmall
+      ? "-93vw"
+      : isSmall
+      ? "-75vw"
+      : isMedium
+      ? "-60vw"
+      : "-35vw";
+  }
 
   if (title.includes("TALENT"))
     return isXXSmall
@@ -166,6 +165,7 @@ export const ImageWrapper = styled(motion.div)`
   overflow: hidden;
   display: flex;
   justify-content: center;
+  zoom: 1;
 `;
 
 export const SubTitle = styled(motion.h3)`
