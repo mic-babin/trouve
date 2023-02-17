@@ -17,7 +17,7 @@ const TeamMembers = ({ teamMembers }) => {
             )
               return "-20px";
             if (employee.name.toUpperCase() === "DAVID-MARC BOUCHARD")
-              return "-25px";
+              return isMedium ? "-8px" : "-25px";
 
             return isXSmall ? "0px" : isMedium ? "-8px" : "10px";
           };

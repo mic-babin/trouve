@@ -74,15 +74,7 @@ export const getImageHeight = (
         ? "-60vw"
         : "-35vw";
     }
-  return isXXSmall
-    ? "-120vw"
-    : isXSmall
-    ? "-93vw"
-    : isSmall
-    ? "-75vw"
-    : isMedium
-    ? "-60vw"
-    : "-35vw";
+
   if (title.includes("TALENT"))
     return isXXSmall
       ? "-150vw"
