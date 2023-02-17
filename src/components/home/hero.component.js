@@ -304,6 +304,7 @@ const H1 = styled(motion.h1)`
     .word-wrapper:nth-of-type(2) {
       padding-right: 175px;
     }
+
     &.en {
       .word-wrapper:nth-of-type(2) {
         padding-right: 0px;
