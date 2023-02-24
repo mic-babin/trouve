@@ -188,7 +188,6 @@ const Experience = ({ data }) => {
           </div>
           <div className="h-0"></div>
         </Container>
-        {/* <div className="scroll-to" id="experience-card"></div> */}
         <div className="row mx-0">
           {components &&
             components.map((el, index) => {
@@ -207,51 +206,104 @@ const Experience = ({ data }) => {
                 }
               };
               const hover = getHoverState();
+              console.log(link);
               return (
-                <Card
-                  key={el.id}
-                  className="col-lg-4 mb-4 mb-lg-0"
-                  onMouseEnter={() => handleHover(index)}
-                  onMouseLeave={() => handleHover(index)}
-                  to={link.url}
-                >
-                  <ImageWrapper>
-                    <div className="round" ref={round}>
-                      <Circle
-                        roundSize={roundSize}
-                        hover={hover}
-                        color={"black"}
-                      />
-                    </div>
-                    <div className="invisible-wrapper">
-                      {image && (
-                        <Image
-                          className="img"
-                          image={getImage(image.gatsbyImageData)}
-                          alt="TODO"
-                        ></Image>
-                      )}
-                    </div>
-                  </ImageWrapper>
-                  {title && <Kicker className="mt-4">{title}</Kicker>}
-                  <Description>
-                    {description && <div>{description.description}</div>}
-                    {link && (
-                      <CardLink target="blank" className="card-link pt-3">
-                        <span className="mask">
-                          <div className="link-container">
-                            <span className="link-title1 title">
-                              {link.text}
+                <>
+                  {link.url !== "http://jobs.trouvemtl.com/" && (
+                    <Card
+                      key={el.id}
+                      className="col-lg-4 mb-4 mb-lg-0"
+                      onMouseEnter={() => handleHover(index)}
+                      onMouseLeave={() => handleHover(index)}
+                      to={"/" + link.url}
+                    >
+                      <ImageWrapper>
+                        <div className="round" ref={round}>
+                          <Circle
+                            roundSize={roundSize}
+                            hover={hover}
+                            color={"black"}
+                          />
+                        </div>
+                        <div className="invisible-wrapper">
+                          {image && (
+                            <Image
+                              className="img"
+                              image={getImage(image.gatsbyImageData)}
+                              alt="TODO"
+                            ></Image>
+                          )}
+                        </div>
+                      </ImageWrapper>
+                      {title && <Kicker className="mt-4">{title}</Kicker>}
+                      <Description>
+                        {description && <div>{description.description}</div>}
+                        {link && (
+                          <CardLink target="blank" className="card-link pt-3">
+                            <span className="mask">
+                              <div className="link-container">
+                                <span className="link-title1 title">
+                                  {link.text}
+                                </span>
+                                <span className="link-title2 title">
+                                  {link.text}
+                                </span>
+                              </div>
                             </span>
-                            <span className="link-title2 title">
-                              {link.text}
+                          </CardLink>
+                        )}
+                      </Description>
+                    </Card>
+                  )}
+                  {link.url === "http://jobs.trouvemtl.com/" && (
+                    <Card
+                          as='a'
+                      key={el.id}
+                      className="col-lg-4 mb-4 mb-lg-0"
+                      onMouseEnter={() => handleHover(index)}
+                      onMouseLeave={() => handleHover(index)}
+                      href={link.url}
+                      target="_blank"
+                    >
+                      <ImageWrapper>
+                        <div className="round" ref={round}>
+                          <Circle
+                            roundSize={roundSize}
+                            hover={hover}
+                            color={"black"}
+                          />
+                        </div>
+                        <div className="invisible-wrapper">
+                          {image && (
+                            <Image
+                              className="img"
+                              image={getImage(image.gatsbyImageData)}
+                              alt="TODO"
+                            ></Image>
+                          )}
+                        </div>
+                      </ImageWrapper>
+                      {title && <Kicker className="mt-4">{title}</Kicker>}
+                      <Description>
+                        {description && <div>{description.description}</div>}
+                        {link && (
+                          <CardLink target="blank" className="card-link pt-3">
+                            <span className="mask">
+                              <div className="link-container">
+                                <span className="link-title1 title">
+                                  {link.text}
+                                </span>
+                                <span className="link-title2 title">
+                                  {link.text}
+                                </span>
+                              </div>
                             </span>
-                          </div>
-                        </span>
-                      </CardLink>
-                    )}
-                  </Description>
-                </Card>
+                          </CardLink>
+                        )}
+                      </Description>
+                    </Card>
+                  )}
+                </>
               );
             })}
         </div>

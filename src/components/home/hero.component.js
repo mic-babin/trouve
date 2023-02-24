@@ -253,10 +253,13 @@ const H1 = styled(motion.h1)`
   }
 
   .word-wrapper.en:nth-of-type(2) {
-    padding-right: 290px;
+    padding-right: 0px;
   }
   .word-wrapper.en:nth-of-type(1) {
-    padding-right: 125px;
+    padding-right: 160px;
+  }
+  .word-wrapper.en:nth-of-type(3) {
+    padding-right: 160px;
   }
 
   .word-wrapper {
@@ -266,6 +269,9 @@ const H1 = styled(motion.h1)`
       .word-wrapper:nth-of-type(1),
       .word-wrapper:nth-of-type(2) {
         padding-right: 230px;
+      }
+      .word-wrapper.en:nth-of-type(3) {
+        padding-right: 30px;
       }
     }
   }
@@ -277,6 +283,9 @@ const H1 = styled(motion.h1)`
       }
       .word-wrapper:nth-of-type(1) {
         padding-right: 217px;
+      }
+      .word-wrapper:nth-of-type(3) {
+        padding-right: 0px;
       }
     }
   }
