@@ -17,7 +17,7 @@ const Talent = ({ data }) => {
     ? "15px"
     : "10px";
   const getImgPosition = () => {
-    return "0% 20%";
+    return "0% 50%";
   };
 
   return (

@@ -80,10 +80,10 @@ export const getImageHeight = (
       : isXSmall
       ? "-120vw"
       : isSmall
-      ? "-75vw"
+      ? "-85vw"
       : isMedium
-      ? "-60vw"
-      : "-40vw";
+      ? "-70vw"
+      : "-50vw";
 
   return "-200px";
 };
