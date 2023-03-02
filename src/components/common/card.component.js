@@ -81,7 +81,8 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
   };
 
   useEffect(() => {
-    console.log(isMobile);
+    let colHeight = middleCol.current.offsetHeight;
+    console.log(colHeight);
     if (name) handleIsEmployee();
     if (hovered) {
       // OPEN
@@ -126,7 +127,7 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
       });
       subTitleControls.start({
         opacity: 1,
-        marginTop: getMarc() ? "85px" : "50px",
+        marginTop: "85px",
         transition: { duration: 0.5, delay: 0.5 },
         type: "linear",
       });
@@ -156,7 +157,8 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
             isXSmall,
             isSmall,
             isMedium,
-            language
+            language,
+            colHeight
           ) +
           ")",
         height: "100%",
@@ -220,6 +222,7 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
     isXXXSmall,
     imageRef,
     isMobile,
+    middleCol,
   ]);
   return (
     <CardWrapper
@@ -240,10 +243,12 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
             animate={titleControls}
             style={
               isEmployee && {
-                maxWidth: isXXSmall
+                maxWidth: hovered
+                  ? "250px"
+                  : isXXSmall
                   ? "250px"
                   : isXSmall
-                  ? "280px"
+                  ? "250px"
                   : isMedium
                   ? "400px"
                   : "500px",

@@ -10,89 +10,93 @@ export const getImageHeight = (
   isXSmall,
   isSmall,
   isMedium,
-  language
+  language,
+  colHeight
 ) => {
-  if (name === "ANNIE-CLAUDE ROY")
-    return isXXXSmall
-      ? "-185vw"
-      : isXXSmall
-      ? "-178vw"
-      : isXSmall
-      ? "-170vw"
-      : isSmall
-      ? "-102vw"
-      : isMedium
-      ? "-82vw"
-      : "-33vw";
-  if (name === "DAVID-MARC BOUCHARD")
-    return isXXXSmall
-      ? "-195vw"
-      : isXXSmall
-      ? "-190vw"
-      : isXSmall
-      ? "-175vw"
-      : isSmall
-      ? "-102vw"
-      : isMedium
-      ? "-82vw"
-      : "-33vw";
-  if (name === "RACHEL MARTIN")
-    return isXXXSmall
-      ? "-208vw"
-      : isXXSmall
-      ? "-200vw"
-      : isXSmall
-      ? "-190vw"
-      : isSmall
-      ? "-106vw"
-      : isMedium
-      ? "-80vw"
-      : "-33vw";
-  if (name === "DAPHNÉ SYLVAIN")
-    return isXXSmall
-      ? "-170vw"
-      : isXSmall
-      ? "-160vw"
-      : isSmall
-      ? "-94vw"
-      : isMedium
-      ? "-72vw"
-      : "-29vw";
+  if (colHeight) {
+    if (name === "ANNIE-CLAUDE ROY") {
+      return isXXXSmall
+        ? "-185vw"
+        : isXXSmall
+        ? "-178vw"
+        : isXSmall
+        ? "-170vw"
+        : isSmall
+        ? "-102vw"
+        : isMedium
+        ? "-82vw"
+        : "-33vw";
+    }
+    if (name === "DAVID-MARC BOUCHARD")
+      return isXXXSmall
+        ? "-195vw"
+        : isXXSmall
+        ? "-190vw"
+        : isXSmall
+        ? "-175vw"
+        : isSmall
+        ? "-102vw"
+        : isMedium
+        ? "-82vw"
+        : "-33vw";
+    if (name === "RACHEL MARTIN")
+      return isXXXSmall
+        ? "-208vw"
+        : isXXSmall
+        ? "-200vw"
+        : isXSmall
+        ? "-190vw"
+        : isSmall
+        ? "-106vw"
+        : isMedium
+        ? "-80vw"
+        : "-33vw";
+    if (name === "DAPHNÉ SYLVAIN")
+      return isXXSmall
+        ? "-170vw"
+        : isXSmall
+        ? "-160vw"
+        : isSmall
+        ? "-94vw"
+        : isMedium
+        ? "-72vw"
+        : "-29vw";
 
-  if (title.includes("PROCESS"))
-    return isXXSmall
-      ? "-150vw"
-      : isXSmall
-      ? "-130vw"
-      : isSmall
-      ? "-130vw"
-      : isMedium
-      ? "-100vw"
-      : "-58vw";
-  if (title.includes("RECRU")) {
-    return isXXSmall
-      ? "-120vw"
-      : isXSmall
-      ? "-93vw"
-      : isSmall
-      ? "-75vw"
-      : isMedium
-      ? "-60vw"
-      : "-35vw";
+    if (title.includes("PROCESS"))
+      return isXXSmall
+        ? "-150vw"
+        : isXSmall
+        ? "-130vw"
+        : isSmall
+        ? "-130vw"
+        : isMedium
+        ? "-100vw"
+        : "-58vw";
+    if (title.includes("RECRU")) {
+      return isXXSmall
+        ? "-120vw"
+        : isXSmall
+        ? "-93vw"
+        : isSmall
+        ? "-75vw"
+        : isMedium
+        ? "-60vw"
+        : "-35vw";
+    }
+
+    if (title.includes("TALENT"))
+      return isXXSmall
+        ? "-100vw"
+        : isXSmall
+        ? "-85vw"
+        : isSmall
+        ? "-65vw"
+        : isMedium
+        ? "-50vw"
+        : "-25vw";
+
+    return "-200px";
   }
-
-  if (title.includes("TALENT"))
-    return isXXSmall
-      ? "-150vw"
-      : isXSmall
-      ? "-120vw"
-      : isSmall
-      ? "-85vw"
-      : isMedium
-      ? "-70vw"
-      : "-50vw";
-
-  return "-200px";
 };
 
 export const Image = styled(GatsbyImage)`
