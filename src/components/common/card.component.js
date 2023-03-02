@@ -6,6 +6,7 @@ import { motion, useAnimationControls } from "framer-motion";
 import { useIsMedium } from "../../utils/media-query.hook";
 import { useIsXSmall } from "../../utils/media-query.hook";
 import { useIsXXSmall } from "../../utils/media-query.hook";
+import { useIsXXXSmall } from "../../utils/media-query.hook";
 import { useIsSmall } from "../../utils/media-query.hook";
 import {
   getImageHeight,
@@ -59,6 +60,7 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
   const isSmall = useIsSmall();
   const isXSmall = useIsXSmall();
   const isXXSmall = useIsXXSmall();
+  const isXXXSmall = useIsXXXSmall();
   const getMarc = () => {
     if (isEmployee) {
       return name === "DAVID-MARC BOUCHARD";
@@ -149,6 +151,7 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
           getImageHeight(
             name,
             title,
+            isXXXSmall,
             isXXSmall,
             isXSmall,
             isSmall,
@@ -198,9 +201,7 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
         opacity: 1,
         transition: { duration: 0.375, delay: 0 },
         type: "linear",
-        top: getMarc()
-          ? `calc(4rem + ${titleHeight})`
-          : `calc(1.7rem + ${titleHeight})`,
+        top: `calc(4rem + ${titleHeight})`,
       });
     }
   }, [
@@ -216,6 +217,7 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
     isEmployee,
     isXSmall,
     isXXSmall,
+    isXXXSmall,
     imageRef,
     isMobile,
   ]);
@@ -236,7 +238,17 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
         <div className="col-lg-4 ">
           <Title
             animate={titleControls}
-            style={isEmployee && { maxWidth: !isMedium ? "700px" : "400px" }}
+            style={
+              isEmployee && {
+                maxWidth: isXXSmall
+                  ? "250px"
+                  : isXSmall
+                  ? "280px"
+                  : isMedium
+                  ? "400px"
+                  : "500px",
+              }
+            }
           >
             {isEmployee ? name : title}
           </Title>
@@ -370,7 +382,8 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
                     isXXSmall,
                     isXSmall,
                     isSmall,
-                    isMedium
+                    isMedium,
+                    isXXXSmall
                   ) +
                   ")",
                 height: "100%",

@@ -19,7 +19,7 @@ const TeamMembers = ({ teamMembers }) => {
             if (employee.name.toUpperCase() === "DAVID-MARC BOUCHARD")
               return isMedium ? "-8px" : "-25px";
 
-            return isXSmall ? "0px" : isMedium ? "-8px" : "10px";
+            return isXSmall ? "-20px" : isMedium ? "-8px" : "-25px";
           };
 
           const getImgPosition = () => {

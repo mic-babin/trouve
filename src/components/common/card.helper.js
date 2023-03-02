@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 export const getImageHeight = (
   name,
   title,
+  isXXXSmall,
   isXXSmall,
   isXSmall,
   isSmall,
@@ -12,45 +13,51 @@ export const getImageHeight = (
   language
 ) => {
   if (name === "ANNIE-CLAUDE ROY")
-    return isXXSmall
-      ? "-200vw"
-      : isXSmall
-      ? "-180vw"
-      : isSmall
-      ? "-120vw"
-      : isMedium
-      ? "-98vw"
-      : "-44vw";
-  if (name === "DAVID-MARC BOUCHARD")
-    return isXXSmall
-      ? "-210vw"
-      : isXSmall
-      ? "-190vw"
-      : isSmall
-      ? "-120vw"
-      : isMedium
-      ? "-98vw"
-      : "-44vw";
-  if (name === "RACHEL MARTIN")
-    return isXXSmall
-      ? "-225vw"
-      : isXSmall
-      ? "-200vw"
-      : isSmall
-      ? "-120vw"
-      : isMedium
-      ? "-98vw"
-      : "-44vw";
-  if (name === "DAPHNÉ SYLVAIN")
-    return isXXSmall
-      ? "-190vw"
+    return isXXXSmall
+      ? "-185vw"
+      : isXXSmall
+      ? "-178vw"
       : isXSmall
       ? "-170vw"
       : isSmall
-      ? "-108vw"
+      ? "-102vw"
       : isMedium
-      ? "-90vw"
-      : "-40vw";
+      ? "-82vw"
+      : "-33vw";
+  if (name === "DAVID-MARC BOUCHARD")
+    return isXXXSmall
+      ? "-195vw"
+      : isXXSmall
+      ? "-190vw"
+      : isXSmall
+      ? "-175vw"
+      : isSmall
+      ? "-102vw"
+      : isMedium
+      ? "-82vw"
+      : "-33vw";
+  if (name === "RACHEL MARTIN")
+    return isXXXSmall
+      ? "-208vw"
+      : isXXSmall
+      ? "-200vw"
+      : isXSmall
+      ? "-190vw"
+      : isSmall
+      ? "-106vw"
+      : isMedium
+      ? "-80vw"
+      : "-33vw";
+  if (name === "DAPHNÉ SYLVAIN")
+    return isXXSmall
+      ? "-170vw"
+      : isXSmall
+      ? "-160vw"
+      : isSmall
+      ? "-94vw"
+      : isMedium
+      ? "-72vw"
+      : "-29vw";
 
   if (title.includes("PROCESS"))
     return isXXSmall
