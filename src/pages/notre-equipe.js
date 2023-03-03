@@ -179,6 +179,13 @@ export const query = graphql`
                   quality: 100
                 )
               }
+              mobileImage {
+                gatsbyImageData(
+                  placeholder: BLURRED
+                  layout: CONSTRAINED
+                  quality: 100
+                )
+              }
             }
             ... on ContentfulForm {
               id

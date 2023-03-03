@@ -9,94 +9,92 @@ export const getImageHeight = (
   isXXSmall,
   isXSmall,
   isSmall,
-  isMedium,
-  language,
-  colHeight
+  isMedium
 ) => {
-  if (colHeight) {
-    if (name === "ANNIE-CLAUDE ROY") {
-      return isXXXSmall
-        ? "-185vw"
-        : isXXSmall
-        ? "-178vw"
-        : isXSmall
-        ? "-170vw"
-        : isSmall
-        ? "-102vw"
-        : isMedium
-        ? "-82vw"
-        : "-33vw";
-    }
-    if (name === "DAVID-MARC BOUCHARD")
-      return isXXXSmall
-        ? "-195vw"
-        : isXXSmall
-        ? "-190vw"
-        : isXSmall
-        ? "-175vw"
-        : isSmall
-        ? "-102vw"
-        : isMedium
-        ? "-82vw"
-        : "-33vw";
-    if (name === "RACHEL MARTIN")
-      return isXXXSmall
-        ? "-208vw"
-        : isXXSmall
-        ? "-200vw"
-        : isXSmall
-        ? "-190vw"
-        : isSmall
-        ? "-106vw"
-        : isMedium
-        ? "-80vw"
-        : "-33vw";
-    if (name === "DAPHNÉ SYLVAIN")
-      return isXXSmall
-        ? "-170vw"
-        : isXSmall
-        ? "-160vw"
-        : isSmall
-        ? "-94vw"
-        : isMedium
-        ? "-72vw"
-        : "-29vw";
-
-    if (title.includes("PROCESS"))
-      return isXXSmall
-        ? "-150vw"
-        : isXSmall
-        ? "-130vw"
-        : isSmall
-        ? "-130vw"
-        : isMedium
-        ? "-100vw"
-        : "-58vw";
-    if (title.includes("RECRU")) {
-      return isXXSmall
-        ? "-120vw"
-        : isXSmall
-        ? "-93vw"
-        : isSmall
-        ? "-75vw"
-        : isMedium
-        ? "-60vw"
-        : "-35vw";
-    }
-
-    if (title.includes("TALENT"))
-      return isXXSmall
-        ? "-100vw"
-        : isXSmall
-        ? "-85vw"
-        : isSmall
-        ? "-65vw"
-        : isMedium
-        ? "-50vw"
-        : "-25vw";
-
-    return "-200px";
+  if (name === "ANNIE-CLAUDE ROY") {
+    return isXXXSmall
+      ? "-198vw"
+      : isXXSmall
+      ? "-185vw"
+      : isXSmall
+      ? "-170vw"
+      : isSmall
+      ? "-97vw"
+      : isMedium
+      ? "-72vw"
+      : "-24vw";
   }
+  if (name === "DAVID-MARC BOUCHARD")
+    return isXXXSmall
+      ? "-210vw"
+      : isXXSmall
+      ? "-200vw"
+      : isXSmall
+      ? "-181vw"
+      : isSmall
+      ? "-103vw"
+      : isMedium
+      ? "-75vw"
+      : "-24vw";
+  if (name === "RACHEL MARTIN")
+    return isXXXSmall
+      ? "-222vw"
+      : isXXSmall
+      ? "-215vw"
+      : isXSmall
+      ? "-192vw"
+      : isSmall
+      ? "-103vw"
+      : isMedium
+      ? "-75vw"
+      : "-24vw";
+  if (name === "DAPHNÉ SYLVAIN")
+    return isXXXSmall
+      ? "-182vw"
+      : isXXSmall
+      ? "-180vw"
+      : isXSmall
+      ? "-163vw"
+      : isSmall
+      ? "-90vw"
+      : isMedium
+      ? "-70vw"
+      : "-22vw";
+
+  if (title.includes("PROCESS"))
+    return isXXSmall
+      ? "-150vw"
+      : isXSmall
+      ? "-130vw"
+      : isSmall
+      ? "-130vw"
+      : isMedium
+      ? "-100vw"
+      : "-58vw";
+  if (title.includes("RECRU")) {
+    return isXXSmall
+      ? "-120vw"
+      : isXSmall
+      ? "-93vw"
+      : isSmall
+      ? "-75vw"
+      : isMedium
+      ? "-60vw"
+      : "-35vw";
+  }
+
+  if (title.includes("TALENT"))
+    return isXXSmall
+      ? "-100vw"
+      : isXSmall
+      ? "-85vw"
+      : isSmall
+      ? "-65vw"
+      : isMedium
+      ? "-50vw"
+      : "-25vw";
+
+  return "-200px";
 };
 
 export const Image = styled(GatsbyImage)`

@@ -28,7 +28,7 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
   const {
     i18n: { language },
   } = useI18next();
-  // console.log(imgPosition);
+
   const middleCol = useRef();
   const imageRef = useRef();
   const {
@@ -38,12 +38,13 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
     textFields,
     images,
     image,
+    mobileImage,
     descriptions,
     phone,
     email,
     id,
   } = data;
-  // console.log(department);
+
   const cardWrapperControls = useAnimationControls();
   const imageWrapperControls = useAnimationControls();
   const titleControls = useAnimationControls();
@@ -79,10 +80,8 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
     if (name === "DAPHNÉ SYLVAIN") return 45;
     return 0;
   };
-
+  console.log(mobileImage);
   useEffect(() => {
-    let colHeight = middleCol.current.offsetHeight;
-    console.log(colHeight);
     if (name) handleIsEmployee();
     if (hovered) {
       // OPEN
@@ -156,9 +155,7 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
             isXXSmall,
             isXSmall,
             isSmall,
-            isMedium,
-            language,
-            colHeight
+            isMedium
           ) +
           ")",
         height: "100%",
@@ -401,7 +398,10 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
               {imgPosition && (
                 <Image
                   image={getImage(
-                    image?.gatsbyImageData || images[0].gatsbyImageData
+                    (!isSmall
+                      ? image?.gatsbyImageData
+                      : mobileImage?.gatsbyImageData) ||
+                      images[0].gatsbyImageData
                   )}
                   alt={name}
                   objectPosition={imgPosition || "center center"}
