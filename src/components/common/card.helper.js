@@ -84,7 +84,9 @@ export const getImageHeight = (
   }
 
   if (title.includes("TALENT"))
-    return isXXSmall
+    return isXXXSmall
+      ? "-110vw"
+      : isXXSmall
       ? "-100vw"
       : isXSmall
       ? "-85vw"
