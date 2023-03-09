@@ -57,7 +57,7 @@ const Wrapper = styled(motion.div)`
     align-items: center;
 
     img {
-      max-height: 20vh;
+      max-height: 25vh;
     }
   }
   .bg-black {
