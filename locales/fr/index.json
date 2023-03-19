@@ -2,5 +2,7 @@
   "seo": "Accueil",
   "title": "Merci d'avoir communiqué avec nous!",
   "message": "Oups! Il semble que cette page n'existe pas...",
-  "close": "Retour vers l'accueil"
+  "messageEmail": "Nous vous répondrons dès que possible.",
+  "close": "Retour vers l'accueil",
+  "closeEmail": "Fermer"
 }

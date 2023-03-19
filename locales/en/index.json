@@ -2,5 +2,7 @@
   "seo": "Home",
   "title": "Thank you for communicating with us!",
   "message": "Oups! It seems this page does not exist...",
-  "close": "Back to home"
+  "messageEmail": "We will respond to you as soon as we can.",
+  "close": "Back to home",
+  "closeEmail": "Close"
 }

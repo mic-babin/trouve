@@ -120,13 +120,13 @@ function ContactForm({ data }) {
             <Trans>title</Trans>
           </h1>
           <p className="px-3 text-center pt-2 mb-0">
-            <Trans>message</Trans>
+            <Trans>messageEmail</Trans>
           </p>
-          <NavLink to="/">
+          {/* <NavLink to="/">
             <Trans>button</Trans>
-          </NavLink>
+          </NavLink> */}
           <ModalButton className="pe-3" onClick={handleClose}>
-            <Trans>close</Trans>
+            <Trans>closeEmail</Trans>
           </ModalButton>
         </Modal.Body>
       </Modal>
