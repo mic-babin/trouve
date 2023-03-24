@@ -110,7 +110,7 @@ const Hero = ({ data }) => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 4 }}
-                href="http://jobs.trouvemtl.com"
+                href="https://jobs.trouvemtl.com/"
                 target="_blank"
                 onMouseEnter={() => handleHover()}
                 onMouseLeave={() => handleHover()}
