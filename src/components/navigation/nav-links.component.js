@@ -15,7 +15,7 @@ const NavLinks = ({ navLinks, setShowContact, setShowMenu, path }) => {
   const handleCloseMenu = () => setShowMenu(false);
 
   const isRealLink = (link) => {
-    return link.url !== "http://jobs.trouvemtl.com/" && link.url !== undefined;
+    return link.url !== "https://jobs.trouvemtl.com/" && link.url !== undefined;
   };
 
   const getActive = (link) => {
@@ -76,7 +76,7 @@ const NavLinks = ({ navLinks, setShowContact, setShowMenu, path }) => {
                   </Text>
                 </NavLink>
               )}
-              {link.url === "http://jobs.trouvemtl.com/" && (
+              {link.url === "https://jobs.trouvemtl.com/" && (
                 <NavLink
                   as="a"
                   href={link.url}

@@ -209,7 +209,7 @@ const Experience = ({ data }) => {
               console.log(link);
               return (
                 <>
-                  {link.url !== "http://jobs.trouvemtl.com/" && (
+                  {link.url !== "https://jobs.trouvemtl.com/" && (
                     <Card
                       key={el.id}
                       className="col-lg-4 mb-4 mb-lg-0"
@@ -255,9 +255,9 @@ const Experience = ({ data }) => {
                       </Description>
                     </Card>
                   )}
-                  {link.url === "http://jobs.trouvemtl.com/" && (
+                  {link.url === "https://jobs.trouvemtl.com/" && (
                     <Card
-                          as='a'
+                      as="a"
                       key={el.id}
                       className="col-lg-4 mb-4 mb-lg-0"
                       onMouseEnter={() => handleHover(index)}

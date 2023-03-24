@@ -21,7 +21,7 @@ const FirstLoader = ({ image, show }) => {
           {image && (
             <>
               <div className="img">
-                <img src={LogoSrc} alt="" />
+                <img src={LogoSrc} alt="Logo" />
               </div>
               <div className="img bg-black"></div>
             </>
@@ -60,6 +60,7 @@ const Wrapper = styled(motion.div)`
       max-height: 25vh;
     }
   }
+
   .bg-black {
     background-color: #000;
     z-index: 10000;
@@ -69,16 +70,10 @@ const Wrapper = styled(motion.div)`
     animation-fill-mode: forwards;
     animation-delay: 0s;
   }
-`;
 
-const Number = styled.div`
-  position: absolute;
-  top: 0;
-  height: 100vh;
-  width: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 65px;
-  font-family: "Neue-Italic";
+  @media (max-width: 574px) {
+    .img img {
+      transform: scale(0.8);
+    }
+  }
 `;
