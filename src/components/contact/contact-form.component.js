@@ -122,9 +122,9 @@ function ContactForm({ data }) {
           <p className="px-3 text-center pt-2 mb-0">
             <Trans>messageEmail</Trans>
           </p>
-          {/* <NavLink to="/">
+          {/* `<NavLink to="/">
             <Trans>button</Trans>
-          </NavLink> */}
+          </NavLink>` */}
           <ModalButton className="pe-3" onClick={handleClose}>
             <Trans>closeEmail</Trans>
           </ModalButton>
