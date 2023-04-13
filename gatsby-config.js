@@ -17,7 +17,7 @@ const siteUrl = "http://localhost:8000/";
 
 module.exports = {
   siteMetadata: {
-    title: `TROUVÉ - Boutique de talent`,
+    title: `TROUVÉ - Boutique de talents`,
     description: `TROUVÉ, c'est une équipe de recruteurs spécialistes de la mode, de la beauté et du design qui cultive des liens étroits entre les talents et les employeurs .`,
     twitterUsername: `@trouvemtl`,
     image: `/trouve.png`,
