@@ -80,7 +80,6 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
     if (name === "DAPHNÉ SYLVAIN") return 45;
     return 0;
   };
-  console.log(mobileImage);
   useEffect(() => {
     if (name) handleIsEmployee();
     if (hovered) {
@@ -224,8 +223,7 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
   return (
     <CardWrapper
       animate={cardWrapperControls}
-      // onClick={executeScroll}
-      onClick={(isEmployee || isMobile) && toggleOpen}
+      onClick={isEmployee || isMobile ? toggleOpen : undefined}
       onMouseOver={() => !isEmployee && !isMobile && handleEnter()}
       onMouseOut={() => !isEmployee && !isMobile && handleLeave()}
       style={{
@@ -325,46 +323,50 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
                 })}
 
               <AddressesWrapper className="">
-                <Address
-                  initial={{ opacity: 0, filter: "blur(1)" }}
-                  animate={hovered && { opacity: 1, filter: "blur(0)" }}
-                  transition={{
-                    duration: 1,
-                    delay: 5,
-                    ease: [0.11, 0, 0.5, 0],
-                  }}
-                  href={"mailTo:" + email}
-                  className="mb-2"
-                >
-                  <span className="mask">
-                    <div className="link-container">
-                      <span className="link-title1 title">
-                        {email.toUpperCase()}
-                      </span>
-                      <span className="link-title2 title">
-                        {email.toUpperCase()}
-                      </span>
-                    </div>
-                  </span>
-                </Address>
-                <Address
-                  initial={{ opacity: 0, filter: "blur(1)" }}
-                  animate={hovered && { opacity: 1, filter: "blur(0)" }}
-                  transition={{
-                    duration: 1,
-                    delay: 5.3,
-                    ease: [0.11, 0, 0.5, 0],
-                  }}
-                  href={"phoneTo:" + phone}
-                  className=""
-                >
-                  <span className="mask">
-                    <div className="link-container">
-                      <span className="link-title1 title">{phone}</span>
-                      <span className="link-title2 title">{phone}</span>
-                    </div>
-                  </span>
-                </Address>
+                {email && (
+                  <Address
+                    initial={{ opacity: 0, filter: "blur(1)" }}
+                    animate={hovered && { opacity: 1, filter: "blur(0)" }}
+                    transition={{
+                      duration: 1,
+                      delay: 5,
+                      ease: [0.11, 0, 0.5, 0],
+                    }}
+                    href={"mailTo:" + email}
+                    className="mb-2"
+                  >
+                    <span className="mask">
+                      <div className="link-container">
+                        <span className="link-title1 title">
+                          {email.toUpperCase()}
+                        </span>
+                        <span className="link-title2 title">
+                          {email.toUpperCase()}
+                        </span>
+                      </div>
+                    </span>
+                  </Address>
+                )}
+                {phone && (
+                  <Address
+                    initial={{ opacity: 0, filter: "blur(1)" }}
+                    animate={hovered && { opacity: 1, filter: "blur(0)" }}
+                    transition={{
+                      duration: 1,
+                      delay: 5.3,
+                      ease: [0.11, 0, 0.5, 0],
+                    }}
+                    href={"phoneTo:" + phone}
+                    className=""
+                  >
+                    <span className="mask">
+                      <div className="link-container">
+                        <span className="link-title1 title">{phone}</span>
+                        <span className="link-title2 title">{phone}</span>
+                      </div>
+                    </span>
+                  </Address>
+                )}
               </AddressesWrapper>
             </div>
           )}

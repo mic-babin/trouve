@@ -7,8 +7,8 @@ const AnimatedHeroLink = ({ link, type, color, bold }) => {
     <Link
       color={color}
       as={type}
-      href={type === motion.a && link.url}
-      target={type === motion.a && "_blank"}
+      href={type === motion.a ? link.url : undefined}
+      target={type === motion.a ? "_blank" : undefined}
       initial={{ opacity: 0, transform: "translateX(200px)" }}
       animate={{ opacity: 1, transform: "translateX(0px)" }}
       transition={{ duration: 1, delay: 4 }}
