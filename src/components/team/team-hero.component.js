@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { H1 } from "../styled-components/h1.style";
 import { Kicker } from "../styled-components/kicker.style";
-import { NavLink } from "../styled-components/nav-link.style";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { motion } from "framer-motion";
 import { useIsMedium } from "../../utils/media-query.hook";
