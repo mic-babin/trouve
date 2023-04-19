@@ -10,6 +10,7 @@ import { useState } from "react";
 import AnimatedHeroLink from "../common/animated-hero-link.component";
 
 const TeamHero = ({ hero, setShowContact }) => {
+  console.log(hero);
   const { title, link, images, textFields } = hero;
   const [isInView, setIsInView] = useState(false);
   const isMedium = useIsMedium();

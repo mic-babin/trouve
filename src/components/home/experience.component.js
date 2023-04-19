@@ -206,7 +206,7 @@ const Experience = ({ data }) => {
                 }
               };
               const hover = getHoverState();
-              console.log(link);
+
               return (
                 <>
                   {link.url !== "https://jobs.trouvemtl.com/" && (
