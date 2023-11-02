@@ -41,7 +41,7 @@ const Merci = (props) => {
           <Trans>message</Trans>
         </p>
         <NavLink to="/">
-          <Trans>button</Trans>
+          <Trans>close</Trans>
         </NavLink>
       </Section>
     </Layout>
