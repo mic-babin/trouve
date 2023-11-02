@@ -48,6 +48,7 @@ const Error = (props) => {
 
 export default Error;
 export const Head = () => <SEO title="404 - " />;
+
 const Section = styled.div`
   display: flex;
   flex-direction: column;

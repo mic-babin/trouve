@@ -6,6 +6,7 @@ import Fallback from "../components/fallback.component";
 import { SEO } from "../components/seo";
 import { useState, useEffect, useRef } from "react";
 import FirstLoader from "../components/common/first-loader.component";
+import { Script } from "gatsby";
 
 export default function Homepage(props) {
   const path = props.path;
@@ -99,7 +100,21 @@ export default function Homepage(props) {
   );
 }
 
-export const Head = () => <SEO />;
+export const Head = () => (
+  <>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=AW-11372992172"
+    ></script>
+    <script>
+      {`
+      window.dataLayer = window.dataLayer || []; function gtag()
+      {dataLayer.push(arguments)} gtag('js', new Date()); gtag('config',
+      'AW-11372992172');`}
+    </script>
+    <SEO />
+  </>
+);
 
 export const query = graphql`
   query ($language: String!) {
