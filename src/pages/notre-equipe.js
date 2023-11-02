@@ -55,7 +55,20 @@ const Equipe = (props) => {
     </Layout>
   );
 };
-export const Head = () => <SEO title="Notre équipe - " />;
+export const Head = () => (
+  <>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=AW-11372992172"
+    ></script>
+    <script>
+      {`
+    <!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-MFY0HQY3X7"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-MFY0HQY3X7'); </script>`}
+    </script>
+
+    <SEO title="Notre équipe - " />
+  </>
+);
 export default Equipe;
 
 export const query = graphql`

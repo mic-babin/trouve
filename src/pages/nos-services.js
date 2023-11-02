@@ -66,7 +66,19 @@ const NosServices = (props) => {
   );
 };
 
-export const Head = () => <SEO title="Nos services - " />;
+export const Head = () => (
+  <>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=AW-11372992172"
+    ></script>
+    <script>
+      {`
+      <!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-MFY0HQY3X7"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-MFY0HQY3X7'); </script>`}
+    </script>
+    <SEO title="Nos services - " />
+  </>
+);
 export default NosServices;
 
 export const query = graphql`

@@ -85,21 +85,5 @@ module.exports = {
         },
       },
     },
-    {
-      resolve: "gatsby-plugin-google-tagmanager",
-      options: {
-        id: "AW-11372992172",
-
-        // Include GTM in development.
-        //
-        // Defaults to false meaning GTM will only be loaded in production.
-        includeInDevelopment: false,
-
-        // Defaults to false
-        enableWebVitalsTracking: true,
-        // Defaults to https://www.googletagmanager.com
-        selfHostedOrigin: "YOUR_SELF_HOSTED_ORIGIN",
-      },
-    },
   ],
 };

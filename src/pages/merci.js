@@ -8,7 +8,7 @@ import { NavLink } from "../components/styled-components/nav-link.style";
 import { Trans } from "gatsby-plugin-react-i18next";
 import { SEO } from "../components/seo";
 
-const Success = (props) => {
+const Merci = (props) => {
   const path = props.path;
   const menu = props.data.allContentfulHeader.edges[0].node;
   const contact = props.data.allContentfulPage.edges[1].node.sections;
@@ -48,8 +48,20 @@ const Success = (props) => {
   );
 };
 
-export default Success;
-export const Head = () => <SEO title="Merci - " />;
+export default Merci;
+export const Head = () => (
+  <>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=AW-11372992172"
+    ></script>
+    <script>
+      {`
+    <!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-MFY0HQY3X7"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-MFY0HQY3X7'); </script>`}
+    </script>
+    <SEO title="Merci - " />
+  </>
+);
 const Section = styled.div`
   display: flex;
   flex-direction: column;
