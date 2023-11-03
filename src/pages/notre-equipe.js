@@ -12,7 +12,8 @@ const Equipe = (props) => {
   const menu = props.data.allContentfulHeader.edges[0].node;
   const contact = props.data.allContentfulPage.edges[1].node.sections;
   const team = props.data.allContentfulPage.edges[0].node.sections;
-  console.log(props.data);
+
+  console.log("team", team);
   const hero = team.filter(
     (el) =>
       el.id === "8a5acd35-6c67-5045-bde6-39ecf7bb1cc2" ||

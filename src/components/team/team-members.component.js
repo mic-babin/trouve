@@ -10,6 +10,7 @@ const TeamMembers = ({ teamMembers }) => {
     <>
       {teamMembers &&
         teamMembers.map((employee) => {
+          console.log(employee);
           const getTitleHeight = () => {
             if (
               isXSmall &&
@@ -29,8 +30,11 @@ const TeamMembers = ({ teamMembers }) => {
               return "center 60%";
             if (employee.name.toUpperCase() === "DAPHNÉ SYLVAIN")
               return "center 40%";
+            if (employee.name.toUpperCase() === "MELISSA CARBONNE")
+              return "center 40%";
             if (employee.name.toUpperCase() === "DAVID-MARC BOUCHARD")
               return "center 60%";
+            return "center 40%";
           };
 
           return (

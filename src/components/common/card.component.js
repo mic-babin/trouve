@@ -78,6 +78,7 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
     if (name === "DAVID-MARC BOUCHARD") return 80;
     if (name === "RACHEL MARTIN") return 45;
     if (name === "DAPHNÉ SYLVAIN") return 45;
+    if (name === "MELISSA CARBONE") return 45;
     return 0;
   };
   useEffect(() => {
