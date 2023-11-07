@@ -4,14 +4,15 @@ import { graphql } from "gatsby";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Loader from "../components/common/loader.component";
-import { NavLink } from "../components/styled-components/nav-link.style";
-import { Trans } from "gatsby-plugin-react-i18next";
 import { SEO } from "../components/seo";
+import ThankYou from "../components/thank-you/thank-you.component";
 
 const Merci = (props) => {
   const path = props.path;
   const menu = props.data.allContentfulHeader.edges[0].node;
   const contact = props.data.allContentfulPage.edges[1].node.sections;
+  const merci = props.data.allContentfulPage.edges[2].node.sections[0];
+  console.log(merci);
 
   const [showContact, setShowContact] = useState(false);
   const [showPage, setShowPage] = useState(false);
@@ -33,17 +34,7 @@ const Merci = (props) => {
       showPage={showPage}
     >
       {!showPage && <Loader />}
-      <Section>
-        <h1>
-          <Trans>title</Trans>
-        </h1>
-        <p className="px-3">
-          <Trans>message</Trans>
-        </p>
-        <NavLink to="/">
-          <Trans>close</Trans>
-        </NavLink>
-      </Section>
+      <ThankYou merci={merci} />
     </Layout>
   );
 };
@@ -77,8 +68,8 @@ const Section = styled.div`
   padding-left: 15px;
   padding-right: 15px;
   text-align: center;
-  background: black;
-  color: white;
+  background: rgb(231, 229, 224);
+  color: black;
   border-bottom: 2px solid white;
 `;
 
@@ -140,7 +131,7 @@ export const query = graphql`
     }
     allContentfulPage(
       filter: {
-        title: { in: ["Contact", "Team", "Équipe"] }
+        title: { in: ["Contact", "Team", "Équipe", "Thanks", "Merci"] }
         node_locale: { eq: $language }
       }
     ) {
