@@ -49,6 +49,23 @@ const Error = (props) => {
 export default Error;
 export const Head = () => (
   <>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=AW-11372992172"
+    ></script>
+    <script>{`window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-11372992172');`}</script>
+
+    <script>
+      {`
+   <!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-MFY0HQY3X7"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-MFY0HQY3X7'); </script>`}
+    </script>
+    <script>
+      {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-5VKFN36S');`}
+    </script>
     <SEO title="404 - " />
   </>
 );
@@ -133,16 +150,27 @@ export const query = graphql`
     }
     allContentfulPage(
       filter: {
-        title: { in: ["Contact", "Team", "Équipe"] }
+        title: { in: ["Contact", "Home", "Accueil"] }
         node_locale: { eq: $language }
       }
     ) {
       edges {
         node {
+          id
           sections {
+            ... on ContentfulLoader {
+              id
+              loaderImage {
+                gatsbyImageData(placeholder: BLURRED)
+              }
+            }
             ... on ContentfulSection {
               id
+              type
               title
+              images {
+                gatsbyImageData(placeholder: BLURRED, quality: 75)
+              }
               components {
                 ... on ContentfulContacts {
                   id
@@ -152,16 +180,27 @@ export const query = graphql`
                     type
                   }
                 }
+                ... on ContentfulCard {
+                  id
+                  title
+                  image {
+                    gatsbyImageData(placeholder: BLURRED)
+                  }
+                  description {
+                    id
+                    description
+                  }
+                  link {
+                    id
+                    text
+                    url
+                  }
+                }
               }
               link {
                 ... on ContentfulShortText {
                   id
                   text
-                }
-                ... on ContentfulLink {
-                  id
-                  text
-                  url
                 }
               }
               textFields {
@@ -171,26 +210,18 @@ export const query = graphql`
                   childContentfulParagraphTextTextNode {
                     text
                   }
+                  text {
+                    text
+                  }
                 }
-              }
-              images {
-                gatsbyImageData(placeholder: BLURRED)
-              }
-            }
-            ... on ContentfulTeamMember {
-              id
-              name
-              title
-              descriptions {
-                id
-                text {
-                  text
+                ... on ContentfulShortText {
+                  id
+                  paragraph: text
                 }
-              }
-              email
-              phone
-              image {
-                gatsbyImageData(placeholder: BLURRED, layout: CONSTRAINED)
+                ... on ContentfulList {
+                  id
+                  value
+                }
               }
             }
             ... on ContentfulForm {
