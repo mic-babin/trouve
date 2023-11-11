@@ -2,7 +2,7 @@ import React from "react";
 import { AnimatedHeroLink as Link } from "../styled-components/animated-hero-link.style";
 import { motion } from "framer-motion";
 
-const AnimatedHeroLink = ({ link, type, color, bold }) => {
+const AnimatedHeroLink = ({ link, type, color, bold, dataAnalytics }) => {
   return (
     <Link
       color={color}
@@ -13,6 +13,7 @@ const AnimatedHeroLink = ({ link, type, color, bold }) => {
       animate={{ opacity: 1, transform: "translateX(0px)" }}
       transition={{ duration: 1, delay: 4 }}
       style={{ cursor: "pointer" }}
+      data-analytics={dataAnalytics ? dataAnalytics : ""}
     >
       <span className="mask">
         <div className="link-container">

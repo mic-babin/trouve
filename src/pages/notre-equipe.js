@@ -13,7 +13,6 @@ const Equipe = (props) => {
   const contact = props.data.allContentfulPage.edges[1].node.sections;
   const team = props.data.allContentfulPage.edges[0].node.sections;
 
-  console.log("team", team);
   const hero = team.filter(
     (el) =>
       el.id === "8a5acd35-6c67-5045-bde6-39ecf7bb1cc2" ||
@@ -67,7 +66,13 @@ export const Head = () => (
       {`
     <!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-MFY0HQY3X7"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-MFY0HQY3X7'); </script>`}
     </script>
-
+    <script>
+      {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-5VKFN36S');`}
+    </script>
     <SEO title="Notre équipe - " />
   </>
 );

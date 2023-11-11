@@ -18,7 +18,8 @@ exports.handler = async (event, context) => {
   const method = event.httpMethod;
   const { firstName, lastName, email, linkedIn, resume, message } = JSON.parse(
     event.body
-  );
+  ).fields;
+
   // const from = "Formulaire de contact <noreply.lecoute@gmail.com>";
   const from = "michael.babin@griffincreative.ca";
   const emailSubject = "Formulaire de contact - TROUVEMTL";

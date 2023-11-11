@@ -99,6 +99,7 @@ const Mandate = ({ mandate, setShowContact }) => {
                   type={motion.div}
                   color="black"
                   bold={true}
+                  dataAnalytics={"contactFormLinkServices"}
                 />
               </div>
             )}

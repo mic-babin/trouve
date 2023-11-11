@@ -76,6 +76,7 @@ const Menu = ({ showMenu, setShowMenu, menu, setShowContact, path }) => {
                     setShowContact={setShowContact}
                     setShowMenu={setShowMenu}
                     path={path}
+                    isFooter={false}
                   />
                 </div>
 

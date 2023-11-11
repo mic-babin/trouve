@@ -22,23 +22,6 @@ const Layout = ({
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    // let x, y;
-
-    // document.onmousemove = function (e) {
-    //   x = e.clientX;
-    //   y = e.clientY;
-    //   updateProps();
-    // };
-
-    // document.onscroll = updateProps;
-
-    // function updateProps() {
-    //   document.body.style.setProperty("--x", x + "px");
-    //   document.body.style.setProperty(
-    //     "--y",
-    //     y + document.documentElement.scrollTop + "px"
-    //   );
-    // }
     if (showModal) {
       setShowModal(showMenu || showContact);
     } else {
@@ -48,6 +31,14 @@ const Layout = ({
 
   return (
     <div>
+      <noscript>
+        <iframe
+          src="https://www.googletagmanager.com/ns.html?id=GTM-5VKFN36S"
+          height="0"
+          width="0"
+          style="display:none;visibility:hidden"
+        ></iframe>
+      </noscript>
       {showPage && (
         <Header
           menu={menu}

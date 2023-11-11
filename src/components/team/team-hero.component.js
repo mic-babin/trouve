@@ -101,6 +101,7 @@ const TeamHero = ({ hero, setShowContact }) => {
                       type={motion.div}
                       link={link}
                       color={"black"}
+                      dataAnalytics="contactFormLinkTeam"
                     />
                   </div>
                 </>

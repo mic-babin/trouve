@@ -5,7 +5,13 @@ import { motion, useAnimationControls } from "framer-motion";
 import { useIsXLarge } from "../../utils/media-query.hook";
 import { AnimatedLink } from "../styled-components/animated-link.style";
 
-const NavLinks = ({ navLinks, setShowContact, setShowMenu, path }) => {
+const NavLinks = ({
+  navLinks,
+  setShowContact,
+  setShowMenu,
+  path,
+  isFooter,
+}) => {
   const isXLarge = useIsXLarge();
   const handleShowContact = () => {
     setShowMenu(false);
@@ -140,6 +146,9 @@ const NavLinks = ({ navLinks, setShowContact, setShowMenu, path }) => {
                   as="div"
                   onClick={handleShowContact}
                   className="d-flex border-bottom-white pointer"
+                  data-analytics={
+                    isFooter ? "contactFormLinkFooter" : "contactFormLinkMenu"
+                  }
                 >
                   <Number className="me-4">0{index + 1}</Number>
                   <Text>

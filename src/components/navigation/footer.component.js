@@ -38,6 +38,7 @@ const Footer = ({ menu, setShowContact, setShowMenu, path }) => {
                 setShowContact={setShowContact}
                 setShowMenu={setShowMenu}
                 path={path}
+                isFooter={true}
               />
             </div>
             <div className="d-flex align-items-center justify-content-end justify-content-xl-between pt-5 pe-xl-3">
