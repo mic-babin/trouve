@@ -22,28 +22,27 @@ const Error = (props) => {
     }, 1);
   }, []);
 
-  return (
-    <Layout
-      menu={menu}
-      contact={contact}
-      showContact={showContact}
-      setShowContact={setShowContact}
-      headerColor="#000000"
-      path={path}
-      showPage={showPage}
-    >
-      {!showPage && <Loader />}
-      <Section>
-        <h1 className="my-5">404</h1>
-        <p className="px-3">
-          <Trans>message</Trans>
-        </p>
-        <NavLink to="/">
-          <Trans>close</Trans>
-        </NavLink>
-      </Section>
-    </Layout>
-  );
+  return 404;
+  // <Layout
+  //   menu={menu}
+  //   contact={contact}
+  //   showContact={showContact}
+  //   setShowContact={setShowContact}
+  //   headerColor="#000000"
+  //   path={path}
+  //   showPage={showPage}
+  // >
+  //   {!showPage && <Loader />}
+  //   <Section>
+  //     <h1 className="my-5">404</h1>
+  //     <p className="px-3">
+  //       <Trans>message</Trans>
+  //     </p>
+  //     <NavLink to="/">
+  //       <Trans>close</Trans>
+  //     </NavLink>
+  //   </Section>
+  // </Layout>
 };
 
 export default Error;
@@ -70,27 +69,27 @@ export const Head = () => (
   </>
 );
 
-const Section = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 80vh;
-  width: 100vw;
-  padding-top: 150px;
-  padding-bottom: 100px;
-  padding-left: 15px;
-  padding-right: 15px;
-  text-align: center;
-  background: black;
-  color: white;
-  border-bottom: 2px solid white;
+// const Section = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   min-height: 80vh;
+//   width: 100vw;
+//   padding-top: 150px;
+//   padding-bottom: 100px;
+//   padding-left: 15px;
+//   padding-right: 15px;
+//   text-align: center;
+//   background: black;
+//   color: white;
+//   border-bottom: 2px solid white;
 
-  h1 {
-    font-size: 18vw;
-    line-height: 18vw;
-  }
-`;
+//   h1 {
+//     font-size: 18vw;
+//     line-height: 18vw;
+//   }
+// `;
 
 export const query = graphql`
   query ($language: String!) {
