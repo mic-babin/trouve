@@ -85,14 +85,5 @@ module.exports = {
         },
       },
     },
-    // In your gatsby-config.js
-
-    // {
-    //   resolve: "gatsby-plugin-google-tagmanager",
-    //   options: {
-    //     id: "GTM-5VKFN36S",
-    //     includeInDevelopment: false,
-    //   },
-    // },
   ],
 };
