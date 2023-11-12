@@ -22,27 +22,29 @@ const Error = (props) => {
     }, 1);
   }, []);
 
-  return 404;
-  // <Layout
-  //   menu={menu}
-  //   contact={contact}
-  //   showContact={showContact}
-  //   setShowContact={setShowContact}
-  //   headerColor="#000000"
-  //   path={path}
-  //   showPage={showPage}
-  // >
-  //   {!showPage && <Loader />}
-  //   <Section>
-  //     <h1 className="my-5">404</h1>
-  //     <p className="px-3">
-  //       <Trans>message</Trans>
-  //     </p>
-  //     <NavLink to="/">
-  //       <Trans>close</Trans>
-  //     </NavLink>
-  //   </Section>
-  // </Layout>
+  return (
+    <Layout
+      menu={menu}
+      contact={contact}
+      showContact={showContact}
+      setShowContact={setShowContact}
+      headerColor="#000000"
+      path={path}
+      showPage={showPage}
+    >
+      404
+      {/* {!showPage && <Loader />}
+    <Section>
+      <h1 className="my-5">404</h1>
+      <p className="px-3">
+        <Trans>message</Trans>
+      </p>
+      <NavLink to="/">
+        <Trans>close</Trans>
+      </NavLink>
+    </Section> */}
+    </Layout>
+  );
 };
 
 export default Error;
