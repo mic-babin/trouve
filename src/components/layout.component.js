@@ -31,14 +31,6 @@ const Layout = ({
 
   return (
     <div>
-      {/* <noscript>
-        <iframe
-          src="https://www.googletagmanager.com/ns.html?id=GTM-5VKFN36S"
-          height="0"
-          width="0"
-          style="display:none;visibility:hidden"
-        ></iframe>
-      </noscript> */}
       {showPage && (
         <Header
           menu={menu}
