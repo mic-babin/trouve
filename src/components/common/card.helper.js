@@ -26,16 +26,16 @@ export const getImageHeight = (
   }
   if (name === "DAVID-MARC BOUCHARD")
     return isXXXSmall
-      ? "-230vw"
+      ? "-220vw"
       : isXXSmall
       ? "-205vw"
       : isXSmall
-      ? "-196vw"
+      ? "-192vw"
       : isSmall
       ? "-105vw"
       : isMedium
       ? "-80vw"
-      : "-24vw";
+      : "-22vw";
   if (name === "RACHEL MARTIN")
     return isXXXSmall
       ? "-232vw"
