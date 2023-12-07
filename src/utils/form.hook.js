@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { navigate } from "gatsby";
 
 export const useForm = (validate, setShow) => {
   const defaultFields = {
@@ -40,6 +41,7 @@ export const useForm = (validate, setShow) => {
       resetFields();
       setShow(true);
       setIsSubmitting(false);
+      navigate("/merci");
     } catch (error) {
       alert("Une erreur est survenue");
       console.log("error", error.response.data);
