@@ -4,15 +4,16 @@ import { useIsXSmall } from "../../utils/media-query.hook";
 import Card from "../common/card.component";
 
 const TeamMembers = ({ teamMembers }) => {
-  // teamMembers = teamMembers.filter(
-  //   (member) => member.name != "MELISSA CARBONE"
-  // );
+  teamMembers = teamMembers.filter(
+    (member) => member.name != "MELISSA CARBONE"
+  );
   const isMedium = useIsMedium();
   const isXSmall = useIsXSmall();
   return (
     <>
       {teamMembers &&
         teamMembers.map((employee) => {
+          console.log(employee);
           const getTitleHeight = () => {
             if (
               isXSmall &&
