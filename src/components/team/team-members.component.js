@@ -4,9 +4,7 @@ import { useIsXSmall } from "../../utils/media-query.hook";
 import Card from "../common/card.component";
 
 const TeamMembers = ({ teamMembers }) => {
-  // teamMembers = teamMembers.filter(
-  //   (member) => member.name != "MELISSA CARBONE"
-  // );
+  teamMembers = teamMembers.filter((member) => member.name != "");
   const isMedium = useIsMedium();
   const isXSmall = useIsXSmall();
   return (
