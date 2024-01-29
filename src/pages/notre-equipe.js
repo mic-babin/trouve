@@ -10,9 +10,10 @@ import { SEO } from "../components/seo";
 const Equipe = (props) => {
   const path = props.path;
   const menu = props.data.allContentfulHeader.edges[0].node;
-  const contact = props.data.allContentfulPage.edges[0].node.sections;
-  const team = props.data.allContentfulPage.edges[1].node.sections;
+  const contact = props.data.allContentfulPage.edges[1].node.sections;
+  const team = props.data.allContentfulPage.edges[0].node.sections;
 
+  console.log(props.data.allContentfulPage.edges);
   console.log("team", team);
   const hero = team.filter(
     (el) =>
