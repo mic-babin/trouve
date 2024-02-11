@@ -2,7 +2,6 @@ import React from "react";
 import Layout from "../components/layout.component";
 import { graphql } from "gatsby";
 import { useState, useEffect } from "react";
-import styled from "styled-components";
 import Loader from "../components/common/loader.component";
 import { NavLink } from "../components/styled-components/nav-link.style";
 import { Trans } from "gatsby-plugin-react-i18next";

@@ -11,7 +11,6 @@ const TeamMembers = ({ teamMembers }) => {
     <>
       {teamMembers &&
         teamMembers.map((employee) => {
-          console.log(employee);
           const getTitleHeight = () => {
             if (
               isXSmall &&

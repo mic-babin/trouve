@@ -1,16 +1,30 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/layout.component";
-import * as sections from "../components/home/index-sections.component";
-import Fallback from "../components/fallback.component";
-import { SEO } from "../components/seo";
-import { useState, useEffect, useRef } from "react";
-import FirstLoader from "../components/common/first-loader.component";
+import { useState, useRef } from "react";
+import Sidebar from "../components/opportunites/sidebar/sidebar.component";
+import Jobs from "../components/opportunites/jobs/jobs.component";
+import { useI18next } from "gatsby-plugin-react-i18next";
+import {
+  filterItems,
+  extractArray,
+  filterFieldsByLanguage,
+} from "../utils/jobs.utils";
+import styled from "styled-components";
+import { JobProvider } from "../context/job.context";
+import { JobModalProvider } from "../context/job-modal.context";
 
-export default function Homepage(props) {
+const Opportunites = (props) => {
+  const layout = useRef();
+
+  const [jobs, setJobs] = useState([]);
+  const [filteredJobs, setFilteredJobs] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [locations, setLocations] = useState([]);
+  const [showContact, setShowContact] = useState(false);
+
   const path = props.path;
   const menu = props.data.allContentfulHeader.edges[0].node;
-
   const contact = props.data.allContentfulPage.edges[1].node.sections.filter(
     (section) =>
       section.id === "b8dc3482-8f6b-52e3-9c2a-cdf3971f3a76" ||
@@ -18,60 +32,67 @@ export default function Homepage(props) {
       section.id === "33167fe8-1da1-59ca-8cae-8aed5506436b" ||
       section.id === "6609d98c-4bf8-5936-9f03-9e293bbd3542"
   );
-  const home = props.data.allContentfulPage.edges[0].node.sections;
-  const layout = useRef();
-  const loader = home.filter(
-    (section) =>
-      section.id === "92e9cacb-db9a-506c-8711-563d732976d5" ||
-      section.id === "0fa3a0bf-6404-5dd4-b9da-129729d5e326"
-  )[0];
-  const [showContact, setShowContact] = useState(false);
-  const [headerColor, setHeaderColor] = useState("transparent");
 
-  const handleHeaderColor = (color) => setHeaderColor(color);
+  const options = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: '{"refreshToken":"78ebbf67-521b-4e94-a42b-53a41a25cfb3"}',
+  };
 
-  const [showPage, setShowPage] = useState(false);
-  const [showLoader, setShowLoader] = useState(true);
+  const {
+    i18n: { language },
+  } = useI18next();
 
   useEffect(() => {
-    let about = document.getElementById("about");
-    if (about && props.location.hash === "#a-propos") {
-      about.scrollIntoView({ behavior: "smooth" }, true);
+    if (jobs.length == 0) {
+      fetch(
+        "https://qimsyaozqntinmrokopq.auth.eu-west-2.nhost.run/v1/token",
+        options
+      )
+        .then((response) => response.json())
+        .then((response) => {
+          const options2 = {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${response.accessToken}`,
+            },
+            body: JSON.stringify({ query: PROJECTS_QUERY }),
+          };
+          fetch(
+            "https://qimsyaozqntinmrokopq.hasura.eu-west-2.nhost.run/v1/graphql",
+            options2
+          )
+            .then((response) => response.json())
+            .then((response) => {
+              setJobs(
+                filterItems(response.data.projects, "Diffuser sur le Site Web")
+              );
+            })
+            .catch((err) => console.error(err));
+        })
+        .catch((err) => console.error(err));
     }
-
-    if (showLoader) {
-      setTimeout(() => {
-        setShowLoader(false);
-      }, 1800);
-    }
-    if (!showPage) {
-      setTimeout(() => {
-        setShowPage(true);
-      }, 1);
-    }
-
-    if (showPage && !showLoader) {
-      var observer = new IntersectionObserver(
-        function (entries) {
-          if (!entries[0].isIntersecting === true) {
-            handleHeaderColor("black");
-          } else {
-            handleHeaderColor("transparent");
-          }
-        },
-        { threshold: [0.1] }
+    if (jobs.length > 0) {
+      setCategories(
+        extractArray(
+          jobs,
+          language == "en"
+            ? "eb079d8c-1301-4dd8-b24f-8e0b5498b8a1"
+            : "ce414904-9606-4c47-852a-07b0652775a0"
+        )
       );
-
-      if (document.querySelector("#hero"))
-        observer.observe(document.querySelector("#hero"));
+      setLocations(
+        extractArray(
+          jobs,
+          language == "en"
+            ? "c4f0e4bf-7d2f-40e9-87f3-968519a88b36"
+            : "cd80b702-cfc2-4c42-b872-9b6ee07372b4"
+        )
+      );
+      setFilteredJobs(filterFieldsByLanguage(jobs, language));
     }
-
-    return () => {
-      if (showPage && !showLoader) {
-        observer.disconnect();
-      }
-    };
-  }, [showPage, showLoader, props.location.hash]);
+  }, [jobs, language]);
 
   return (
     <div ref={layout}>
@@ -80,39 +101,65 @@ export default function Homepage(props) {
         contact={contact}
         showContact={showContact}
         setShowContact={setShowContact}
-        headerColor={headerColor}
+        headerColor="black"
         path={path}
-        showPage={showPage}
+        showPage={true}
       >
         <div id="top"></div>
-        <FirstLoader image={loader} show={showLoader}></FirstLoader>
-        {showPage &&
-          !showLoader &&
-          home.map((section) => {
-            const { id, type, ...componentProps } = section;
-            const Component = sections[type] || Fallback;
-            const data = home.filter((el) => el.type === type)[0];
-            return <Component key={id} {...componentProps} data={data} />;
-          })}
+        <Wrapper>
+          <JobProvider>
+            <JobModalProvider>
+              <Sidebar locations={locations} categories={categories} />
+              <Jobs jobs={filteredJobs} />
+            </JobModalProvider>
+          </JobProvider>
+        </Wrapper>
       </Layout>
     </div>
   );
-}
+};
 
-export const Head = () => (
-  <>
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=AW-11372992172"
-    ></script>
-    <script>{`window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-11372992172');`}</script>
-    <script>
-      {`
-     <!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-MFY0HQY3X7"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-MFY0HQY3X7'); </script>`}
-    </script>
-    <SEO />
-  </>
-);
+export default Opportunites;
+
+const Wrapper = styled.div`
+  display: flex;
+`;
+
+const PROJECTS_QUERY = `
+  query RecentProjects {
+    projects(
+      where: {_or: [{updatedAt: {_gte: "2023-12-01"}}, {fieldsValues: {updatedAt: {_gte: "2023-12-01"}}}]}
+      order_by: {fieldsValues_aggregate: {max: {updatedAt: desc}}}
+    ) {
+      deletedAt
+      createdAt
+      assignee {
+        email
+        phoneNumber
+        id
+        displayName
+      }
+      company {
+        companyPublicData {
+          id
+          name
+        }
+      }
+      referenceId
+      fieldsValues(where: {deletedAt: {_is_null: true}}) {
+        field {
+          id
+          name
+        }
+        fieldValue {
+          id
+          name
+        }
+        value
+      }
+    }
+  }
+`;
 
 export const query = graphql`
   query ($language: String!) {

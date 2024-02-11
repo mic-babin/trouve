@@ -4,5 +4,16 @@
   "message": "Thank you for reaching out. We truly appreciate your interest in our services and taking the time to connect with us.",
   "messageEmail": "We will respond to you as soon as we can.",
   "close": "Back to home",
-  "closeEmail": "Close"
+  "closeEmail": "Close",
+  "location": "Location",
+  "category": "Category",
+  "showLess": "Show Less",
+  "showMore": "Show all",
+  "keywordSearch": "Keyword Search",
+  "jobOffer": "Job Offer",
+  "share": "Share",
+  "print": "Print",
+  "jobSummary": "JOB SUMMARY",
+  "skills": "SKILLS/QUALIFICATIONS REQUIRED",
+  "responsibilities": "RESPONSIBILITIES"
 }

@@ -12,7 +12,6 @@ const Merci = (props) => {
   const menu = props.data.allContentfulHeader.edges[0].node;
   const contact = props.data.allContentfulPage.edges[2].node.sections;
   const merci = props.data.allContentfulPage.edges[0].node.sections[0];
-  console.log(props);
 
   const [showContact, setShowContact] = useState(false);
   const [showPage, setShowPage] = useState(false);
