@@ -1,23 +1,25 @@
 import React, { useEffect } from "react";
 import { graphql } from "gatsby";
-import Layout from "../components/layout.component";
+import Layout from "../../components/layout.component";
 import { useState, useRef } from "react";
-import Sidebar from "../components/opportunites/sidebar/sidebar.component";
-import Jobs from "../components/opportunites/jobs/jobs.component";
+import Jobs from "../../components/opportunites/jobs/jobs.component";
 import { useI18next } from "gatsby-plugin-react-i18next";
 import {
   filterItems,
   extractArray,
   filterFieldsByLanguage,
-} from "../utils/jobs.utils";
+  fieldToJobPropertyMap,
+} from "../../utils/jobs.utils";
 import styled from "styled-components";
-import { JobProvider } from "../context/job.context";
-import { JobModalProvider } from "../context/job-modal.context";
+import { JobProvider } from "../../context/job.context";
+import { JobModalProvider } from "../../context/job-modal.context";
+import JobModal from "../../components/opportunites/job-modal/job-modal.component";
 
-const Opportunites = (props) => {
+const Details = (props) => {
   const layout = useRef();
 
   const [jobs, setJobs] = useState([]);
+  const [job, setJob] = useState(null);
   const [filteredJobs, setFilteredJobs] = useState([]);
   const [categories, setCategories] = useState([]);
   const [locations, setLocations] = useState([]);
@@ -42,6 +44,18 @@ const Opportunites = (props) => {
   const {
     i18n: { language },
   } = useI18next();
+
+  const findJob = (id, jobs) => {
+    jobs.forEach((job) => {
+      job.fieldsValues.forEach((field) => {
+        const jobProperty = fieldToJobPropertyMap[field.field.id];
+        if (jobProperty) {
+          job[jobProperty] = field.value;
+        }
+      });
+    });
+    setJob(jobs.find((job) => job.referenceId === id));
+  };
 
   useEffect(() => {
     if (jobs.length == 0) {
@@ -90,6 +104,7 @@ const Opportunites = (props) => {
             : "cd80b702-cfc2-4c42-b872-9b6ee07372b4"
         )
       );
+      findJob(props.params["*"], jobs);
       setFilteredJobs(filterFieldsByLanguage(jobs, language));
     }
   }, [jobs, language]);
@@ -109,10 +124,7 @@ const Opportunites = (props) => {
         <Wrapper>
           <JobProvider>
             <JobModalProvider>
-              <div className="container">
-                {/* <Sidebar locations={locations} categories={categories} /> */}
-                <Jobs jobs={filteredJobs} />
-              </div>
+              {job != null && <JobModal job={job} />}
             </JobModalProvider>
           </JobProvider>
         </Wrapper>
@@ -121,7 +133,7 @@ const Opportunites = (props) => {
   );
 };
 
-export default Opportunites;
+export default Details;
 
 const Wrapper = styled.div`
   min-height: 100vh;

@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { Card } from "./job-modal-apply.styles";
-import { useJob } from "../../../context/job.context";
+import JobModalForm from "../job-modal-form/job-modal-form.component";
 
-const JobModalApply = () => {
-  const { job } = useJob();
+const JobModalApply = ({ job }) => {
+  const [showModal, setShowModal] = useState(false);
   const [email, setEmail] = useState("");
   const [hasApplied, setHasApplied] = useState(false);
   const [showForm, setShowForm] = useState(false); // Assuming you have logic to show/hide the form
 
   // Placeholder function to simulate applying to a job
   const applyToJob = () => {
-    // Implement your apply logic here
     console.log(`Applying to job with email: ${email}`);
+    setShowModal(true);
     setHasApplied(true);
   };
 
@@ -53,6 +53,11 @@ const JobModalApply = () => {
       <a href="#" onClick={() => console.log("View all jobs in this category")}>
         View all jobs in this category<i className="bhi-arrow-right"></i>
       </a>
+      <JobModalForm
+        showModal={showModal}
+        setShowModal={setShowModal}
+        job={job}
+      />
     </Card>
   );
 };

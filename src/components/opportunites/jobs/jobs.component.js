@@ -22,8 +22,8 @@ const Jobs = ({ jobs }) => {
       <GridWrapper>
         <div className="row">
           {jobs.map((job, index) => (
-            <div className="col-md-6 col-lg-4">
-              <JobCard job={job} key={index} />
+            <div className="col-md-6 col-lg-4" key={index}>
+              <JobCard job={job} />
             </div>
           ))}
         </div>

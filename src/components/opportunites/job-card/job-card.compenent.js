@@ -1,18 +1,10 @@
 import React from "react";
 import { Card } from "./job-card.styles";
-import { useJob } from "../../../context/job.context";
-import { useJobModal } from "../../../context/job-modal.context";
+import { Link } from "gatsby-plugin-react-i18next";
 const JobCard = ({ job }) => {
-  const { setJob } = useJob();
-  const { jobModal, setJobModal } = useJobModal();
-  const openModal = () => {
-    setJobModal(true);
-    setJob(job);
-  };
-
   return (
     <Card className="card-wrapper">
-      <div className="card slide-up-item" onClick={openModal}>
+      <Link className="card slide-up-item" to={`${job.referenceId}`}>
         <div className="card-content">
           <span className="card-title-category">
             <span className="card-title">
@@ -57,7 +49,7 @@ const JobCard = ({ job }) => {
           </div>
           <i className="bhi-arrow-right"></i>
         </div>
-      </div>
+      </Link>
     </Card>
   );
 };

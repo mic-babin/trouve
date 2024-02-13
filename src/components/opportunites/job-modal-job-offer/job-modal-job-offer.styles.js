@@ -98,3 +98,20 @@ export const Card = styled.div`
     }
   }
 `;
+
+export const Icon = styled.img`
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+`;
+export const IconSm = styled.img`
+  height: 18px;
+  width: 18px;
+  cursor: pointer;
+`;
+
+export const IconXS = styled.img`
+  height: 16px;
+  width: 16px;
+  cursor: pointer;
+`;

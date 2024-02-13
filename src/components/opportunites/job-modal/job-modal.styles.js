@@ -16,12 +16,12 @@ export const Grid = styled.div`
     border: none;
     color: #000;
     display: block;
-    height: calc(100vh - 90px);
+    height: 100%;
+    min-height: calc(100vh - 90px);
     transition: all 0.15s ease-in;
-    box-shadow: 8px 0 4px -4px rgba(0, 0, 0, 0.2);
+    box-shadow: 8px 0 4px -2px rgba(0, 0, 0, 0.2);
   }
   .back:hover {
-    color: #fff;
     background: #000;
   }
 `;
@@ -32,4 +32,9 @@ export const JobWrapper = styled.div`
 
 export const ApplyWrapper = styled.div`
   width: calc(25vw + 30px);
+`;
+
+export const Back = styled.img`
+  height: 20px;
+  width: 20px;
 `;
