@@ -54,7 +54,6 @@ const Reason = ({ data }) => {
           transition={{
             duration: 5,
             delay: 0.7,
-            type: "linear",
           }}
           className={"line-0"}
           viewport={{ once: true }}
@@ -69,7 +68,6 @@ const Reason = ({ data }) => {
           transition={{
             duration: 5,
             delay: 0.7,
-            type: "linear",
           }}
           className={"line-1"}
           viewport={{ once: true }}
@@ -84,7 +82,6 @@ const Reason = ({ data }) => {
           transition={{
             duration: 5,
             delay: 0.7,
-            type: "linear",
           }}
           className={`line-2 ${language == "en" && "en"}`}
           viewport={{ once: true }}

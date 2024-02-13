@@ -20,9 +20,13 @@ const Jobs = ({ jobs }) => {
   return (
     <>
       <GridWrapper>
-        {jobs.map((job, index) => (
-          <JobCard job={job} key={index} />
-        ))}
+        <div className="row">
+          {jobs.map((job, index) => (
+            <div className="col-md-6 col-lg-4">
+              <JobCard job={job} key={index} />
+            </div>
+          ))}
+        </div>
       </GridWrapper>
       <JobModal isOpen={jobModal} />
     </>

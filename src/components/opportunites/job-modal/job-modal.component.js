@@ -2,9 +2,9 @@ import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ApplyWrapper, Grid, JobWrapper } from "./job-modal.styles";
 import { useJobModal } from "../../../context/job-modal.context";
-import JobCard from "../job-card/job-card.compenent";
 import { useJob } from "../../../context/job.context";
 import JobModalJobOffer from "../job-modal-job-offer/job-modal-job-offer.component";
+import JobModalApply from "../job-modal-apply/job-modal-apply.component";
 
 const JobModal = () => {
   const { jobModal, setJobModal } = useJobModal();
@@ -29,11 +29,11 @@ const JobModal = () => {
           exit="hidden"
           style={{
             position: "fixed",
-            top: 0,
+            top: 90,
             left: 0,
             width: "100vw",
-            height: "100vh",
-            backgroundColor: "rgba(255,255,255,1)",
+            height: "100vh - 90px",
+            backgroundColor: "rgba(255,255,255,0)",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -41,13 +41,17 @@ const JobModal = () => {
           }}
         >
           <Grid>
-            <button type="button" className="back" onClick={closeModal}>
-              x
-            </button>
+            <button
+              type="button"
+              className="back"
+              onClick={closeModal}
+            ></button>
             <JobWrapper>
               <JobModalJobOffer />
             </JobWrapper>
-            <ApplyWrapper>2</ApplyWrapper>
+            <ApplyWrapper>
+              <JobModalApply />
+            </ApplyWrapper>
           </Grid>
         </motion.div>
       )}

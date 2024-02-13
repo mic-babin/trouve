@@ -134,7 +134,6 @@ const Expertise = ({ expertise }) => {
               transition={{
                 duration: 5,
                 delay: 2.9,
-                type: "linear",
               }}
               className="line"
             ></motion.div>

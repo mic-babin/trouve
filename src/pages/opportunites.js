@@ -109,8 +109,10 @@ const Opportunites = (props) => {
         <Wrapper>
           <JobProvider>
             <JobModalProvider>
-              <Sidebar locations={locations} categories={categories} />
-              <Jobs jobs={filteredJobs} />
+              <div className="container">
+                {/* <Sidebar locations={locations} categories={categories} /> */}
+                <Jobs jobs={filteredJobs} />
+              </div>
             </JobModalProvider>
           </JobProvider>
         </Wrapper>
@@ -122,7 +124,9 @@ const Opportunites = (props) => {
 export default Opportunites;
 
 const Wrapper = styled.div`
+  min-height: 100vh;
   display: flex;
+  background: #efefef;
 `;
 
 const PROJECTS_QUERY = `

@@ -3,7 +3,7 @@ import { keyframes } from "styled-components";
 export const WrapperAnimation = {
   visible: {
     opacity: 1,
-    transition: { duration: 0.5, type: "linear" },
+    transition: { duration: 0.5 },
   },
   hidden: {
     opacity: 0,

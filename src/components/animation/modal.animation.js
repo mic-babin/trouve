@@ -3,7 +3,7 @@ export const ModalAnimation = {
     // padding: "50vw 50vw",
     width: "200vw",
     height: "200vw",
-    transition: { duration: 2, type: "linear" },
+    transition: { duration: 2 },
   },
   hidden: {
     padding: 0,

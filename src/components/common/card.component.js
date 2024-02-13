@@ -97,7 +97,6 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
           ? middleCol.current.offsetHeight + 800 + getVariableHeight() + "px"
           : middleCol.current.offsetHeight + 150 + "px",
         transition: { duration: 0.75 },
-        type: "linear",
       });
       imageWrapperControls.start({
         width: "100%",
@@ -105,7 +104,6 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
         transform: "translateY(0vw)",
         height: !isMedium ? middleCol.current.clientHeight || "310px" : "500px",
         transition: { duration: 0.75 },
-        type: "linear",
       });
       titleControls.start({
         marginTop: "0px",
@@ -122,18 +120,15 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
         fontSize: "30px",
         lineHeight: "35px",
         transition: { duration: 0.75 },
-        type: "linear",
       });
       subTitleControls.start({
         opacity: 1,
         marginTop: "85px",
         transition: { duration: 0.5, delay: 0.5 },
-        type: "linear",
       });
       subTitleClosedControls.start({
         opacity: 0,
         transition: { duration: 0.375, delay: 0 },
-        type: "linear",
       });
     } else {
       // CLOSED
@@ -141,7 +136,6 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
         height: "250px",
         maxHeight: "250px",
         transition: { duration: 0.375 },
-        type: "linear",
       });
       imageWrapperControls.start({
         width: "102vw",
@@ -160,7 +154,6 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
           ")",
         height: "100%",
         transition: { duration: 0.375 },
-        type: "linear",
       });
       titleControls.start({
         marginTop: titleHeight || "-33px",
@@ -188,18 +181,16 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
           ? "55px"
           : "70px",
         transition: { duration: 0.375 },
-        type: "linear",
       });
       subTitleControls.start({
         opacity: 0,
         marginTop: getMarc() ? "85px" : "50px",
         transition: { duration: 0.375, delay: 0 },
-        type: "linear",
       });
       subTitleClosedControls.start({
         opacity: 1,
         transition: { duration: 0.375, delay: 0 },
-        type: "linear",
+
         top: `calc(4rem + ${titleHeight})`,
       });
     }
@@ -393,7 +384,6 @@ const Card = ({ data, titleHeight, titleMargin, imgPosition }) => {
                   ")",
                 height: "100%",
                 transition: { duration: 0.375 },
-                type: "linear",
               }}
               className="img-wrapper"
               style={{ alignItems: isEmployee ? "start" : "center" }}

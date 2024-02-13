@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Grid = styled.div`
   display: flex;
-  padding: 1.5em;
+  padding: 0 1.5rem;
   background-color: #efefef;
 
   .back {
@@ -16,7 +16,7 @@ export const Grid = styled.div`
     border: none;
     color: #000;
     display: block;
-    height: 100vh;
+    height: calc(100vh - 90px);
     transition: all 0.15s ease-in;
     box-shadow: 8px 0 4px -4px rgba(0, 0, 0, 0.2);
   }
@@ -27,9 +27,9 @@ export const Grid = styled.div`
 `;
 
 export const JobWrapper = styled.div`
-  width: calc(75vw - 46px);
+  width: calc(75vw - 76px);
 `;
 
 export const ApplyWrapper = styled.div`
-  width: calc(25vw);
+  width: calc(25vw + 30px);
 `;

@@ -7,16 +7,15 @@ export const Card = styled.div`
     font-size: 13px;
     color: #46474a;
     background: #fff;
-    padding: 1em;
-    padding-left: 2em;
-    padding-right: 2em;
-    margin-right: 1.5em;
+    padding: 2em;
+
     -webkit-box-ordinal-group: 2;
     order: 1;
     -webkit-box-flex: 1;
     flex: 1;
     background-color: #fff;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    border-radius: 0;
   }
   .job-heading {
     display: flex;
