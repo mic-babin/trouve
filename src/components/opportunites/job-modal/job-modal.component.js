@@ -1,11 +1,18 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ApplyWrapper, Grid, JobWrapper, Back } from "./job-modal.styles";
+import {
+  ApplyWrapper,
+  Grid,
+  JobWrapper,
+  Back,
+  Wrapper,
+  BackLink,
+} from "./job-modal.styles";
 import JobModalJobOffer from "../job-modal-job-offer/job-modal-job-offer.component";
 import JobModalApply from "../job-modal-apply/job-modal-apply.component";
 import BackSrc from "../../../assets/img/back.svg";
 import BackWhiteSrc from "../../../assets/img/back-white.svg";
-import { Link } from "gatsby-plugin-react-i18next";
+import { Link, Trans } from "gatsby-plugin-react-i18next";
 
 const JobModal = ({ job }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -20,25 +27,14 @@ const JobModal = ({ job }) => {
   return (
     <AnimatePresence>
       {job && (
-        <motion.div
-          className="backdrop"
+        <Wrapper
           variants={backdropVariants}
           initial="hidden"
           animate="visible"
           exit="hidden"
-          style={{
-            marginTop: 90,
-            left: 0,
-            width: "100vw",
-            backgroundColor: "rgba(255,255,255,0)",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            overflow: "hidden",
-          }}
         >
           <Grid>
-            <Link to="../">
+            <Link to="../" className="d-none d-lg-block">
               <button
                 className="back"
                 onMouseEnter={() => setIsHovered(true)}
@@ -47,14 +43,23 @@ const JobModal = ({ job }) => {
                 <Back src={isHovered ? BackWhiteSrc : BackSrc} alt="Back" />
               </button>
             </Link>
-            <JobWrapper>
-              <JobModalJobOffer job={job} />
-            </JobWrapper>
-            <ApplyWrapper>
-              <JobModalApply job={job} />
-            </ApplyWrapper>
+            <div className="row me-1 me-sm-3">
+              <BackLink
+                to="../"
+                className="d-block d-lg-none col-12 p-3 ms-3 pb-1 order-first"
+              >
+                <Back src={BackSrc} alt="Back" className="me-3" />
+                <Trans>backToJobs</Trans>
+              </BackLink>
+              <JobWrapper className="col-xl-9 col-md-8 pe-0">
+                <JobModalJobOffer job={job} />
+              </JobWrapper>
+              <ApplyWrapper className="col-xl-3 col-md-4 order-first order-md-last mb-0 px-md-0">
+                <JobModalApply job={job} />
+              </ApplyWrapper>
+            </div>
           </Grid>
-        </motion.div>
+        </Wrapper>
       )}
     </AnimatePresence>
   );

@@ -127,14 +127,18 @@ const JobModalJobOffer = ({ job }) => {
             <button onClick={toggleShareOptions}>
               <Icon src={ShareSrc} alt="Share" /> Share
             </button>
-            <button onClick={() => window.print()}>
+            <button
+              onClick={() => window.print()}
+              className="d-none d-md-block"
+            >
               <Icon src={PrintSrc} alt="Print" /> Print
             </button>
           </div>
-          <h2>
+          <h2 className="d-none d-sm-block">
             <Trans>jobOffer</Trans>
           </h2>
         </div>
+
         <div dangerouslySetInnerHTML={{ __html: job.description }}></div>
 
         <strong>

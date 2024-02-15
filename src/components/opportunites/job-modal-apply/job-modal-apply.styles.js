@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const Card = styled.div`
   margin-top: 1rem;
   border-radius: 0;
-  width: calc(25vw + 15px);
 
   &.card {
     font-size: 13px;
@@ -11,10 +10,11 @@ export const Card = styled.div`
     background: #fff;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
     padding: 1rem;
-    margin-bottom: 1.5em;
+
     -webkit-box-ordinal-group: 3;
     order: 2;
     border-radius: 0;
+    max-width: 100%;
 
     button {
       font: inherit;

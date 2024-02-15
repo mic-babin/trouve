@@ -1,8 +1,8 @@
 import styled from "styled-components";
-
+import { motion } from "framer-motion";
+import { Link } from "gatsby-plugin-react-i18next";
 export const Grid = styled.div`
   display: flex;
-  padding: 0 1.5rem;
   background-color: #efefef;
 
   .back {
@@ -26,15 +26,35 @@ export const Grid = styled.div`
   }
 `;
 
-export const JobWrapper = styled.div`
-  width: calc(75vw - 76px);
-`;
+export const JobWrapper = styled.div``;
 
 export const ApplyWrapper = styled.div`
-  width: calc(25vw + 30px);
+  @media screen and (max-width: 767px) {
+    margin: 1rem;
+    padding-right: 2rem !important;
+  }
 `;
 
 export const Back = styled.img`
   height: 20px;
   width: 20px;
+`;
+
+export const Wrapper = styled(motion.div)`
+  margin-top: 90px;
+  width: 100vw;
+  background-color: transparent;
+
+  overflow: hidden;
+
+  @media screen and (max-width: 767px) {
+    margin-top: 70px;
+  }
+`;
+
+export const BackLink = styled(Link)`
+  color: #000;
+  &:hover {
+    color: black;
+  }
 `;

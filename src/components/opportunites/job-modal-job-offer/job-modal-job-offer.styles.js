@@ -21,6 +21,10 @@ export const Card = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @media screen and (max-width: 600px) {
+      padding-bottom: 1rem;
+    }
   }
 
   .job-actions {
@@ -57,7 +61,7 @@ export const Card = styled.div`
     border-left: none;
     border-right: 1px solid transparent;
   }
-  h2 {
+  .job-heading h2 {
     font-size: 1.6em;
     font-weight: 500;
     display: inline-block;

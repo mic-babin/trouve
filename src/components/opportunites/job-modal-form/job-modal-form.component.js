@@ -192,10 +192,18 @@ const JobModalForm = ({ showModal, setShowModal, job }) => {
                         </span>
                       )}
                       <footer>
-                        <button type="button" onClick={closeModal}>
+                        <button
+                          type="button"
+                          onClick={closeModal}
+                          className="cancel"
+                        >
                           Cancel
                         </button>
-                        <button type="submit" disabled={isSubmitting}>
+                        <button
+                          type="submit"
+                          disabled={isSubmitting}
+                          className="send"
+                        >
                           {isSubmitting ? "Submitting..." : "Send"}
                         </button>
                       </footer>

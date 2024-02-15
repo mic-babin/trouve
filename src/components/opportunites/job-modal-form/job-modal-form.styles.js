@@ -11,7 +11,8 @@ export const Backdrop = styled(motion.div)`
     background: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: start;
+    padding: 3rem 1rem;
   }
 
   .modal-content {
@@ -117,5 +118,34 @@ export const Backdrop = styled(motion.div)`
     font-size: 1.1em;
     color: #797c7e;
     box-sizing: inherit;
+  }
+  footer {
+    display: flex;
+    height: 50px;
+  }
+  button.cancel {
+    text-transform: uppercase;
+    height: 50px;
+    font-size: 1.5em;
+    border: none;
+    color: #c9c9c9;
+    background: 0 0;
+    font-weight: 600;
+    margin-top: 0;
+  }
+
+  button.send {
+    margin-top: 0;
+    outline: 0;
+    text-transform: uppercase;
+    height: 50px;
+    font-size: 1.5em;
+    border: none;
+    color: #fff;
+    background: #699;
+    border-radius: 2px;
+    width: 100%;
+    font-weight: 700;
+    background-color: #d3d3d3;
   }
 `;
