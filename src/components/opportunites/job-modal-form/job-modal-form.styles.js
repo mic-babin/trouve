@@ -146,6 +146,6 @@ export const Backdrop = styled(motion.div)`
     border-radius: 2px;
     width: 100%;
     font-weight: 700;
-    background-color: #d3d3d3;
+    background-color: #000000;
   }
 `;

@@ -4,7 +4,10 @@ import { Link } from "gatsby-plugin-react-i18next";
 const JobCard = ({ job }) => {
   return (
     <Card className="card-wrapper">
-      <Link className="card slide-up-item" to={`${job.referenceId}`}>
+      <Link
+        className="card slide-up-item"
+        to={`/opportunites/${job.referenceId}`}
+      >
         <div className="card-content">
           <span className="card-title-category">
             <span className="card-title">

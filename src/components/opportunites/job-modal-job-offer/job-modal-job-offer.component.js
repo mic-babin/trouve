@@ -20,11 +20,6 @@ const JobModalJobOffer = ({ job }) => {
   // Handler to toggle the share options
   const toggleShareOptions = () => setOpen(!open);
 
-  // Placeholder functions for share actions
-  const shareTwitter = () => console.log("Sharing to Twitter...");
-  const shareFacebook = () => console.log("Sharing to Facebook...");
-  const shareLinkedin = () => console.log("Sharing to LinkedIn...");
-
   const socialIcons = {
     facebook: {
       src: FbSrc,

@@ -16,5 +16,7 @@
   "jobSummary": "SOMMAIRE DU POSTE",
   "skills": "COMPÉTENCES RECHERCHÉES",
   "responsibilities": "RESPONSABILITÉS",
-  "backToJobs": "Retour vers les offres"
+  "backToJobs": "Retour vers les offres",
+  "submitting": "Envoi en cours",
+  "apply": "Appliquer"
 }

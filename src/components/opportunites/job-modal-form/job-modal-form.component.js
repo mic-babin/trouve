@@ -4,6 +4,9 @@ import { Backdrop } from "./job-modal-form.styles";
 import CloseWhiteSrc from "../../../assets/img/close-white.svg";
 import { Icon } from "../job-modal-job-offer/job-modal-job-offer.styles";
 import FileInput from "../file-input/file-input.component";
+import { useJarvisForm } from "../../../utils/form.hook";
+import { validate } from "../../../utils/form.validators";
+import { Trans } from "gatsby-plugin-react-i18next";
 
 const JobModalForm = ({ showModal, setShowModal, job }) => {
   const modalVariants = {
@@ -23,76 +26,74 @@ const JobModalForm = ({ showModal, setShowModal, job }) => {
     },
   };
 
-  const uploadResume = () => console.log("sent");
-
   const [showForm, setShowForm] = useState(true);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "", // Optional
-    resume: null,
-  });
-  const [errors, setErrors] = useState({});
+  const [show, setShow] = useState(false);
+  const { handleChange, fields, handleSubmit, errors } = useJarvisForm(
+    validate,
+    setShow
+  );
 
-  const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    if (name === "resume") {
-      setFormData({ ...formData, resume: files[0] });
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
-  };
+  // const uploadResume = () => console.log("sent");
 
-  const validateForm = () => {
-    let formIsValid = true;
-    let errors = {};
+  // const [errors, setErrors] = useState({});
 
-    if (!formData.firstName) {
-      errors.firstName = "Please enter your first name.";
-      formIsValid = false;
-    }
+  // const handleChange = (e) => {
+  //   const { name, value, files } = e.target;
+  //   if (name === "resume") {
+  //     setFormData({ ...formData, resume: files[0] });
+  //   } else {
+  //     setFormData({ ...formData, [name]: value });
+  //   }
+  // };
 
-    if (!formData.lastName) {
-      errors.lastName = "Please enter your last name.";
-      formIsValid = false;
-    }
+  // const validateForm = () => {
+  //   let formIsValid = true;
+  //   let errors = {};
 
-    if (!formData.email) {
-      errors.email = "Please enter your email.";
-      formIsValid = false;
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      errors.email = "Please enter a valid email.";
-      formIsValid = false;
-    }
+  //   if (!formData.firstName) {
+  //     errors.firstName = "Please enter your first name.";
+  //     formIsValid = false;
+  //   }
 
-    if (!formData.resume) {
-      errors.resume = "Please attach your resume.";
-      formIsValid = false;
-    }
+  //   if (!formData.lastName) {
+  //     errors.lastName = "Please enter your last name.";
+  //     formIsValid = false;
+  //   }
 
-    setErrors(errors);
-    return formIsValid;
-  };
+  //   if (!formData.email) {
+  //     errors.email = "Please enter your email.";
+  //     formIsValid = false;
+  //   } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+  //     errors.email = "Please enter a valid email.";
+  //     formIsValid = false;
+  //   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!validateForm()) return;
+  //   if (!formData.resume) {
+  //     errors.resume = "Please attach your resume.";
+  //     formIsValid = false;
+  //   }
 
-    setIsSubmitting(true);
-    try {
-      await uploadResume(formData);
-      setShowForm(false);
-      setIsSubmitting(false);
-      // Handle success, maybe reset form or give feedback to the user
-    } catch (error) {
-      setIsSubmitting(false);
-      // Handle error, show message to the user
-      setErrors({ submit: "An error occurred. Please try again." });
-    }
-  };
+  //   setErrors(errors);
+  //   return formIsValid;
+  // };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (!validateForm()) return;
+
+  //   setShow(true);
+  //   try {
+  //     await uploadResume(formData);
+  //     setShowForm(false);
+  //     setShow(false);
+  //     // Handle success, maybe reset form or give feedback to the user
+  //   } catch (error) {
+  //     setShow(false);
+  //     // Handle error, show message to the user
+  //     setErrors({ submit: "An error occurred. Please try again." });
+  //   }
+  // };
+  const [fileUploaded, setFileUploaded] = useState(false);
   const closeModal = () => setShowModal(false);
 
   return (
@@ -104,7 +105,6 @@ const JobModalForm = ({ showModal, setShowModal, job }) => {
           initial="hidden"
           animate="visible"
           exit="exit"
-          onClick={() => setShowModal(false)}
         >
           <motion.div
             className="modal-content"
@@ -130,13 +130,13 @@ const JobModalForm = ({ showModal, setShowModal, job }) => {
               <div className="main">
                 {showForm && (
                   <section>
-                    <form onSubmit={handleSubmit} noValidate>
+                    <form>
                       <div className="form-field">
                         <input
                           type="text"
                           name="firstName"
                           placeholder="First Name"
-                          value={formData.firstName}
+                          value={fields["firstName"]}
                           onChange={handleChange}
                           required
                         />
@@ -149,7 +149,7 @@ const JobModalForm = ({ showModal, setShowModal, job }) => {
                           type="text"
                           name="lastName"
                           placeholder="Last Name"
-                          value={formData.lastName}
+                          value={fields["lastName"]}
                           onChange={handleChange}
                           required
                         />
@@ -162,7 +162,7 @@ const JobModalForm = ({ showModal, setShowModal, job }) => {
                           type="email"
                           name="email"
                           placeholder="email@domain.com"
-                          value={formData.email}
+                          value={fields["email"]}
                           onChange={handleChange}
                           required
                         />
@@ -175,13 +175,18 @@ const JobModalForm = ({ showModal, setShowModal, job }) => {
                           type="text"
                           name="phone"
                           placeholder="Mobile Phone (Optional)"
-                          value={formData.phone}
+                          value={fields["phone"]}
                           onChange={handleChange}
                         />
                       </div>
-                      <span class="field-label">Resume File</span>
+                      <span className="field-label">Resume File</span>
                       <div className="form-field upload-container">
-                        <FileInput />
+                        <FileInput
+                          fileUploaded={fileUploaded}
+                          setFileUploaded={setFileUploaded}
+                          fields={fields}
+                          setFields={handleChange}
+                        />
                         {errors.resume && (
                           <span className="error">{errors.resume}</span>
                         )}
@@ -201,10 +206,15 @@ const JobModalForm = ({ showModal, setShowModal, job }) => {
                         </button>
                         <button
                           type="submit"
-                          disabled={isSubmitting}
+                          disabled={show}
                           className="send"
+                          onClick={(e) => handleSubmit(e)}
                         >
-                          {isSubmitting ? "Submitting..." : "Send"}
+                          {show ? (
+                            <Trans>submitting</Trans>
+                          ) : (
+                            <Trans>send</Trans>
+                          )}
                         </button>
                       </footer>
                     </form>

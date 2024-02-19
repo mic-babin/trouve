@@ -1,18 +1,21 @@
-export const validate = fields => {
-  const { firstName, lastName, email } = fields
+export const validate = (fields) => {
+  const { firstName, lastName, email, resume } = fields;
 
-  let errors = {}
+  let errors = {};
 
   if (!firstName.trim()) {
-    errors.firstName = "Ce champs est obligatoire"
+    errors.firstName = "Ce champs est obligatoire";
   }
   if (!lastName.trim()) {
-    errors.lastName = "Ce champs est obligatoire"
+    errors.lastName = "Ce champs est obligatoire";
   }
   if (!email.trim()) {
-    errors.email = "Ce champs est obligatoire"
+    errors.email = "Ce champs est obligatoire";
   } else if (!/\S+@\S+\.\S+/.test(email)) {
-    errors.email = "Entrez une adresse courriel valide"
+    errors.email = "Entrez une adresse courriel valide";
   }
-  return errors
-}
+  if (!resume.trim()) {
+    errors.resume = "Please attach your resume.";
+  }
+  return errors;
+};

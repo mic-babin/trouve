@@ -87,7 +87,7 @@ const Details = (props) => {
         })
         .catch((err) => console.error(err));
     }
-    if (jobs.length > 0) {
+    if (jobs.length > 0 && filteredJobs.length == 0) {
       setCategories(
         extractArray(
           jobs,
@@ -104,11 +104,13 @@ const Details = (props) => {
             : "cd80b702-cfc2-4c42-b872-9b6ee07372b4"
         )
       );
-      findJob(props.params["*"], jobs);
+
       setFilteredJobs(filterFieldsByLanguage(jobs, language));
     }
-  }, [jobs, language]);
-
+    if (filteredJobs.length > 0) {
+      findJob(props.params["*"], filteredJobs);
+    }
+  }, [jobs, language, filteredJobs]);
   return (
     <div ref={layout}>
       <Layout

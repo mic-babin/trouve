@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Card } from "./job-modal-apply.styles";
 import JobModalForm from "../job-modal-form/job-modal-form.component";
+import { Trans } from "gatsby-plugin-react-i18next";
 
 const JobModalApply = ({ job }) => {
   const [showModal, setShowModal] = useState(false);
@@ -10,9 +11,8 @@ const JobModalApply = ({ job }) => {
 
   // Placeholder function to simulate applying to a job
   const applyToJob = () => {
-    console.log(`Applying to job with email: ${email}`);
     setShowModal(true);
-    setHasApplied(true);
+    // setHasApplied(true);
   };
 
   return (
@@ -47,12 +47,12 @@ const JobModalApply = ({ job }) => {
         onClick={applyToJob}
         disabled={hasApplied}
       >
-        {hasApplied ? "Applied" : "Apply"}
+        {hasApplied ? "Applied" : <Trans>apply</Trans>}
       </button>
       <hr />
-      <a href="#" onClick={() => console.log("View all jobs in this category")}>
+      {/* <a href="#" onClick={() => console.log("View all jobs in this category")}>
         View all jobs in this category<i className="bhi-arrow-right"></i>
-      </a>
+      </a> */}
       <JobModalForm
         showModal={showModal}
         setShowModal={setShowModal}

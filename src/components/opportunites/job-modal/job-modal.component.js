@@ -34,7 +34,7 @@ const JobModal = ({ job }) => {
           exit="hidden"
         >
           <Grid>
-            <Link to="../" className="d-none d-lg-block">
+            <Link to="/opportunites" className="d-none d-lg-block">
               <button
                 className="back"
                 onMouseEnter={() => setIsHovered(true)}
@@ -45,7 +45,7 @@ const JobModal = ({ job }) => {
             </Link>
             <div className="row me-1 me-sm-3">
               <BackLink
-                to="../"
+                to="/opportunites"
                 className="d-block d-lg-none col-12 p-3 ms-3 pb-1 order-first"
               >
                 <Back src={BackSrc} alt="Back" className="me-3" />

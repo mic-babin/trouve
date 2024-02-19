@@ -16,5 +16,7 @@
   "jobSummary": "JOB SUMMARY",
   "skills": "SKILLS/QUALIFICATIONS REQUIRED",
   "responsibilities": "RESPONSIBILITIES",
-  "backToJobs": "Back to job offers"
+  "backToJobs": "Back to job offers",
+  "send": "Send",
+  "apply": "Apply"
 }
