@@ -6,7 +6,7 @@ import { Icon } from "../job-modal-job-offer/job-modal-job-offer.styles";
 import FileInput from "../file-input/file-input.component";
 import { useJarvisForm } from "../../../utils/form.hook";
 import { validate } from "../../../utils/form.validators";
-import { Trans } from "gatsby-plugin-react-i18next";
+import { Trans, useI18next } from "gatsby-plugin-react-i18next";
 
 const JobModalForm = ({ showModal, setShowModal, job }) => {
   const modalVariants = {
@@ -26,76 +26,19 @@ const JobModalForm = ({ showModal, setShowModal, job }) => {
     },
   };
 
+  const {
+    i18n: { language },
+  } = useI18next();
+
   const [showForm, setShowForm] = useState(true);
   const [show, setShow] = useState(false);
   const { handleChange, fields, handleSubmit, errors } = useJarvisForm(
     validate,
     setShow
   );
-
-  // const uploadResume = () => console.log("sent");
-
-  // const [errors, setErrors] = useState({});
-
-  // const handleChange = (e) => {
-  //   const { name, value, files } = e.target;
-  //   if (name === "resume") {
-  //     setFormData({ ...formData, resume: files[0] });
-  //   } else {
-  //     setFormData({ ...formData, [name]: value });
-  //   }
-  // };
-
-  // const validateForm = () => {
-  //   let formIsValid = true;
-  //   let errors = {};
-
-  //   if (!formData.firstName) {
-  //     errors.firstName = "Please enter your first name.";
-  //     formIsValid = false;
-  //   }
-
-  //   if (!formData.lastName) {
-  //     errors.lastName = "Please enter your last name.";
-  //     formIsValid = false;
-  //   }
-
-  //   if (!formData.email) {
-  //     errors.email = "Please enter your email.";
-  //     formIsValid = false;
-  //   } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-  //     errors.email = "Please enter a valid email.";
-  //     formIsValid = false;
-  //   }
-
-  //   if (!formData.resume) {
-  //     errors.resume = "Please attach your resume.";
-  //     formIsValid = false;
-  //   }
-
-  //   setErrors(errors);
-  //   return formIsValid;
-  // };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   if (!validateForm()) return;
-
-  //   setShow(true);
-  //   try {
-  //     await uploadResume(formData);
-  //     setShowForm(false);
-  //     setShow(false);
-  //     // Handle success, maybe reset form or give feedback to the user
-  //   } catch (error) {
-  //     setShow(false);
-  //     // Handle error, show message to the user
-  //     setErrors({ submit: "An error occurred. Please try again." });
-  //   }
-  // };
   const [fileUploaded, setFileUploaded] = useState(false);
   const closeModal = () => setShowModal(false);
-
+  console.log(job.category);
   return (
     <AnimatePresence>
       {showModal && (
@@ -114,10 +57,16 @@ const JobModalForm = ({ showModal, setShowModal, job }) => {
               <header>
                 {showForm && (
                   <section>
-                    <h2>Gérant(e) de Magasin</h2>
-                    <span className="category">Management</span>
-                    <span className="location">Montréal, Quebec | </span>
-                    <span className="type">Permanent</span>
+                    <h2>{job.title.replace(/<[^>]*>/g, "")}</h2>
+                    <span className="category">
+                      {job.category.replace(/<[^>]*>/g, "")}
+                    </span>
+                    <span className="location">
+                      {job.location.replace(/<[^>]*>/g, "")} |{" "}
+                    </span>
+                    <span className="type">
+                      {job.schedule.replace(/<[^>]*>/g, "")}
+                    </span>
                     <Icon
                       onClick={closeModal}
                       className="close"
@@ -135,7 +84,9 @@ const JobModalForm = ({ showModal, setShowModal, job }) => {
                         <input
                           type="text"
                           name="firstName"
-                          placeholder="First Name"
+                          placeholder={
+                            language == "en" ? "First Name" : "Prénom"
+                          }
                           value={fields["firstName"]}
                           onChange={handleChange}
                           required
@@ -148,7 +99,9 @@ const JobModalForm = ({ showModal, setShowModal, job }) => {
                         <input
                           type="text"
                           name="lastName"
-                          placeholder="Last Name"
+                          placeholder={
+                            language == "en" ? "Last Name" : "Nom de famille"
+                          }
                           value={fields["lastName"]}
                           onChange={handleChange}
                           required
@@ -161,7 +114,7 @@ const JobModalForm = ({ showModal, setShowModal, job }) => {
                         <input
                           type="email"
                           name="email"
-                          placeholder="email@domain.com"
+                          placeholder="Email"
                           value={fields["email"]}
                           onChange={handleChange}
                           required
@@ -174,12 +127,18 @@ const JobModalForm = ({ showModal, setShowModal, job }) => {
                         <input
                           type="text"
                           name="phone"
-                          placeholder="Mobile Phone (Optional)"
+                          placeholder={
+                            language == "en"
+                              ? "Mobile Phone (Optional)"
+                              : "Téléphone (Optionelle)"
+                          }
                           value={fields["phone"]}
                           onChange={handleChange}
                         />
                       </div>
-                      <span className="field-label">Resume File</span>
+                      <span className="field-label">
+                        <Trans>resume</Trans>
+                      </span>
                       <div className="form-field upload-container">
                         <FileInput
                           fileUploaded={fileUploaded}
@@ -202,7 +161,7 @@ const JobModalForm = ({ showModal, setShowModal, job }) => {
                           onClick={closeModal}
                           className="cancel"
                         >
-                          Cancel
+                          <Trans>cancel</Trans>
                         </button>
                         <button
                           type="submit"

@@ -11,12 +11,16 @@
   "showMore": "Voir tous",
   "keywordSearch": "Recherche par mot-clef",
   "jobOffer": "Offre d'emploi",
-  "share": "Partagez",
-  "print": "Imprimez",
+  "share": "Partager",
+  "print": "Imprimer",
   "jobSummary": "SOMMAIRE DU POSTE",
   "skills": "COMPÉTENCES RECHERCHÉES",
   "responsibilities": "RESPONSABILITÉS",
   "backToJobs": "Retour vers les offres",
+  "send": "Envoyer",
+  "cancel": "Annuler",
   "submitting": "Envoi en cours",
-  "apply": "Appliquer"
+  "apply": "Appliquer",
+  "attachResume": "Téléverser votre CV",
+  "resume": "CV"
 }

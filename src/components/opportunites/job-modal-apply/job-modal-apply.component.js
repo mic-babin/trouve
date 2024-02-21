@@ -18,9 +18,7 @@ const JobModalApply = ({ job }) => {
   return (
     <Card className="card apply">
       <span className="card-title-category">
-        <span className="card-title">
-          {job.title.replace(/<\/?p[^>]*>/g, "")}
-        </span>
+        <span className="card-title">{job.title.replace(/<[^>]*>/g, "")}</span>
       </span>
       <span className="card-location">
         {job.location.replace(/<\/?p[^>]*>/g, "")} |{" "}

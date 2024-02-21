@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { storage } from "../../../utils/firebase";
 import { FileUploader } from "./file-input.styles";
 import UploadSrc from "../../../assets/img/upload.svg";
 import { Icon } from "../job-modal-job-offer/job-modal-job-offer.styles";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { v4 } from "uuid";
+import { Trans } from "react-i18next";
 
 const FileInput = ({ fields, setFields, fileUploaded, setFileUploaded }) => {
   const [imageUpload, setImageUpload] = useState(null);
@@ -70,7 +68,9 @@ const FileInput = ({ fields, setFields, fileUploaded, setFileUploaded }) => {
         className="upload-label pointer w-100 d-flex justify-content-center"
       >
         {name === "" && <Icon src={UploadSrc} alt="upload" />}
-        <span className="upload-text">{name || "Attach Resume File"}</span>
+        <span className="upload-text">
+          {name || <Trans>attachResume</Trans>}
+        </span>
       </label>
     </FileUploader>
   );

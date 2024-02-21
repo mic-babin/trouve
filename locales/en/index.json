@@ -18,5 +18,8 @@
   "responsibilities": "RESPONSIBILITIES",
   "backToJobs": "Back to job offers",
   "send": "Send",
-  "apply": "Apply"
+  "cancel": "Cancel",
+  "apply": "Apply",
+  "attachResume": "Attach Resume File",
+  "resume": "Resume File"
 }
