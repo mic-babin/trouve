@@ -38,7 +38,6 @@ const JobModalForm = ({ showModal, setShowModal, job }) => {
   );
   const [fileUploaded, setFileUploaded] = useState(false);
   const closeModal = () => setShowModal(false);
-  console.log(job.category);
   return (
     <AnimatePresence>
       {showModal && (
