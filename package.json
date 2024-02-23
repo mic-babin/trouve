@@ -36,6 +36,7 @@
     "gatsby-source-filesystem": "^5.2.0",
     "gatsby-transformer-sharp": "^5.2.0",
     "i18next": "^22.0.6",
+    "node-fetch": "^2.7.0",
     "nodemailer": "^6.8.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.6.0",
