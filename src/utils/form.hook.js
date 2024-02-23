@@ -93,7 +93,6 @@ export const useJarvisForm = (validate, setShow) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
-        "x-client-id": "d621d817-20a5-4d51-884e-00b8a02a42cb",
       },
     };
     try {
@@ -122,6 +121,7 @@ export const useJarvisForm = (validate, setShow) => {
 };
 
 const data = {
+  "x-client-id": "d621d817-20a5-4d51-884e-00b8a02a42cb",
   referenceId: "123456",
   firstName: "Michae;",
   lastName: "Babin",
