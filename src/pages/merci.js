@@ -11,7 +11,7 @@ const Merci = (props) => {
   const path = props.path;
   const menu = props.data.allContentfulHeader.edges[0].node;
   const contact = props.data.allContentfulPage.edges[2].node.sections;
-  const merci = props.data.allContentfulPage.edges[0].node.sections[0];
+  const merci = props.data.allContentfulPage.edges[1].node.sections[0];
 
   const [showContact, setShowContact] = useState(false);
   const [showPage, setShowPage] = useState(false);
