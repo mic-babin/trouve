@@ -12,15 +12,20 @@ import {
 import styled from "styled-components";
 import { JobProvider } from "../../context/job.context";
 import { JobModalProvider } from "../../context/job-modal.context";
+import Sidebar from "../../components/opportunites/sidebar/sidebar.component";
+import Loader from "../../components/common/loader.component";
 
 const Opportunites = (props) => {
   const layout = useRef();
-
   const [jobs, setJobs] = useState([]);
   const [filteredJobs, setFilteredJobs] = useState([]);
+  const [reallyFilteredJobs, setReallyFilteredJobs] = useState([]);
   const [categories, setCategories] = useState([]);
   const [locations, setLocations] = useState([]);
   const [showContact, setShowContact] = useState(false);
+  const [activeLocation, setActiveLocation] = useState(null);
+  const [activeCategory, setActiveCategory] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const path = props.path;
   const menu = props.data.allContentfulHeader.edges[0].node;
@@ -36,9 +41,6 @@ const Opportunites = (props) => {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: '{"refreshToken":"c277dfcd-921d-40d9-b5b9-1b93262191ca"}',
-
-    //Private: c277dfcd-921d-40d9-b5b9-1b93262191ca
-    //Public: d621d817-20a5-4d51-884e-00b8a02a42cb
   };
 
   const {
@@ -93,32 +95,76 @@ const Opportunites = (props) => {
         )
       );
       setFilteredJobs(filterFieldsByLanguage(jobs, language));
+      setLoading(false);
     }
   }, [jobs, language]);
 
+  const applyFilters = () => {
+    let tempJobs = filteredJobs;
+
+    if (activeLocation) {
+      tempJobs = tempJobs.filter((job) => {
+        return job?.location?.includes(activeLocation.name);
+      });
+    }
+    if (activeCategory) {
+      tempJobs = tempJobs.filter((job) => {
+        return job?.category?.includes(activeCategory.name);
+      });
+    }
+
+    setReallyFilteredJobs(tempJobs);
+  };
+
+  const resetLocationFilter = () => {
+    console.log("reset");
+    setActiveLocation();
+  };
+
+  const resetCategoryFilter = () => {
+    setActiveCategory(null);
+  };
+
+  useEffect(() => {
+    if (filteredJobs.length > 0) {
+      console.log("applyFilters");
+      applyFilters();
+    }
+  }, [filteredJobs, activeLocation, activeCategory]);
+
   return (
     <div ref={layout}>
-      <Layout
-        menu={menu}
-        contact={contact}
-        showContact={showContact}
-        setShowContact={setShowContact}
-        headerColor="black"
-        path={path}
-        showPage={true}
-      >
-        <div id="top"></div>
-        <Wrapper>
-          <JobProvider>
-            <JobModalProvider>
-              <div className="container">
-                {/* <Sidebar locations={locations} categories={categories} /> */}
-                <Jobs jobs={filteredJobs} />
-              </div>
-            </JobModalProvider>
-          </JobProvider>
-        </Wrapper>
-      </Layout>
+      {loading && <Loader />}
+      {!loading && (
+        <Layout
+          menu={menu}
+          contact={contact}
+          showContact={showContact}
+          setShowContact={setShowContact}
+          headerColor="black"
+          path={path}
+          showPage={true}
+        >
+          <div id="top"></div>
+          <Wrapper>
+            <JobProvider>
+              <JobModalProvider>
+                <Sidebar
+                  locations={locations}
+                  categories={categories}
+                  activeLocation={activeLocation}
+                  activeCategory={activeCategory}
+                  setActiveLocation={setActiveLocation}
+                  setActiveCategory={setActiveCategory}
+                  resetLocationFilter={resetLocationFilter}
+                  resetCategoryFilter={resetCategoryFilter}
+                />
+                <Jobs jobs={reallyFilteredJobs} />
+              </JobModalProvider>
+            </JobProvider>
+          </Wrapper>
+        </Layout>
+      )}
     </div>
   );
 };
@@ -127,6 +173,8 @@ export default Opportunites;
 
 const Wrapper = styled.div`
   min-height: 100vh;
+  max-width: 100vw;
+  overflow-x: hidden;
   display: flex;
   background: #efefef;
 `;

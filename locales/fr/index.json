@@ -22,5 +22,6 @@
   "submitting": "Envoi en cours",
   "apply": "Appliquer",
   "attachResume": "Téléverser votre CV",
-  "resume": "CV"
+  "resume": "CV",
+  "nojobs": "Aucun emploi ne correspond à ces critères de recherches."
 }

@@ -4,9 +4,8 @@ export const Aside = styled.aside`
   background-color: #efefef;
   color: #000;
   transition: all 0.2s ease-in-out;
-  box-shadow: 8px 0 4px -4px rgba(0, 0, 0, 0.2);
-  width: 300px;
-  min-width: 300px;
+  width: 320px;
+  min-width: 320px;
 `;
 
 export const Section = styled.section`
@@ -51,8 +50,12 @@ export const Section = styled.section`
   }
 
   .filter-section-header {
+    padding-top: 1rem;
     width: 100%;
     margin-bottom: 1em;
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
   }
 
   .clear-filter {
@@ -60,8 +63,8 @@ export const Section = styled.section`
     text-transform: none;
     -webkit-appearance: button;
     cursor: pointer;
-    display: none !important;
-    padding: 0;
+    padding-top: 0.5em;
+    padding-right: 0;
     margin: 0;
     border: none;
     background: 0 0;

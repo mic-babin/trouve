@@ -21,5 +21,6 @@
   "cancel": "Cancel",
   "apply": "Apply",
   "attachResume": "Attach Resume File",
-  "resume": "Resume File"
+  "resume": "Resume File",
+  "nojobs": "No job matches these search criteria."
 }

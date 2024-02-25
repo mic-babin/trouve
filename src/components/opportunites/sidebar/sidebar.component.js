@@ -2,40 +2,56 @@ import React, { useState, useEffect } from "react";
 import { Aside, Section } from "./sidebar.styles";
 import { Trans, useI18next } from "gatsby-plugin-react-i18next";
 
-const Sidebar = ({ locations, categories }) => {
+const Sidebar = ({
+  locations,
+  categories,
+  activeLocation,
+  activeCategory,
+  setActiveLocation,
+  setActiveCategory,
+  resetLocationFilter,
+  resetCategoryFilter,
+}) => {
   const [textSearch, setTextSearch] = useState("");
-
-  const [locationLimitTo, setLocationLimitTo] = useState(false);
-  const [categoryLimitTo, setCategoryLimitTo] = useState(false);
 
   const {
     i18n: { language },
   } = useI18next();
 
-  const searchOnDelay = () => {
-    // Implement search logic here, potentially with debounce
-  };
-
-  const clearSearchParamsAndLoadData = (type) => {
-    // Clear search params based on type and reload data
-  };
-
   const addOrRemoveLocation = (location) => {
-    // Add or remove location from selected filters
+    if (activeLocation === location) {
+      resetLocationFilter();
+    } else {
+      setActiveLocation(location);
+    }
   };
 
   const addOrRemoveCategory = (category) => {
-    // Add or remove category from selected filters
+    if (activeCategory === category) {
+      resetCategoryFilter(); // Uncomment or implement as needed
+    } else {
+      setActiveCategory(category);
+    }
   };
 
-  useEffect(() => {
-    // You might want to fetch initial data here
-  }, []);
+  // Assuming locations and categories are passed with a 'selected' property
+  const isLocationSelected = (location) => activeLocation === location;
+  const isCategorySelected = (category) => activeCategory === category;
+
+  const clearLocationFilter = () => {
+    resetLocationFilter();
+    setActiveLocation(null); // Ensure this action clears the active location state
+  };
+
+  const clearCategoryFilter = () => {
+    resetCategoryFilter(); // Ensure this action is implemented to clear category selections
+    setActiveCategory(null); // Ensure this action clears the active category state
+  };
 
   return (
-    <Aside>
+    <Aside className="d-none d-md-block">
       <Section>
-        <div className="keyword-search">
+        {/* <div className="keyword-search">
           <label htmlFor="keyword">
             <i className="bhi-search"></i>
           </label>
@@ -62,21 +78,19 @@ const Sidebar = ({ locations, categories }) => {
               <i className="bhi-times"></i>
             </button>
           )}
-        </div>
-        <section
-          className={`filter-section ${!locationLimitTo ? "active" : ""}`}
-        >
+        </div> */}
+        <div className="filter-section">
           <div className="filter-section-header">
             <h4>
               <Trans>location</Trans>
             </h4>
-            {locations.some((location) => location.selected) && (
+            {activeLocation && (
               <button
                 className="clear-filter"
-                onClick={() => clearSearchParamsAndLoadData("location")}
-                name="clear-all"
+                onClick={clearLocationFilter}
+                title="Clear location filter"
               >
-                x
+                &#10006;
               </button>
             )}
           </div>
@@ -85,28 +99,26 @@ const Sidebar = ({ locations, categories }) => {
               <input
                 type="checkbox"
                 id={location.id}
-                checked={location.selected}
+                checked={isLocationSelected(location)}
                 onChange={() => addOrRemoveLocation(location)}
               />
               <label htmlFor={location.id}>{location.name}</label>
               <span>{location.count}</span>
             </div>
           ))}
-        </section>
-        <section
-          className={`filter-section ${!categoryLimitTo ? "active" : ""}`}
-        >
+        </div>
+        <div className="fitler-section">
           <div className="filter-section-header">
             <h4>
-              <Trans>categories</Trans>
+              <Trans>category</Trans>
             </h4>
-            {categories.some((category) => category.selected) && (
+            {activeCategory && (
               <button
                 className="clear-filter"
-                onClick={() => clearSearchParamsAndLoadData("category")}
-                name="clear-all"
+                onClick={clearCategoryFilter}
+                title="Clear category filter"
               >
-                x
+                &#10006;
               </button>
             )}
           </div>
@@ -115,25 +127,14 @@ const Sidebar = ({ locations, categories }) => {
               <input
                 type="checkbox"
                 id={category.id}
-                checked={category.selected}
+                checked={isCategorySelected(category)}
                 onChange={() => addOrRemoveCategory(category)}
               />
               <label htmlFor={category.id}>{category.name}</label>
               <span>{category.count}</span>
             </div>
           ))}
-        </section>
-        <span className="show-more">
-          <Trans>showLess</Trans>
-        </span>
-        <button
-          type="button"
-          className="bhi-arrow-left"
-          name="back-arrow"
-          onClick={() => {
-            /* Go back logic */
-          }}
-        ></button>
+        </div>
       </Section>
     </Aside>
   );
