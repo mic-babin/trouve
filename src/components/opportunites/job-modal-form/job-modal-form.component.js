@@ -34,7 +34,8 @@ const JobModalForm = ({ showModal, setShowModal, job }) => {
   const [show, setShow] = useState(false);
   const { handleChange, fields, handleSubmit, errors } = useJarvisForm(
     validate,
-    setShow
+    setShow,
+    setShowModal
   );
   const [fileUploaded, setFileUploaded] = useState(false);
   const closeModal = () => setShowModal(false);

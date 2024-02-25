@@ -17,6 +17,7 @@ export const useForm = (validate, setShow) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const resetFields = () => {
+    console.log("resetFields");
     setFields(defaultFields);
   };
 
@@ -57,7 +58,7 @@ export const useForm = (validate, setShow) => {
   return { handleChange, fields, handleSubmit, errors };
 };
 
-export const useJarvisForm = (validate, setShow) => {
+export const useJarvisForm = (validate, setShow, setShowModal) => {
   const defaultFields = {
     firstName: "",
     lastName: "",
@@ -93,14 +94,26 @@ export const useJarvisForm = (validate, setShow) => {
   };
 
   const sendJarvi = async () => {
-    console.log(fields.resume);
-    await fetch("/.netlify/functions/jarvi", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(fields),
-    });
+    try {
+      await fetch("/.netlify/functions/jarvi", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(fields),
+      });
+      resetFields();
+      setShow(true);
+      setIsSubmitting(false);
+      setShowModal(false);
+      alert(
+        "Merci, votre candidature a bien été envoyée. / Thank you, your resume has successfully been sent."
+      );
+      // Send email or Navigate merci
+    } catch (error) {
+      alert("Une erreur est survenue");
+      console.log("error", error.response.data);
+    }
   };
 
   useEffect(() => {
