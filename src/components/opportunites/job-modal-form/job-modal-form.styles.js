@@ -18,7 +18,7 @@ export const Backdrop = styled(motion.div)`
   .modal-content {
     background: white;
     /* Adjust width as needed */
-    width: 500px;
+    max-width: 500px;
   }
 
   .modal {

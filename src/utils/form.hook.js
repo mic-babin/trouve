@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { navigate } from "gatsby";
-import data from "./data.json";
 
 export const useForm = (validate, setShow) => {
   const defaultFields = {
@@ -59,13 +58,13 @@ export const useForm = (validate, setShow) => {
 };
 
 export const useJarvisForm = (validate, setShow) => {
-  console.log(data);
   const defaultFields = {
     firstName: "",
     lastName: "",
     email: "",
     phone: "",
     resume: "",
+    id: "",
   };
 
   const [fields, setFields] = useState(defaultFields);
@@ -85,6 +84,8 @@ export const useJarvisForm = (validate, setShow) => {
     }
   };
 
+  console.log(fields);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     setErrors(validate(fields));
@@ -92,12 +93,13 @@ export const useJarvisForm = (validate, setShow) => {
   };
 
   const sendJarvi = async () => {
+    console.log(fields.resume);
     await fetch("/.netlify/functions/jarvi", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(fields),
     });
   };
 

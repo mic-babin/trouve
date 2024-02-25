@@ -9,8 +9,27 @@ exports.handler = async (event, context) => {
   }
 
   try {
-    console.log(event);
-    const data = JSON.parse(event.body);
+    const eventData = JSON.parse(event.body);
+    const data = {
+      "x-client-id": "d621d817-20a5-4d51-884e-00b8a02a42cb",
+      referenceId: eventData.id,
+      firstName: eventData.firstName,
+      lastName: eventData.lastName,
+      emailAddresses: eventData.email,
+      phoneNumbers: eventData.phoneNumbers,
+      linkedinUrl: "",
+      historyEntrySubject: "Candidature depuis trouvemtl.com",
+      historyEntryMessage:
+        "Voici mon commentaire, merci de regarde ma candidature avec attention",
+      files: [],
+      resumesFiles: [
+        {
+          data: eventData.resume,
+          fileName: "cv.pdf",
+        },
+      ],
+    };
+    const bodyData = data;
     const response = await fetch(
       "https://functions.prod.jarvi.tech/v1/form_webhook_handler",
       {
@@ -19,7 +38,7 @@ exports.handler = async (event, context) => {
           "Content-Type": "application/json",
           // Include any other headers your target API requires
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(bodyData),
       }
     );
 

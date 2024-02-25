@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Backdrop } from "./job-modal-form.styles";
 import CloseWhiteSrc from "../../../assets/img/close-white.svg";
@@ -38,6 +38,14 @@ const JobModalForm = ({ showModal, setShowModal, job }) => {
   );
   const [fileUploaded, setFileUploaded] = useState(false);
   const closeModal = () => setShowModal(false);
+
+  useEffect(() => {
+    if (job) {
+      let event = { target: { name: "id", value: job.referenceId } };
+      handleChange(event);
+    }
+  }, [job]);
+
   return (
     <AnimatePresence>
       {showModal && (
@@ -129,7 +137,7 @@ const JobModalForm = ({ showModal, setShowModal, job }) => {
                           placeholder={
                             language == "en"
                               ? "Mobile Phone (Optional)"
-                              : "Téléphone (Optionelle)"
+                              : "Téléphone (Optionel)"
                           }
                           value={fields["phone"]}
                           onChange={handleChange}
