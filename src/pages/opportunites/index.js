@@ -14,6 +14,7 @@ import { JobProvider } from "../../context/job.context";
 import { JobModalProvider } from "../../context/job-modal.context";
 import Sidebar from "../../components/opportunites/sidebar/sidebar.component";
 import Loader from "../../components/common/loader.component";
+import { SEO } from "../../components/seo";
 
 const Opportunites = (props) => {
   const layout = useRef();
@@ -25,6 +26,7 @@ const Opportunites = (props) => {
   const [showContact, setShowContact] = useState(false);
   const [activeLocation, setActiveLocation] = useState(null);
   const [activeCategory, setActiveCategory] = useState(null);
+  const [activeKeyword, setActiveKeyword] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const path = props.path;
@@ -112,12 +114,25 @@ const Opportunites = (props) => {
         return job?.category?.includes(activeCategory.name);
       });
     }
+    if (activeKeyword) {
+      tempJobs = tempJobs.filter((job) => {
+        return job?.title
+          ?.toLowerCase()
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .includes(
+            activeKeyword
+              ?.toLowerCase()
+              .normalize("NFD")
+              .replace(/[\u0300-\u036f]/g, "")
+          );
+      });
+    }
 
     setReallyFilteredJobs(tempJobs);
   };
 
   const resetLocationFilter = () => {
-    console.log("reset");
     setActiveLocation();
   };
 
@@ -127,10 +142,9 @@ const Opportunites = (props) => {
 
   useEffect(() => {
     if (filteredJobs.length > 0) {
-      console.log("applyFilters");
       applyFilters();
     }
-  }, [filteredJobs, activeLocation, activeCategory]);
+  }, [filteredJobs, activeLocation, activeCategory, activeKeyword]);
 
   return (
     <div ref={layout}>
@@ -158,6 +172,8 @@ const Opportunites = (props) => {
                   setActiveCategory={setActiveCategory}
                   resetLocationFilter={resetLocationFilter}
                   resetCategoryFilter={resetCategoryFilter}
+                  activeKeyword={activeKeyword}
+                  setActiveKeyword={setActiveKeyword}
                 />
                 <Jobs jobs={reallyFilteredJobs} />
               </JobModalProvider>
@@ -168,6 +184,23 @@ const Opportunites = (props) => {
     </div>
   );
 };
+
+export const Head = () => (
+  <>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=AW-11372992172"
+    ></script>
+    <script>{`window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-11372992172');`}</script>
+
+    <script>
+      {`
+    <!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-MFY0HQY3X7"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-MFY0HQY3X7'); </script>`}
+    </script>
+    <script>{`gtag('event', 'conversion', {'send_to': 'AW-11372992172/I6K8CIXF6usYEKytiK8q'});`}</script>
+    <SEO title="Merci - " />
+  </>
+);
 
 export default Opportunites;
 

@@ -17,7 +17,6 @@ export const useForm = (validate, setShow) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const resetFields = () => {
-    console.log("resetFields");
     setFields(defaultFields);
   };
 
@@ -84,8 +83,6 @@ export const useJarvisForm = (validate, setShow, setShowModal) => {
       setFields({ ...fields, ["resume"]: event["resume"] });
     }
   };
-
-  console.log(fields);
 
   const handleSubmit = (event) => {
     event.preventDefault();

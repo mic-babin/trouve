@@ -11,9 +11,9 @@ const Sidebar = ({
   setActiveCategory,
   resetLocationFilter,
   resetCategoryFilter,
+  activeKeyword,
+  setActiveKeyword,
 }) => {
-  const [textSearch, setTextSearch] = useState("");
-
   const {
     i18n: { language },
   } = useI18next();
@@ -51,17 +51,20 @@ const Sidebar = ({
   return (
     <Aside className="d-none d-md-block">
       <Section>
-        {/* <div className="keyword-search">
+        <div className="keyword-search">
           <label htmlFor="keyword">
             <i className="bhi-search"></i>
           </label>
           <input
             className="search"
             type="text"
-            value={textSearch}
+            value={activeKeyword}
             onChange={(e) => {
-              setTextSearch(e.target.value);
-              searchOnDelay();
+              if (e.target.value.length > 0) {
+                setActiveKeyword(e.target.value);
+              } else {
+                setActiveKeyword(null);
+              }
             }}
             id="keyword"
             name="keyword"
@@ -69,16 +72,7 @@ const Sidebar = ({
               language == "en" ? "Keyword Search" : "Recherche par mot-clef"
             }
           />
-          {textSearch.length > 0 && (
-            <button
-              className="clear-filter"
-              onClick={() => clearSearchParamsAndLoadData("text")}
-              name="clear-all"
-            >
-              <i className="bhi-times"></i>
-            </button>
-          )}
-        </div> */}
+        </div>
         <div className="filter-section">
           <div className="filter-section-header">
             <h4>
