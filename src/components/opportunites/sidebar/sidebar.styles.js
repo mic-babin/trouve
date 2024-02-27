@@ -6,6 +6,10 @@ export const Aside = styled.aside`
   transition: all 0.2s ease-in-out;
   width: 320px;
   min-width: 320px;
+
+  @media screen and (max-width: 767px) {
+    width: 100vw;
+  }
 `;
 
 export const Section = styled.section`
@@ -22,10 +26,19 @@ export const Section = styled.section`
   padding: 1rem;
   max-width: 300px;
   box-shadow: 8px 0 4px -4px rgba(0, 0, 0, 0.2);
+  @media screen and (max-width: 767px) {
+    margin-top: 70px;
+    max-width: 100vw;
+    width: 100vw;
+    height: calc(100%);
+  }
 
   .keyword-search {
     position: relative;
     margin: 1em 0 2em;
+    @media screen and (max-width: 767px) {
+      margin: 1.5em 0 1em;
+    }
   }
 
   .search {
@@ -47,6 +60,9 @@ export const Section = styled.section`
     flex-flow: row wrap;
     max-height: 370px;
     overflow: hidden;
+    @media screen and (max-width: 767px) {
+      margin-bottom: 1em;
+    }
   }
 
   .filter-section-header {
@@ -56,6 +72,10 @@ export const Section = styled.section`
     display: flex;
     align-items: start;
     justify-content: space-between;
+    @media screen and (max-width: 767px) {
+      padding-top: 0.5rem;
+      margin-bottom: 0.5em;
+    }
   }
 
   .clear-filter {
@@ -88,6 +108,11 @@ export const Section = styled.section`
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
+
+    @media screen and (max-width: 767px) {
+      padding-bottom: 2.5px;
+      padding-top: 4px;
+    }
   }
 
   input[type="checkbox"] {

@@ -6,7 +6,7 @@ export const GridWrapper = styled.div`
   width: 100%;
   padding-right: 15px;
   @media screen and (max-width: 767px) {
-    padding-top: 90px;
+    padding-top: 20px;
     padding-left: 15px;
   }
 `;

@@ -23,5 +23,6 @@
   "apply": "Appliquer",
   "attachResume": "Téléverser votre CV",
   "resume": "CV",
-  "nojobs": "Aucun emploi ne correspond à ces critères de recherches."
+  "nojobs": "Aucun emploi ne correspond à ces critères de recherches.",
+  "filters": "Filtres"
 }

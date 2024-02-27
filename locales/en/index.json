@@ -22,5 +22,6 @@
   "apply": "Apply",
   "attachResume": "Attach Resume File",
   "resume": "Resume File",
-  "nojobs": "No job matches these search criteria."
+  "nojobs": "No job matches these search criteria.",
+  "filters": "Filters"
 }

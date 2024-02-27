@@ -210,6 +210,10 @@ const Wrapper = styled.div`
   overflow-x: hidden;
   display: flex;
   background: #efefef;
+
+  @media screen and (max-width: 767px) {
+    display: block;
+  }
 `;
 
 const PROJECTS_QUERY = `
