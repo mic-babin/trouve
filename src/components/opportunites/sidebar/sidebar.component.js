@@ -105,7 +105,7 @@ const Sidebar = ({
           </motion.header>
         )}
         <AnimatePresence initial={false}>
-          {isOpen && (
+          {((isMobile && isOpen) || !isMobile) && (
             <motion.section
               key="content"
               initial="collapsed"

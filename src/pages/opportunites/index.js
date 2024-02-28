@@ -163,18 +163,20 @@ const Opportunites = (props) => {
           <Wrapper>
             <JobProvider>
               <JobModalProvider>
-                <Sidebar
-                  locations={locations}
-                  categories={categories}
-                  activeLocation={activeLocation}
-                  activeCategory={activeCategory}
-                  setActiveLocation={setActiveLocation}
-                  setActiveCategory={setActiveCategory}
-                  resetLocationFilter={resetLocationFilter}
-                  resetCategoryFilter={resetCategoryFilter}
-                  activeKeyword={activeKeyword}
-                  setActiveKeyword={setActiveKeyword}
-                />
+                {categories.length > 0 && locations.length > 0 && (
+                  <Sidebar
+                    locations={locations}
+                    categories={categories}
+                    activeLocation={activeLocation}
+                    activeCategory={activeCategory}
+                    setActiveLocation={setActiveLocation}
+                    setActiveCategory={setActiveCategory}
+                    resetLocationFilter={resetLocationFilter}
+                    resetCategoryFilter={resetCategoryFilter}
+                    activeKeyword={activeKeyword}
+                    setActiveKeyword={setActiveKeyword}
+                  />
+                )}
                 <Jobs jobs={reallyFilteredJobs} />
               </JobModalProvider>
             </JobProvider>

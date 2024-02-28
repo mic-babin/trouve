@@ -21,8 +21,8 @@ const JobModalApply = ({ job }) => {
         <span className="card-title">{job.title.replace(/<[^>]*>/g, "")}</span>
       </span>
       <span className="card-location">
-        {job.location.replace(/<\/?p[^>]*>/g, "")} |{" "}
-        {job.schedule.replace(/<\/?p[^>]*>/g, "")}
+        {job.location.replace(/<[^>]*>/g, "")} |{" "}
+        {job.schedule.replace(/<[^>]*>/g, "")}
       </span>
 
       {showForm && (
