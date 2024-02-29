@@ -14,7 +14,7 @@ export const Aside = styled.aside`
 
 export const Section = styled.section`
   font-family: Montserrat, Roboto, sans-serif;
-  margin-top: 90px;
+
   font-size: 13px;
   color: #000;
   box-sizing: inherit;
@@ -28,7 +28,6 @@ export const Section = styled.section`
   max-width: 300px;
   box-shadow: 8px 0 4px -4px rgba(0, 0, 0, 0.2);
   @media screen and (max-width: 767px) {
-    margin-top: 70px;
     max-width: 100vw;
     width: 100vw;
     height: calc(100%);

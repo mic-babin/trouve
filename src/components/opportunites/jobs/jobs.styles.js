@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const GridWrapper = styled.div`
-  padding-top: 105px;
+  padding-top: 15px;
   background-color: #efefef;
   width: 100%;
   padding-right: 15px;
