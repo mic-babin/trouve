@@ -17,7 +17,7 @@ exports.handler = async (event, context) => {
       lastName: eventData.lastName,
       emailAddresses: eventData.email,
       phoneNumbers: eventData.phoneNumbers,
-      linkedinUrl: "",
+      linkedinUrl: eventData.linkedIn,
       historyEntrySubject: "Candidature depuis trouvemtl.com",
       historyEntryMessage:
         "Voici mon commentaire, merci de regarde ma candidature avec attention",

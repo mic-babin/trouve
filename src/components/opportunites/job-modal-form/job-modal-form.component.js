@@ -134,6 +134,19 @@ const JobModalForm = ({ showModal, setShowModal, job }) => {
                       <div className="form-field">
                         <input
                           type="text"
+                          name="linkedIn"
+                          placeholder="LinkedIn"
+                          value={fields["linkedIn"]}
+                          onChange={handleChange}
+                          required
+                        />
+                        {errors.linkedIn && (
+                          <span className="error">{errors.linkedIn}</span>
+                        )}
+                      </div>
+                      <div className="form-field">
+                        <input
+                          type="text"
                           name="phone"
                           placeholder={
                             language == "en"

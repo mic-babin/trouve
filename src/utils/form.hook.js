@@ -64,6 +64,7 @@ export const useJarvisForm = (validate, setShow, setShowModal) => {
     email: "",
     phone: "",
     resume: "",
+    linkedIn: "",
     id: "",
   };
 
