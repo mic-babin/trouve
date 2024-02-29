@@ -207,7 +207,7 @@ export const Head = () => (
 export default Opportunites;
 
 const Wrapper = styled.div`
-  margin-top: 90px;
+  padding-top: 90px;
   min-height: 100vh;
   max-width: 100vw;
   overflow: hidden;
@@ -216,7 +216,7 @@ const Wrapper = styled.div`
 
   @media screen and (max-width: 767px) {
     display: block;
-    margin-top: 70px;
+    padding-top: 70px;
   }
 `;
 
