@@ -1,6 +1,6 @@
 import React from "react";
 import { Card } from "./job-card.styles";
-import { Link } from "gatsby-plugin-react-i18next";
+import { Link, Trans } from "gatsby-plugin-react-i18next";
 const JobCard = ({ job }) => {
   return (
     <Card className="card-wrapper">
@@ -11,32 +11,45 @@ const JobCard = ({ job }) => {
         <div className="card-content">
           <span className="card-title-category">
             <span className="card-title">
-              {job.title.replace(/<[^>]*>/g, "")}
+              {job?.title?.replace(/<[^>]*>/g, "")}
             </span>
             <span className="card-category">
-              {job.category.replace(/<[^>]*>/g, "")}
+              {job?.category?.replace(/<[^>]*>/g, "")}
             </span>
           </span>
           <span className="card-location">
             {" "}
-            {job.location.replace(/<[^>]*>/g, "")}
+            {job?.location?.replace(/<[^>]*>/g, "")}
           </span>
           <span className="card-separator"> | </span>
           <span className="card-type">
-            {job.schedule.replace(/<[^>]*>/g, "")}
+            {job?.schedule?.replace(/<[^>]*>/g, "")}
           </span>
           <div className="card-description">
             <div dangerouslySetInnerHTML={{ __html: job.description }}></div>
+            {job.summary && (
+              <>
+                <br />
+                <strong>
+                  <u>
+                    <Trans>jobSummary</Trans>:
+                  </u>
+                </strong>
+              </>
+            )}
+            {job.summary && (
+              <>
+                <br />
+                <br />
+                <span dangerouslySetInnerHTML={{ __html: job.summary }}></span>
+                <br />
+              </>
+            )}
+            <br />
             <strong>
-              <u>SOMMAIRE DU POSTE:</u>
-            </strong>
-            <br />
-            <br />
-            <span dangerouslySetInnerHTML={{ __html: job.summary }}></span>
-            <br />
-            <br />
-            <strong>
-              <u>COMPÉTENCES RECHERCHÉES:</u>
+              <u>
+                <Trans>skills</Trans>:
+              </u>
             </strong>
             <br />
             <br />

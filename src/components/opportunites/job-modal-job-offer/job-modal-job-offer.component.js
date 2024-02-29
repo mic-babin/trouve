@@ -135,13 +135,20 @@ const JobModalJobOffer = ({ job }) => {
         </div>
 
         <div dangerouslySetInnerHTML={{ __html: job.description }}></div>
+        <br />
+        {job.summary && (
+          <>
+            <strong>
+              <u>
+                <Trans>jobSummary</Trans>
+              </u>
+            </strong>
+            <br />
+            <span dangerouslySetInnerHTML={{ __html: job.summary }}></span>
+            <br />
+          </>
+        )}
 
-        <strong>
-          <u>
-            <Trans>jobSummary</Trans>
-          </u>
-        </strong>
-        <span dangerouslySetInnerHTML={{ __html: job.summary }}></span>
         <strong>
           <u>
             <Trans>responsibilities</Trans>

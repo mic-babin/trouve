@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Card = styled.div`
   margin-top: 1rem;
   border-radius: 0;
+  width: 100%;
 
   &.card {
     font-size: 13px;

@@ -22,10 +22,11 @@ export const frFields = [
 ];
 
 export const filterItems = (items, fieldName) => {
-  return items.filter((item) =>
-    item.fieldsValues.some(
-      (field) => field.field.name === fieldName && field.value === "true"
-    )
+  return items.filter(
+    (item) =>
+      item.fieldsValues.some(
+        (field) => field.field.name === fieldName && field.value === "true"
+      ) && item.deletedAt == null
   );
 };
 

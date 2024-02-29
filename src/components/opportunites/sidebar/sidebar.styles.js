@@ -21,7 +21,8 @@ export const Section = styled.section`
   display: block;
   -webkit-box-flex: 1;
   flex: 1;
-  height: calc(100vh - 60px);
+  min-height: calc(100vh - 60px);
+  height: 100%;
   overflow: auto;
   padding: 1rem;
   max-width: 300px;
@@ -66,12 +67,14 @@ export const Section = styled.section`
   }
 
   .filter-section-header {
-    padding-top: 1rem;
     width: 100%;
     margin-bottom: 1em;
     display: flex;
     align-items: start;
     justify-content: space-between;
+    h4 {
+      font-size: 1.1em;
+    }
     @media screen and (max-width: 767px) {
       padding-top: 0.5rem;
       margin-bottom: 0.5em;
@@ -94,8 +97,8 @@ export const Section = styled.section`
 
   .filter-item {
     width: 100%;
-    padding-bottom: 5px;
-    padding-top: 8px;
+    padding-bottom: 2px;
+    padding-top: 5px;
     border-bottom: 1px solid #e2e2e2;
     color: #707070;
     display: -webkit-box;
@@ -132,6 +135,7 @@ export const Section = styled.section`
     background: #000;
   }
   label {
+    display: block;
     -webkit-box-flex: 1;
     -ms-flex: 1;
     flex: 1;
@@ -139,6 +143,9 @@ export const Section = styled.section`
     cursor: pointer;
     padding-left: 1em;
     padding-right: 1em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   span {
     font-weight: 400;
@@ -147,7 +154,7 @@ export const Section = styled.section`
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
     box-sizing: border-box;
-    font-size: 1.1rem;
+    font-size: 1.1em;
   }
 
   .show-more {

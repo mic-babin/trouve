@@ -43,7 +43,7 @@ const JobModal = ({ job }) => {
                 <Back src={isHovered ? BackWhiteSrc : BackSrc} alt="Back" />
               </button>
             </Link>
-            <div className="row me-1 me-sm-3">
+            <div className="row me-1 me-sm-3 w-100">
               <BackLink
                 to="/opportunites"
                 className="d-block d-lg-none col-12 p-3 ms-3 pb-1 order-first"

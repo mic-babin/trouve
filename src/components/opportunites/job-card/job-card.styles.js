@@ -9,6 +9,7 @@ export const Card = styled.div`
     justify-content: flex-start;
     color: #46474a;
     padding: 1.5rem 0.75rem;
+    width: 100%;
   }
   .card {
     font-size: 13px;
