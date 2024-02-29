@@ -39,6 +39,19 @@ export const Section = styled.section`
     @media screen and (max-width: 767px) {
       margin: 1.5em 0 1em;
     }
+    label {
+      position: absolute;
+      top: -1px;
+      left: -8px;
+      font-size: 1.5em;
+      color: #000;
+
+      svg {
+        margin-top: 9px;
+        height: 24px;
+        width: 24px;
+      }
+    }
   }
 
   .search {
