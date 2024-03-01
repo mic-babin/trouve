@@ -12,6 +12,7 @@ const ThankYou = ({ merci }) => {
   const { title, link, images, textFields } = merci;
   const [isInView, setIsInView] = useState(false);
   const isMedium = useIsMedium();
+  console.log(link);
 
   const middle = title.length / 2; // Find the middle point of the sentence
 

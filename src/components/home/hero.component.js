@@ -5,7 +5,7 @@ import { useIsMedium, useIsXSmall } from "../../utils/media-query.hook";
 import { motion } from "framer-motion";
 import Circle from "../animation/circle.components";
 import { useEffect, useState } from "react";
-import { useI18next } from "gatsby-plugin-react-i18next";
+import { useI18next, Link } from "gatsby-plugin-react-i18next";
 import LogoSrc from "../../assets/img/trouve_blanc.svg";
 
 const Hero = ({ data }) => {
@@ -110,17 +110,17 @@ const Hero = ({ data }) => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 4 }}
-                href="https://jobs.trouvemtl.com/"
-                target="_blank"
                 onMouseEnter={() => handleHover()}
                 onMouseLeave={() => handleHover()}
               >
-                <span className="mask">
-                  <div className="link-container">
-                    <span className="link-title1 title">{opportunities}</span>
-                    <span className="link-title2 title">{opportunities}</span>
-                  </div>
-                </span>
+                <Link to="/opportunites" className="link">
+                  <span className="mask">
+                    <div className="link-container">
+                      <span className="link-title1 title">{opportunities}</span>
+                      <span className="link-title2 title">{opportunities}</span>
+                    </div>
+                  </span>
+                </Link>
               </JobsLink>
             </JobsLinkWrapper>
           </Container>
@@ -438,13 +438,18 @@ const JobsLinkWrapper = styled.div`
   }
 `;
 
-const JobsLink = styled(motion.a)`
+const JobsLink = styled(motion.div)`
   cursor: pointer;
   position: relative;
   margin-left: 50px;
   color: white;
   text-decoration: none;
   letter-spacing: 2px;
+
+  .link {
+    color: white;
+    text-decoration: none;
+  }
 
   &:before {
     content: "";
@@ -459,6 +464,9 @@ const JobsLink = styled(motion.a)`
   }
   &:hover {
     color: white;
+    .link {
+      color: white;
+    }
 
     &:before {
       content: "";
