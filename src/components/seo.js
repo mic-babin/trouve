@@ -1,7 +1,10 @@
 import React from "react";
 import { useSiteMetadata } from "../utils/metadata.hook";
+import { isBrowser } from "react-device-detect";
 
 export const SEO = ({ title, description, pathname, children }) => {
+  const language =
+    isBrowser && window.location.href.includes("/en") ? "en" : "fr";
   const {
     title: defaultTitle,
     description: defaultDescription,
@@ -20,13 +23,39 @@ export const SEO = ({ title, description, pathname, children }) => {
 
   return (
     <>
-      <title>{seo.title}</title>
-      <meta name="description" content={seo.description} />
+      <title>
+        {language == "en"
+          ? "TROUVÉ Montreal | Premier Talent Recruitment Agency"
+          : "TROUVÉ Montréal | Agence de Recrutement de Talents"}
+      </title>
+      <meta
+        name="description"
+        content={
+          language == "en"
+            ? "Connect with the top talents in Montreal. TROUVÉ is a team of recruiters who specializes in the creative and administrative spheres, who creates close connections between talents and employers."
+            : "Connectez-vous avec les meilleurs talents à Montréal. TROUVÉ est une équipe de recruteurs spécialisée dans les sphères créatives et administratives, qui cultive des liens étroits entre les talents et les employeurs."
+        }
+      />
+      <meta
+        name="keywords"
+        content={
+          language == "en"
+            ? "Montreal recruitment agency, Talent acquisition Montreal, Hiring solutions Montreal"
+            : "Agence de recrutement Montréal, Acquisition de talents Montréal, Solutions d'embauche Montréal"
+        }
+      ></meta>
       <meta name="image" content={seo.image} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={seo.title} />
       <meta name="twitter:url" content={seo.url} />
-      <meta name="twitter:description" content={seo.description} />
+      <meta
+        name="twitter:description"
+        content={
+          language == "en"
+            ? "Connect with the top talents in Montreal. TROUVÉ is a team of recruiters who specializes in the creative and administrative spheres, who creates close connections between talents and employers."
+            : "Connectez-vous avec les meilleurs talents à Montréal. TROUVÉ est une équipe de recruteurs spécialisée dans les sphères créatives et administratives, qui cultive des liens étroits entre les talents et les employeurs."
+        }
+      />
       <meta name="twitter:image" content={seo.image} />
       <meta name="twitter:creator" content={seo.twitterUsername} />
       <meta
