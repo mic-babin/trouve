@@ -1,8 +1,8 @@
 import React from "react";
 import { useSiteMetadata } from "../utils/metadata.hook";
-import { isBrowser } from "react-device-detect";
 
 export const SEO = ({ title, description, pathname, children }) => {
+  const isBrowser = typeof window !== "undefined";
   const language =
     isBrowser && window.location.href.includes("/en") ? "en" : "fr";
   const {
@@ -20,7 +20,7 @@ export const SEO = ({ title, description, pathname, children }) => {
     url: `${siteUrl}${pathname || ``}`,
     twitterUsername,
   };
-
+  if (isBrowser) document.documentElement.lang = language;
   return (
     <>
       <title>
