@@ -6,6 +6,7 @@ export const Aside = styled.aside`
   transition: all 0.2s ease-in-out;
   width: 320px;
   min-width: 320px;
+  height: 100%;
 
   @media screen and (max-width: 767px) {
     width: 100vw;
@@ -21,7 +22,7 @@ export const Section = styled.section`
   display: block;
   -webkit-box-flex: 1;
   flex: 1;
-  min-height: calc(100vh - 60px);
+  min-height: 100%;
   height: 100%;
   overflow: auto;
   padding: 1rem;
@@ -30,7 +31,9 @@ export const Section = styled.section`
   @media screen and (max-width: 767px) {
     max-width: 100vw;
     width: 100vw;
+    min-height: 100%;
     height: calc(100%);
+    box-shadow: none;
   }
 
   .keyword-search {

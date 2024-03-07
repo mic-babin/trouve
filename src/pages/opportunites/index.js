@@ -15,6 +15,7 @@ import { JobModalProvider } from "../../context/job-modal.context";
 import Sidebar from "../../components/opportunites/sidebar/sidebar.component";
 import Loader from "../../components/common/loader.component";
 import { SEO } from "../../components/seo";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Opportunites = (props) => {
   const layout = useRef();
@@ -163,20 +164,29 @@ const Opportunites = (props) => {
           <Wrapper>
             <JobProvider>
               <JobModalProvider>
-                {categories.length > 0 && locations.length > 0 && (
-                  <Sidebar
-                    locations={locations}
-                    categories={categories}
-                    activeLocation={activeLocation}
-                    activeCategory={activeCategory}
-                    setActiveLocation={setActiveLocation}
-                    setActiveCategory={setActiveCategory}
-                    resetLocationFilter={resetLocationFilter}
-                    resetCategoryFilter={resetCategoryFilter}
-                    activeKeyword={activeKeyword}
-                    setActiveKeyword={setActiveKeyword}
-                  />
-                )}
+                <AnimatePresence>
+                  {categories.length > 0 && locations.length > 0 && (
+                    <motion.div
+                      initial={{ x: -500 }} // Initial state: off-screen to the right
+                      animate={{ x: 0 }} // Animate to its natural position
+                      // Exit state: slide out to the right
+                      transition={{ duration: 1, delay: 1 }} // Animation properties
+                    >
+                      <Sidebar
+                        locations={locations}
+                        categories={categories}
+                        activeLocation={activeLocation}
+                        activeCategory={activeCategory}
+                        setActiveLocation={setActiveLocation}
+                        setActiveCategory={setActiveCategory}
+                        resetLocationFilter={resetLocationFilter}
+                        resetCategoryFilter={resetCategoryFilter}
+                        activeKeyword={activeKeyword}
+                        setActiveKeyword={setActiveKeyword}
+                      />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
                 <Jobs jobs={reallyFilteredJobs} />
               </JobModalProvider>
             </JobProvider>
