@@ -1,7 +1,7 @@
 import React from "react";
 import { useSiteMetadata } from "../utils/metadata.hook";
 
-export const SEO = ({ title, description, pathname, children }) => {
+export const SEO = ({ titleFr, titleEn, description, pathname, children }) => {
   const isBrowser = typeof window !== "undefined";
   const language =
     isBrowser && window.location.href.includes("/en") ? "en" : "fr";
@@ -13,21 +13,26 @@ export const SEO = ({ title, description, pathname, children }) => {
     twitterUsername,
   } = useSiteMetadata();
 
+  console.log(titleFr);
   const seo = {
-    title: title ? title + defaultTitle : defaultTitle,
+    title:
+      language == "en"
+        ? `${
+            titleEn != null ? titleEn : ""
+          }TROUVÉ Montreal | Premier Talent Recruitment Agency`
+        : `${
+            titleFr != null ? titleFr : ""
+          }TROUVÉ Montréal | Agence de Recrutement de Talents`,
     description: description || defaultDescription,
     image: `${siteUrl}${image}`,
     url: `${siteUrl}${pathname || ``}`,
     twitterUsername,
   };
+  console.log(seo.title);
   if (isBrowser) document.documentElement.lang = language;
   return (
     <>
-      <title>
-        {language == "en"
-          ? "TROUVÉ Montreal | Premier Talent Recruitment Agency"
-          : "TROUVÉ Montréal | Agence de Recrutement de Talents"}
-      </title>
+      <title>{seo.title}</title>
       <meta
         name="description"
         content={

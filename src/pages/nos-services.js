@@ -78,7 +78,7 @@ export const Head = () => (
       {`
       <!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-MFY0HQY3X7"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-MFY0HQY3X7'); </script>`}
     </script>
-    <SEO title="Nos services - " />
+    <SEO titleFr="Nos services - " titleEn="Our Services - " />
   </>
 );
 export default NosServices;
