@@ -28,7 +28,7 @@ const Opportunites = (props) => {
   const [activeLocation, setActiveLocation] = useState(null);
   const [activeCategory, setActiveCategory] = useState(null);
   const [activeKeyword, setActiveKeyword] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const path = props.path;
   const menu = props.data.allContentfulHeader.edges[0].node;
