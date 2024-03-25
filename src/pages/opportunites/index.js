@@ -28,7 +28,7 @@ const Opportunites = (props) => {
   const [activeLocation, setActiveLocation] = useState(null);
   const [activeCategory, setActiveCategory] = useState(null);
   const [activeKeyword, setActiveKeyword] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const path = props.path;
   const menu = props.data.allContentfulHeader.edges[0].node;
@@ -51,7 +51,7 @@ const Opportunites = (props) => {
   } = useI18next();
 
   useEffect(() => {
-    if (jobs.length == 0) {
+    if (jobs?.length == 0) {
       fetch(
         "https://qimsyaozqntinmrokopq.auth.eu-west-2.nhost.run/v1/token",
         options
@@ -73,14 +73,14 @@ const Opportunites = (props) => {
             .then((response) => response.json())
             .then((response) => {
               setJobs(
-                filterItems(response.data.projects, "Diffuser sur le Site Web")
+                filterItems(response.data?.projects, "Diffuser sur le Site Web")
               );
             })
             .catch((err) => console.error(err));
         })
         .catch((err) => console.error(err));
     }
-    if (jobs.length > 0) {
+    if (jobs?.length > 0) {
       setCategories(
         extractArray(
           jobs,
@@ -241,12 +241,6 @@ const PROJECTS_QUERY = `
     ) {
       deletedAt
       createdAt
-      assignee {
-        email
-        phoneNumber
-        id
-        displayName
-      }
       company {
         companyPublicData {
           id

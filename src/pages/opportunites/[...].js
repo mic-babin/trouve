@@ -80,7 +80,7 @@ const Details = (props) => {
             .then((response) => response.json())
             .then((response) => {
               setJobs(
-                filterItems(response.data.projects, "Diffuser sur le Site Web")
+                filterItems(response.data?.projects, "Diffuser sur le Site Web")
               );
             })
             .catch((err) => console.error(err));
@@ -151,12 +151,6 @@ const PROJECTS_QUERY = `
     ) {
       deletedAt
       createdAt
-      assignee {
-        email
-        phoneNumber
-        id
-        displayName
-      }
       company {
         companyPublicData {
           id
