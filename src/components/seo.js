@@ -21,7 +21,7 @@ export const SEO = ({ titleFr, titleEn, description, pathname, children }) => {
             titleEn != null ? titleEn : ""
           }TROUVÉ Montreal | Premier Talent Recruitment Agency`
         : `${
-            titleFr != null ? titleFr : ""
+            titleFr != null || titleFr == undefined ? titleFr : ""
           }TROUVÉ Montréal | Agence de Recrutement de Talents`,
     description: description || defaultDescription,
     image: `${siteUrl}${image}`,
