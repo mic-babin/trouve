@@ -65,19 +65,13 @@ module.exports = {
           // debug: true,
           fallbackLng: defaultLanguage,
           supportedLngs: languages,
-          defaultNS: "common",
-          interpolation: {
-            escapeValue: false, // not needed for react as it escapes by default
-          },
-          keySeparator: false,
-          nsSeparator: false,
         },
-        // pages: [
-        //   {
-        //     matchPath: "/:lang?/opportunites/:uid",
-        //     getLanguageFromPath: true,
-        //   },
-        // ],
+        pages: [
+          {
+            matchPath: "/:lang?/:lang?/opportunites/:uid",
+            getLanguageFromPath: false,
+          },
+        ],
       },
     },
     {
