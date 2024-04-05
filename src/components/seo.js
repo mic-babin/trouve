@@ -13,15 +13,15 @@ export const SEO = ({ titleFr, titleEn, description, pathname, children }) => {
     twitterUsername,
   } = useSiteMetadata();
 
-  console.log(titleFr);
+  console.log(titleEn);
   const seo = {
     title:
       language == "en"
         ? `${
-            titleEn != null ? titleEn : ""
+            titleEn != null && titleEn != undefined ? titleEn : ""
           }TROUVÉ Montreal | Premier Talent Recruitment Agency`
         : `${
-            titleFr != null || titleFr == undefined ? titleFr : ""
+            titleFr != null && titleFr != undefined ? titleFr : ""
           }TROUVÉ Montréal | Agence de Recrutement de Talents`,
     description: description || defaultDescription,
     image: `${siteUrl}${image}`,
