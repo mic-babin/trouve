@@ -62,7 +62,7 @@ export const SEO = ({ titleFr, titleEn, description, pathname, children }) => {
         }
       />
       <meta name="twitter:image" content={seo.image} />
-      <meta name="og:image" content="https://trouvemtl.com/trouve-og.png" />
+      {/* <meta name="og:image" content="https://trouvemtl.com/trouve-og.png" /> */}
       <meta name="twitter:creator" content={seo.twitterUsername} />
       <meta
         name="google-site-verification"
