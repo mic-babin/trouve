@@ -62,12 +62,28 @@ export const SEO = ({ titleFr, titleEn, description, pathname, children }) => {
         }
       />
       <meta name="twitter:image" content={seo.image} />
-      {/* <meta name="og:image" content="https://trouvemtl.com/trouve-og.png" /> */}
       <meta name="twitter:creator" content={seo.twitterUsername} />
-      <meta
+      {/* <meta
         name="google-site-verification"
         content="copy your code from the Google Meta Tag"
+      /> */}
+      <meta property="og:title" content={seo.title} />
+      <meta property="og:url" content={seo.url} />
+      <meta property="og:image" content={seo.image} />
+      <meta
+        property="og:description"
+        content={
+          language == "en"
+            ? "Connect with the top talents in Montreal. TROUVÉ is a team of recruiters who specializes in the creative and administrative spheres, who creates close connections between talents and employers."
+            : "Connectez-vous avec les meilleurs talents à Montréal. TROUVÉ est une équipe de recruteurs spécialisée dans les sphères créatives et administratives, qui cultive des liens étroits entre les talents et les employeurs."
+        }
       />
+      <meta property="og:type" content="website" />
+      <meta
+        property="og:locale"
+        content={language == "en" ? "en_CA" : "fr_CA"}
+      />
+      <meta property="og:site_name" content="TROUVÉ" />
       {children}
     </>
   );
