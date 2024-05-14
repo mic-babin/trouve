@@ -3,6 +3,7 @@ import { graphql } from "gatsby";
 import Layout from "../../components/layout.component";
 import { useState, useRef } from "react";
 import Jobs from "../../components/opportunites/jobs/jobs.component";
+import { SEO } from "../../components/seo";
 import { useI18next } from "gatsby-plugin-react-i18next";
 import {
   filterItems,
