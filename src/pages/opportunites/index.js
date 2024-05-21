@@ -39,11 +39,13 @@ const Opportunites = (props) => {
       section.id === "33167fe8-1da1-59ca-8cae-8aed5506436b" ||
       section.id === "6609d98c-4bf8-5936-9f03-9e293bbd3542"
   );
-
+  // e5e876a5-e114-40c6-8a58-86aa7e80dace
+  //ffccfa48-5181-4891-b23a-1e08360e0420
+  //78ebbf67-521b-4e94-a42b-53a41a25cfb3
   const options = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: '{"refreshToken":"47830f8d-cbce-47ca-a353-f2aeaef816c5"}',
+    body: '{"personalAccessToken":"ffccfa48-5181-4891-b23a-1e08360e0420"}',
   };
 
   const {
@@ -52,24 +54,18 @@ const Opportunites = (props) => {
 
   useEffect(() => {
     if (jobs?.length == 0) {
-      fetch(
-        "https://qimsyaozqntinmrokopq.auth.eu-west-2.nhost.run/v1/token",
-        options
-      )
+      fetch("https://auth.prod.jarvi.tech/v1/signin/pat", options)
         .then((response) => response.json())
         .then((response) => {
           const options2 = {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${response.accessToken}`,
+              Authorization: `Bearer ${response.session.accessToken}`,
             },
             body: JSON.stringify({ query: PROJECTS_QUERY }),
           };
-          fetch(
-            "https://qimsyaozqntinmrokopq.hasura.eu-west-2.nhost.run/v1/graphql",
-            options2
-          )
+          fetch("https://hasura.prod.jarvi.tech/v1/graphql", options2)
             .then((response) => response.json())
             .then((response) => {
               setJobs(

@@ -39,9 +39,8 @@ const Details = (props) => {
   const options = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: '{"refreshToken":"78ebbf67-521b-4e94-a42b-53a41a25cfb3"}',
+    body: '{"personalAccessToken":"ffccfa48-5181-4891-b23a-1e08360e0420"}',
   };
-
   const {
     i18n: { language },
   } = useI18next();
@@ -60,24 +59,18 @@ const Details = (props) => {
 
   useEffect(() => {
     if (jobs.length == 0) {
-      fetch(
-        "https://qimsyaozqntinmrokopq.auth.eu-west-2.nhost.run/v1/token",
-        options
-      )
+      fetch("https://auth.prod.jarvi.tech/v1/signin/pat", options)
         .then((response) => response.json())
         .then((response) => {
           const options2 = {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${response.accessToken}`,
+              Authorization: `Bearer ${response.session.accessToken}`,
             },
             body: JSON.stringify({ query: PROJECTS_QUERY }),
           };
-          fetch(
-            "https://qimsyaozqntinmrokopq.hasura.eu-west-2.nhost.run/v1/graphql",
-            options2
-          )
+          fetch("https://hasura.prod.jarvi.tech/v1/graphql", options2)
             .then((response) => response.json())
             .then((response) => {
               setJobs(
