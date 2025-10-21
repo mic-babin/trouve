@@ -39,9 +39,7 @@ const Details = (props) => {
   const options = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      personalAccessToken: process.env.PERSONAL_ACCESS_TOKEN,
-    }),
+    body: '{"personalAccessToken":"ffccfa48-5181-4891-b23a-1e08360e0420"}',
   };
   const {
     i18n: { language },
