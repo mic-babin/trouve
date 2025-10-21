@@ -13,7 +13,6 @@ export const SEO = ({ titleFr, titleEn, description, pathname, children }) => {
     twitterUsername,
   } = useSiteMetadata();
 
-  console.log(titleEn);
   const seo = {
     title:
       language == "en"
@@ -28,7 +27,6 @@ export const SEO = ({ titleFr, titleEn, description, pathname, children }) => {
     url: `${siteUrl}${pathname || ``}`,
     twitterUsername,
   };
-  console.log(seo.title);
   if (isBrowser) document.documentElement.lang = language;
   return (
     <>

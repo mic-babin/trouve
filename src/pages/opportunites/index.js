@@ -229,35 +229,69 @@ const Wrapper = styled.div`
   }
 `;
 
-const PROJECTS_QUERY = `
-  query RecentProjects {
-    projects(
-      where: {_or: [{updatedAt: {_gte: "2023-12-01"}}, {fieldsValues: {updatedAt: {_gte: "2023-12-01"}}}]}
-      order_by: {fieldsValues_aggregate: {max: {updatedAt: desc}}}
-    ) {
-      deletedAt
-      createdAt
-      company {
-        companyPublicData {
-          id
-          name
-        }
-      }
-      referenceId
-      fieldsValues(where: {deletedAt: {_is_null: true}}) {
-        field {
-          id
-          name
-        }
-        fieldValue {
-          id
-          name
-        }
-        value
+// const PROJECTS_QUERY = `
+//   query RecentProjects {
+//     projects(
+//       where: {_or: [{updatedAt: {_gte: "2023-12-01"}}, {fieldsValues: {updatedAt: {_gte: "2023-12-01"}}}]}
+//       order_by: {fieldsValues_aggregate: {max: {updatedAt: desc}}}
+//     ) {
+//       deletedAt
+//       createdAt
+//       company {
+//         companyPublicData {
+//           id
+//           name
+//         }
+//       }
+//       referenceId
+//       fieldsValues(where: {deletedAt: {_is_null: true}}) {
+//         field {
+//           id
+//           name
+//         }
+//         fieldValue {
+//           id
+//           name
+//         }
+//         value
+//       }
+//     }
+//   }
+// `;
+
+const PROJECTS_QUERY = `query RecentProjects {
+  projects(
+    where: {
+      _or: [
+        { updatedAt: { _gte: "2023-12-01" } }
+        { fieldsValues: { updatedAt: { _gte: "2023-12-01" } } }
+      ]
+    }
+    order_by: { fieldsValues_aggregate: { max: { updatedAt: desc } } }
+  ) {
+    deletedAt
+    createdAt
+    company {
+      name
+      linkedinCompanyData {
+        id
+        name
       }
     }
+    referenceId
+    fieldsValues(where: { deletedAt: { _is_null: true } }) {
+      field {
+        id
+        name
+      }
+      fieldValue {
+        id
+        name
+      }
+      value
+    }
   }
-`;
+}`;
 
 export const query = graphql`
   query ($language: String!) {

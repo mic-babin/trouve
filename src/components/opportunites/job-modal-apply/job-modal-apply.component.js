@@ -48,9 +48,7 @@ const JobModalApply = ({ job }) => {
         {hasApplied ? "Applied" : <Trans>apply</Trans>}
       </button>
       <hr />
-      {/* <a href="#" onClick={() => console.log("View all jobs in this category")}>
-        View all jobs in this category<i className="bhi-arrow-right"></i>
-      </a> */}
+
       <JobModalForm
         showModal={showModal}
         setShowModal={setShowModal}

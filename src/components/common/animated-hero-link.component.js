@@ -3,7 +3,6 @@ import { AnimatedHeroLink as Link } from "../styled-components/animated-hero-lin
 import { motion } from "framer-motion";
 
 const AnimatedHeroLink = ({ link, type, color, bold, dataAnalytics }) => {
-  console.log(link);
   return (
     <Link
       color={color}
