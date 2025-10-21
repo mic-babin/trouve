@@ -45,7 +45,9 @@ const Opportunites = (props) => {
   const options = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: '{"personalAccessToken":"ffccfa48-5181-4891-b23a-1e08360e0420"}',
+    body: JSON.stringify({
+      personalAccessToken: process.env.GATSBY_PERSONAL_ACCESS_TOKEN,
+    }),
   };
 
   const {
