@@ -6,7 +6,7 @@ import Jobs from "../../components/opportunites/jobs/jobs.component";
 import { SEO } from "../../components/seo";
 import { useI18next } from "gatsby-plugin-react-i18next";
 import {
-  filterItems,
+  fetchJarviOffers,
   extractArray,
   filterFieldsByLanguage,
   fieldToJobPropertyMap,
@@ -36,11 +36,6 @@ const Details = (props) => {
       section.id === "6609d98c-4bf8-5936-9f03-9e293bbd3542"
   );
 
-  const options = {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: '{"personalAccessToken":"ffccfa48-5181-4891-b23a-1e08360e0420"}',
-  };
   const {
     i18n: { language },
   } = useI18next();
@@ -58,29 +53,12 @@ const Details = (props) => {
   };
 
   useEffect(() => {
-    if (jobs.length == 0) {
-      fetch("https://auth.prod.jarvi.tech/v1/signin/pat", options)
-        .then((response) => response.json())
-        .then((response) => {
-          const options2 = {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${response.session.accessToken}`,
-            },
-            body: JSON.stringify({ query: PROJECTS_QUERY }),
-          };
-          fetch("https://hasura.prod.jarvi.tech/v1/graphql", options2)
-            .then((response) => response.json())
-            .then((response) => {
-              setJobs(
-                filterItems(response.data?.projects, "Diffuser sur le Site Web")
-              );
-            })
-            .catch((err) => console.error(err));
-        })
-        .catch((err) => console.error(err));
-    }
+    fetchJarviOffers()
+      .then(setJobs)
+      .catch((err) => console.error(err));
+  }, []);
+
+  useEffect(() => {
     if (jobs.length > 0 && filteredJobs.length == 0) {
       setCategories(
         extractArray(
@@ -157,41 +135,6 @@ const Wrapper = styled.div`
   background: #efefef;
 `;
 
-const PROJECTS_QUERY = `
-query RecentProjects {
-  projects(
-    where: {
-      _or: [
-        { updatedAt: { _gte: "2023-12-01" } }
-        { fieldsValues: { updatedAt: { _gte: "2023-12-01" } } }
-      ]
-    }
-    order_by: { fieldsValues_aggregate: { max: { updatedAt: desc } } }
-  ) {
-    deletedAt
-    createdAt
-    company {
-      name
-      linkedinCompanyData {
-        id
-        name
-      }
-    }
-    referenceId
-    fieldsValues(where: { deletedAt: { _is_null: true } }) {
-      field {
-        id
-        name
-      }
-      fieldValue {
-        id
-        name
-      }
-      value
-    }
-  }
-}
-`;
 
 export const query = graphql`
   query ($language: String!) {

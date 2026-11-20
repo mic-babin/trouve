@@ -5,7 +5,7 @@ import { useState, useRef } from "react";
 import Jobs from "../../components/opportunites/jobs/jobs.component";
 import { useI18next } from "gatsby-plugin-react-i18next";
 import {
-  filterItems,
+  fetchJarviOffers,
   extractArray,
   filterFieldsByLanguage,
 } from "../../utils/jobs.utils";
@@ -39,43 +39,18 @@ const Opportunites = (props) => {
       section.id === "33167fe8-1da1-59ca-8cae-8aed5506436b" ||
       section.id === "6609d98c-4bf8-5936-9f03-9e293bbd3542"
   );
-  // e5e876a5-e114-40c6-8a58-86aa7e80dace
-  //ffccfa48-5181-4891-b23a-1e08360e0420
-  //78ebbf67-521b-4e94-a42b-53a41a25cfb3
-  const options = {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: '{"personalAccessToken":"ffccfa48-5181-4891-b23a-1e08360e0420"}',
-  };
 
   const {
     i18n: { language },
   } = useI18next();
 
   useEffect(() => {
-    if (jobs?.length == 0) {
-      fetch("https://auth.prod.jarvi.tech/v1/signin/pat", options)
-        .then((response) => response.json())
-        .then((response) => {
-          const options2 = {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${response.session.accessToken}`,
-            },
-            body: JSON.stringify({ query: PROJECTS_QUERY }),
-          };
-          fetch("https://hasura.prod.jarvi.tech/v1/graphql", options2)
-            .then((response) => response.json())
-            .then((response) => {
-              setJobs(
-                filterItems(response.data?.projects, "Diffuser sur le Site Web")
-              );
-            })
-            .catch((err) => console.error(err));
-        })
-        .catch((err) => console.error(err));
-    }
+    fetchJarviOffers()
+      .then(setJobs)
+      .catch((err) => console.error(err));
+  }, []);
+
+  useEffect(() => {
     if (jobs?.length > 0) {
       setCategories(
         extractArray(
@@ -229,69 +204,7 @@ const Wrapper = styled.div`
   }
 `;
 
-// const PROJECTS_QUERY = `
-//   query RecentProjects {
-//     projects(
-//       where: {_or: [{updatedAt: {_gte: "2023-12-01"}}, {fieldsValues: {updatedAt: {_gte: "2023-12-01"}}}]}
-//       order_by: {fieldsValues_aggregate: {max: {updatedAt: desc}}}
-//     ) {
-//       deletedAt
-//       createdAt
-//       company {
-//         companyPublicData {
-//           id
-//           name
-//         }
-//       }
-//       referenceId
-//       fieldsValues(where: {deletedAt: {_is_null: true}}) {
-//         field {
-//           id
-//           name
-//         }
-//         fieldValue {
-//           id
-//           name
-//         }
-//         value
-//       }
-//     }
-//   }
-// `;
 
-const PROJECTS_QUERY = `query RecentProjects {
-  projects(
-    where: {
-      _or: [
-        { updatedAt: { _gte: "2023-12-01" } }
-        { fieldsValues: { updatedAt: { _gte: "2023-12-01" } } }
-      ]
-    }
-    order_by: { fieldsValues_aggregate: { max: { updatedAt: desc } } }
-  ) {
-    deletedAt
-    createdAt
-    company {
-      name
-      linkedinCompanyData {
-        id
-        name
-      }
-    }
-    referenceId
-    fieldsValues(where: { deletedAt: { _is_null: true } }) {
-      field {
-        id
-        name
-      }
-      fieldValue {
-        id
-        name
-      }
-      value
-    }
-  }
-}`;
 
 export const query = graphql`
   query ($language: String!) {

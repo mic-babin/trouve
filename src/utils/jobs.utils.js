@@ -21,14 +21,14 @@ export const frFields = [
   "ce414904-9606-4c47-852a-07b0652775a0",
 ];
 
-export const filterItems = (items, fieldName) => {
-  return items?.filter(
-    (item) =>
-      item.fieldsValues.some(
-        (field) => field.field.name === fieldName && field.value === "true"
-      ) && item.deletedAt == null
-  );
-};
+// The public key only reads the offers published on the Jarvi career site, it can be shown in the page
+export const fetchJarviOffers = () =>
+  fetch(
+    "https://functions.prod.jarvi.tech/v1/public-api/rest/v2/offers?limit=1000",
+    { headers: { "x-api-key": "e2b9f2de-3c1f-4895-a388-ba84ed84891b" } }
+  )
+    .then((response) => response.json())
+    .then((response) => response.data ?? []);
 
 export const extractArray = (items, fieldId) => {
   const allValues = items
